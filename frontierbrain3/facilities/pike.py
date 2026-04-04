@@ -161,7 +161,7 @@ def get_status_chances(
         For each status: probability that at least one team member
         gets afflicted with it (considering immunities).
     """
-    from frontierutils import _norm
+    from ..frontierutils import _norm
 
     n_mons = len(pokemon_types)
     n_targets = min(status_targets(pass_num), n_mons)

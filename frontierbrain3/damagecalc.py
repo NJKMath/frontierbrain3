@@ -18,7 +18,7 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Union
 
-from frontierutils import (
+from .frontierutils import (
     _norm, calc_stats, apply_stage, move_category,
     type_effectiveness, _TYPE_CHART,
     CustomSet, POKEMON_FILE,

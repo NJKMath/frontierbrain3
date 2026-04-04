@@ -2,7 +2,7 @@ import json
 import random
 import re
 
-from frontier_db import Database, _norm
+from ..frontier_db import Database, _norm
 
 # ── Team Type/Phrase utilities ────────────────────────────────────────────────
 

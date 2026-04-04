@@ -9,7 +9,7 @@ Depends on:
 import json
 from pathlib import Path
 
-from frontierutils import (
+from .frontierutils import (
     _norm, _set_id, calc_stats, CustomSet, type_effectiveness,
     SETS_FILE, TRAINERS_FILE, POKEMON_FILE,
     # Re-export for backward compatibility

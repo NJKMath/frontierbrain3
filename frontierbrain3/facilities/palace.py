@@ -22,7 +22,7 @@ Provides:
 from __future__ import annotations
 
 from math import comb
-from frontierutils import _norm
+from ..frontierutils import _norm
 
 
 # ══════════════════════════════════════════════════════════════════════════════

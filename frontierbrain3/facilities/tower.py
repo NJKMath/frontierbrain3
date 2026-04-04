@@ -1,4 +1,4 @@
-from frontier_db import (
+from ..frontier_db import (
     Database, TrainerCollection,
     _norm, _trainer_has_pokemon_pred, _trainer_has_set_pred,
 )

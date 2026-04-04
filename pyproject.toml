@@ -1,0 +1,20 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "frontierbrain3"
+version = "0.1.0"
+description = "Data analysis tools for Pokémon Emerald's Battle Frontier"
+readme = "README.md"
+requires-python = ">=3.10"
+license = {text = "MIT"}
+
+[project.optional-dependencies]
+clipboard = ["tkinter"]  # from_clipboard() needs tkinter; usually bundled with Python
+
+[tool.setuptools.packages.find]
+include = ["frontierbrain3*"]
+
+[tool.setuptools.package-data]
+frontierbrain3 = ["data/*.json"]

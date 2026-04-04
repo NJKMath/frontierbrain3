@@ -12,8 +12,8 @@ Enemy bugs (is_enemy=True):
     - Non-HP stats overflow to stat mod 256.
 """
 
-from frontier_db import Database
-from frontierutils import _norm, calc_stats, CustomSet
+from ..frontier_db import Database
+from ..frontierutils import _norm, calc_stats, CustomSet
 
 
 def calc_seed(
