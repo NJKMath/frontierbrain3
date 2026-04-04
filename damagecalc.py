@@ -97,7 +97,7 @@ _MAGNITUDE_TABLE = [
 
 # -- Move data loading ---------------------------------------------------------
 
-_MOVES_FILE = Path(__file__).parent / "Data" / "moves.json"
+_MOVES_FILE = Path(__file__).parent / "data" / "moves.json"
 _moves_cache: dict | None = None
 
 
@@ -127,7 +127,7 @@ def get_move(move: Union[str, dict]) -> dict:
     if name not in moves_db:
         raise ValueError(
             f"Move '{move}' not found. Pass a dict with 'type' and 'power', "
-            f"or ensure Data/moves.json exists and contains it."
+            f"or ensure data/moves.json exists and contains it."
         )
     m = dict(moves_db[name])
     m.setdefault("category", move_category(m["type"]))

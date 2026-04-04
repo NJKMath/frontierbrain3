@@ -16,7 +16,7 @@ from pathlib import Path
 
 # ── File paths ────────────────────────────────────────────────────────────────
 
-_DATA         = Path(__file__).parent / "Data"
+_DATA         = Path(__file__).parent / "data"
 SETS_FILE     = _DATA / "bf_pokemon.json"
 TRAINERS_FILE = _DATA / "bf_trainers.json"
 POKEMON_FILE  = _DATA / "pokemon.json"

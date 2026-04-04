@@ -1,9 +1,9 @@
 from frontierutils import calc_stats, CustomSet, from_paste, from_clipboard
 from frontier_db import Database
-from tower import TowerDatabase
-from factory import FactoryDatabase
+from facilities.tower import TowerDatabase
+from facilities.factory import FactoryDatabase
 from damagecalc import damage_rolls, ko_chance, calc_matchup, format_result, Field
-from dome import calc_seed
+from facilities.dome import calc_seed
 
 db = Database()
 tower = TowerDatabase()

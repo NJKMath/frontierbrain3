@@ -1,7 +1,6 @@
 import json
 import random
 import re
-from pathlib import Path
 
 from frontier_db import Database, _norm
 
@@ -98,8 +97,6 @@ def _set_has_type(s: dict, type_name: str, species_map: dict) -> bool:
     types = species_map.get(dex, {}).get("types", [])
     return _norm(type_name) in types
 
-
-_DATA = Path(__file__).parent / "Data"
 
 # ── Group definitions ─────────────────────────────────────────────────────────
 # Maps index range → group number. Indices 1-110 and Unown don't appear.
