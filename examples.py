@@ -3,6 +3,7 @@ from frontier_db import Database
 from tower import TowerDatabase
 from factory import FactoryDatabase
 from damagecalc import damage_rolls, ko_chance, calc_matchup, format_result, Field
+from dome import calc_seed
 
 db = Database()
 tower = TowerDatabase()
@@ -483,3 +484,43 @@ if meta_sets and ttar_sets:
     meta = meta_sets[0]
     show("Sets Metagross-1 OHKOs at +1 Atk (Dragon Dance)",
          db.sets.diesTo(meta, atk_boosts={"atk": 1}))
+
+
+# ======================================================================
+# Battle Dome seeding examples
+# ======================================================================
+print("\n" + "=" * 72)
+print("BATTLE DOME SEEDING EXAMPLES")
+print("=" * 72)
+
+if meta_sets and lax_sets and ttar_sets:
+    meta = meta_sets[0]
+    lax  = lax_sets[0]
+    ttar = ttar_sets[0]
+    team = [meta, lax, ttar]
+
+    # Player team seeding at lv100 / 31 IVs
+    seed = calc_seed(team, smap)
+    print(f"\nMetagross-1 / Snorlax-1 / Tyranitar-1 (lv100, 31 IVs):")
+    print(f"  Player seed: {seed}")
+
+    # Enemy team seeding (0 EV bug + mod 256 overflow)
+    enemy_seed = calc_seed(team, smap, is_enemy=True)
+    print(f"  Enemy seed:  {enemy_seed}  (0 EV bug + mod 256 overflow)")
+    print(f"  Difference:  {seed - enemy_seed}")
+
+    # Lv50, 15 IVs (typical early Frontier)
+    seed_50 = calc_seed(team, smap, level=50, ivs=15)
+    enemy_50 = calc_seed(team, smap, level=50, ivs=15, is_enemy=True)
+    print(f"\nSame team at lv50, 15 IVs:")
+    print(f"  Player seed: {seed_50}")
+    print(f"  Enemy seed:  {enemy_50}")
+
+# Player team with a CustomSet
+print(f"\nWith a CustomSet on the player's team:")
+my_meta = CustomSet("Metagross", nature="Adamant",
+                    evs=[252, 252, 0, 0, 4, 0], item="Choice Band")
+if lax_sets and ttar_sets:
+    mixed_team = [my_meta, lax_sets[0], ttar_sets[0]]
+    seed = calc_seed(mixed_team, smap)
+    print(f"  Custom Metagross / Snorlax-1 / Tyranitar-1: seed = {seed}")

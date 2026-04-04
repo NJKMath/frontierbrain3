@@ -3,18 +3,18 @@ frontier_db.py — Database and query/filter collections for Battle Frontier dat
 
 Depends on:
     frontierutils  — shared data, stats, types, CustomSet
-    damagecalc     — damage formula (for willOHKO filter)
+    damagecalc     — damage formula (for OHKO filters)
 """
 
 import json
 from pathlib import Path
 
 from frontierutils import (
-    _norm, _set_id, calc_stats, CustomSet,
+    _norm, _set_id, calc_stats, CustomSet, type_effectiveness,
     SETS_FILE, TRAINERS_FILE, POKEMON_FILE,
     # Re-export for backward compatibility
     from_paste, from_clipboard, STAT_KEYS,
-    apply_stage, move_category, type_effectiveness,
+    apply_stage, move_category,
 )
 
 
@@ -37,12 +37,6 @@ def _nature_pred(s, natures):
     return _norm(s["Nature"]) in {_norm(n) for n in natures}
 
 def _type_pred(s, types, species_map):
-    """Each arg is a type string:
-      'Fire'        — has Fire (pure or dual)
-      'Fire/Flying' — has both Fire and Flying
-      'Fire/'       — pure Fire only (no second type)
-    Multiple args are OR'd together.
-    """
     dex = s.get("DexNum")
     if dex is None:
         return False
@@ -68,50 +62,124 @@ def _trainer_has_set_pred(t, set_ids):
 
 # ── OHKO filter helpers ───────────────────────────────────────────────────────
 
-def _best_move_min_max(attacker, defender, species_map, **kwargs):
+# One-hit KO moves: normalized name → move type
+_OHKO_MOVES = {
+    "guillotine": "normal",
+    "horndrill":  "normal",
+    "fissure":    "ground",
+    "sheercold":  "ice",
+}
+
+
+def _ohko_move_accuracy(atk_level: int, def_level: int) -> int:
+    """Gen 3 OHKO move accuracy: fails if attacker level < defender level."""
+    if atk_level < def_level:
+        return 0
+    return min(100, 30 + atk_level - def_level)
+
+
+def _best_ohko_chance(attacker, defender, species_map, *,
+                      include_ohko=False, include_acc=False, **kwargs):
     """
-    Returns (best_min_roll, best_max_roll) across all of the attacker's moves
-    against the defender. 'Best' = highest min roll (the move most likely to KO).
-    If no moves deal damage, returns (0, 0).
+    Returns the highest OHKO probability (0.0–1.0) across all of the
+    attacker's moves against the defender, including multi-hit support.
     """
-    from damagecalc import damage_rolls, get_move
+    from damagecalc import (
+        damage_rolls, get_move, get_hit_info, _extract,
+        multi_hit_ohko_prob, _convolve_once, _ko_prob_from_dist,
+        _TRIPLE_KICK_POWERS,
+    )
+
+    dfn = _extract(defender, species_map,
+                   ivs=kwargs.get("def_ivs", 31),
+                   level=kwargs.get("def_level", 100),
+                   ability_override=kwargs.get("def_ability"))
+    hp = kwargs.get("def_current_hp") or dfn["stats"]["hp"]
+    def_types = dfn["types"]
+    def_ability = dfn["ability"]
+    def_level = dfn["level"]
+
+    atk_info = _extract(attacker, species_map,
+                        ivs=kwargs.get("atk_ivs", 31),
+                        level=kwargs.get("atk_level", 100),
+                        ability_override=kwargs.get("atk_ability"))
+    atk_level = atk_info["level"]
 
     if isinstance(attacker, CustomSet):
         move_names = attacker.moves or []
     else:
         move_names = attacker.get("Moves", [])
 
-    best_min = 0
-    best_max = 0
+    best = 0.0
 
     for mname in move_names:
+        norm = _norm(mname)
+
+        # ── OHKO moves ────────────────────────────────────────────────
+        if norm in _OHKO_MOVES and include_ohko:
+            if def_ability == "sturdy":
+                continue
+            ohko_type = _OHKO_MOVES[norm]
+            eff = type_effectiveness(ohko_type, def_types)
+            if eff == 0:
+                continue
+            if include_acc:
+                acc = _ohko_move_accuracy(atk_level, def_level)
+                chance = acc / 100
+            else:
+                chance = 1.0
+            best = max(best, chance)
+            if best >= 1.0:
+                return 1.0
+            continue
+
+        # ── Regular damaging moves ────────────────────────────────────
         try:
             mv = get_move(mname)
         except ValueError:
             continue
         if mv.get("power", 0) in (0, None):
             continue
-        rolls = damage_rolls(attacker, defender, mv, species_map, **kwargs)
-        roll_min = min(rolls)
-        if roll_min > best_min:
-            best_min = roll_min
-            best_max = max(rolls)
 
-    return best_min, best_max
+        per_hit_rolls = damage_rolls(attacker, defender, mv, species_map, **kwargs)
+        hit_info = get_hit_info(mv)
 
+        # Compute OHKO probability based on hit type
+        if hit_info["type"] == "triple_kick":
+            # Convolve 3 different-power kicks
+            kick_rolls_list = []
+            for kick_power in _TRIPLE_KICK_POWERS:
+                kick_mv = dict(mv)
+                kick_mv["power"] = kick_power
+                kick_rolls_list.append(
+                    damage_rolls(attacker, defender, kick_mv, species_map, **kwargs)
+                )
+            dist = {0: 1}
+            for kr in kick_rolls_list:
+                dist = _convolve_once(dist, kr)
+            total_combos = 1
+            for kr in kick_rolls_list:
+                total_combos *= len(kr)
+            roll_chance = _ko_prob_from_dist(dist, total_combos, hp)
+        else:
+            roll_chance = multi_hit_ohko_prob(per_hit_rolls, hp, hit_info)
 
-def _get_defender_hp(defender, species_map, **kwargs):
-    """Extract HP from a frontier set or CustomSet in the defender role.
-    Respects def_current_hp if passed, otherwise uses max HP."""
-    current = kwargs.get("def_current_hp")
-    if current is not None:
-        return current
-    from damagecalc import _extract
-    dfn = _extract(defender, species_map,
-                   ivs=kwargs.get("def_ivs", 31),
-                   level=kwargs.get("def_level", 100),
-                   ability_override=kwargs.get("def_ability"))
-    return dfn["stats"]["hp"]
+        if roll_chance <= 0:
+            continue
+
+        if include_acc:
+            acc = mv.get("accuracy", 100)
+            if not acc or acc <= 0:
+                acc = 100
+            chance = (acc / 100) * roll_chance
+        else:
+            chance = roll_chance
+
+        best = max(best, chance)
+        if best >= 1.0:
+            return 1.0
+
+    return best
 
 
 # ── SetCollection ─────────────────────────────────────────────────────────────
@@ -173,37 +241,89 @@ class SetCollection:
             lambda s: calc_stats(s, self._db._species_map, ivs=ivs, level=level)["spe"] == threshold
         )
 
-    def willOHKO(self, defender, **kwargs) -> "SetCollection":
-        """Filter to sets whose best move guarantees an OHKO (min roll KOs)."""
+    # ── OHKO filters ──────────────────────────────────────────────────────
+
+    def willOHKO(self, defender, *,
+                 include_ohko=False, include_acc=False, **kwargs) -> "SetCollection":
+        """
+        Filter to sets that GUARANTEE an OHKO on the defender.
+
+        include_ohko: Allow OHKO moves (Guillotine, etc.) to count.
+        include_acc:  Only count moves with 100% accuracy as guaranteed.
+                      (A move with <100% accuracy cannot be a guaranteed OHKO.)
+        **kwargs:     Passed to damage_rolls (field, atk_boosts, critical, etc.)
+        """
         smap = self._db._species_map
-        hp = _get_defender_hp(defender, smap, **kwargs)
         return self._filter(
-            lambda s: _best_move_min_max(s, defender, smap, **kwargs)[0] >= hp
+            lambda s: _best_ohko_chance(
+                s, defender, smap,
+                include_ohko=include_ohko, include_acc=include_acc, **kwargs
+            ) >= 1.0
         )
 
-    def canOHKO(self, defender, **kwargs) -> "SetCollection":
-        """Filter to sets whose best move can OHKO on the max roll."""
+    def canOHKO(self, defender, *,
+                include_ohko=False, include_acc=False,
+                min_chance=None, **kwargs) -> "SetCollection":
+        """
+        Filter to sets that CAN OHKO the defender (at least one roll KOs).
+
+        include_ohko: Allow OHKO moves to count.
+        include_acc:  Factor accuracy into the probability.
+        min_chance:   Minimum OHKO probability threshold (0.0–1.0).
+                      None (default) = any non-zero chance.
+                      E.g. min_chance=0.5 for "at least 50% to OHKO".
+        **kwargs:     Passed to damage_rolls.
+        """
         smap = self._db._species_map
-        hp = _get_defender_hp(defender, smap, **kwargs)
+        if min_chance is None:
+            return self._filter(
+                lambda s: _best_ohko_chance(
+                    s, defender, smap,
+                    include_ohko=include_ohko, include_acc=include_acc, **kwargs
+                ) > 0
+            )
         return self._filter(
-            lambda s: _best_move_min_max(s, defender, smap, **kwargs)[1] >= hp
+            lambda s: _best_ohko_chance(
+                s, defender, smap,
+                include_ohko=include_ohko, include_acc=include_acc, **kwargs
+            ) >= min_chance
         )
 
-    def diesTo(self, attacker, **kwargs) -> "SetCollection":
-        """Filter to sets that are guaranteed OHKO'd by the attacker's best move."""
+    def diesTo(self, attacker, *,
+               include_ohko=False, include_acc=False, **kwargs) -> "SetCollection":
+        """
+        Filter to sets that the attacker GUARANTEES to OHKO.
+        (Reverse of willOHKO — each set in the collection is the defender.)
+        """
         smap = self._db._species_map
-        def pred(s):
-            hp = _get_defender_hp(s, smap, **kwargs)
-            return _best_move_min_max(attacker, s, smap, **kwargs)[0] >= hp
-        return self._filter(pred)
+        return self._filter(
+            lambda s: _best_ohko_chance(
+                attacker, s, smap,
+                include_ohko=include_ohko, include_acc=include_acc, **kwargs
+            ) >= 1.0
+        )
 
-    def canDieTo(self, attacker, **kwargs) -> "SetCollection":
-        """Filter to sets that can be OHKO'd by the attacker's best move (max roll)."""
+    def canDieTo(self, attacker, *,
+                 include_ohko=False, include_acc=False,
+                 min_chance=None, **kwargs) -> "SetCollection":
+        """
+        Filter to sets that the attacker CAN OHKO.
+        (Reverse of canOHKO — each set in the collection is the defender.)
+        """
         smap = self._db._species_map
-        def pred(s):
-            hp = _get_defender_hp(s, smap, **kwargs)
-            return _best_move_min_max(attacker, s, smap, **kwargs)[1] >= hp
-        return self._filter(pred)
+        if min_chance is None:
+            return self._filter(
+                lambda s: _best_ohko_chance(
+                    attacker, s, smap,
+                    include_ohko=include_ohko, include_acc=include_acc, **kwargs
+                ) > 0
+            )
+        return self._filter(
+            lambda s: _best_ohko_chance(
+                attacker, s, smap,
+                include_ohko=include_ohko, include_acc=include_acc, **kwargs
+            ) >= min_chance
+        )
 
     def usedByTrainer(self) -> "TrainerCollection":
         ids = {_norm(_set_id(s)) for s in self._sets}
@@ -283,35 +403,69 @@ class _NegatedSetCollection:
             negate=True
         )
 
-    def willOHKO(self, defender, **kwargs) -> SetCollection:
+    # ── Negated OHKO filters ──────────────────────────────────────────────
+
+    def willOHKO(self, defender, *,
+                 include_ohko=False, include_acc=False, **kwargs) -> SetCollection:
         smap = self._col._db._species_map
-        hp = _get_defender_hp(defender, smap, **kwargs)
         return self._col._filter(
-            lambda s: _best_move_min_max(s, defender, smap, **kwargs)[0] >= hp,
+            lambda s: _best_ohko_chance(
+                s, defender, smap,
+                include_ohko=include_ohko, include_acc=include_acc, **kwargs
+            ) >= 1.0,
             negate=True
         )
 
-    def canOHKO(self, defender, **kwargs) -> SetCollection:
+    def canOHKO(self, defender, *,
+                include_ohko=False, include_acc=False,
+                min_chance=None, **kwargs) -> SetCollection:
         smap = self._col._db._species_map
-        hp = _get_defender_hp(defender, smap, **kwargs)
+        if min_chance is None:
+            return self._col._filter(
+                lambda s: _best_ohko_chance(
+                    s, defender, smap,
+                    include_ohko=include_ohko, include_acc=include_acc, **kwargs
+                ) > 0,
+                negate=True
+            )
         return self._col._filter(
-            lambda s: _best_move_min_max(s, defender, smap, **kwargs)[1] >= hp,
+            lambda s: _best_ohko_chance(
+                s, defender, smap,
+                include_ohko=include_ohko, include_acc=include_acc, **kwargs
+            ) >= min_chance,
             negate=True
         )
 
-    def diesTo(self, attacker, **kwargs) -> SetCollection:
+    def diesTo(self, attacker, *,
+               include_ohko=False, include_acc=False, **kwargs) -> SetCollection:
         smap = self._col._db._species_map
-        def pred(s):
-            hp = _get_defender_hp(s, smap, **kwargs)
-            return _best_move_min_max(attacker, s, smap, **kwargs)[0] >= hp
-        return self._col._filter(pred, negate=True)
+        return self._col._filter(
+            lambda s: _best_ohko_chance(
+                attacker, s, smap,
+                include_ohko=include_ohko, include_acc=include_acc, **kwargs
+            ) >= 1.0,
+            negate=True
+        )
 
-    def canDieTo(self, attacker, **kwargs) -> SetCollection:
+    def canDieTo(self, attacker, *,
+                 include_ohko=False, include_acc=False,
+                 min_chance=None, **kwargs) -> SetCollection:
         smap = self._col._db._species_map
-        def pred(s):
-            hp = _get_defender_hp(s, smap, **kwargs)
-            return _best_move_min_max(attacker, s, smap, **kwargs)[1] >= hp
-        return self._col._filter(pred, negate=True)
+        if min_chance is None:
+            return self._col._filter(
+                lambda s: _best_ohko_chance(
+                    attacker, s, smap,
+                    include_ohko=include_ohko, include_acc=include_acc, **kwargs
+                ) > 0,
+                negate=True
+            )
+        return self._col._filter(
+            lambda s: _best_ohko_chance(
+                attacker, s, smap,
+                include_ohko=include_ohko, include_acc=include_acc, **kwargs
+            ) >= min_chance,
+            negate=True
+        )
 
 
 # ── TrainerCollection ─────────────────────────────────────────────────────────
