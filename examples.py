@@ -524,3 +524,26 @@ if lax_sets and ttar_sets:
     mixed_team = [my_meta, lax_sets[0], ttar_sets[0]]
     seed = calc_seed(mixed_team, smap)
     print(f"  Custom Metagross / Snorlax-1 / Tyranitar-1: seed = {seed}")
+
+# Monte Carlo: estimate highest enemy seed in a round 8 Tower run
+print(f"\nMonte Carlo: highest enemy seed across 1000 random round 8 teams:")
+set_lookup = {f"{s['Pokemon']}-{s['SetNum']}": s for s in db._sets}
+best_seed = 0
+best_team_str = ""
+n_samples = 1000
+for _ in range(n_samples):
+    result = tower.random_team(8)
+    if result.startswith("Error"):
+        continue
+    # Parse "CLASS Name: SetId1, SetId2, SetId3"
+    label, ids_str = result.split(": ", 1)
+    set_ids = [s.strip() for s in ids_str.split(", ")]
+    team_sets = [set_lookup[sid] for sid in set_ids if sid in set_lookup]
+    if len(team_sets) != 3:
+        continue
+    seed = calc_seed(team_sets, smap, is_enemy=True)
+    if seed > best_seed:
+        best_seed = seed
+        best_team_str = result
+print(f"  Highest seed: {best_seed}")
+print(f"  Team: {best_team_str}")
