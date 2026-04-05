@@ -1,8 +1,7 @@
-import json
 import random
-import re
 
 from ..frontier_db import Database, _norm
+from ..frontierutils import _default_species_map
 
 # ── Team Type/Phrase utilities ────────────────────────────────────────────────
 
@@ -62,7 +61,9 @@ _PHRASE_STYLES = {
 _PHRASE_NUM_MAP = {0: None, 1: 1, 2: 2, 3: 3, 4: 4, 5: 5, 6: 6, 7: 7, 8: "flex"}
 
 
-def team_type(sets: list[dict], species_map: dict) -> str:
+def team_type(sets: list[dict], species_map: dict = None) -> str:
+    if species_map is None:
+        species_map = _default_species_map()
     counts: dict[str, int] = {}
     for s in sets:
         dex = s.get("DexNum")

@@ -16,12 +16,10 @@ from __future__ import annotations
 import json
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Union
 
 from .frontierutils import (
     _norm, calc_stats, apply_stage, move_category,
-    type_effectiveness, _TYPE_CHART,
-    CustomSet, POKEMON_FILE,
+    _TYPE_CHART, CustomSet, _default_species_map,
 )
 
 # -- Move property lists (kept here so we don't need flags in moves.json) ------
@@ -116,7 +114,7 @@ def _load_moves() -> dict:
     return {}
 
 
-def get_move(move: Union[str, dict]) -> dict:
+def get_move(move: str | dict) -> dict:
     if isinstance(move, dict):
         m = dict(move)
         m.setdefault("category", move_category(m["type"]))
@@ -200,8 +198,7 @@ def combine_multi_hit_rolls(per_hit_rolls: list[int], hit_info: dict) -> list[in
             dist = {0: 1}
             for _ in range(hits):
                 dist = _convolve_once(dist, per_hit_rolls)
-            combos = n ** hits
-            expanded = _expand_dist(dist, combos)
+            expanded = _expand_dist(dist, n ** hits)
             all_rolls.extend(expanded * w)
         return all_rolls
     return list(per_hit_rolls)
@@ -304,7 +301,7 @@ def _get_weight_kg(defender, species_map) -> float:
 
 def damage_rolls(
     attacker, defender, move,
-    species_map: dict,
+    species_map: dict = None,
     *,
     atk_ivs: int = 31,
     def_ivs: int = 31,
@@ -330,6 +327,8 @@ def damage_rolls(
     for a single hit. Use get_hit_info() + combine_multi_hit_rolls() or
     calc_matchup() for total damage from a full attack.
     """
+    if species_map is None:
+        species_map = _default_species_map()
     if field is None:
         field = Field()
 
@@ -696,7 +695,7 @@ _HP_DEPENDENT_MOVES = frozenset({"superfang", "endeavor"})
 
 def calc_matchup(
     attacker, defender, move,
-    species_map: dict,
+    species_map: dict = None,
     **kwargs,
 ) -> dict:
     """
@@ -705,6 +704,9 @@ def calc_matchup(
     For multi-hit moves, per_hit_rolls are per-hit values, and ko_chances
     use properly combined attack totals.
     """
+    if species_map is None:
+        species_map = _default_species_map()
+
     recovery = kwargs.pop("recovery", 0)
     max_hits = kwargs.pop("max_hits", 8)
 
@@ -728,7 +730,7 @@ def calc_matchup(
     if hit_info["type"] == "single":
         attack_rolls = per_hit_rolls
     elif hit_info["type"] == "triple_kick":
-        # Special: compute per-kick rolls at each power, then convolve
+        # Compute per-kick rolls at each power, then convolve
         kick_rolls_list = []
         for kick_power in _TRIPLE_KICK_POWERS:
             kick_mv = dict(mv)

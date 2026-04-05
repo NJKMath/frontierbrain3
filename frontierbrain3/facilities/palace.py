@@ -1,21 +1,24 @@
 """
 palace.py -- Battle Palace move selection logic and probability analysis.
 
-In the Battle Palace, Pokémon act autonomously based on their Nature.
+In the Battle Palace, Pokemon act autonomously based on their Nature.
 Each turn, a move *category* (Attack / Defense / Support) is selected
-according to nature-dependent ratios, and one of the Pokémon's moves in
-that category is used.  If no move exists in the chosen category, there
-is a 50 % chance the Pokémon picks a random move and a 50 % chance it
-wastes its turn.
+according to nature-dependent ratios. Then one of the Pokemon's moves
+in that category is chosen uniformly at random.  If no move exists in
+the chosen category, there is a 50% chance the Pokemon picks a random
+move from all its moves and a 50% chance it wastes its turn.
 
 Provides:
     get_move_category()        - classify a move as attack/defense/support
     categorize_moveset()       - break a moveset into its three categories
     get_nature_ratios()        - raw per-nature category ratios
     get_action_probabilities() - effective per-turn odds given a moveset
-    multi_turn_probabilities() - P(exactly k attacks in n turns), etc.
+    get_move_probabilities()   - per-move usage probability on a single turn
+    multi_turn_probabilities() - P(exactly k uses of a category in n turns)
+    move_turn_probabilities()  - P(exactly k uses of a specific move in n turns)
     cumulative_attack_prob()   - P(at least k attacks in n turns)
     expected_attacks()         - E[attacks] in n turns
+    rank_natures()             - rank all natures by category probability
     DOUBLES_TARGETING          - which foe each Nature targets
 """
 
@@ -114,7 +117,7 @@ def categorize_moveset(moves: list[str]) -> dict[str, list[str]]:
 # ══════════════════════════════════════════════════════════════════════════════
 # Nature data
 # ══════════════════════════════════════════════════════════════════════════════
-# (attack%, defense%, support%) at >50 % HP, then at ≤50 % HP.
+# (attack%, defense%, support%) at >50 % HP, then at <=50 % HP.
 
 _NATURE_RATIOS: dict[str, dict] = {
     "hardy":   {"high": (61,  7, 32), "low": (61,  7, 32)},
@@ -154,7 +157,7 @@ def get_nature_ratios(nature: str, *, low_hp: bool = False) -> dict[str, float]:
     nature : str
         Pokemon nature name.
     low_hp : bool
-        If True, use the ≤50 % HP ratios.
+        If True, use the <=50% HP ratios.
 
     Returns
     -------
@@ -185,9 +188,9 @@ def get_action_probabilities(
     moveset's category coverage.
 
     If the selected category has no move in the set:
-        - 50 % chance: pick one of the Pokémon's moves at random
+        - 50% chance: pick one of the Pokemon's moves at random
           (distributed across whichever categories the mon *does* have).
-        - 50 % chance: the Pokémon wastes its turn (does nothing).
+        - 50% chance: the Pokemon wastes its turn (does nothing).
 
     Parameters
     ----------
@@ -196,7 +199,7 @@ def get_action_probabilities(
     moves : list[str]
         The moveset (up to 4 moves).
     low_hp : bool
-        Use ≤50 % HP ratios.
+        Use <=50% HP ratios.
 
     Returns
     -------
@@ -242,7 +245,7 @@ def get_move_probabilities(
 
     Within a selected category, each move is equally likely (uniform AI
     approximation). When a random move is forced (empty category), each
-    of the Pokémon's moves is equally likely.
+    of the Pokemon's moves is equally likely.
 
     Parameters
     ----------
@@ -288,6 +291,15 @@ def get_move_probabilities(
 # Multi-turn probability distributions
 # ══════════════════════════════════════════════════════════════════════════════
 
+def _binomial_dist(p: float, n_turns: int) -> dict[int, float]:
+    """P(exactly k successes in n_turns independent Bernoulli trials)."""
+    q = 1.0 - p
+    return {
+        k: comb(n_turns, k) * (p ** k) * (q ** (n_turns - k))
+        for k in range(n_turns + 1)
+    }
+
+
 def multi_turn_probabilities(
     nature: str,
     moves: list[str],
@@ -316,12 +328,39 @@ def multi_turn_probabilities(
     """
     probs = get_action_probabilities(nature, moves, low_hp=low_hp)
     p = probs.get(category, 0.0)
-    q = 1.0 - p
+    return _binomial_dist(p, n_turns)
 
-    return {
-        k: comb(n_turns, k) * (p ** k) * (q ** (n_turns - k))
-        for k in range(n_turns + 1)
-    }
+
+def move_turn_probabilities(
+    nature: str,
+    moves: list[str],
+    n_turns: int,
+    move: str,
+    *,
+    low_hp: bool = False,
+) -> dict[int, float]:
+    """
+    Probability of using a specific move exactly k times in n turns.
+
+    Each turn is independent. The per-turn probability of the move is
+    derived from get_move_probabilities().
+
+    Parameters
+    ----------
+    nature : str
+    moves : list[str]
+    n_turns : int
+    move : str
+        The specific move name to track.
+    low_hp : bool
+
+    Returns
+    -------
+    dict  {k: P(exactly k times in n_turns)}, k = 0 .. n_turns.
+    """
+    move_probs = get_move_probabilities(nature, moves, low_hp=low_hp)
+    p = move_probs.get(move, 0.0)
+    return _binomial_dist(p, n_turns)
 
 
 def cumulative_attack_prob(
@@ -343,7 +382,7 @@ def cumulative_attack_prob(
 
     Returns
     -------
-    float   0.0 – 1.0
+    float   0.0 - 1.0
     """
     dist = multi_turn_probabilities(nature, moves, n_turns, low_hp=low_hp,
                                     category="attack")
@@ -376,7 +415,7 @@ def multi_turn_mixed_hp(
 ) -> dict[int, float]:
     """
     Probability of using a category exactly k times across a fight where
-    the Pokémon spends some turns above 50 % HP and some at or below.
+    the Pokemon spends some turns above 50% HP and some at or below.
 
     The two phases are independent sequences with different per-turn odds.
 
@@ -385,9 +424,9 @@ def multi_turn_mixed_hp(
     nature : str
     moves : list[str]
     high_hp_turns : int
-        Turns spent above 50 % HP.
+        Turns spent above 50% HP.
     low_hp_turns : int
-        Turns spent at or below 50 % HP.
+        Turns spent at or below 50% HP.
     category : str
 
     Returns
@@ -411,9 +450,9 @@ def multi_turn_mixed_hp(
 # Doubles targeting
 # ══════════════════════════════════════════════════════════════════════════════
 
-# "higher_hp"  → targets the foe with more HP
-# "lower_hp"   → targets the foe with less HP
-# "random"     → random foe (also used when both foes have equal HP)
+# "higher_hp"  -> targets the foe with more HP
+# "lower_hp"   -> targets the foe with less HP
+# "random"     -> random foe (also used when both foes have equal HP)
 
 DOUBLES_TARGETING: dict[str, str] = {
     "hardy":   "higher_hp",
@@ -463,8 +502,8 @@ _MSG_TEXT = {
 }
 
 
-def low_hp_message(nature: str, pokemon_name: str = "Pokémon") -> str:
-    """Return the flavour text shown when a Pokémon drops to ≤50 % HP."""
+def low_hp_message(nature: str, pokemon_name: str = "Pokemon") -> str:
+    """Return the flavour text shown when a Pokemon drops to <=50% HP."""
     n = _norm(nature)
     for key, natures in _LOW_HP_MESSAGES.items():
         if n in natures:

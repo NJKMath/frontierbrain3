@@ -1,3 +1,13 @@
+Metadata-Version: 2.4
+Name: frontierbrain3
+Version: 0.1.0
+Summary: Data analysis tools for Pokémon Emerald's Battle Frontier
+License: MIT
+Requires-Python: >=3.10
+Description-Content-Type: text/markdown
+Provides-Extra: clipboard
+Requires-Dist: tkinter; extra == "clipboard"
+
 # frontierbrain3
 
 A Python toolkit for analyzing Pokemon Emerald's Battle Frontier. Covers damage calculation, set/trainer querying, and facility-specific mechanics for the Tower, Factory, Dome, Palace, Pike, and Pyramid.
@@ -46,7 +56,7 @@ frontierbrain3/
 ├── damagecalc.py        # Damage formula, KO probability
 ├── data/
 │   ├── pokemon.json     # Species data (stats, types, weight, abilities)
-│   ├── bf_pokemon.json  # All frontier sets (882 regular + 36 Frontier Brain)
+│   ├── bf_pokemon.json  # All 882 frontier sets
 │   ├── bf_trainers.json # All 300+ trainers (includes Frontier Brains)
 │   ├── moves.json       # Move data (type, power, accuracy, etc.)
 │   ├── items.json       # Item names/IDs
@@ -67,7 +77,7 @@ frontierbrain3/
 
 ### Frontier Sets
 
-The package includes data for all 918 Battle Frontier Pokemon sets (882 regular sets plus 36 Frontier Brain sets). Each set is a dict with the following structure:
+The package includes data for all 882 Battle Frontier Pokemon sets. Each set is a dict with the following structure:
 
 ```json
 {
@@ -125,7 +135,7 @@ flygon.speed()      # shorthand for get_stats()["spe"]
 The `stats` parameter lets you override calculated stats with exact values if needed:
 
 ```python
-custom = CustomSet("Flygon", stats={"hp": 302, "atk": 299, "def": 196, "spa": 176, "spd": 196, "spe": 328})
+custom = CustomSet("Ditto", stats={"hp": 300, "atk": 100, "def": 100, "spa": 100, "spd": 100, "spe": 100})
 ```
 
 ### Pokepaste Import
@@ -180,8 +190,8 @@ from frontierbrain3 import Database
 
 db = Database()  # loads from default data/ paths
 
-db.sets       # SetCollection of all 918 frontier sets (882 regular + 36 Frontier Brain)
-db.trainers   # TrainerCollection of all trainers (300 regular + Frontier Brains)
+db.sets       # SetCollection of all 882 frontier sets
+db.trainers   # TrainerCollection of all trainers (300 normal + Frontier Brains)
 ```
 
 ### SetCollection
@@ -288,8 +298,8 @@ db.sets.willOHKO(ttar, field=Field(weather="rain"))
 # Include OHKO moves (Guillotine, Fissure, etc.)
 db.sets.canOHKO(lax, include_ohko=True)
 
-# Factor accuracy into guaranteed OHKOs (excludes imperfect-accuracy moves like Cross Chop)
-db.sets.willOHKO(ttar, include_acc=True)
+# Factor accuracy into probability (includes Brightpowder/Lax Incense on defender)
+db.sets.canOHKO(lax, include_ohko=True, include_acc=True)
 ```
 
 #### Negation

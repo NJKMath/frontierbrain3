@@ -12,13 +12,12 @@ Enemy bugs (is_enemy=True):
     - Non-HP stats overflow to stat mod 256.
 """
 
-from ..frontier_db import Database
-from ..frontierutils import _norm, calc_stats, CustomSet
+from ..frontierutils import _norm, calc_stats, CustomSet, _default_species_map
 
 
 def calc_seed(
     team: list,
-    species_map: dict,
+    species_map: dict = None,
     *,
     level: int = 100,
     ivs: int = 31,
@@ -32,8 +31,8 @@ def calc_seed(
     team : list
         List of 3 frontier set dicts, or CustomSets (CustomSet only if
         is_enemy is False).
-    species_map : dict
-        Species data from Database._species_map.
+    species_map : dict, optional
+        Species data. Defaults to the built-in pokemon.json.
     level : int
         Level for frontier sets (ignored for CustomSets, which carry their own).
     ivs : int
@@ -49,6 +48,9 @@ def calc_seed(
     int
         The seeding value.
     """
+    if species_map is None:
+        species_map = _default_species_map()
+
     if len(team) != 3:
         raise ValueError(f"Team must have exactly 3 members, got {len(team)}")
 

@@ -12,8 +12,8 @@ from pathlib import Path
 from .frontierutils import (
     _norm, _set_id, calc_stats, CustomSet, type_effectiveness,
     SETS_FILE, TRAINERS_FILE, POKEMON_FILE,
-    # Re-export for backward compatibility
-    from_paste, from_clipboard, STAT_KEYS,
+    # Re-exported for backward compatibility
+    from_paste, STAT_KEYS,
     apply_stage, move_category,
 )
 
@@ -84,7 +84,7 @@ def _best_ohko_chance(attacker, defender, species_map, *,
     Returns the highest OHKO probability (0.0–1.0) across all of the
     attacker's moves against the defender, including multi-hit support.
     """
-    from damagecalc import (
+    from .damagecalc import (
         damage_rolls, get_move, get_hit_info, _extract,
         multi_hit_ohko_prob, _convolve_once, _ko_prob_from_dist,
         _TRIPLE_KICK_POWERS,
@@ -171,6 +171,12 @@ def _best_ohko_chance(attacker, defender, species_map, *,
             acc = mv.get("accuracy", 100)
             if not acc or acc <= 0:
                 acc = 100
+            else:
+                # Defender evasion items (not applied to never-miss moves)
+                if dfn["item"] == "brightpowder":
+                    acc = acc * 9 // 10
+                elif dfn["item"] == "laxincense":
+                    acc = acc * 95 // 100
             chance = (acc / 100) * roll_chance
         else:
             chance = roll_chance
@@ -536,7 +542,7 @@ class Database:
 
     @property
     def trainers(self) -> TrainerCollection:
-        return TrainerCollection(self._trainers, self)
+        return self._make_trainer_collection(self._trainers)
 
     def allSets(self, pokemon: str) -> SetCollection:
         norm = _norm(pokemon)

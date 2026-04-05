@@ -11,7 +11,6 @@ Contains:
 
 import json
 import re
-import tkinter as tk
 from pathlib import Path
 
 # ── File paths ────────────────────────────────────────────────────────────────
@@ -20,6 +19,20 @@ _DATA         = Path(__file__).parent / "data"
 SETS_FILE     = _DATA / "bf_pokemon.json"
 TRAINERS_FILE = _DATA / "bf_trainers.json"
 POKEMON_FILE  = _DATA / "pokemon.json"
+
+
+# ── Default species map (lazy-loaded) ─────────────────────────────────────
+
+_species_map_cache: dict | None = None
+
+
+def _default_species_map() -> dict:
+    """Return the default species map, loading from pokemon.json on first call."""
+    global _species_map_cache
+    if _species_map_cache is None:
+        with open(POKEMON_FILE, encoding="utf-8") as f:
+            _species_map_cache = {p["id"]: p for p in json.load(f)}
+    return _species_map_cache
 
 
 # ── Normalization ─────────────────────────────────────────────────────────────
@@ -63,12 +76,14 @@ def apply_stage(stat: int, stage: int) -> int:
 
 # ── Stat calculation ──────────────────────────────────────────────────────────
 
-def calc_stats(s: dict, species_map: dict,
+def calc_stats(s: dict, species_map: dict = None,
                ivs: int | list[int] = 31, level: int = 100) -> dict:
     """
     Calculate a set's stats given IVs and level.
     ivs can be a single int (all stats equal) or a list of 6 ints [hp,atk,def,spa,spd,spe].
     """
+    if species_map is None:
+        species_map = _default_species_map()
     dex     = s.get("DexNum")
     bases   = species_map.get(dex, {}).get("stats", {})
     evs     = s["EVs"]
@@ -190,8 +205,7 @@ class CustomSet:
         self.moves      = [_norm(m) for m in (moves or [])][:4]
         self._raw_stats = stats
 
-        with open(POKEMON_FILE, encoding="utf-8") as f:
-            species_map = {p["id"]: p for p in json.load(f)}
+        species_map = _default_species_map()
 
         dex_entry = next(
             (p for p in species_map.values() if _norm(p["name"]) == _norm(pokemon)),
@@ -213,7 +227,20 @@ class CustomSet:
         return self.get_stats()["spe"]
 
     def __repr__(self):
-        return f"CustomSet({self.pokemon}, nature={self.nature}, ivs={self.ivs}, level={self.level})"
+        parts = [
+            self.pokemon,
+            f"nature={self.nature}",
+            f"evs={self.evs}",
+            f"ivs={self.ivs}",
+            f"level={self.level}",
+        ]
+        if self.item and self.item != "None":
+            parts.append(f"item={self.item}")
+        if self.ability:
+            parts.append(f"ability={self.ability}")
+        if self.moves:
+            parts.append(f"moves={self.moves}")
+        return f"CustomSet({', '.join(parts)})"
 
 
 # ── Pokepaste import ──────────────────────────────────────────────────────────
@@ -280,11 +307,3 @@ def from_paste(text: str) -> dict[str, CustomSet]:
             n   += 1
         result[name] = cs
     return result
-
-
-def from_clipboard() -> dict[str, CustomSet]:
-    root = tk.Tk()
-    root.withdraw()
-    text = root.clipboard_get()
-    root.destroy()
-    return from_paste(text)

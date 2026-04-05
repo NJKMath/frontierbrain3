@@ -1,12 +1,12 @@
 """
-frontierbrain3 -- Data analysis tools for Pokémon Emerald's Battle Frontier.
+frontierbrain3 -- Data analysis tools for Pokemon Emerald's Battle Frontier.
 
 Quick start:
     from frontierbrain3 import Database, CustomSet, calc_matchup
 
 Core:
     Database        - query/filter frontier sets and trainers
-    CustomSet       - define your own Pokémon set
+    CustomSet       - define your own Pokemon set
     calc_stats      - compute stats from a set dict
     from_paste      - import teams from Pokepaste format
 
@@ -33,7 +33,6 @@ from .frontierutils import (
     move_category,
     type_effectiveness,
     from_paste,
-    from_clipboard,
     STAT_KEYS,
 )
 
@@ -55,7 +54,7 @@ __all__ = [
     # Core
     "Database", "SetCollection", "TrainerCollection",
     "CustomSet", "calc_stats", "apply_stage", "move_category",
-    "type_effectiveness", "from_paste", "from_clipboard", "STAT_KEYS",
+    "type_effectiveness", "from_paste", "STAT_KEYS",
     # Damage calc
     "damage_rolls", "ko_chance", "calc_matchup", "format_result",
     "get_move", "get_hit_info", "Field",

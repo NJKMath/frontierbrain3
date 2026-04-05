@@ -1,93 +1,152 @@
+#!/usr/bin/env python3
 """
-Scans Data/moves.json for non-status moves with 0 or null power,
-then checks whether each is referenced in damagecalc.py.
+Extract and run every Python code block from README.md to verify correctness.
 
-Prints unhandled moves so we know what to implement next.
+Blocks are executed sequentially in a shared namespace, so variables defined
+in earlier blocks are available to later ones (matching how a reader would
+build up state while following the README top to bottom).
+
+Usage:
+    python test_readme.py                # run all blocks
+    python test_readme.py --stop         # stop on first failure
+    python test_readme.py --block 5      # run only block 5
+    python test_readme.py --list         # list all blocks without running
+    python test_readme.py --from 8       # run blocks 8 onward
 """
 
-import json
+import argparse
 import re
+import sys
+import traceback
 from pathlib import Path
 
-MOVES_FILE    = Path(__file__).parent / "Data" / "moves.json"
-DAMAGECALC_PY = Path(__file__).parent / "damagecalc.py"
 
-# ── Load moves ────────────────────────────────────────────────────────────────
+def extract_blocks(readme_path: str) -> list[dict]:
+    """Extract all ```python code blocks with context."""
+    text = Path(readme_path).read_text(encoding="utf-8")
+    lines = text.splitlines()
 
-with open(MOVES_FILE, encoding="utf-8") as f:
-    raw = json.load(f)
+    blocks = []
+    i = 0
+    while i < len(lines):
+        if lines[i].strip().startswith("```python"):
+            # Walk backward to find the nearest heading
+            heading = "(no heading)"
+            for j in range(i - 1, -1, -1):
+                if lines[j].startswith("#"):
+                    heading = lines[j].lstrip("#").strip()
+                    break
 
-if isinstance(raw, list):
-    moves = {m["name"]: m for m in raw}
-else:
-    moves = dict(raw)
+            # Collect code lines
+            code_lines = []
+            i += 1
+            while i < len(lines) and not lines[i].strip().startswith("```"):
+                code_lines.append(lines[i])
+                i += 1
 
-# ── Load damagecalc source and normalize for scanning ─────────────────────────
+            code = "\n".join(code_lines)
+            blocks.append({
+                "index": len(blocks) + 1,
+                "heading": heading,
+                "code": code,
+                "preview": code_lines[0].strip() if code_lines else "",
+                "line_count": len(code_lines),
+            })
+        i += 1
 
-calc_source = DAMAGECALC_PY.read_text(encoding="utf-8").lower()
+    return blocks
 
-# ── Classify ──────────────────────────────────────────────────────────────────
 
-def norm(s: str) -> str:
-    return re.sub(r"[^a-z0-9]", "", s.lower())
+def run_block(block: dict, namespace: dict, verbose: bool = True) -> bool:
+    """Execute a code block. Returns True on success."""
+    idx = block["index"]
+    heading = block["heading"]
+    code = block["code"]
 
-# Moves with 0/null power that still deal damage (variable BP, OHKO, etc.)
-# Status moves genuinely do 0 damage and we can skip them.
-# We identify status moves by category if available, otherwise by having
-# no damage-dealing characteristics.
+    if verbose:
+        print(f"\n{'=' * 60}")
+        print(f"  Block {idx}: {heading}")
+        print(f"  ({block['line_count']} lines, starts with: {block['preview']!r})")
+        print(f"{'=' * 60}")
 
-zero_power = []
-for name, data in moves.items():
-    power = data.get("power", 0) or 0
-    if power != 0:
-        continue
+    try:
+        exec(compile(code, f"<README block {idx}>", "exec"), namespace)
+        if verbose:
+            print(f"  PASS")
+        return True
+    except Exception as e:
+        if verbose:
+            print(f"  FAIL: {type(e).__name__}: {e}")
+            print()
+            # Show the code with line numbers for debugging
+            for i, line in enumerate(code.splitlines(), 1):
+                print(f"    {i:3d} | {line}")
+            print()
+            traceback.print_exc()
+        return False
 
-    cat = data.get("category", "").lower()
 
-    # Skip pure status moves
-    if cat == "status":
-        continue
+def main():
+    parser = argparse.ArgumentParser(description="Test README.md code blocks")
+    parser.add_argument("--readme", default="README.md", help="Path to README")
+    parser.add_argument("--stop", action="store_true", help="Stop on first failure")
+    parser.add_argument("--block", type=int, help="Run only this block number")
+    parser.add_argument("--list", action="store_true", help="List blocks, don't run")
+    parser.add_argument("--from", type=int, dest="from_block", help="Start from this block")
+    parser.add_argument("--quiet", action="store_true", help="Only show failures")
+    args = parser.parse_args()
 
-    zero_power.append((name, data))
+    readme_path = Path(args.readme)
+    if not readme_path.exists():
+        print(f"Error: {readme_path} not found")
+        sys.exit(1)
 
-# ── Check which are referenced in damagecalc.py ──────────────────────────────
+    blocks = extract_blocks(str(readme_path))
+    print(f"Found {len(blocks)} Python code blocks in {readme_path}\n")
 
-handled   = []
-unhandled = []
+    if args.list:
+        for b in blocks:
+            print(f"  {b['index']:3d}. [{b['heading']}] ({b['line_count']} lines)")
+            print(f"       {b['preview']}")
+        return
 
-for name, data in sorted(zero_power, key=lambda x: x[0]):
-    normalized = norm(name)
-    # Check for the normalized name appearing as a string literal in the source
-    if normalized in calc_source:
-        handled.append((name, data))
-    else:
-        unhandled.append((name, data))
+    # Filter blocks
+    if args.block:
+        blocks = [b for b in blocks if b["index"] == args.block]
+        if not blocks:
+            print(f"Error: block {args.block} not found")
+            sys.exit(1)
+    elif args.from_block:
+        blocks = [b for b in blocks if b["index"] >= args.from_block]
 
-# ── Print results ─────────────────────────────────────────────────────────────
+    # Shared namespace across all blocks
+    namespace = {"__builtins__": __builtins__}
 
-print(f"Total moves in DB: {len(moves)}")
-print(f"Non-status moves with 0/null power: {len(zero_power)}")
-print(f"  Already referenced in damagecalc.py: {len(handled)}")
-print(f"  NOT referenced: {len(unhandled)}")
+    passed = 0
+    failed = 0
+    failed_blocks = []
 
-if handled:
-    print(f"\n{'─'*60}")
-    print("HANDLED (referenced in damagecalc.py):")
-    print(f"{'─'*60}")
-    for name, data in handled:
-        cat  = data.get("category", "?")
-        typ  = data.get("type", "?")
-        desc = data.get("description", data.get("desc", ""))[:60]
-        print(f"  {name:<20} {typ:<10} {cat:<10} {desc}")
+    for block in blocks:
+        verbose = not args.quiet or True  # always show block header
+        ok = run_block(block, namespace, verbose=not args.quiet)
+        if ok:
+            passed += 1
+        else:
+            failed += 1
+            failed_blocks.append(block["index"])
+            if args.stop:
+                print(f"\nStopping on first failure (--stop)")
+                break
 
-if unhandled:
-    print(f"\n{'─'*60}")
-    print("UNHANDLED (not referenced in damagecalc.py):")
-    print(f"{'─'*60}")
-    for name, data in unhandled:
-        cat  = data.get("category", "?")
-        typ  = data.get("type", "?")
-        desc = data.get("description", data.get("desc", ""))[:60]
-        print(f"  {name:<20} {typ:<10} {cat:<10} {desc}")
-else:
-    print("\nAll non-status 0-power moves are referenced!")
+    # Summary
+    print(f"\n{'=' * 60}")
+    print(f"  Results: {passed} passed, {failed} failed out of {passed + failed}")
+    if failed_blocks:
+        print(f"  Failed blocks: {failed_blocks}")
+    print(f"{'=' * 60}")
+
+    sys.exit(1 if failed else 0)
+
+
+if __name__ == "__main__":
+    main()
