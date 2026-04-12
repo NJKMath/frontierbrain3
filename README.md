@@ -540,10 +540,11 @@ get_hit_info("Earthquake")    # {"type": "single"}
 ```python
 from frontierbrain3.damagecalc import combine_multi_hit_rolls, multi_hit_ohko_prob
 
-per_hit = damage_rolls(meta, ttar, "Bullet Seed")
-hit_info = get_hit_info("Bullet Seed")
+blaziken = db.allSets("Blaziken")._sets[0]
+per_hit = damage_rolls(blaziken, lax, "Double Kick")
+hit_info = get_hit_info("Double Kick")
 total_rolls = combine_multi_hit_rolls(per_hit, hit_info)
-ohko_prob = multi_hit_ohko_prob(per_hit, calc_stats(ttar)["hp"], hit_info)
+ohko_prob = multi_hit_ohko_prob(per_hit, calc_stats(lax)["hp"], hit_info)
 ```
 
 ### Recoil and Drain Reference

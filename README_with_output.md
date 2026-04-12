@@ -18,31 +18,23 @@ pip install -e .
 
 ## Quick Start
 
+
 ```python
 from frontierbrain3 import Database, CustomSet, calc_matchup, format_result
+```
 
+```python
 db = Database()
+```
 
-# Find all Water-types with Surf
+```python
 water_surfers = db.sets.hasType("Water").hasMove("surf")
-print(f"{len(water_surfers)} sets")  # SetCollection with .ids(), iteration, etc.
-
-# Damage calc: custom attacker vs frontier defender
-starmie = CustomSet("Starmie", nature="Timid", evs=[0,0,0,252,4,252],
-                    moves=["Surf", "Thunderbolt", "Ice Beam", "Psychic"])
-ttar = db.allSets("Tyranitar")._sets[0]
-
-result = calc_matchup(starmie, ttar, "Surf")
-print(format_result(result, "Surf"))
 ```
 
 <details>
 <summary>Output</summary>
 
 ```
->>> db = Database()
-db = <frontierbrain3.frontier_db.Database object at 0x000001D349492F90>
->>> water_surfers = db.sets.hasType("Water").hasMove("surf")
 water_surfers = SetCollection(65 sets)
 [  # 65 items
   'Wartortle-2',
@@ -77,10 +69,45 @@ water_surfers = SetCollection(65 sets)
   'Suicune-SpenserGold',
   'Milotic-LucySilver',
 ]
+```
+
+</details>
+
+```python
+print(f"{len(water_surfers)} sets")  # SetCollection with .ids(), iteration, etc.
+```
+
+<details>
+<summary>Output</summary>
+
+```
 65 sets
->>> starmie = CustomSet("Starmie", nature="Timid", evs=[0,0,0,252,4,252], ...
+```
+
+</details>
+
+```python
+starmie = CustomSet("Starmie", nature="Timid", evs=[0,0,0,252,4,252],
+                    moves=["Surf", "Thunderbolt", "Ice Beam", "Psychic"])
+```
+
+<details>
+<summary>Output</summary>
+
+```
 starmie = CustomSet(Starmie, nature=Timid, evs=[0, 0, 0, 252, 4, 252], ivs=[31, 31, 31, 31, 31, 31], level=100, ability=illuminate, moves=['surf', 'thunderbolt', 'icebeam', 'psychic'])
->>> ttar = db.allSets("Tyranitar")._sets[0]
+```
+
+</details>
+
+```python
+ttar = db.allSets("Tyranitar")._sets[0]
+```
+
+<details>
+<summary>Output</summary>
+
+```
 ttar = {
   'Pokemon': 'Tyranitar',
   'SetNum': 1,
@@ -92,7 +119,18 @@ ttar = {
   'Index': 861,
   'DexNum': 248,
 }
->>> result = calc_matchup(starmie, ttar, "Surf")
+```
+
+</details>
+
+```python
+result = calc_matchup(starmie, ttar, "Surf")
+```
+
+<details>
+<summary>Output</summary>
+
+```
 result = {
   'rolls': [261, 264, 267, 271, 274, 277, 280, 283, 286, 289, 292, 295, 298, 301, 304, 308],
   'attack_rolls': None,
@@ -105,13 +143,24 @@ result = {
   'defender_max_hp': 341,
   'ko_chances': {1: 0.0, 2: 1.0},
 }
-  Surf: 261-308 (76.5% - 90.3%) [HP: 341]
+```
+
+</details>
+
+```python
+print(format_result(result, "Surf"))
+```
+
+<details>
+<summary>Output</summary>
+
+```
+Surf: 261-308 (76.5% - 90.3%) [HP: 341]
   Per-hit rolls: (261, 264, 267, 271, 274, 277, 280, 283, 286, 289, 292, 295, 298, 301, 304, 308)
   guaranteed 2HKO
 ```
 
 </details>
-
 
 ## Package Structure
 
@@ -164,31 +213,50 @@ EVs are ordered `[HP, Atk, Def, SpA, SpD, Spe]`. The `Index` field determines wh
 
 You can access sets directly through the database:
 
+
 ```python
 from frontierbrain3 import Database
+```
 
+```python
 db = Database()
+```
 
+```python
 db.allSets("Charizard")        # SetCollection of all Charizard sets
-db.allSets("Charizard").ids()  # ["Charizard-1", "Charizard-2", ...]
-
-# Access the raw set dict
-meta = db.allSets("Metagross")._sets[0]
-print(meta["Nature"], meta["Item"], meta["Moves"])
 ```
 
 <details>
 <summary>Output</summary>
 
 ```
->>> db = Database()
-db = <frontierbrain3.frontier_db.Database object at 0x000001D34940F890>
->>> db.allSets("Charizard")        # SetCollection of all Charizard sets
 SetCollection(5 sets)
 ['Charizard-1', 'Charizard-2', 'Charizard-3', 'Charizard-4', 'Charizard-TuckerSilver']
->>> db.allSets("Charizard").ids()  # ["Charizard-1", "Charizard-2", ...]
+```
+
+</details>
+
+```python
+db.allSets("Charizard").ids()  # ["Charizard-1", "Charizard-2", ...]
+```
+
+<details>
+<summary>Output</summary>
+
+```
 ['Charizard-1', 'Charizard-2', 'Charizard-3', 'Charizard-4', 'Charizard-TuckerSilver']
->>> meta = db.allSets("Metagross")._sets[0]
+```
+
+</details>
+
+```python
+meta = db.allSets("Metagross")._sets[0]
+```
+
+<details>
+<summary>Output</summary>
+
+```
 meta = {
   'Pokemon': 'Metagross',
   'SetNum': 1,
@@ -200,19 +268,33 @@ meta = {
   'Index': 467,
   'DexNum': 376,
 }
+```
+
+</details>
+
+```python
+print(meta["Nature"], meta["Item"], meta["Moves"])
+```
+
+<details>
+<summary>Output</summary>
+
+```
 Adamant Leftovers ['meteormash', 'aerialace', 'facade', 'lightscreen']
 ```
 
 </details>
 
-
 ### CustomSet
 
 Represents a player-defined Pokemon with full control over species, nature, EVs, IVs, level, item, ability, and moves. Used as attacker/defender in damage calcs and as a speed benchmark in queries.
 
+
 ```python
 from frontierbrain3 import CustomSet
+```
 
+```python
 flygon = CustomSet(
     "Flygon",
     nature="Jolly",
@@ -223,18 +305,25 @@ flygon = CustomSet(
     ability="Levitate",
     moves=["Earthquake", "Rock Slide", "Fire Blast", "Return"],
 )
-
-flygon.get_stats()  # {'hp': ..., 'atk': ..., 'def': ..., 'spa': ..., 'spd': ..., 'spe': ...}
-flygon.speed()      # shorthand for get_stats()["spe"]
 ```
 
 <details>
 <summary>Output</summary>
 
 ```
->>> flygon = CustomSet( ...
 flygon = CustomSet(Flygon, nature=Jolly, evs=[4, 252, 0, 0, 0, 252], ivs=[31, 31, 31, 31, 31, 31], level=100, item=Choice Band, ability=Levitate, moves=['earthquake', 'rockslide', 'fireblast', 'return'])
->>> flygon.get_stats()  # {'hp': ..., 'atk': ..., 'def': ..., 'spa': ..., 'spd': ..., 'spe': ...}
+```
+
+</details>
+
+```python
+flygon.get_stats()  # {'hp': ..., 'atk': ..., 'def': ..., 'spa': ..., 'spd': ..., 'spe': ...}
+```
+
+<details>
+<summary>Output</summary>
+
+```
 {
   'hp': 302,
   'atk': 299,
@@ -243,14 +332,25 @@ flygon = CustomSet(Flygon, nature=Jolly, evs=[4, 252, 0, 0, 0, 252], ivs=[31, 31
   'spd': 196,
   'spe': 328,
 }
->>> flygon.speed()      # shorthand for get_stats()["spe"]
+```
+
+</details>
+
+```python
+flygon.speed()      # shorthand for get_stats()["spe"]
+```
+
+<details>
+<summary>Output</summary>
+
+```
 328
 ```
 
 </details>
 
-
 The `stats` parameter lets you override calculated stats with exact values if needed:
+
 
 ```python
 custom = CustomSet("Flygon", stats={"hp": 302, "atk": 299, "def": 196, "spa": 176, "spd": 196, "spe": 328})
@@ -260,21 +360,21 @@ custom = CustomSet("Flygon", stats={"hp": 302, "atk": 299, "def": 196, "spa": 17
 <summary>Output</summary>
 
 ```
->>> custom = CustomSet("Flygon", stats={"hp": 302, "atk": 299, "def": 196, "spa": 176, "spd": 196, "spe": 328})
 custom = CustomSet(Flygon, nature=hardy, evs=[0, 0, 0, 0, 0, 0], ivs=[31, 31, 31, 31, 31, 31], level=100, ability=levitate)
 ```
 
 </details>
 
-
 ### Pokepaste Import
 
 Import teams from [Pokepaste](https://pokepast.es/) format:
 
+
 ```python
 from frontierbrain3 import from_paste
+```
 
-# From a string
+```python
 team = from_paste("""
 Skarmory (M) @ Leftovers
 Ability: Sturdy
@@ -285,7 +385,20 @@ Bold Nature
 - Protect
 - Rest
 """)
+```
 
+<details>
+<summary>Output</summary>
+
+```
+team = {
+  'CustomSkarmory': CustomSet(Skarmory, nature=Bold, evs=[252, 0, 252, 0, 4, 0], ivs=[31, 31, 31, 31, 31, 31], level=100, item=Leftovers, ability=Sturdy, moves=['spikes', 'whirlwind', 'protect', 'rest']),
+}
+```
+
+</details>
+
+```python
 for name, cs in team.items():
     print(f"{name}: {cs.pokemon}, speed={cs.speed()}")
 ```
@@ -294,15 +407,10 @@ for name, cs in team.items():
 <summary>Output</summary>
 
 ```
->>> team = from_paste(""" ...
-team = {
-  'CustomSkarmory': CustomSet(Skarmory, nature=Bold, evs=[252, 0, 252, 0, 4, 0], ivs=[31, 31, 31, 31, 31, 31], level=100, item=Leftovers, ability=Sturdy, moves=['spikes', 'whirlwind', 'protect', 'rest']),
-}
 CustomSkarmory: Skarmory, speed=176
 ```
 
 </details>
-
 
 ---
 
@@ -310,25 +418,23 @@ CustomSkarmory: Skarmory, speed=176
 
 ### Stat Calculations
 
+
 ```python
 from frontierbrain3 import calc_stats, Database
+```
 
+```python
 db = Database()
-alakazam = db.allSets("Alakazam")._sets[0]
+```
 
-calc_stats(alakazam)                    # 31 IVs, lv100 (defaults)
-calc_stats(alakazam, ivs=15)            # 15 IVs, lv100
-calc_stats(alakazam, ivs=15, level=50)  # 15 IVs, lv50
-calc_stats(alakazam, ivs=[31,31,31,0,31,31])  # per-stat IVs
+```python
+alakazam = db.allSets("Alakazam")._sets[0]
 ```
 
 <details>
 <summary>Output</summary>
 
 ```
->>> db = Database()
-db = <frontierbrain3.frontier_db.Database object at 0x000001D34A09AC10>
->>> alakazam = db.allSets("Alakazam")._sets[0]
 alakazam = {
   'Pokemon': 'Alakazam',
   'SetNum': 1,
@@ -340,7 +446,18 @@ alakazam = {
   'Index': 405,
   'DexNum': 65,
 }
->>> calc_stats(alakazam)                    # 31 IVs, lv100 (defaults)
+```
+
+</details>
+
+```python
+calc_stats(alakazam)                    # 31 IVs, lv100 (defaults)
+```
+
+<details>
+<summary>Output</summary>
+
+```
 {
   'hp': 251,
   'atk': 122,
@@ -349,7 +466,18 @@ alakazam = {
   'spd': 206,
   'spe': 276,
 }
->>> calc_stats(alakazam, ivs=15)            # 15 IVs, lv100
+```
+
+</details>
+
+```python
+calc_stats(alakazam, ivs=15)            # 15 IVs, lv100
+```
+
+<details>
+<summary>Output</summary>
+
+```
 {
   'hp': 235,
   'atk': 108,
@@ -358,7 +486,18 @@ alakazam = {
   'spd': 190,
   'spe': 260,
 }
->>> calc_stats(alakazam, ivs=15, level=50)  # 15 IVs, lv50
+```
+
+</details>
+
+```python
+calc_stats(alakazam, ivs=15, level=50)  # 15 IVs, lv50
+```
+
+<details>
+<summary>Output</summary>
+
+```
 {
   'hp': 122,
   'atk': 55,
@@ -367,7 +506,18 @@ alakazam = {
   'spd': 97,
   'spe': 132,
 }
->>> calc_stats(alakazam, ivs=[31,31,31,0,31,31])  # per-stat IVs
+```
+
+</details>
+
+```python
+calc_stats(alakazam, ivs=[31,31,31,0,31,31])  # per-stat IVs
+```
+
+<details>
+<summary>Output</summary>
+
+```
 {
   'hp': 251,
   'atk': 122,
@@ -380,29 +530,29 @@ alakazam = {
 
 </details>
 
-
 ---
 
 ## Database (`frontier_db`)
 
 ### Loading
 
+
 ```python
 from frontierbrain3 import Database
+```
 
+```python
 db = Database()  # loads from default data/ paths
+```
 
+```python
 db.sets       # SetCollection of all 918 frontier sets (882 regular + 36 Frontier Brain)
-db.trainers   # TrainerCollection of all trainers (300 regular + Frontier Brains)
 ```
 
 <details>
 <summary>Output</summary>
 
 ```
->>> db = Database()  # loads from default data/ paths
-db = <frontierbrain3.frontier_db.Database object at 0x000001D34979AC40>
->>> db.sets       # SetCollection of all 918 frontier sets (882 regular + 36 Frontier Brain)
 SetCollection(918 sets)
 [  # 918 items
   'Sunkern-1',
@@ -437,7 +587,18 @@ SetCollection(918 sets)
   'Zapdos-BrandonGold',
   'Moltres-BrandonGold',
 ]
->>> db.trainers   # TrainerCollection of all trainers (300 regular + Frontier Brains)
+```
+
+</details>
+
+```python
+db.trainers   # TrainerCollection of all trainers (300 regular + Frontier Brains)
+```
+
+<details>
+<summary>Output</summary>
+
+```
 TrainerCollection(312 trainers)
 [  # 312 items
   'YOUNGSTER BRADY',
@@ -476,24 +637,21 @@ TrainerCollection(312 trainers)
 
 </details>
 
-
 ### SetCollection
 
 All filter methods return a new `SetCollection`, so they chain freely. Every `SetCollection` supports `len()`, iteration, `.ids()` (returns `["Pokemon-SetNum", ...]`), and `.Not` for negation.
 
 #### Type Filters
 
+
 ```python
 db.sets.hasType("Water")        # pure or part Water type
-db.sets.hasType("Psychic/")     # pure Psychic only (trailing slash)
-db.sets.hasType("Fire/Flying")  # must have both Fire and Flying
 ```
 
 <details>
 <summary>Output</summary>
 
 ```
->>> db.sets.hasType("Water")        # pure or part Water type
 SetCollection(179 sets)
 [  # 179 items
   'Magikarp-1',
@@ -528,7 +686,18 @@ SetCollection(179 sets)
   'Milotic-LucySilver',
   'Gyarados-LucyGold',
 ]
->>> db.sets.hasType("Psychic/")     # pure Psychic only (trailing slash)
+```
+
+</details>
+
+```python
+db.sets.hasType("Psychic/")     # pure Psychic only (trailing slash)
+```
+
+<details>
+<summary>Output</summary>
+
+```
 SetCollection(40 sets)
 [  # 40 items
   'Ralts-1',
@@ -563,7 +732,18 @@ SetCollection(40 sets)
   'Gardevoir-8',
   'Alakazam-AnabelSilver',
 ]
->>> db.sets.hasType("Fire/Flying")  # must have both Fire and Flying
+```
+
+</details>
+
+```python
+db.sets.hasType("Fire/Flying")  # must have both Fire and Flying
+```
+
+<details>
+<summary>Output</summary>
+
+```
 SetCollection(12 sets)
 [
   'Charizard-1',
@@ -583,20 +763,17 @@ SetCollection(12 sets)
 
 </details>
 
-
 #### Move Filters
+
 
 ```python
 db.sets.hasMove("surf")                        # has Surf
-db.sets.hasMove("earthquake", "surf")           # has EQ OR Surf (default match="any")
-db.sets.hasMove("calmmind", "surf", match="all")  # has BOTH Calm Mind AND Surf
 ```
 
 <details>
 <summary>Output</summary>
 
 ```
->>> db.sets.hasMove("surf")                        # has Surf
 SetCollection(72 sets)
 [  # 72 items
   'Wartortle-2',
@@ -631,7 +808,18 @@ SetCollection(72 sets)
   'Suicune-SpenserGold',
   'Milotic-LucySilver',
 ]
->>> db.sets.hasMove("earthquake", "surf")           # has EQ OR Surf (default match="any")
+```
+
+</details>
+
+```python
+db.sets.hasMove("earthquake", "surf")           # has EQ OR Surf (default match="any")
+```
+
+<details>
+<summary>Output</summary>
+
+```
 SetCollection(222 sets)
 [  # 222 items
   'Lickitung-2',
@@ -666,28 +854,35 @@ SetCollection(222 sets)
   'Regirock-BrandonSilver',
   'Registeel-BrandonSilver',
 ]
->>> db.sets.hasMove("calmmind", "surf", match="all")  # has BOTH Calm Mind AND Surf
-SetCollection(5 sets)
-['Slowbro-2', 'Suicune-1', 'Suicune-5', 'Suicune-6', 'Suicune-SpenserGold']
 ```
 
 </details>
 
-
-#### Item, Nature, Ability Filters
-
 ```python
-db.sets.hasItem("Choice Band")
-db.sets.hasItem("Leftovers", "Shell Bell")  # has either item
-db.sets.hasNature("Adamant")
-db.sets.hasAbility("Intimidate")
+db.sets.hasMove("calmmind", "surf", match="all")  # has BOTH Calm Mind AND Surf
 ```
 
 <details>
 <summary>Output</summary>
 
 ```
->>> db.sets.hasItem("Choice Band")
+SetCollection(5 sets)
+['Slowbro-2', 'Suicune-1', 'Suicune-5', 'Suicune-6', 'Suicune-SpenserGold']
+```
+
+</details>
+
+#### Item, Nature, Ability Filters
+
+
+```python
+db.sets.hasItem("Choice Band")
+```
+
+<details>
+<summary>Output</summary>
+
+```
 SetCollection(12 sets)
 [
   'Beldum-1',
@@ -703,7 +898,18 @@ SetCollection(12 sets)
   'Armaldo-4',
   'Ursaring-5',
 ]
->>> db.sets.hasItem("Leftovers", "Shell Bell")  # has either item
+```
+
+</details>
+
+```python
+db.sets.hasItem("Leftovers", "Shell Bell")  # has either item
+```
+
+<details>
+<summary>Output</summary>
+
+```
 SetCollection(121 sets)
 [  # 121 items
   'Slakoth-1',
@@ -738,7 +944,18 @@ SetCollection(121 sets)
   'Milotic-LucySilver',
   'Registeel-BrandonSilver',
 ]
->>> db.sets.hasNature("Adamant")
+```
+
+</details>
+
+```python
+db.sets.hasNature("Adamant")
+```
+
+<details>
+<summary>Output</summary>
+
+```
 SetCollection(197 sets)
 [  # 197 items
   'Machop-1',
@@ -773,7 +990,18 @@ SetCollection(197 sets)
   'Regirock-BrandonSilver',
   'Registeel-BrandonSilver',
 ]
->>> db.sets.hasAbility("Intimidate")
+```
+
+</details>
+
+```python
+db.sets.hasAbility("Intimidate")
+```
+
+<details>
+<summary>Output</summary>
+
+```
 SetCollection(41 sets)
 [  # 41 items
   'Ekans-1',
@@ -812,22 +1040,19 @@ SetCollection(41 sets)
 
 </details>
 
-
 #### Stat Filters
 
 Filter by calculated stat value. Specify `ivs` and `level` to match the format you're analyzing.
 
+
 ```python
 db.sets.statFilter("atk", min=300)                      # 300+ Atk at 31 IVs, lv100
-db.sets.statFilter("spe", min=200, max=250)              # speed in range
-db.sets.statFilter("spa", min=150, level=50, ivs=15)     # lv50, 15 IVs
 ```
 
 <details>
 <summary>Output</summary>
 
 ```
->>> db.sets.statFilter("atk", min=300)                      # 300+ Atk at 31 IVs, lv100
 SetCollection(172 sets)
 [  # 172 items
   'Krabby-1',
@@ -862,7 +1087,18 @@ SetCollection(172 sets)
   'Gyarados-LucyGold',
   'Regirock-BrandonSilver',
 ]
->>> db.sets.statFilter("spe", min=200, max=250)              # speed in range
+```
+
+</details>
+
+```python
+db.sets.statFilter("spe", min=200, max=250)              # speed in range
+```
+
+<details>
+<summary>Output</summary>
+
+```
 SetCollection(138 sets)
 [  # 138 items
   'Spearow-1',
@@ -897,7 +1133,18 @@ SetCollection(138 sets)
   'Arcanine-SpenserGold',
   'Suicune-SpenserGold',
 ]
->>> db.sets.statFilter("spa", min=150, level=50, ivs=15)     # lv50, 15 IVs
+```
+
+</details>
+
+```python
+db.sets.statFilter("spa", min=150, level=50, ivs=15)     # lv50, 15 IVs
+```
+
+<details>
+<summary>Output</summary>
+
+```
 SetCollection(116 sets)
 [  # 116 items
   'Magneton-1',
@@ -936,27 +1183,32 @@ SetCollection(116 sets)
 
 </details>
 
-
 #### Speed Comparisons
 
 Compare frontier sets against a `CustomSet` benchmark:
 
+
 ```python
 my_flygon = CustomSet("Flygon", nature="Jolly", evs=[4, 252, 0, 0, 0, 252])
-
-db.sets.fasterThan(my_flygon)                # sets that outspeed it at 31 IVs
-db.sets.slowerThan(my_flygon)                # sets it outspeeds
-db.sets.speedTieWith(my_flygon)              # exact ties
-db.sets.fasterThan(my_flygon, ivs=15)        # enemy sets at 15 IVs
 ```
 
 <details>
 <summary>Output</summary>
 
 ```
->>> my_flygon = CustomSet("Flygon", nature="Jolly", evs=[4, 252, 0, 0, 0, 252])
 my_flygon = CustomSet(Flygon, nature=Jolly, evs=[4, 252, 0, 0, 0, 252], ivs=[31, 31, 31, 31, 31, 31], level=100, ability=levitate)
->>> db.sets.fasterThan(my_flygon)                # sets that outspeed it at 31 IVs
+```
+
+</details>
+
+```python
+db.sets.fasterThan(my_flygon)                # sets that outspeed it at 31 IVs
+```
+
+<details>
+<summary>Output</summary>
+
+```
 SetCollection(27 sets)
 [
   'Ninjask-1',
@@ -987,7 +1239,18 @@ SetCollection(27 sets)
   'Raikou-5',
   'Crobat-SpenserSilver',
 ]
->>> db.sets.slowerThan(my_flygon)                # sets it outspeeds
+```
+
+</details>
+
+```python
+db.sets.slowerThan(my_flygon)                # sets it outspeeds
+```
+
+<details>
+<summary>Output</summary>
+
+```
 SetCollection(890 sets)
 [  # 890 items
   'Sunkern-1',
@@ -1022,49 +1285,51 @@ SetCollection(890 sets)
   'Zapdos-BrandonGold',
   'Moltres-BrandonGold',
 ]
->>> db.sets.speedTieWith(my_flygon)              # exact ties
-SetCollection(1 sets)
-['Linoone-2']
->>> db.sets.fasterThan(my_flygon, ivs=15)        # enemy sets at 15 IVs
-SetCollection(6 sets)
-['Ninjask-1', 'Ninjask-2', 'Jolteon-1', 'Crobat-3', 'Jolteon-4', 'Crobat-4']
 ```
 
 </details>
 
-
-#### OHKO Filters
-
-These run the full damage calculator for every set in the collection. The attacker/defender can be a frontier set dict or a `CustomSet`.
-
 ```python
-zam = db.allSets("Alakazam")._sets[0]
-lax = db.allSets("Snorlax")._sets[0]
-
-# Sets that GUARANTEED OHKO Alakazam-1 (min roll kills)
-db.sets.willOHKO(zam)
-
-# Sets that CAN OHKO Snorlax-1 (at least one roll kills)
-db.sets.canOHKO(lax)
-
-# Sets where at least 50% of rolls OHKO
-db.sets.canOHKO(lax, min_chance=0.5)
-
-# Normal-types that Metagross-1 guaranteed OHKOs (each set is the defender)
-meta = db.allSets("Metagross")._sets[0]
-db.sets.hasType("Normal").diesTo(meta)
-
-# Sets that a custom Starmie can OHKO on at least one roll
-starmie = CustomSet("Starmie", nature="Timid", evs=[0,0,0,252,4,252],
-                    moves=["Surf", "Psychic", "Thunderbolt", "Ice Beam"])
-db.sets.canDieTo(starmie)
+db.sets.speedTieWith(my_flygon)              # exact ties
 ```
 
 <details>
 <summary>Output</summary>
 
 ```
->>> zam = db.allSets("Alakazam")._sets[0]
+SetCollection(1 sets)
+['Linoone-2']
+```
+
+</details>
+
+```python
+db.sets.fasterThan(my_flygon, ivs=15)        # enemy sets at 15 IVs
+```
+
+<details>
+<summary>Output</summary>
+
+```
+SetCollection(6 sets)
+['Ninjask-1', 'Ninjask-2', 'Jolteon-1', 'Crobat-3', 'Jolteon-4', 'Crobat-4']
+```
+
+</details>
+
+#### OHKO Filters
+
+These run the full damage calculator for every set in the collection. The attacker/defender can be a frontier set dict or a `CustomSet`.
+
+
+```python
+zam = db.allSets("Alakazam")._sets[0]
+```
+
+<details>
+<summary>Output</summary>
+
+```
 zam = {
   'Pokemon': 'Alakazam',
   'SetNum': 1,
@@ -1076,7 +1341,18 @@ zam = {
   'Index': 405,
   'DexNum': 65,
 }
->>> lax = db.allSets("Snorlax")._sets[0]
+```
+
+</details>
+
+```python
+lax = db.allSets("Snorlax")._sets[0]
+```
+
+<details>
+<summary>Output</summary>
+
+```
 lax = {
   'Pokemon': 'Snorlax',
   'SetNum': 1,
@@ -1088,7 +1364,18 @@ lax = {
   'Index': 461,
   'DexNum': 143,
 }
->>> db.sets.willOHKO(zam)
+```
+
+</details>
+
+```python
+db.sets.willOHKO(zam)
+```
+
+<details>
+<summary>Output</summary>
+
+```
 SetCollection(65 sets)
 [  # 65 items
   'Pineco-1',
@@ -1123,7 +1410,18 @@ SetCollection(65 sets)
   'Steelix-LucyGold',
   'Regirock-BrandonSilver',
 ]
->>> db.sets.canOHKO(lax)
+```
+
+</details>
+
+```python
+db.sets.canOHKO(lax)
+```
+
+<details>
+<summary>Output</summary>
+
+```
 SetCollection(25 sets)
 [
   'Breloom-2',
@@ -1152,7 +1450,18 @@ SetCollection(25 sets)
   'Breloom-GretaGold',
   'Regirock-BrandonSilver',
 ]
->>> db.sets.canOHKO(lax, min_chance=0.5)
+```
+
+</details>
+
+```python
+db.sets.canOHKO(lax, min_chance=0.5)
+```
+
+<details>
+<summary>Output</summary>
+
+```
 SetCollection(20 sets)
 [
   'Breloom-3',
@@ -1176,7 +1485,18 @@ SetCollection(20 sets)
   'Breloom-GretaGold',
   'Regirock-BrandonSilver',
 ]
->>> meta = db.allSets("Metagross")._sets[0]
+```
+
+</details>
+
+```python
+meta = db.allSets("Metagross")._sets[0]
+```
+
+<details>
+<summary>Output</summary>
+
+```
 meta = {
   'Pokemon': 'Metagross',
   'SetNum': 1,
@@ -1188,7 +1508,18 @@ meta = {
   'Index': 467,
   'DexNum': 376,
 }
->>> db.sets.hasType("Normal").diesTo(meta)
+```
+
+</details>
+
+```python
+db.sets.hasType("Normal").diesTo(meta)
+```
+
+<details>
+<summary>Output</summary>
+
+```
 SetCollection(18 sets)
 [
   'Azurill-1',
@@ -1210,9 +1541,32 @@ SetCollection(18 sets)
   'Clefairy-1',
   'Raticate-2',
 ]
->>> starmie = CustomSet("Starmie", nature="Timid", evs=[0,0,0,252,4,252], ...
+```
+
+</details>
+
+```python
+starmie = CustomSet("Starmie", nature="Timid", evs=[0,0,0,252,4,252],
+                    moves=["Surf", "Psychic", "Thunderbolt", "Ice Beam"])
+```
+
+<details>
+<summary>Output</summary>
+
+```
 starmie = CustomSet(Starmie, nature=Timid, evs=[0, 0, 0, 252, 4, 252], ivs=[31, 31, 31, 31, 31, 31], level=100, ability=illuminate, moves=['surf', 'psychic', 'thunderbolt', 'icebeam'])
->>> db.sets.canDieTo(starmie)
+```
+
+</details>
+
+```python
+db.sets.canDieTo(starmie)
+```
+
+<details>
+<summary>Output</summary>
+
+```
 SetCollection(325 sets)
 [  # 325 items
   'Sunkern-1',
@@ -1251,22 +1605,17 @@ SetCollection(325 sets)
 
 </details>
 
-
 Specify IVs for the attacker and defender independently, useful for analyzing player sets (31 IVs) against frontier enemies (3-31 IVs depending on tier):
 
-```python
-# Frontier sets at 3 IVs that a 31 IV Metagross-1 guaranteed OHKOs
-db.sets.diesTo(meta, atk_ivs=31, def_ivs=3)
 
-# Frontier sets at 31 IVs that can OHKO a 15 IV Alakazam-1
-db.sets.canOHKO(zam, atk_ivs=31, def_ivs=15)
+```python
+db.sets.diesTo(meta, atk_ivs=31, def_ivs=3)
 ```
 
 <details>
 <summary>Output</summary>
 
 ```
->>> db.sets.diesTo(meta, atk_ivs=31, def_ivs=3)
 SetCollection(264 sets)
 [  # 264 items
   'Sunkern-1',
@@ -1301,7 +1650,18 @@ SetCollection(264 sets)
   'Regice-BrandonSilver',
   'Articuno-BrandonGold',
 ]
->>> db.sets.canOHKO(zam, atk_ivs=31, def_ivs=15)
+```
+
+</details>
+
+```python
+db.sets.canOHKO(zam, atk_ivs=31, def_ivs=15)
+```
+
+<details>
+<summary>Output</summary>
+
+```
 SetCollection(173 sets)
 [  # 173 items
   'Shedinja-1',
@@ -1340,31 +1700,21 @@ SetCollection(173 sets)
 
 </details>
 
-
 Other optional parameters are passed through to the damage calculator:
+
 
 ```python
 from frontierbrain3 import Field
+```
 
-# With stat boosts
+```python
 db.sets.diesTo(meta, atk_boosts={"atk": 1})
-
-# With weather
-ttar = db.allSets("Tyranitar")._sets[0]
-db.sets.willOHKO(ttar, field=Field(weather="rain"))
-
-# Include OHKO moves (Guillotine, Fissure, etc.)
-db.sets.canOHKO(lax, include_ohko=True)
-
-# Factor accuracy into guaranteed OHKOs (excludes imperfect-accuracy moves like Cross Chop)
-db.sets.willOHKO(ttar, include_acc=True)
 ```
 
 <details>
 <summary>Output</summary>
 
 ```
->>> db.sets.diesTo(meta, atk_boosts={"atk": 1})
 SetCollection(335 sets)
 [  # 335 items
   'Sunkern-1',
@@ -1399,7 +1749,18 @@ SetCollection(335 sets)
   'Regice-BrandonSilver',
   'Articuno-BrandonGold',
 ]
->>> ttar = db.allSets("Tyranitar")._sets[0]
+```
+
+</details>
+
+```python
+ttar = db.allSets("Tyranitar")._sets[0]
+```
+
+<details>
+<summary>Output</summary>
+
+```
 ttar = {
   'Pokemon': 'Tyranitar',
   'SetNum': 1,
@@ -1411,7 +1772,18 @@ ttar = {
   'Index': 861,
   'DexNum': 248,
 }
->>> db.sets.willOHKO(ttar, field=Field(weather="rain"))
+```
+
+</details>
+
+```python
+db.sets.willOHKO(ttar, field=Field(weather="rain"))
+```
+
+<details>
+<summary>Output</summary>
+
+```
 SetCollection(103 sets)
 [  # 103 items
   'Meditite-1',
@@ -1446,7 +1818,18 @@ SetCollection(103 sets)
   'Milotic-LucySilver',
   'Regirock-BrandonSilver',
 ]
->>> db.sets.canOHKO(lax, include_ohko=True)
+```
+
+</details>
+
+```python
+db.sets.canOHKO(lax, include_ohko=True)
+```
+
+<details>
+<summary>Output</summary>
+
+```
 SetCollection(50 sets)
 [  # 50 items
   'Gligar-2',
@@ -1481,33 +1864,37 @@ SetCollection(50 sets)
   'Breloom-GretaGold',
   'Regirock-BrandonSilver',
 ]
->>> db.sets.willOHKO(ttar, include_acc=True)
-SetCollection(0 sets)
-[]
 ```
 
 </details>
 
-
-#### Negation
-
-Every filter has a negated form via `.Not`:
-
 ```python
-ttar = db.allSets("Tyranitar")._sets[0]
-hera = CustomSet("Heracross", nature="Adamant", evs=[4,252,0,0,0,252],
-                 item="Choice Band", moves=["Megahorn", "Earthquake", "Brick Break", "Rock Slide"])
-
-db.sets.hasMove("earthquake").Not.hasMove("surf")     # has EQ but not Surf
-db.sets.Not.canDieTo(hera)                             # survives Heracross even on max roll
-db.sets.hasMove("earthquake").Not.willOHKO(ttar)       # EQ users that don't guaranteed OHKO Ttar
+db.sets.willOHKO(ttar, include_acc=True)
 ```
 
 <details>
 <summary>Output</summary>
 
 ```
->>> ttar = db.allSets("Tyranitar")._sets[0]
+SetCollection(0 sets)
+[]
+```
+
+</details>
+
+#### Negation
+
+Every filter has a negated form via `.Not`:
+
+
+```python
+ttar = db.allSets("Tyranitar")._sets[0]
+```
+
+<details>
+<summary>Output</summary>
+
+```
 ttar = {
   'Pokemon': 'Tyranitar',
   'SetNum': 1,
@@ -1519,9 +1906,32 @@ ttar = {
   'Index': 861,
   'DexNum': 248,
 }
->>> hera = CustomSet("Heracross", nature="Adamant", evs=[4,252,0,0,0,252], ...
+```
+
+</details>
+
+```python
+hera = CustomSet("Heracross", nature="Adamant", evs=[4,252,0,0,0,252],
+                 item="Choice Band", moves=["Megahorn", "Earthquake", "Brick Break", "Rock Slide"])
+```
+
+<details>
+<summary>Output</summary>
+
+```
 hera = CustomSet(Heracross, nature=Adamant, evs=[4, 252, 0, 0, 0, 252], ivs=[31, 31, 31, 31, 31, 31], level=100, item=Choice Band, ability=swarm, moves=['megahorn', 'earthquake', 'brickbreak', 'rockslide'])
->>> db.sets.hasMove("earthquake").Not.hasMove("surf")     # has EQ but not Surf
+```
+
+</details>
+
+```python
+db.sets.hasMove("earthquake").Not.hasMove("surf")     # has EQ but not Surf
+```
+
+<details>
+<summary>Output</summary>
+
+```
 SetCollection(150 sets)
 [  # 150 items
   'Lickitung-2',
@@ -1556,7 +1966,18 @@ SetCollection(150 sets)
   'Regirock-BrandonSilver',
   'Registeel-BrandonSilver',
 ]
->>> db.sets.Not.canDieTo(hera)                             # survives Heracross even on max roll
+```
+
+</details>
+
+```python
+db.sets.Not.canDieTo(hera)                             # survives Heracross even on max roll
+```
+
+<details>
+<summary>Output</summary>
+
+```
 SetCollection(173 sets)
 [  # 173 items
   'Duskull-1',
@@ -1591,7 +2012,18 @@ SetCollection(173 sets)
   'Registeel-BrandonSilver',
   'Zapdos-BrandonGold',
 ]
->>> db.sets.hasMove("earthquake").Not.willOHKO(ttar)       # EQ users that don't guaranteed OHKO Ttar
+```
+
+</details>
+
+```python
+db.sets.hasMove("earthquake").Not.willOHKO(ttar)       # EQ users that don't guaranteed OHKO Ttar
+```
+
+<details>
+<summary>Output</summary>
+
+```
 SetCollection(151 sets)
 [  # 151 items
   'Lickitung-2',
@@ -1630,11 +2062,10 @@ SetCollection(151 sets)
 
 </details>
 
-
 #### Trainer Lookup
 
+
 ```python
-# Which trainers use Water-type Surfers?
 db.sets.hasType("Water").hasMove("surf").usedByTrainer()
 ```
 
@@ -1642,7 +2073,6 @@ db.sets.hasType("Water").hasMove("surf").usedByTrainer()
 <summary>Output</summary>
 
 ```
->>> db.sets.hasType("Water").hasMove("surf").usedByTrainer()
 TrainerCollection(158 trainers)
 [  # 158 items
   'PSYCHIC (M) NORTON',
@@ -1681,22 +2111,19 @@ TrainerCollection(158 trainers)
 
 </details>
 
-
 ### TrainerCollection
 
 Supports `len()`, iteration, `.names()` (returns `["CLASS Name", ...]`), and `.Not`.
 
+
 ```python
 db.trainers.hasPokemon("Charizard")                           # trainers with any Charizard set
-db.trainers.hasPokemon("Charizard").Not.hasPokemon("Blastoise")  # Charizard but no Blastoise
-db.trainers.hasSet("Metagross-4")                              # trainers with a specific set
 ```
 
 <details>
 <summary>Output</summary>
 
 ```
->>> db.trainers.hasPokemon("Charizard")                           # trainers with any Charizard set
 TrainerCollection(50 trainers)
 [  # 50 items
   'COOLTRAINER (M) COOPER',
@@ -1731,7 +2158,18 @@ TrainerCollection(50 trainers)
   'PARASOL LADY PAIGE',
   'DOME ACE TUCKER',
 ]
->>> db.trainers.hasPokemon("Charizard").Not.hasPokemon("Blastoise")  # Charizard but no Blastoise
+```
+
+</details>
+
+```python
+db.trainers.hasPokemon("Charizard").Not.hasPokemon("Blastoise")  # Charizard but no Blastoise
+```
+
+<details>
+<summary>Output</summary>
+
+```
 TrainerCollection(17 trainers)
 [
   'DRAGON TAMER ROBERTO',
@@ -1752,7 +2190,18 @@ TrainerCollection(17 trainers)
   'KINDLER FERRIS',
   'DOME ACE TUCKER',
 ]
->>> db.trainers.hasSet("Metagross-4")                              # trainers with a specific set
+```
+
+</details>
+
+```python
+db.trainers.hasSet("Metagross-4")                              # trainers with a specific set
+```
+
+<details>
+<summary>Output</summary>
+
+```
 TrainerCollection(28 trainers)
 [
   'PKMN BREEDER (M) OSCAR',
@@ -1788,7 +2237,6 @@ TrainerCollection(28 trainers)
 
 </details>
 
-
 ---
 
 ## Damage Calculator (`damagecalc`)
@@ -1797,34 +2245,26 @@ Implements the Gen 3 damage formula, referencing [Bulbapedia](https://bulbapedia
 
 The examples below assume this setup:
 
+
 ```python
 from frontierbrain3 import (
     Database, CustomSet, damage_rolls, calc_matchup,
     format_result, ko_chance, calc_stats, Field,
 )
+```
 
+```python
 db = Database()
+```
 
+```python
 meta = db.allSets("Metagross")._sets[0]
-ttar = db.allSets("Tyranitar")._sets[0]
-lax  = db.allSets("Snorlax")._sets[0]
-zam  = db.allSets("Alakazam")._sets[0]
-sala = db.allSets("Salamence")._sets[0]
-
-starmie = CustomSet("Starmie", nature="Timid", evs=[0,0,0,252,4,252],
-                    moves=["Surf", "Psychic", "Thunderbolt", "Ice Beam"])
-hera = CustomSet("Heracross", nature="Adamant", evs=[4,252,0,0,0,252],
-                 item="Choice Band", ability="Guts",
-                 moves=["Megahorn", "Earthquake", "Brick Break", "Rock Slide"])
 ```
 
 <details>
 <summary>Output</summary>
 
 ```
->>> db = Database()
-db = <frontierbrain3.frontier_db.Database object at 0x000001D34979AEA0>
->>> meta = db.allSets("Metagross")._sets[0]
 meta = {
   'Pokemon': 'Metagross',
   'SetNum': 1,
@@ -1836,7 +2276,18 @@ meta = {
   'Index': 467,
   'DexNum': 376,
 }
->>> ttar = db.allSets("Tyranitar")._sets[0]
+```
+
+</details>
+
+```python
+ttar = db.allSets("Tyranitar")._sets[0]
+```
+
+<details>
+<summary>Output</summary>
+
+```
 ttar = {
   'Pokemon': 'Tyranitar',
   'SetNum': 1,
@@ -1848,7 +2299,18 @@ ttar = {
   'Index': 861,
   'DexNum': 248,
 }
->>> lax  = db.allSets("Snorlax")._sets[0]
+```
+
+</details>
+
+```python
+lax  = db.allSets("Snorlax")._sets[0]
+```
+
+<details>
+<summary>Output</summary>
+
+```
 lax = {
   'Pokemon': 'Snorlax',
   'SetNum': 1,
@@ -1860,7 +2322,18 @@ lax = {
   'Index': 461,
   'DexNum': 143,
 }
->>> zam  = db.allSets("Alakazam")._sets[0]
+```
+
+</details>
+
+```python
+zam  = db.allSets("Alakazam")._sets[0]
+```
+
+<details>
+<summary>Output</summary>
+
+```
 zam = {
   'Pokemon': 'Alakazam',
   'SetNum': 1,
@@ -1872,7 +2345,18 @@ zam = {
   'Index': 405,
   'DexNum': 65,
 }
->>> sala = db.allSets("Salamence")._sets[0]
+```
+
+</details>
+
+```python
+sala = db.allSets("Salamence")._sets[0]
+```
+
+<details>
+<summary>Output</summary>
+
+```
 sala = {
   'Pokemon': 'Salamence',
   'SetNum': 1,
@@ -1884,29 +2368,52 @@ sala = {
   'Index': 466,
   'DexNum': 373,
 }
->>> starmie = CustomSet("Starmie", nature="Timid", evs=[0,0,0,252,4,252], ...
-starmie = CustomSet(Starmie, nature=Timid, evs=[0, 0, 0, 252, 4, 252], ivs=[31, 31, 31, 31, 31, 31], level=100, ability=illuminate, moves=['surf', 'psychic', 'thunderbolt', 'icebeam'])
->>> hera = CustomSet("Heracross", nature="Adamant", evs=[4,252,0,0,0,252], ...
-hera = CustomSet(Heracross, nature=Adamant, evs=[4, 252, 0, 0, 0, 252], ivs=[31, 31, 31, 31, 31, 31], level=100, item=Choice Band, ability=Guts, moves=['megahorn', 'earthquake', 'brickbreak', 'rockslide'])
 ```
 
 </details>
 
-
-### Specifying Moves
-
-Moves can be passed as a string name (looked up from `data/moves.json`):
-
 ```python
-result = calc_matchup(meta, ttar, "Earthquake")
-result = calc_matchup(starmie, ttar, "Surf")
+starmie = CustomSet("Starmie", nature="Timid", evs=[0,0,0,252,4,252],
+                    moves=["Surf", "Psychic", "Thunderbolt", "Ice Beam"])
 ```
 
 <details>
 <summary>Output</summary>
 
 ```
->>> result = calc_matchup(meta, ttar, "Earthquake")
+starmie = CustomSet(Starmie, nature=Timid, evs=[0, 0, 0, 252, 4, 252], ivs=[31, 31, 31, 31, 31, 31], level=100, ability=illuminate, moves=['surf', 'psychic', 'thunderbolt', 'icebeam'])
+```
+
+</details>
+
+```python
+hera = CustomSet("Heracross", nature="Adamant", evs=[4,252,0,0,0,252],
+                 item="Choice Band", ability="Guts",
+                 moves=["Megahorn", "Earthquake", "Brick Break", "Rock Slide"])
+```
+
+<details>
+<summary>Output</summary>
+
+```
+hera = CustomSet(Heracross, nature=Adamant, evs=[4, 252, 0, 0, 0, 252], ivs=[31, 31, 31, 31, 31, 31], level=100, item=Choice Band, ability=Guts, moves=['megahorn', 'earthquake', 'brickbreak', 'rockslide'])
+```
+
+</details>
+
+### Specifying Moves
+
+Moves can be passed as a string name (looked up from `data/moves.json`):
+
+
+```python
+result = calc_matchup(meta, ttar, "Earthquake")
+```
+
+<details>
+<summary>Output</summary>
+
+```
 result = {
   'rolls': [215, 218, 220, 223, 226, 228, 231, 233, 236, 238, 241, 243, 246, 248, 251, 254],
   'attack_rolls': None,
@@ -1919,7 +2426,18 @@ result = {
   'defender_max_hp': 341,
   'ko_chances': {1: 0.0, 2: 1.0},
 }
->>> result = calc_matchup(starmie, ttar, "Surf")
+```
+
+</details>
+
+```python
+result = calc_matchup(starmie, ttar, "Surf")
+```
+
+<details>
+<summary>Output</summary>
+
+```
 result = {
   'rolls': [261, 264, 267, 271, 274, 277, 280, 283, 286, 289, 292, 295, 298, 301, 304, 308],
   'attack_rolls': None,
@@ -1936,13 +2454,29 @@ result = {
 
 </details>
 
-
 All move properties, including special behavior for fixed-damage moves, variable-power moves, multi-hit moves, etc., are handled automatically based on the move name.
 
 Alternatively, pass a dict with `name`, `type`, and `power` keys. This is useful for Hidden Power (where type/power vary per Pokemon) or for ROM hacks with custom moves:
 
+
 ```python
 hp_grass = {"name": "HP Grass", "type": "grass", "power": 70}
+```
+
+<details>
+<summary>Output</summary>
+
+```
+hp_grass = {
+  'name': 'HP Grass',
+  'type': 'grass',
+  'power': 70,
+}
+```
+
+</details>
+
+```python
 result = calc_matchup(starmie, ttar, hp_grass)
 ```
 
@@ -1950,13 +2484,6 @@ result = calc_matchup(starmie, ttar, hp_grass)
 <summary>Output</summary>
 
 ```
->>> hp_grass = {"name": "HP Grass", "type": "grass", "power": 70}
-hp_grass = {
-  'name': 'HP Grass',
-  'type': 'grass',
-  'power': 70,
-}
->>> result = calc_matchup(starmie, ttar, hp_grass)
 result = {
   'rolls': [129, 130, 132, 133, 135, 136, 138, 139, 141, 142, 144, 145, 147, 148, 150, 152],
   'attack_rolls': None,
@@ -1973,38 +2500,30 @@ result = {
 
 </details>
 
-
 ### Basic Usage
 
+
 ```python
-# damage_rolls: returns 16 per-hit damage values (one per random roll 85-100)
 rolls = damage_rolls(meta, ttar, "Earthquake")
-
-# calc_matchup: full summary with KO chances
-result = calc_matchup(meta, ttar, "Earthquake")
-print(format_result(result, "Earthquake"))
-#   Earthquake: 186-220 (54.7% - 64.7%) [HP: 340]
-#   0.0% chance to 1HKO
-#   guaranteed 2HKO
-
-# result dict keys:
-#   rolls          - per-hit damage values (list[int])
-#   attack_rolls   - combined multi-hit totals (None for single-hit moves)
-#   hit_info       - {"type": "single"/"fixed"/"variable"/"triple_kick", ...}
-#   min, max       - min/max total damage
-#   min_pct, max_pct - as percentage of defender's max HP
-#   defender_hp    - defender's current HP used for KO calc
-#   defender_max_hp
-#   ko_chances     - {1: prob, 2: prob, ...} up to guaranteed KO
 ```
 
 <details>
 <summary>Output</summary>
 
 ```
->>> rolls = damage_rolls(meta, ttar, "Earthquake")
 rolls = [215, 218, 220, 223, 226, 228, 231, 233, 236, 238, 241, 243, 246, 248, 251, 254]
->>> result = calc_matchup(meta, ttar, "Earthquake")
+```
+
+</details>
+
+```python
+result = calc_matchup(meta, ttar, "Earthquake")
+```
+
+<details>
+<summary>Output</summary>
+
+```
 result = {
   'rolls': [215, 218, 220, 223, 226, 228, 231, 233, 236, 238, 241, 243, 246, 248, 251, 254],
   'attack_rolls': None,
@@ -2017,25 +2536,73 @@ result = {
   'defender_max_hp': 341,
   'ko_chances': {1: 0.0, 2: 1.0},
 }
-  Earthquake: 215-254 (63.0% - 74.5%) [HP: 341]
+```
+
+</details>
+
+```python
+print(format_result(result, "Earthquake"))
+```
+
+<details>
+<summary>Output</summary>
+
+```
+Earthquake: 215-254 (63.0% - 74.5%) [HP: 341]
   Per-hit rolls: (215, 218, 220, 223, 226, 228, 231, 233, 236, 238, 241, 243, 246, 248, 251, 254)
   guaranteed 2HKO
 ```
 
 </details>
 
-
 ### Raw API
 
 For fine-grained control, use `damage_rolls` + `ko_chance` directly:
 
+
 ```python
 rolls = damage_rolls(meta, ttar, "Earthquake")
-ttar_hp = calc_stats(ttar)["hp"]
-kos = ko_chance(rolls, ttar_hp)
-# kos = {1: 0.0, 2: 0.875, 3: 1.0}
+```
 
-# With Leftovers recovery between hits
+<details>
+<summary>Output</summary>
+
+```
+rolls = [215, 218, 220, 223, 226, 228, 231, 233, 236, 238, 241, 243, 246, 248, 251, 254]
+```
+
+</details>
+
+```python
+ttar_hp = calc_stats(ttar)["hp"]
+```
+
+<details>
+<summary>Output</summary>
+
+```
+ttar_hp = 341
+```
+
+</details>
+
+```python
+kos = ko_chance(rolls, ttar_hp)
+```
+
+<details>
+<summary>Output</summary>
+
+```
+kos = {
+  1: 0.00,
+  2: 1.00,
+}
+```
+
+</details>
+
+```python
 kos = ko_chance(rolls, ttar_hp, recovery=ttar_hp // 16)
 ```
 
@@ -2043,16 +2610,6 @@ kos = ko_chance(rolls, ttar_hp, recovery=ttar_hp // 16)
 <summary>Output</summary>
 
 ```
->>> rolls = damage_rolls(meta, ttar, "Earthquake")
-rolls = [215, 218, 220, 223, 226, 228, 231, 233, 236, 238, 241, 243, 246, 248, 251, 254]
->>> ttar_hp = calc_stats(ttar)["hp"]
-ttar_hp = 341
->>> kos = ko_chance(rolls, ttar_hp)
-kos = {
-  1: 0.00,
-  2: 1.00,
-}
->>> kos = ko_chance(rolls, ttar_hp, recovery=ttar_hp // 16)
 kos = {
   1: 0.00,
   2: 1.00,
@@ -2061,28 +2618,19 @@ kos = {
 
 </details>
 
-
 ### Attacker and Defender
 
 Both can be either a frontier set dict (from the database) or a `CustomSet`:
 
+
 ```python
-# Frontier set vs frontier set
 calc_matchup(meta, ttar, "Earthquake")
-
-# CustomSet vs frontier set
-calc_matchup(starmie, lax, "Surf")
-
-# Frontier set at non-default IVs/level
-swam = db.allSets("Swampert")._sets[0]
-calc_matchup(meta, swam, "Earthquake", atk_ivs=15, def_ivs=15, atk_level=50, def_level=50)
 ```
 
 <details>
 <summary>Output</summary>
 
 ```
->>> calc_matchup(meta, ttar, "Earthquake")
 {
   'rolls': [215, 218, 220, 223, 226, 228, 231, 233, 236, 238, 241, 243, 246, 248, 251, 254],
   'attack_rolls': None,
@@ -2095,7 +2643,18 @@ calc_matchup(meta, swam, "Earthquake", atk_ivs=15, def_ivs=15, atk_level=50, def
   'defender_max_hp': 341,
   'ko_chances': {1: 0.0, 2: 1.0},
 }
->>> calc_matchup(starmie, lax, "Surf")
+```
+
+</details>
+
+```python
+calc_matchup(starmie, lax, "Surf")
+```
+
+<details>
+<summary>Output</summary>
+
+```
 {
   'rolls': [120, 122, 123, 124, 126, 127, 129, 130, 132, 133, 134, 136, 137, 139, 140, 142],
   'attack_rolls': None,
@@ -2108,7 +2667,18 @@ calc_matchup(meta, swam, "Earthquake", atk_ivs=15, def_ivs=15, atk_level=50, def
   'defender_max_hp': 461,
   'ko_chances': {1: 0.0, 2: 0.0, 3: 0.0, 4: 1.0},
 }
->>> swam = db.allSets("Swampert")._sets[0]
+```
+
+</details>
+
+```python
+swam = db.allSets("Swampert")._sets[0]
+```
+
+<details>
+<summary>Output</summary>
+
+```
 swam = {
   'Pokemon': 'Swampert',
   'SetNum': 1,
@@ -2120,7 +2690,18 @@ swam = {
   'Index': 459,
   'DexNum': 260,
 }
->>> calc_matchup(meta, swam, "Earthquake", atk_ivs=15, def_ivs=15, atk_level=50, def_level=50)
+```
+
+</details>
+
+```python
+calc_matchup(meta, swam, "Earthquake", atk_ivs=15, def_ivs=15, atk_level=50, def_level=50)
+```
+
+<details>
+<summary>Output</summary>
+
+```
 {
   'rolls': [56, 57, 58, 58, 59, 60, 60, 61, 62, 62, 63, 64, 64, 65, 66, 67],
   'attack_rolls': None,
@@ -2137,32 +2718,21 @@ swam = {
 
 </details>
 
-
 ### Field Conditions
+
 
 ```python
 from frontierbrain3 import Field
+```
 
-# Weather
+```python
 calc_matchup(starmie, ttar, "Surf", field=Field(weather="rain"))
-
-# Screens
-calc_matchup(meta, ttar, "Earthquake", field=Field(reflect=True))
-
-# Doubles
-calc_matchup(starmie, ttar, "Surf", field=Field(is_doubles=True))
-
-# Combine freely
-Field(weather="rain", reflect=True, is_doubles=True)
-
-# Other fields: helping_hand (1.5x), cloud_nine (suppresses weather)
 ```
 
 <details>
 <summary>Output</summary>
 
 ```
->>> calc_matchup(starmie, ttar, "Surf", field=Field(weather="rain"))
 {
   'rolls': [389, 393, 398, 403, 407, 412, 416, 421, 425, 430, 435, 439, 444, 448, 453, 458],
   'attack_rolls': None,
@@ -2175,7 +2745,18 @@ Field(weather="rain", reflect=True, is_doubles=True)
   'defender_max_hp': 341,
   'ko_chances': {1: 1.0},
 }
->>> calc_matchup(meta, ttar, "Earthquake", field=Field(reflect=True))
+```
+
+</details>
+
+```python
+calc_matchup(meta, ttar, "Earthquake", field=Field(reflect=True))
+```
+
+<details>
+<summary>Output</summary>
+
+```
 {
   'rolls': [108, 110, 111, 112, 113, 115, 116, 117, 119, 120, 121, 122, 124, 125, 126, 128],
   'attack_rolls': None,
@@ -2188,7 +2769,18 @@ Field(weather="rain", reflect=True, is_doubles=True)
   'defender_max_hp': 341,
   'ko_chances': {1: 0.0, 2: 0.0, 3: 0.89, 4: 1.0},
 }
->>> calc_matchup(starmie, ttar, "Surf", field=Field(is_doubles=True))
+```
+
+</details>
+
+```python
+calc_matchup(starmie, ttar, "Surf", field=Field(is_doubles=True))
+```
+
+<details>
+<summary>Output</summary>
+
+```
 {
   'rolls': [261, 264, 267, 271, 274, 277, 280, 283, 286, 289, 292, 295, 298, 301, 304, 308],
   'attack_rolls': None,
@@ -2201,34 +2793,34 @@ Field(weather="rain", reflect=True, is_doubles=True)
   'defender_max_hp': 341,
   'ko_chances': {1: 0.0, 2: 1.0},
 }
->>> Field(weather="rain", reflect=True, is_doubles=True)
-Field(weather='rain', reflect=True, light_screen=False, is_doubles=True, helping_hand=False, cloud_nine=False)
 ```
 
 </details>
 
-
-### Stat Boosts
-
 ```python
-# Dragon Dance (+1 Atk, +1 Spe; only Atk affects damage)
-calc_matchup(sala, ttar, "Earthquake", atk_boosts={"atk": 1})
-
-# Calm Mind on defender (+1 SpD)
-calc_matchup(starmie, lax, "Surf", def_boosts={"spd": 1})
-
-# Intimidate on attacker
-calc_matchup(meta, zam, "Meteor Mash", atk_boosts={"atk": -1})
-
-# Critical hits ignore negative atk stages and positive def stages
-calc_matchup(sala, lax, "Earthquake", def_boosts={"def": 2}, critical=True)
+Field(weather="rain", reflect=True, is_doubles=True)
 ```
 
 <details>
 <summary>Output</summary>
 
 ```
->>> calc_matchup(sala, ttar, "Earthquake", atk_boosts={"atk": 1})
+Field(weather='rain', reflect=True, light_screen=False, is_doubles=True, helping_hand=False, cloud_nine=False)
+```
+
+</details>
+
+### Stat Boosts
+
+
+```python
+calc_matchup(sala, ttar, "Earthquake", atk_boosts={"atk": 1})
+```
+
+<details>
+<summary>Output</summary>
+
+```
 {
   'rolls': [311, 314, 318, 322, 325, 329, 333, 336, 340, 344, 347, 351, 355, 358, 362, 366],
   'attack_rolls': None,
@@ -2241,7 +2833,18 @@ calc_matchup(sala, lax, "Earthquake", def_boosts={"def": 2}, critical=True)
   'defender_max_hp': 341,
   'ko_chances': {1: 0.43, 2: 1.0},
 }
->>> calc_matchup(starmie, lax, "Surf", def_boosts={"spd": 1})
+```
+
+</details>
+
+```python
+calc_matchup(starmie, lax, "Surf", def_boosts={"spd": 1})
+```
+
+<details>
+<summary>Output</summary>
+
+```
 {
   'rolls': [81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96],
   'attack_rolls': None,
@@ -2254,7 +2857,18 @@ calc_matchup(sala, lax, "Earthquake", def_boosts={"def": 2}, critical=True)
   'defender_max_hp': 461,
   'ko_chances': {1: 0.0, 2: 0.0, 3: 0.0, 4: 0.0, 5: 0.04, 6: 1.0},
 }
->>> calc_matchup(meta, zam, "Meteor Mash", atk_boosts={"atk": -1})
+```
+
+</details>
+
+```python
+calc_matchup(meta, zam, "Meteor Mash", atk_boosts={"atk": -1})
+```
+
+<details>
+<summary>Output</summary>
+
+```
 {
   'rolls': [145, 147, 148, 150, 152, 153, 155, 157, 159, 160, 162, 164, 165, 167, 169, 171],
   'attack_rolls': None,
@@ -2267,7 +2881,18 @@ calc_matchup(sala, lax, "Earthquake", def_boosts={"def": 2}, critical=True)
   'defender_max_hp': 251,
   'ko_chances': {1: 0.0, 2: 1.0},
 }
->>> calc_matchup(sala, lax, "Earthquake", def_boosts={"def": 2}, critical=True)
+```
+
+</details>
+
+```python
+calc_matchup(sala, lax, "Earthquake", def_boosts={"def": 2}, critical=True)
+```
+
+<details>
+<summary>Output</summary>
+
+```
 {
   'rolls': [232, 235, 238, 241, 243, 246, 249, 252, 254, 257, 260, 263, 265, 268, 271, 274],
   'attack_rolls': None,
@@ -2284,29 +2909,17 @@ calc_matchup(sala, lax, "Earthquake", def_boosts={"def": 2}, critical=True)
 
 </details>
 
-
 ### Status Conditions
 
+
 ```python
-# Burn halves physical damage (unless Guts)
 calc_matchup(meta, ttar, "Earthquake", atk_status="burn")
-
-# Guts: burn boosts Attack instead
-calc_matchup(hera, ttar, "Megahorn", atk_status="burn")
-
-# Facade doubles power when statused
-calc_matchup(meta, lax, "Facade", atk_status="burn")  # 140 BP
-
-# Marvel Scale: defender's status boosts their Defense
-milotic = db.allSets("Milotic")._sets[0]
-calc_matchup(meta, milotic, "Earthquake", def_status="burn")
 ```
 
 <details>
 <summary>Output</summary>
 
 ```
->>> calc_matchup(meta, ttar, "Earthquake", atk_status="burn")
 {
   'rolls': [108, 110, 111, 112, 113, 115, 116, 117, 119, 120, 121, 122, 124, 125, 126, 128],
   'attack_rolls': None,
@@ -2319,7 +2932,18 @@ calc_matchup(meta, milotic, "Earthquake", def_status="burn")
   'defender_max_hp': 341,
   'ko_chances': {1: 0.0, 2: 0.0, 3: 0.89, 4: 1.0},
 }
->>> calc_matchup(hera, ttar, "Megahorn", atk_status="burn")
+```
+
+</details>
+
+```python
+calc_matchup(hera, ttar, "Megahorn", atk_status="burn")
+```
+
+<details>
+<summary>Output</summary>
+
+```
 {
   'rolls': [868, 878, 889, 899, 909, 919, 930, 940, 950, 960, 970, 981, 991, 1001, 1011, 1022],
   'attack_rolls': None,
@@ -2332,7 +2956,18 @@ calc_matchup(meta, milotic, "Earthquake", def_status="burn")
   'defender_max_hp': 341,
   'ko_chances': {1: 1.0},
 }
->>> calc_matchup(meta, lax, "Facade", atk_status="burn")  # 140 BP
+```
+
+</details>
+
+```python
+calc_matchup(meta, lax, "Facade", atk_status="burn")  # 140 BP
+```
+
+<details>
+<summary>Output</summary>
+
+```
 {
   'rolls': [85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100],
   'attack_rolls': None,
@@ -2345,7 +2980,18 @@ calc_matchup(meta, milotic, "Earthquake", def_status="burn")
   'defender_max_hp': 461,
   'ko_chances': {1: 0.0, 2: 0.0, 3: 0.0, 4: 0.0, 5: 0.57, 6: 1.0},
 }
->>> milotic = db.allSets("Milotic")._sets[0]
+```
+
+</details>
+
+```python
+milotic = db.allSets("Milotic")._sets[0]
+```
+
+<details>
+<summary>Output</summary>
+
+```
 milotic = {
   'Pokemon': 'Milotic',
   'SetNum': 1,
@@ -2357,7 +3003,18 @@ milotic = {
   'Index': 464,
   'DexNum': 350,
 }
->>> calc_matchup(meta, milotic, "Earthquake", def_status="burn")
+```
+
+</details>
+
+```python
+calc_matchup(meta, milotic, "Earthquake", def_status="burn")
+```
+
+<details>
+<summary>Output</summary>
+
+```
 {
   'rolls': [78, 79, 80, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92],
   'attack_rolls': None,
@@ -2373,7 +3030,6 @@ milotic = {
 ```
 
 </details>
-
 
 ### Special Parameters
 
@@ -2424,12 +3080,61 @@ The calculator handles multi-hit moves automatically:
 - **Variable 2-5 hit** (Bullet Seed, Rock Blast, etc.): weighted by Gen 3 distribution (3/8, 3/8, 1/8, 1/8)
 - **Triple Kick** (10+20+30 power): convolves 3 different-power kicks
 
+
 ```python
 from frontierbrain3.damagecalc import get_hit_info
+```
 
+```python
 get_hit_info("Double Kick")   # {"type": "fixed", "hits": 2}
+```
+
+<details>
+<summary>Output</summary>
+
+```
+{
+  'type': 'fixed',
+  'hits': 2,
+}
+```
+
+</details>
+
+```python
 get_hit_info("Bullet Seed")   # {"type": "variable", "weights": {2:3, 3:3, 4:1, 5:1}}
+```
+
+<details>
+<summary>Output</summary>
+
+```
+{
+  'type': 'variable',
+  'weights': {2: 3, 3: 3, 4: 1, 5: 1},
+}
+```
+
+</details>
+
+```python
 get_hit_info("Triple Kick")   # {"type": "triple_kick", "powers": [10,20,30], "acc": 0.9}
+```
+
+<details>
+<summary>Output</summary>
+
+```
+{
+  'type': 'triple_kick',
+  'powers': [10, 20, 30],
+  'acc': 0.90,
+}
+```
+
+</details>
+
+```python
 get_hit_info("Earthquake")    # {"type": "single"}
 ```
 
@@ -2437,23 +3142,6 @@ get_hit_info("Earthquake")    # {"type": "single"}
 <summary>Output</summary>
 
 ```
->>> get_hit_info("Double Kick")   # {"type": "fixed", "hits": 2}
-{
-  'type': 'fixed',
-  'hits': 2,
-}
->>> get_hit_info("Bullet Seed")   # {"type": "variable", "weights": {2:3, 3:3, 4:1, 5:1}}
-{
-  'type': 'variable',
-  'weights': {2: 3, 3: 3, 4: 1, 5: 1},
-}
->>> get_hit_info("Triple Kick")   # {"type": "triple_kick", "powers": [10,20,30], "acc": 0.9}
-{
-  'type': 'triple_kick',
-  'powers': [10, 20, 30],
-  'acc': 0.90,
-}
->>> get_hit_info("Earthquake")    # {"type": "single"}
 {
   'type': 'single',
 }
@@ -2461,86 +3149,140 @@ get_hit_info("Earthquake")    # {"type": "single"}
 
 </details>
 
-
 `calc_matchup` and the OHKO filters handle multi-hit convolution automatically. For manual use:
+
 
 ```python
 from frontierbrain3.damagecalc import combine_multi_hit_rolls, multi_hit_ohko_prob
+```
 
-per_hit = damage_rolls(meta, ttar, "Bullet Seed")
-hit_info = get_hit_info("Bullet Seed")
-total_rolls = combine_multi_hit_rolls(per_hit, hit_info)
-ohko_prob = multi_hit_ohko_prob(per_hit, calc_stats(ttar)["hp"], hit_info)
+```python
+blaziken = db.allSets("Blaziken")._sets[0]
 ```
 
 <details>
 <summary>Output</summary>
 
 ```
->>> per_hit = damage_rolls(meta, ttar, "Bullet Seed")
-per_hit = [15, 15, 15, 15, 16, 16, 16, 16, 16, 16, 17, 17, 17, 17, 17, 18]
->>> hit_info = get_hit_info("Bullet Seed")
-hit_info = {
-  'type': 'variable',
-  'weights': {2: 3, 3: 3, 4: 1, 5: 1},
+blaziken = {
+  'Pokemon': 'Blaziken',
+  'SetNum': 1,
+  'Nature': 'Docile',
+  'Item': 'Quick Claw',
+  'Abilities': ['Blaze'],
+  'Moves': ['flamethrower', 'sunnyday', 'doublekick', 'roar'],
+  'EVs': [0, 255, 0, 255, 0, 0],
+  'Index': 452,
+  'DexNum': 257,
 }
->>> total_rolls = combine_multi_hit_rolls(per_hit, hit_info)
-total_rolls = [  # 1127168 items
-  30,
-  30,
-  30,
-  30,
-  30,
-  30,
-  30,
-  30,
-  30,
-  30,
-  30,
-  30,
-  30,
-  30,
-  30,
-  ... (1127138 more) ...
-  89,
-  89,
-  89,
-  89,
-  89,
-  89,
-  89,
-  89,
-  89,
-  89,
-  89,
-  89,
-  89,
-  89,
-  90,
+```
+
+</details>
+
+```python
+per_hit = damage_rolls(blaziken, lax, "Double Kick")
+```
+
+<details>
+<summary>Output</summary>
+
+```
+per_hit = [98, 99, 100, 102, 103, 104, 105, 106, 107, 109, 110, 111, 112, 113, 114, 116]
+```
+
+</details>
+
+```python
+hit_info = get_hit_info("Double Kick")
+```
+
+<details>
+<summary>Output</summary>
+
+```
+hit_info = {
+  'type': 'fixed',
+  'hits': 2,
+}
+```
+
+</details>
+
+```python
+total_rolls = combine_multi_hit_rolls(per_hit, hit_info)
+```
+
+<details>
+<summary>Output</summary>
+
+```
+total_rolls = [  # 256 items
+  196,
+  197,
+  197,
+  198,
+  198,
+  198,
+  199,
+  199,
+  200,
+  200,
+  200,
+  201,
+  201,
+  201,
+  201,
+  ... (226 more) ...
+  226,
+  226,
+  226,
+  227,
+  227,
+  227,
+  227,
+  228,
+  228,
+  228,
+  229,
+  229,
+  230,
+  230,
+  232,
 ]
->>> ohko_prob = multi_hit_ohko_prob(per_hit, calc_stats(ttar)["hp"], hit_info)
+```
+
+</details>
+
+```python
+ohko_prob = multi_hit_ohko_prob(per_hit, calc_stats(lax)["hp"], hit_info)
+```
+
+<details>
+<summary>Output</summary>
+
+```
 ohko_prob = 0.00
 ```
 
 </details>
 
-
 ### Recoil and Drain Reference
 
 Not applied in the damage formula (they don't affect the hit), but provided as constants for external calculations:
 
+
 ```python
 from frontierbrain3.damagecalc import RECOIL_MOVES, DRAIN_MOVES
+```
 
+```python
 RECOIL_MOVES  # {"doubleedge": 1/3, "volttackle": 1/3, "submission": 1/4, ...}
-DRAIN_MOVES   # {"gigadrain": 1/2, "absorb": 1/2, "dreameater": 1/2, ...}
 ```
 
 <details>
 <summary>Output</summary>
 
 ```
->>> RECOIL_MOVES  # {"doubleedge": 1/3, "volttackle": 1/3, "submission": 1/4, ...}
 {
   'doubleedge': 0.33,
   'struggle': 0.25,
@@ -2548,7 +3290,18 @@ DRAIN_MOVES   # {"gigadrain": 1/2, "absorb": 1/2, "dreameater": 1/2, ...}
   'takedown': 0.25,
   'volttackle': 0.33,
 }
->>> DRAIN_MOVES   # {"gigadrain": 1/2, "absorb": 1/2, "dreameater": 1/2, ...}
+```
+
+</details>
+
+```python
+DRAIN_MOVES   # {"gigadrain": 1/2, "absorb": 1/2, "dreameater": 1/2, ...}
+```
+
+<details>
+<summary>Output</summary>
+
+```
 {
   'absorb': 0.50,
   'megadrain': 0.50,
@@ -2560,7 +3313,6 @@ DRAIN_MOVES   # {"gigadrain": 1/2, "absorb": 1/2, "dreameater": 1/2, ...}
 
 </details>
 
-
 ---
 
 ## Battle Tower (`facilities.tower`)
@@ -2569,12 +3321,46 @@ DRAIN_MOVES   # {"gigadrain": 1/2, "absorb": 1/2, "dreameater": 1/2, ...}
 
 Tower trainers are grouped into tiers by index, each with fixed IVs and round eligibility. These are the same trainers used across all Battle Frontier facilities, though details like round eligibility and team size may differ slightly between facilities. The Ruby/Sapphire Battle Tower uses a different trainer list that is not currently supported.
 
+
 ```python
 from frontierbrain3.facilities.tower import TowerDatabase, get_tier, TIERS, BRAIN_IVS
+```
 
+```python
 get_tier(250)  # {"ivs": 31, "rounds": [8], "last_in_round": "any"}
-get_tier(150)  # {"ivs": 15, "rounds": [3, 4, 5], "last_in_round": 3}
+```
 
+<details>
+<summary>Output</summary>
+
+```
+{
+  'ivs': 31,
+  'rounds': [8],
+  'last_in_round': 'any',
+}
+```
+
+</details>
+
+```python
+get_tier(150)  # {"ivs": 15, "rounds": [3, 4, 5], "last_in_round": 3}
+```
+
+<details>
+<summary>Output</summary>
+
+```
+{
+  'ivs': 15,
+  'rounds': [3, 4, 5],
+  'last_in_round': 3,
+}
+```
+
+</details>
+
+```python
 BRAIN_IVS  # {"silver": 15, "gold": 31}
 ```
 
@@ -2582,19 +3368,6 @@ BRAIN_IVS  # {"silver": 15, "gold": 31}
 <summary>Output</summary>
 
 ```
->>> get_tier(250)  # {"ivs": 31, "rounds": [8], "last_in_round": "any"}
-{
-  'ivs': 31,
-  'rounds': [8],
-  'last_in_round': 'any',
-}
->>> get_tier(150)  # {"ivs": 15, "rounds": [3, 4, 5], "last_in_round": 3}
-{
-  'ivs': 15,
-  'rounds': [3, 4, 5],
-  'last_in_round': 3,
-}
->>> BRAIN_IVS  # {"silver": 15, "gold": 31}
 {
   'silver': 15,
   'gold': 31,
@@ -2603,32 +3376,32 @@ BRAIN_IVS  # {"silver": 15, "gold": 31}
 
 </details>
 
-
 ### TowerDatabase
 
 Extends `Database` with tower-specific trainer filtering:
 
+
 ```python
 tower = TowerDatabase()
-
-# Trainers that appear in round 8
-tower.trainers.appearsInRound(8)
-
-# Trainers eligible to be the last battle of round 7
-tower.trainers.canBeLastInRound(7)
-
-# Combine with base filters
-tower.trainers.appearsInRound(8).hasPokemon("Metagross")
-tower.trainers.appearsInRound(8).Not.hasPokemon("Starmie")
 ```
 
 <details>
 <summary>Output</summary>
 
 ```
->>> tower = TowerDatabase()
-tower = <frontierbrain3.facilities.tower.TowerDatabase object at 0x000001D3497C23C0>
->>> tower.trainers.appearsInRound(8)
+tower = <frontierbrain3.facilities.tower.TowerDatabase object at 0x000002422BF323C0>
+```
+
+</details>
+
+```python
+tower.trainers.appearsInRound(8)
+```
+
+<details>
+<summary>Output</summary>
+
+```
 TrainerCollection(100 trainers)
 [  # 100 items
   'YOUNGSTER JAXON',
@@ -2663,7 +3436,18 @@ TrainerCollection(100 trainers)
   'AROMA LADY ABBY',
   'AROMA LADY GRETEL',
 ]
->>> tower.trainers.canBeLastInRound(7)
+```
+
+</details>
+
+```python
+tower.trainers.canBeLastInRound(7)
+```
+
+<details>
+<summary>Output</summary>
+
+```
 TrainerCollection(80 trainers)
 [  # 80 items
   'COOLTRAINER (M) LEON',
@@ -2698,7 +3482,18 @@ TrainerCollection(80 trainers)
   'AROMA LADY ABBY',
   'AROMA LADY GRETEL',
 ]
->>> tower.trainers.appearsInRound(8).hasPokemon("Metagross")
+```
+
+</details>
+
+```python
+tower.trainers.appearsInRound(8).hasPokemon("Metagross")
+```
+
+<details>
+<summary>Output</summary>
+
+```
 TrainerCollection(38 trainers)
 [  # 38 items
   'PKMN BREEDER (M) OSCAR',
@@ -2733,7 +3528,18 @@ TrainerCollection(38 trainers)
   'HIKER DEV',
   'HIKER COREY',
 ]
->>> tower.trainers.appearsInRound(8).Not.hasPokemon("Starmie")
+```
+
+</details>
+
+```python
+tower.trainers.appearsInRound(8).Not.hasPokemon("Starmie")
+```
+
+<details>
+<summary>Output</summary>
+
+```
 TrainerCollection(56 trainers)
 [  # 56 items
   'YOUNGSTER JAXON',
@@ -2772,32 +3578,49 @@ TrainerCollection(56 trainers)
 
 </details>
 
-
 ### Random Team Generation
 
 Generates a random trainer + 3-set team respecting species and item clause:
 
+
 ```python
 tower.random_team(8)                              # random round 8 team
-tower.random_team(8, trainer_class="Dragon Tamer") # filtered by class
-tower.random_team(name="Brady")                    # filtered by name (any round)
-# Returns: "CLASS Name: SetId1, SetId2, SetId3"
 ```
 
 <details>
 <summary>Output</summary>
 
 ```
->>> tower.random_team(8)                              # random round 8 team
-'PKMN Breeder (M) WILSON: Exeggutor-4, Flygon-4, Lapras-4'
->>> tower.random_team(8, trainer_class="Dragon Tamer") # filtered by class
-'Dragon Tamer DAVIN: Nidoqueen-2, Altaria-2, Tyranitar-4'
->>> tower.random_team(name="Brady")                    # filtered by name (any round)
-'Youngster BRADY: NidoranM-1, Vulpix-1, Jigglypuff-1'
+'PKMN Breeder (M) WILSON: Flygon-4, Crobat-4, Kingdra-4'
 ```
 
 </details>
 
+```python
+tower.random_team(8, trainer_class="Dragon Tamer") # filtered by class
+```
+
+<details>
+<summary>Output</summary>
+
+```
+'Dragon Tamer TREVON: Lapras-1, Tyranitar-7, Kingdra-3'
+```
+
+</details>
+
+```python
+tower.random_team(name="Brady")                    # filtered by name (any round)
+```
+
+<details>
+<summary>Output</summary>
+
+```
+'Youngster BRADY: Electrike-1, Shedinja-1, Swinub-1'
+```
+
+</details>
 
 ---
 
@@ -2809,12 +3632,38 @@ Unlike the Tower, Factory sets are not tied to specific trainers. Any trainer ca
 
 Factory sets are divided into 9 groups by index. Each round draws from specific groups:
 
+
 ```python
 from frontierbrain3.facilities.factory import FactoryDatabase, get_group
+```
 
+```python
 get_group(500)  # 5 (set index 500 is in group 5)
+```
 
+<details>
+<summary>Output</summary>
+
+```
+5
+```
+
+</details>
+
+```python
 fac = FactoryDatabase()
+```
+
+<details>
+<summary>Output</summary>
+
+```
+fac = <frontierbrain3.facilities.factory.FactoryDatabase object at 0x000002422BF32BA0>
+```
+
+</details>
+
+```python
 pool = fac.sets_in_groups([4, 5, 6, 7, 8])  # all sets in these groups
 ```
 
@@ -2822,11 +3671,6 @@ pool = fac.sets_in_groups([4, 5, 6, 7, 8])  # all sets in these groups
 <summary>Output</summary>
 
 ```
->>> get_group(500)  # 5 (set index 500 is in group 5)
-5
->>> fac = FactoryDatabase()
-fac = <frontierbrain3.facilities.factory.FactoryDatabase object at 0x000001D3497C2BA0>
->>> pool = fac.sets_in_groups([4, 5, 6, 7, 8])  # all sets in these groups
 pool = [  # 478 items
   {'Pokemon': 'Dugtrio', 'SetNum': 1, 'Nature': 'Adamant', 'Item': 'Soft Sand', 'Abilities': ['Sand Veil', 'Arena Trap'], 'Moves': ['earthquake', 'triattack', 'slash', 'sandtomb'], 'EVs': [0, 255, 0, 0, 0, 255], 'Index': 373, 'DexNum': 51},
   {'Pokemon': 'Medicham', 'SetNum': 1, 'Nature': 'Docile', 'Item': 'Focus Band', 'Abilities': ['Pure Power'], 'Moves': ['psychic', 'hijumpkick', 'calmmind', 'batonpass'], 'EVs': [0, 255, 0, 0, 0, 255], 'Index': 374, 'DexNum': 308},
@@ -2864,18 +3708,59 @@ pool = [  # 478 items
 
 </details>
 
-
 ### Team Type and Phrase
 
 Every Factory team gets a "type" (most common Pokemon type) and a "phrase" (battle style description):
 
+
 ```python
 from frontierbrain3.facilities.factory import FactoryDatabase, team_type, team_phrase
+```
 
+```python
 fac = FactoryDatabase()
-sample_team = fac.sets_in_groups([7, 8])[:3]  # grab 3 sets for demonstration
+```
 
+<details>
+<summary>Output</summary>
+
+```
+fac = <frontierbrain3.facilities.factory.FactoryDatabase object at 0x000002422C8AF890>
+```
+
+</details>
+
+```python
+sample_team = fac.sets_in_groups([7, 8])[:3]  # grab 3 sets for demonstration
+```
+
+<details>
+<summary>Output</summary>
+
+```
+sample_team = [
+  {'Pokemon': 'Medicham', 'SetNum': 4, 'Nature': 'Hardy', 'Item': 'Lum Berry', 'Abilities': ['Pure Power'], 'Moves': ['megakick', 'psychic', 'shadowball', 'rockslide'], 'EVs': [0, 255, 0, 255, 0, 0], 'Index': 662, 'DexNum': 308},
+  {'Pokemon': 'Misdreavus', 'SetNum': 4, 'Nature': 'Timid', 'Item': 'Lum Berry', 'Abilities': ['Levitate'], 'Moves': ['destinybond', 'psychic', 'shadowball', 'thunderbolt'], 'EVs': [0, 0, 0, 255, 0, 255], 'Index': 663, 'DexNum': 200},
+  {'Pokemon': 'Fearow', 'SetNum': 4, 'Nature': 'Hardy', 'Item': 'Lum Berry', 'Abilities': ['Keen Eye'], 'Moves': ['drillpeck', 'doubleedge', 'steelwing', 'skyattack'], 'EVs': [0, 255, 0, 255, 0, 0], 'Index': 664, 'DexNum': 22},
+]
+```
+
+</details>
+
+```python
 team_type(sample_team)   # "Water", "Fire", "No Type", etc.
+```
+
+<details>
+<summary>Output</summary>
+
+```
+'No Type'
+```
+
+</details>
+
+```python
 team_phrase(sample_team)  # "appears to be one based on total preparation", etc.
 ```
 
@@ -2883,73 +3768,88 @@ team_phrase(sample_team)  # "appears to be one based on total preparation", etc.
 <summary>Output</summary>
 
 ```
->>> fac = FactoryDatabase()
-fac = <frontierbrain3.facilities.factory.FactoryDatabase object at 0x000001D34AD63250>
->>> sample_team = fac.sets_in_groups([7, 8])[:3]  # grab 3 sets for demonstration
-sample_team = [
-  {'Pokemon': 'Medicham', 'SetNum': 4, 'Nature': 'Hardy', 'Item': 'Lum Berry', 'Abilities': ['Pure Power'], 'Moves': ['megakick', 'psychic', 'shadowball', 'rockslide'], 'EVs': [0, 255, 0, 255, 0, 0], 'Index': 662, 'DexNum': 308},
-  {'Pokemon': 'Misdreavus', 'SetNum': 4, 'Nature': 'Timid', 'Item': 'Lum Berry', 'Abilities': ['Levitate'], 'Moves': ['destinybond', 'psychic', 'shadowball', 'thunderbolt'], 'EVs': [0, 0, 0, 255, 0, 255], 'Index': 663, 'DexNum': 200},
-  {'Pokemon': 'Fearow', 'SetNum': 4, 'Nature': 'Hardy', 'Item': 'Lum Berry', 'Abilities': ['Keen Eye'], 'Moves': ['drillpeck', 'doubleedge', 'steelwing', 'skyattack'], 'EVs': [0, 255, 0, 255, 0, 0], 'Index': 664, 'DexNum': 22},
-]
->>> team_type(sample_team)   # "Water", "Fire", "No Type", etc.
-'No Type'
->>> team_phrase(sample_team)  # "appears to be one based on total preparation", etc.
 'appears to be high risk, high return'
 ```
 
 </details>
 
-
 ### Random Team Generation
 
 Generate teams with optional type/phrase constraints:
 
+
 ```python
 fac = FactoryDatabase()
-
-ids, typ, phrase = fac.random_team("open", 5)                           # unconstrained
-ids, typ, phrase = fac.random_team("open", 5, target_type="Water")       # Water teams only
-ids, typ, phrase = fac.random_team("open", 5, target_phrase=4)           # phrase 4 only
-ids, typ, phrase = fac.random_team("lv50", 1, target_type="Fire", target_phrase=1)  # both
-
-# Phrase numbers: 0=none, 1=preparation, 2=slow/steady, 3=endurance,
-# 4=high-risk, 5=weaken foe, 6=unpredictable, 7=battle flow, 8=flex
 ```
 
 <details>
 <summary>Output</summary>
 
 ```
->>> fac = FactoryDatabase()
-fac = <frontierbrain3.facilities.factory.FactoryDatabase object at 0x000001D34A1B9310>
->>> ids, typ, phrase = fac.random_team("open", 5)                           # unconstrained
-ids = ['Slaking-1', 'Moltres-2', 'Wailord-1']
->>> ids, typ, phrase = fac.random_team("open", 5)                           # unconstrained
-typ = 'No Type'
->>> ids, typ, phrase = fac.random_team("open", 5)                           # unconstrained
-phrase = 'appears to be free-spirited and unrestrained'
->>> ids, typ, phrase = fac.random_team("open", 5, target_type="Water")       # Water teams only
-ids = ['Whiscash-1', 'Rapidash-1', 'Lanturn-3']
->>> ids, typ, phrase = fac.random_team("open", 5, target_type="Water")       # Water teams only
-typ = 'Water'
->>> ids, typ, phrase = fac.random_team("open", 5, target_type="Water")       # Water teams only
-phrase = 'appears to be free-spirited and unrestrained'
->>> ids, typ, phrase = fac.random_team("open", 5, target_phrase=4)           # phrase 4 only
-ids = ['Ampharos-2', 'Gyarados-1', 'Ursaring-7']
->>> ids, typ, phrase = fac.random_team("open", 5, target_phrase=4)           # phrase 4 only
-typ = 'No Type'
->>> ids, typ, phrase = fac.random_team("open", 5, target_phrase=4)           # phrase 4 only
-phrase = 'appears to be high risk, high return'
->>> ids, typ, phrase = fac.random_team("lv50", 1, target_type="Fire", target_phrase=1)  # both
-ids = ['Clamperl-1', 'Magby-1', 'Growlithe-1']
->>> ids, typ, phrase = fac.random_team("lv50", 1, target_type="Fire", target_phrase=1)  # both
-typ = 'Fire'
->>> ids, typ, phrase = fac.random_team("lv50", 1, target_type="Fire", target_phrase=1)  # both
-phrase = 'appears to be one based on total preparation'
+fac = <frontierbrain3.facilities.factory.FactoryDatabase object at 0x000002422C5E9810>
 ```
 
 </details>
 
+```python
+ids, typ, phrase = fac.random_team("open", 5)                           # unconstrained
+```
+
+<details>
+<summary>Output</summary>
+
+```
+ids = ['Zapdos-4', 'Nidoqueen-4', 'Whiscash-3']
+typ = 'Ground'
+phrase = 'appears to be free-spirited and unrestrained'
+```
+
+</details>
+
+```python
+ids, typ, phrase = fac.random_team("open", 5, target_type="Water")       # Water teams only
+```
+
+<details>
+<summary>Output</summary>
+
+```
+ids = ['Umbreon-1', 'Walrein-1', 'Slowking-3']
+typ = 'Water'
+phrase = 'appears to be free-spirited and unrestrained'
+```
+
+</details>
+
+```python
+ids, typ, phrase = fac.random_team("open", 5, target_phrase=4)           # phrase 4 only
+```
+
+<details>
+<summary>Output</summary>
+
+```
+ids = ['Salamence-2', 'Regirock-6', 'Latios-2']
+typ = 'Dragon'
+phrase = 'appears to be high risk, high return'
+```
+
+</details>
+
+```python
+ids, typ, phrase = fac.random_team("lv50", 1, target_type="Fire", target_phrase=1)  # both
+```
+
+<details>
+<summary>Output</summary>
+
+```
+ids = ['Growlithe-1', 'Ledian-1', 'Houndour-1']
+typ = 'Fire'
+phrase = 'appears to be one based on total preparation'
+```
+
+</details>
 
 ---
 
@@ -2959,35 +3859,24 @@ phrase = 'appears to be one based on total preparation'
 
 The Dome ranks teams by a seeding value. Higher seed = higher bracket position. Notably, the higher seed wins in case of a tie, unlike every other facility where a tie counts as a loss for the player.
 
+
 ```python
 from frontierbrain3 import Database, CustomSet
 from frontierbrain3.facilities.dome import calc_seed
+```
 
+```python
 db = Database()
+```
 
+```python
 meta = db.allSets("Metagross")._sets[0]
-lax  = db.allSets("Snorlax")._sets[0]
-ttar = db.allSets("Tyranitar")._sets[0]
-team = [meta, lax, ttar]  # exactly 3 sets
-
-# Player seed (normal stat calculation)
-calc_seed(team)
-
-# Enemy seed (applies two bugs: 0 EVs + non-HP stats mod 256)
-calc_seed(team, is_enemy=True)
-
-# At specific level/IVs
-calc_seed(team, level=50, ivs=15)
-calc_seed(team, level=50, ivs=15, is_enemy=True)
 ```
 
 <details>
 <summary>Output</summary>
 
 ```
->>> db = Database()
-db = <frontierbrain3.frontier_db.Database object at 0x000001D34A188EF0>
->>> meta = db.allSets("Metagross")._sets[0]
 meta = {
   'Pokemon': 'Metagross',
   'SetNum': 1,
@@ -2999,7 +3888,18 @@ meta = {
   'Index': 467,
   'DexNum': 376,
 }
->>> lax  = db.allSets("Snorlax")._sets[0]
+```
+
+</details>
+
+```python
+lax  = db.allSets("Snorlax")._sets[0]
+```
+
+<details>
+<summary>Output</summary>
+
+```
 lax = {
   'Pokemon': 'Snorlax',
   'SetNum': 1,
@@ -3011,7 +3911,18 @@ lax = {
   'Index': 461,
   'DexNum': 143,
 }
->>> ttar = db.allSets("Tyranitar")._sets[0]
+```
+
+</details>
+
+```python
+ttar = db.allSets("Tyranitar")._sets[0]
+```
+
+<details>
+<summary>Output</summary>
+
+```
 ttar = {
   'Pokemon': 'Tyranitar',
   'SetNum': 1,
@@ -3023,24 +3934,78 @@ ttar = {
   'Index': 861,
   'DexNum': 248,
 }
->>> team = [meta, lax, ttar]  # exactly 3 sets
+```
+
+</details>
+
+```python
+team = [meta, lax, ttar]  # exactly 3 sets
+```
+
+<details>
+<summary>Output</summary>
+
+```
 team = [
   {'Pokemon': 'Metagross', 'SetNum': 1, 'Nature': 'Adamant', 'Item': 'Leftovers', 'Abilities': ['Clear Body'], 'Moves': ['meteormash', 'aerialace', 'facade', 'lightscreen'], 'EVs': [0, 170, 0, 0, 170, 170], 'Index': 467, 'DexNum': 376},
   {'Pokemon': 'Snorlax', 'SetNum': 1, 'Nature': 'Adamant', 'Item': 'Leftovers', 'Abilities': ['Immunity', 'Thick Fat'], 'Moves': ['facade', 'shadowball', 'attract', 'doubleteam'], 'EVs': [0, 255, 255, 0, 0, 0], 'Index': 461, 'DexNum': 143},
   {'Pokemon': 'Tyranitar', 'SetNum': 1, 'Nature': 'Hardy', 'Item': 'BrightPowder', 'Abilities': ['Sand Stream'], 'Moves': ['earthquake', 'aerialace', 'thunderbolt', 'surf'], 'EVs': [0, 255, 0, 255, 0, 0], 'Index': 861, 'DexNum': 248},
 ]
->>> calc_seed(team)
-4871
->>> calc_seed(team, is_enemy=True)
-2947
->>> calc_seed(team, level=50, ivs=15)
-2334
->>> calc_seed(team, level=50, ivs=15, is_enemy=True)
-2138
 ```
 
 </details>
 
+```python
+calc_seed(team)
+```
+
+<details>
+<summary>Output</summary>
+
+```
+4871
+```
+
+</details>
+
+```python
+calc_seed(team, is_enemy=True)
+```
+
+<details>
+<summary>Output</summary>
+
+```
+2947
+```
+
+</details>
+
+```python
+calc_seed(team, level=50, ivs=15)
+```
+
+<details>
+<summary>Output</summary>
+
+```
+2334
+```
+
+</details>
+
+```python
+calc_seed(team, level=50, ivs=15, is_enemy=True)
+```
+
+<details>
+<summary>Output</summary>
+
+```
+2138
+```
+
+</details>
 
 `CustomSet` objects are supported for player teams (not with `is_enemy=True`).
 
@@ -3054,39 +4019,33 @@ team = [
 
 The enemy seeding bugs massively favor the player, but it's useful to know how high an enemy seed can actually get. Since the Dome draws from the same trainer/set pool as the Tower, we can use `TowerDatabase` to simulate round 8 enemy teams:
 
+
 ```python
 from frontierbrain3.facilities.tower import TowerDatabase
 from frontierbrain3.facilities.dome import calc_seed
+```
 
+```python
 tower = TowerDatabase()
-set_lookup = {f"{s['Pokemon']}-{s['SetNum']}": s for s in tower._sets}
-
-best_seed = 0
-best_team = ""
-for _ in range(1000):
-    result = tower.random_team(8)
-    if result.startswith("Error"):
-        continue
-    label, ids_str = result.split(": ", 1)
-    set_ids = [s.strip() for s in ids_str.split(", ")]
-    team_sets = [set_lookup[sid] for sid in set_ids if sid in set_lookup]
-    if len(team_sets) == 3:
-        seed = calc_seed(team_sets, is_enemy=True)
-        if seed > best_seed:
-            best_seed = seed
-            best_team = result
-
-print(f"Highest enemy seed: {best_seed}")
-print(f"Team: {best_team}")
 ```
 
 <details>
 <summary>Output</summary>
 
 ```
->>> tower = TowerDatabase()
-tower = <frontierbrain3.facilities.tower.TowerDatabase object at 0x000001D34A09AC10>
->>> set_lookup = {f"{s['Pokemon']}-{s['SetNum']}": s for s in tower._sets}
+tower = <frontierbrain3.facilities.tower.TowerDatabase object at 0x000002422C3E2FD0>
+```
+
+</details>
+
+```python
+set_lookup = {f"{s['Pokemon']}-{s['SetNum']}": s for s in tower._sets}
+```
+
+<details>
+<summary>Output</summary>
+
+```
 set_lookup = {  # 918 entries
   'Sunkern-1': {'Pokemon': 'Sunkern', 'SetNum': 1, 'Nature': 'Relaxed', 'Item': 'Lax Incense', 'Abilities': ['Chlorophyll'], 'Moves': ['megadrain', 'helpinghand', 'sunnyday', 'lightscreen'], 'EVs': [255, 0, 0, 255, 0, 0], 'Index': 1, 'DexNum': 191},
   'Azurill-1': {'Pokemon': 'Azurill', 'SetNum': 1, 'Nature': 'Rash', 'Item': 'Cheri Berry', 'Abilities': ['Thick Fat', 'Huge Power'], 'Moves': ['waterpulse', 'attract', 'sing', 'charm'], 'EVs': [255, 0, 0, 255, 0, 0], 'Index': 2, 'DexNum': 298},
@@ -3110,16 +4069,76 @@ set_lookup = {  # 918 entries
   'Lotad-1': {'Pokemon': 'Lotad', 'SetNum': 1, 'Nature': 'Docile', 'Item': 'Lax Incense', 'Abilities': ['Swift Swim', 'Rain Dish'], 'Moves': ['raindance', 'waterpulse', 'sunnyday', 'megadrain'], 'EVs': [255, 0, 0, 255, 0, 0], 'Index': 20, 'DexNum': 270},
   ... (898 more) ...
 }
->>> best_seed = 0
-best_seed = 0
->>> best_team = ""
-best_team = ''
-Highest enemy seed: 4183
-Team: PKMN Breeder (F) TESS: Kingdra-4, Walrein-4, Venusaur-4
 ```
 
 </details>
 
+```python
+best_seed = 0
+```
+
+<details>
+<summary>Output</summary>
+
+```
+best_seed = 0
+```
+
+</details>
+
+```python
+best_team = ""
+```
+
+<details>
+<summary>Output</summary>
+
+```
+best_team = ''
+```
+
+</details>
+
+```python
+for _ in range(1000):
+    result = tower.random_team(8)
+    if result.startswith("Error"):
+        continue
+    label, ids_str = result.split(": ", 1)
+    set_ids = [s.strip() for s in ids_str.split(", ")]
+    team_sets = [set_lookup[sid] for sid in set_ids if sid in set_lookup]
+    if len(team_sets) == 3:
+        seed = calc_seed(team_sets, is_enemy=True)
+        if seed > best_seed:
+            best_seed = seed
+            best_team = result
+```
+
+```python
+print(f"Highest enemy seed: {best_seed}")
+```
+
+<details>
+<summary>Output</summary>
+
+```
+Highest enemy seed: 4205
+```
+
+</details>
+
+```python
+print(f"Team: {best_team}")
+```
+
+<details>
+<summary>Output</summary>
+
+```
+Team: PKMN Breeder (F) TESS: Charizard-4, Lapras-4, Kingdra-4
+```
+
+</details>
 
 ---
 
@@ -3131,28 +4150,58 @@ In the Palace, Pokemon choose moves autonomously. Each turn, the game first sele
 
 Palace classifies every move as attack, defense, or support:
 
+
 ```python
 from frontierbrain3.facilities.palace import get_move_category, categorize_moveset
+```
 
+```python
 get_move_category("Earthquake")  # "attack"
-get_move_category("Swords Dance") # "defense"
-get_move_category("Thunder Wave") # "support"
-
-categorize_moveset(["Earthquake", "Rock Slide", "Swords Dance", "Thunder Wave"])
-# {"attack": ["Earthquake", "Rock Slide"], "defense": ["Swords Dance"], "support": ["Thunder Wave"]}
 ```
 
 <details>
 <summary>Output</summary>
 
 ```
->>> get_move_category("Earthquake")  # "attack"
 'attack'
->>> get_move_category("Swords Dance") # "defense"
+```
+
+</details>
+
+```python
+get_move_category("Swords Dance") # "defense"
+```
+
+<details>
+<summary>Output</summary>
+
+```
 'defense'
->>> get_move_category("Thunder Wave") # "support"
+```
+
+</details>
+
+```python
+get_move_category("Thunder Wave") # "support"
+```
+
+<details>
+<summary>Output</summary>
+
+```
 'support'
->>> categorize_moveset(["Earthquake", "Rock Slide", "Swords Dance", "Thunder Wave"])
+```
+
+</details>
+
+```python
+categorize_moveset(["Earthquake", "Rock Slide", "Swords Dance", "Thunder Wave"])
+```
+
+<details>
+<summary>Output</summary>
+
+```
 {
   'attack': ['Earthquake', 'Rock Slide'],
   'defense': ['Swords Dance'],
@@ -3162,15 +4211,33 @@ categorize_moveset(["Earthquake", "Rock Slide", "Swords Dance", "Thunder Wave"])
 
 </details>
 
-
 ### Nature Ratios
 
 Each nature has different category selection odds at high HP (>50%) and low HP (<=50%):
 
+
 ```python
 from frontierbrain3.facilities.palace import get_nature_ratios
+```
 
+```python
 get_nature_ratios("Adamant")              # {"attack": 0.38, "defense": 0.31, "support": 0.31}
+```
+
+<details>
+<summary>Output</summary>
+
+```
+{
+  'attack': 0.38,
+  'defense': 0.31,
+  'support': 0.31,
+}
+```
+
+</details>
+
+```python
 get_nature_ratios("Adamant", low_hp=True) # {"attack": 0.70, "defense": 0.15, "support": 0.15}
 ```
 
@@ -3178,13 +4245,6 @@ get_nature_ratios("Adamant", low_hp=True) # {"attack": 0.70, "defense": 0.15, "s
 <summary>Output</summary>
 
 ```
->>> get_nature_ratios("Adamant")              # {"attack": 0.38, "defense": 0.31, "support": 0.31}
-{
-  'attack': 0.38,
-  'defense': 0.31,
-  'support': 0.31,
-}
->>> get_nature_ratios("Adamant", low_hp=True) # {"attack": 0.70, "defense": 0.15, "support": 0.15}
 {
   'attack': 0.70,
   'defense': 0.15,
@@ -3194,35 +4254,41 @@ get_nature_ratios("Adamant", low_hp=True) # {"attack": 0.70, "defense": 0.15, "s
 
 </details>
 
-
 ### Effective Action Probabilities
 
 Accounts for empty categories and the random-move fallback:
 
+
 ```python
 from frontierbrain3.facilities.palace import get_action_probabilities, get_move_probabilities
+```
 
-# Per-category probabilities (including "nothing")
+```python
 get_action_probabilities("Adamant", ["Earthquake", "Rock Slide", "Swords Dance", "Protect"])
-# {"attack": 0.5..., "defense": 0.3..., "support": 0.0..., "nothing": 0.1...}
-
-# Per-move probabilities
-get_move_probabilities("Adamant", ["Earthquake", "Rock Slide", "Protect"])
-# {"Earthquake": 0.25, "Rock Slide": 0.25, "Protect": 0.38, "nothing": 0.12}
 ```
 
 <details>
 <summary>Output</summary>
 
 ```
->>> get_action_probabilities("Adamant", ["Earthquake", "Rock Slide", "Swords Dance", "Protect"])
 {
   'attack': 0.46,
   'defense': 0.39,
   'support': 0.00,
   'nothing': 0.15,
 }
->>> get_move_probabilities("Adamant", ["Earthquake", "Rock Slide", "Protect"])
+```
+
+</details>
+
+```python
+get_move_probabilities("Adamant", ["Earthquake", "Rock Slide", "Protect"])
+```
+
+<details>
+<summary>Output</summary>
+
+```
 {
   'Earthquake': 0.24,
   'Rock Slide': 0.24,
@@ -3233,42 +4299,39 @@ get_move_probabilities("Adamant", ["Earthquake", "Rock Slide", "Protect"])
 
 </details>
 
-
 ### Multi-Turn Analysis
 
 Analyze probabilities over multiple turns, either by category or by specific move:
+
 
 ```python
 from frontierbrain3.facilities.palace import (
     multi_turn_probabilities, move_turn_probabilities,
     cumulative_attack_prob, expected_attacks, multi_turn_mixed_hp,
 )
+```
 
+```python
 moves = ["Earthquake", "Rock Slide", "Swords Dance", "Protect"]
-
-# P(exactly k attacks in 5 turns)
-multi_turn_probabilities("Adamant", moves, 5)  # {0: p, 1: p, ..., 5: p}
-
-# P(exactly k uses of Earthquake specifically in 5 turns)
-move_turn_probabilities("Adamant", moves, 5, "Earthquake")  # {0: p, 1: p, ..., 5: p}
-
-# P(at least 3 attacks in 5 turns)
-cumulative_attack_prob("Adamant", moves, 5, 3)  # float
-
-# Expected attacks in 5 turns
-expected_attacks("Adamant", moves, 5)  # float
-
-# Mixed HP: 3 turns at high HP, then 2 turns at low HP
-multi_turn_mixed_hp("Adamant", moves, 3, 2)  # {0: p, ..., 5: p}
 ```
 
 <details>
 <summary>Output</summary>
 
 ```
->>> moves = ["Earthquake", "Rock Slide", "Swords Dance", "Protect"]
 moves = ['Earthquake', 'Rock Slide', 'Swords Dance', 'Protect']
->>> multi_turn_probabilities("Adamant", moves, 5)  # {0: p, 1: p, ..., 5: p}
+```
+
+</details>
+
+```python
+multi_turn_probabilities("Adamant", moves, 5)  # {0: p, 1: p, ..., 5: p}
+```
+
+<details>
+<summary>Output</summary>
+
+```
 {
   0: 0.05,
   1: 0.20,
@@ -3277,7 +4340,18 @@ moves = ['Earthquake', 'Rock Slide', 'Swords Dance', 'Protect']
   4: 0.12,
   5: 0.02,
 }
->>> move_turn_probabilities("Adamant", moves, 5, "Earthquake")  # {0: p, 1: p, ..., 5: p}
+```
+
+</details>
+
+```python
+move_turn_probabilities("Adamant", moves, 5, "Earthquake")  # {0: p, 1: p, ..., 5: p}
+```
+
+<details>
+<summary>Output</summary>
+
+```
 {
   0: 0.27,
   1: 0.40,
@@ -3286,11 +4360,44 @@ moves = ['Earthquake', 'Rock Slide', 'Swords Dance', 'Protect']
   4: 0.01,
   5: 0.0006,
 }
->>> cumulative_attack_prob("Adamant", moves, 5, 3)  # float
+```
+
+</details>
+
+```python
+cumulative_attack_prob("Adamant", moves, 5, 3)  # float
+```
+
+<details>
+<summary>Output</summary>
+
+```
 0.42
->>> expected_attacks("Adamant", moves, 5)  # float
+```
+
+</details>
+
+```python
+expected_attacks("Adamant", moves, 5)  # float
+```
+
+<details>
+<summary>Output</summary>
+
+```
 2.29
->>> multi_turn_mixed_hp("Adamant", moves, 3, 2)  # {0: p, ..., 5: p}
+```
+
+</details>
+
+```python
+multi_turn_mixed_hp("Adamant", moves, 3, 2)  # {0: p, ..., 5: p}
+```
+
+<details>
+<summary>Output</summary>
+
+```
 {
   0: 0.01,
   1: 0.09,
@@ -3303,29 +4410,21 @@ moves = ['Earthquake', 'Rock Slide', 'Swords Dance', 'Protect']
 
 </details>
 
-
 ### Nature Rankings and Utilities
+
 
 ```python
 from frontierbrain3.facilities.palace import rank_natures, low_hp_message, DOUBLES_TARGETING
+```
 
-# Rank all 25 natures by attack probability for a moveset
+```python
 rank_natures(["Earthquake", "Rock Slide", "Protect"])
-# [("Sassy", 0.88), ("Brave", 0.70), ...]
-
-# Low HP flavor text
-low_hp_message("Adamant", "Metagross")  # "A glint appears in Metagross's eyes!"
-
-# Doubles targeting preference by nature
-DOUBLES_TARGETING["adamant"]  # "higher_hp"
-DOUBLES_TARGETING["brave"]    # "lower_hp"
 ```
 
 <details>
 <summary>Output</summary>
 
 ```
->>> rank_natures(["Earthquake", "Rock Slide", "Protect"])
 [
   ('Sassy', 0.9),
   ('Impish', 0.77),
@@ -3353,16 +4452,48 @@ DOUBLES_TARGETING["brave"]    # "lower_hp"
   ('Naughty', 0.23),
   ('Gentle', 0.21),
 ]
->>> low_hp_message("Adamant", "Metagross")  # "A glint appears in Metagross's eyes!"
-"A glint appears in Metagross's eyes!"
->>> DOUBLES_TARGETING["adamant"]  # "higher_hp"
-'higher_hp'
->>> DOUBLES_TARGETING["brave"]    # "lower_hp"
-'lower_hp'
 ```
 
 </details>
 
+```python
+low_hp_message("Adamant", "Metagross")  # "A glint appears in Metagross's eyes!"
+```
+
+<details>
+<summary>Output</summary>
+
+```
+"A glint appears in Metagross's eyes!"
+```
+
+</details>
+
+```python
+DOUBLES_TARGETING["adamant"]  # "higher_hp"
+```
+
+<details>
+<summary>Output</summary>
+
+```
+'higher_hp'
+```
+
+</details>
+
+```python
+DOUBLES_TARGETING["brave"]    # "lower_hp"
+```
+
+<details>
+<summary>Output</summary>
+
+```
+'lower_hp'
+```
+
+</details>
 
 ---
 
@@ -3372,28 +4503,19 @@ DOUBLES_TARGETING["brave"]    # "lower_hp"
 
 8 possible events per room, with some conditionally excluded:
 
+
 ```python
 from frontierbrain3.facilities.pike import get_event_probabilities, EVENTS
+```
 
-# All events and descriptions
+```python
 EVENTS  # {"single_battle": "A Trainer with 3 Pokemon...", ...}
-
-# Default: all at full HP, none fainted/statused
-get_event_probabilities()
-# {"single_battle": 0.1667, "double_battle": 0.1667, ... "partial_heal": 0.0, "full_heal": 0.0}
-
-# With party damage
-get_event_probabilities(all_full_hp=False)  # healing rooms now possible
-
-# With 2 fainted (double battle excluded)
-get_event_probabilities(num_fainted=2, all_full_hp=False)
 ```
 
 <details>
 <summary>Output</summary>
 
 ```
->>> EVENTS  # {"single_battle": "A Trainer with 3 Pokemon...", ...}
 {
   'single_battle': 'A Trainer with 3 Pokemon walks up and battles.',
   'double_battle': 'Two Trainers with 1 Pokemon each team up and battle.',
@@ -3404,7 +4526,18 @@ get_event_probabilities(num_fainted=2, all_full_hp=False)
   'partial_heal': 'A Gentleman fully heals one or two of your Pokemon.',
   'full_heal': 'A receptionist fully heals all three of your Pokemon.',
 }
->>> get_event_probabilities()
+```
+
+</details>
+
+```python
+get_event_probabilities()
+```
+
+<details>
+<summary>Output</summary>
+
+```
 {
   'single_battle': 0.17,
   'double_battle': 0.17,
@@ -3415,7 +4548,18 @@ get_event_probabilities(num_fainted=2, all_full_hp=False)
   'partial_heal': 0.00,
   'full_heal': 0.00,
 }
->>> get_event_probabilities(all_full_hp=False)  # healing rooms now possible
+```
+
+</details>
+
+```python
+get_event_probabilities(all_full_hp=False)  # healing rooms now possible
+```
+
+<details>
+<summary>Output</summary>
+
+```
 {
   'single_battle': 0.12,
   'double_battle': 0.12,
@@ -3426,7 +4570,18 @@ get_event_probabilities(num_fainted=2, all_full_hp=False)
   'partial_heal': 0.12,
   'full_heal': 0.12,
 }
->>> get_event_probabilities(num_fainted=2, all_full_hp=False)
+```
+
+</details>
+
+```python
+get_event_probabilities(num_fainted=2, all_full_hp=False)
+```
+
+<details>
+<summary>Output</summary>
+
+```
 {
   'single_battle': 0.14,
   'double_battle': 0.00,
@@ -3441,38 +4596,64 @@ get_event_probabilities(num_fainted=2, all_full_hp=False)
 
 </details>
 
-
 ### Status Room
+
 
 ```python
 from frontierbrain3.facilities.pike import get_status_chances, status_targets, STATUS_TABLE
+```
 
-# How many mons targeted per pass
+```python
 status_targets(1)   # 1 (passes 1-5)
-status_targets(6)   # 2 (passes 6-10)
-status_targets(11)  # 3 (passes 11+)
-
-# Status probabilities accounting for immunities
-# Example team: Metagross / Tauros / Latios
-get_status_chances(
-    pokemon_types=[["steel", "psychic"], ["normal"], ["dragon", "psychic"]],
-    pokemon_abilities=["clearbody", "intimidate", "levitate"],
-    pass_num=1,
-)
-# {"bad_poison": 0.233, "freeze": 0.25, "paralysis": 0.2, "sleep": 0.1, "burn": 0.1}
 ```
 
 <details>
 <summary>Output</summary>
 
 ```
->>> status_targets(1)   # 1 (passes 1-5)
 1
->>> status_targets(6)   # 2 (passes 6-10)
+```
+
+</details>
+
+```python
+status_targets(6)   # 2 (passes 6-10)
+```
+
+<details>
+<summary>Output</summary>
+
+```
 2
->>> status_targets(11)  # 3 (passes 11+)
+```
+
+</details>
+
+```python
+status_targets(11)  # 3 (passes 11+)
+```
+
+<details>
+<summary>Output</summary>
+
+```
 3
->>> get_status_chances( ...
+```
+
+</details>
+
+```python
+get_status_chances(
+    pokemon_types=[["steel", "psychic"], ["normal"], ["dragon", "psychic"]],
+    pokemon_abilities=["clearbody", "intimidate", "levitate"],
+    pass_num=1,
+)
+```
+
+<details>
+<summary>Output</summary>
+
+```
 {
   'bad_poison': 0.23,
   'freeze': 0.25,
@@ -3484,14 +4665,48 @@ get_status_chances(
 
 </details>
 
-
 ### Wild Pokemon
+
 
 ```python
 from frontierbrain3.facilities.pike import get_wild_pokemon
+```
 
+```python
 get_wild_pokemon(100, lv50=True)   # rooms 1-280: Seviper, Milotic, Dusclops
+```
+
+<details>
+<summary>Output</summary>
+
+```
+[
+  {'species': 'Seviper', 'ability': 'Shed Skin', 'level': 46, 'rate': 26, 'moves': ['Toxic', 'Glare', 'Sludge Bomb', 'Body Slam']},
+  {'species': 'Milotic', 'ability': 'Marvel Scale', 'level': 46, 'rate': 26, 'moves': ['Toxic', 'Hypnosis', 'Body Slam', 'Surf']},
+  {'species': 'Dusclops', 'ability': 'Pressure', 'level': 45, 'rate': 48, 'moves': ['Will-O-Wisp', 'Mean Look', 'Toxic', 'Shadow Punch']},
+]
+```
+
+</details>
+
+```python
 get_wild_pokemon(300, lv50=True)   # rooms 281-560: Seviper, Milotic, Electrode
+```
+
+<details>
+<summary>Output</summary>
+
+```
+[
+  {'species': 'Seviper', 'ability': 'Shed Skin', 'level': 46, 'rate': 26, 'moves': ['Toxic', 'Glare', 'Sludge Bomb', 'Body Slam']},
+  {'species': 'Milotic', 'ability': 'Marvel Scale', 'level': 46, 'rate': 26, 'moves': ['Toxic', 'Hypnosis', 'Body Slam', 'Surf']},
+  {'species': 'Electrode', 'ability': 'Soundproof', 'level': 45, 'rate': 48, 'moves': ['Explosion', 'Selfdestruct', 'Thunder', 'Toxic']},
+]
+```
+
+</details>
+
+```python
 get_wild_pokemon(900, lv50=False)  # rooms 841+: Seviper, Milotic, Wobbuffet
 ```
 
@@ -3499,19 +4714,6 @@ get_wild_pokemon(900, lv50=False)  # rooms 841+: Seviper, Milotic, Wobbuffet
 <summary>Output</summary>
 
 ```
->>> get_wild_pokemon(100, lv50=True)   # rooms 1-280: Seviper, Milotic, Dusclops
-[
-  {'species': 'Seviper', 'ability': 'Shed Skin', 'level': 46, 'rate': 26, 'moves': ['Toxic', 'Glare', 'Sludge Bomb', 'Body Slam']},
-  {'species': 'Milotic', 'ability': 'Marvel Scale', 'level': 46, 'rate': 26, 'moves': ['Toxic', 'Hypnosis', 'Body Slam', 'Surf']},
-  {'species': 'Dusclops', 'ability': 'Pressure', 'level': 45, 'rate': 48, 'moves': ['Will-O-Wisp', 'Mean Look', 'Toxic', 'Shadow Punch']},
-]
->>> get_wild_pokemon(300, lv50=True)   # rooms 281-560: Seviper, Milotic, Electrode
-[
-  {'species': 'Seviper', 'ability': 'Shed Skin', 'level': 46, 'rate': 26, 'moves': ['Toxic', 'Glare', 'Sludge Bomb', 'Body Slam']},
-  {'species': 'Milotic', 'ability': 'Marvel Scale', 'level': 46, 'rate': 26, 'moves': ['Toxic', 'Hypnosis', 'Body Slam', 'Surf']},
-  {'species': 'Electrode', 'ability': 'Soundproof', 'level': 45, 'rate': 48, 'moves': ['Explosion', 'Selfdestruct', 'Thunder', 'Toxic']},
-]
->>> get_wild_pokemon(900, lv50=False)  # rooms 841+: Seviper, Milotic, Wobbuffet
 [
   {'species': 'Seviper', 'ability': 'Shed Skin', 'level': [60, 96], 'rate': 26, 'moves': ['Toxic', 'Glare', 'Sludge Bomb', 'Poison Fang']},
   {'species': 'Milotic', 'ability': 'Marvel Scale', 'level': [60, 96], 'rate': 26, 'moves': ['Toxic', 'Hypnosis', 'Body Slam', 'Ice Beam']},
@@ -3521,16 +4723,78 @@ get_wild_pokemon(900, lv50=False)  # rooms 841+: Seviper, Milotic, Wobbuffet
 
 </details>
 
-
 ### Hints
+
 
 ```python
 from frontierbrain3.facilities.pike import HINTS
+```
 
+```python
 HINTS["nostalgia"]   # {"text": "...wave of nostalgia...", "events": ["status", "partial_heal"]}
+```
+
+<details>
+<summary>Output</summary>
+
+```
+{
+  'text': 'For some odd reason, I felt a wave of nostalgia coming from it...',
+  'events': ['status', 'partial_heal'],
+}
+```
+
+</details>
+
+```python
 HINTS["people"]      # {"text": "...presence of people...", "events": ["single_battle", "full_heal"]}
+```
+
+<details>
+<summary>Output</summary>
+
+```
+{
+  'text': 'Is it...A Trainer? I sense the presence of people...',
+  'events': ['single_battle', 'full_heal'],
+}
+```
+
+</details>
+
+```python
 HINTS["aroma"]       # {"text": "...aroma of Pokemon...", "events": ["wild_pokemon", "hard_battle_heal"]}
+```
+
+<details>
+<summary>Output</summary>
+
+```
+{
+  'text': 'It seems to have the distinct aroma of Pokemon wafting around it...',
+  'events': ['wild_pokemon', 'hard_battle_heal'],
+}
+```
+
+</details>
+
+```python
 HINTS["whispering"]  # {"text": "...heard something...", "events": ["no_event", "double_battle"]}
+```
+
+<details>
+<summary>Output</summary>
+
+```
+{
+  'text': 'I seem to have heard something... It may have been whispering...',
+  'events': ['no_event', 'double_battle'],
+}
+```
+
+</details>
+
+```python
 HINTS["dreadful"]    # {"text": "...dreadful presence...", "events": ["pike_queen"]}
 ```
 
@@ -3538,27 +4802,6 @@ HINTS["dreadful"]    # {"text": "...dreadful presence...", "events": ["pike_quee
 <summary>Output</summary>
 
 ```
->>> HINTS["nostalgia"]   # {"text": "...wave of nostalgia...", "events": ["status", "partial_heal"]}
-{
-  'text': 'For some odd reason, I felt a wave of nostalgia coming from it...',
-  'events': ['status', 'partial_heal'],
-}
->>> HINTS["people"]      # {"text": "...presence of people...", "events": ["single_battle", "full_heal"]}
-{
-  'text': 'Is it...A Trainer? I sense the presence of people...',
-  'events': ['single_battle', 'full_heal'],
-}
->>> HINTS["aroma"]       # {"text": "...aroma of Pokemon...", "events": ["wild_pokemon", "hard_battle_heal"]}
-{
-  'text': 'It seems to have the distinct aroma of Pokemon wafting around it...',
-  'events': ['wild_pokemon', 'hard_battle_heal'],
-}
->>> HINTS["whispering"]  # {"text": "...heard something...", "events": ["no_event", "double_battle"]}
-{
-  'text': 'I seem to have heard something... It may have been whispering...',
-  'events': ['no_event', 'double_battle'],
-}
->>> HINTS["dreadful"]    # {"text": "...dreadful presence...", "events": ["pike_queen"]}
 {
   'text': 'From every path I sense a dreadful presence...',
   'events': ['pike_queen'],
@@ -3566,7 +4809,6 @@ HINTS["dreadful"]    # {"text": "...dreadful presence...", "events": ["pike_quee
 ```
 
 </details>
-
 
 ---
 
@@ -3576,25 +4818,21 @@ HINTS["dreadful"]    # {"text": "...dreadful presence...", "events": ["pike_quee
 
 20 rounds, each with a theme and 8 wild Pokemon:
 
+
 ```python
 from frontierbrain3.facilities.pyramid import (
     ROUNDS, ROUND_THEMES, get_round_pokemon, get_encounters,
 )
+```
 
+```python
 ROUND_THEMES  # {1: "paralysis", 2: "poison", ..., 20: "normal"}
-
-# All 8 Pokemon for a round
-get_round_pokemon(1)  # [{"species": "Plusle", "moves": [...], ...}, ...]
-
-# Encounters for a specific floor (1-7) with rates
-get_encounters(1, 3)  # [{"pokemon": {...}, "rate": 30}, {"pokemon": {...}, "rate": 50}, ...]
 ```
 
 <details>
 <summary>Output</summary>
 
 ```
->>> ROUND_THEMES  # {1: "paralysis", 2: "poison", ..., 20: "normal"}
 {
   1: 'paralysis',
   2: 'poison',
@@ -3617,7 +4855,18 @@ get_encounters(1, 3)  # [{"pokemon": {...}, "rate": 30}, {"pokemon": {...}, "rat
   19: 'stone_evo',
   20: 'normal',
 }
->>> get_round_pokemon(1)  # [{"species": "Plusle", "moves": [...], ...}, ...]
+```
+
+</details>
+
+```python
+get_round_pokemon(1)  # [{"species": "Plusle", "moves": [...], ...}, ...]
+```
+
+<details>
+<summary>Output</summary>
+
+```
 [
   {'species': 'Plusle', 'ability': None, 'lv50': [30, 40], 'open_offset': [-20, -10], 'moves': ['Thunder Wave', 'Spark', 'Encore']},
   {'species': 'Minun', 'ability': None, 'lv50': [30, 40], 'open_offset': [-20, -10], 'moves': ['Thunder Wave', 'Thunderbolt', 'Quick Attack']},
@@ -3628,7 +4877,18 @@ get_encounters(1, 3)  # [{"pokemon": {...}, "rate": 30}, {"pokemon": {...}, "rat
   {'species': 'Breloom', 'ability': None, 'lv50': [35, 45], 'open_offset': [-11, -1], 'moves': ['Stun Spore', 'Focus Punch', 'Giga Drain', 'Mach Punch']},
   {'species': 'Jolteon', 'ability': None, 'lv50': [35, 45], 'open_offset': [-11, -1], 'moves': ['Thunder Wave', 'Thunder', 'Pin Missile', 'Quick Attack']},
 ]
->>> get_encounters(1, 3)  # [{"pokemon": {...}, "rate": 30}, {"pokemon": {...}, "rate": 50}, ...]
+```
+
+</details>
+
+```python
+get_encounters(1, 3)  # [{"pokemon": {...}, "rate": 30}, {"pokemon": {...}, "rate": 50}, ...]
+```
+
+<details>
+<summary>Output</summary>
+
+```
 [
   {'pokemon': {'species': 'Pikachu', 'ability': None, 'lv50': [32, 42], 'open_offset': [-18, -8], 'moves': ['Thunder Wave', 'Thunderbolt', 'Slam']}, 'rate': 60},
   {'pokemon': {'species': 'Electabuzz', 'ability': None, 'lv50': [32, 42], 'open_offset': [-18, -8], 'moves': ['ThunderPunch', 'Swift', 'Screech']}, 'rate': 20},
@@ -3639,21 +4899,42 @@ get_encounters(1, 3)  # [{"pokemon": {...}, "rate": 30}, {"pokemon": {...}, "rat
 
 </details>
 
-
 Encounter data includes species, ability, level ranges, and moves. Rounds cycle after 20 (round 21 = round 1, etc.).
 
 ### Floor Mechanics
 
+
 ```python
 from frontierbrain3.facilities.pyramid import FLOOR_TABLE, SLOT_RATES, get_floor_encounter_rate
+```
 
-# 12 encounter slots per floor, mapping to Pokemon IDs 1-8
+```python
 FLOOR_TABLE[1]  # [1, 1, 1, 1, 2, 2, 3, 3, 3, 4, 3, 4]
+```
 
-# Per-slot encounter rates (sum to 100%)
+<details>
+<summary>Output</summary>
+
+```
+[1, 1, 1, 1, 2, 2, 3, 3, 3, 4, 3, 4]
+```
+
+</details>
+
+```python
 SLOT_RATES  # [20, 20, 10, 10, 10, 10, 5, 5, 4, 4, 1, 1]
+```
 
-# Base encounter rate per step
+<details>
+<summary>Output</summary>
+
+```
+[20, 20, 10, 10, 10, 10, 5, 5, 4, 4, 1, 1]
+```
+
+</details>
+
+```python
 get_floor_encounter_rate(7)  # 8 (floor 7 has doubled rate)
 ```
 
@@ -3661,34 +4942,26 @@ get_floor_encounter_rate(7)  # 8 (floor 7 has doubled rate)
 <summary>Output</summary>
 
 ```
->>> FLOOR_TABLE[1]  # [1, 1, 1, 1, 2, 2, 3, 3, 3, 4, 3, 4]
-[1, 1, 1, 1, 2, 2, 3, 3, 3, 4, 3, 4]
->>> SLOT_RATES  # [20, 20, 10, 10, 10, 10, 5, 5, 4, 4, 1, 1]
-[20, 20, 10, 10, 10, 10, 5, 5, 4, 4, 1, 1]
->>> get_floor_encounter_rate(7)  # 8 (floor 7 has doubled rate)
 8
 ```
 
 </details>
 
-
 ### Items
+
 
 ```python
 from frontierbrain3.facilities.pyramid import get_items, get_pickup_items
+```
 
-# Floor items with per-floor rate weighting
+```python
 get_items(1, 3)  # [{"item": "Hyper Potion", "rate": 31}, ...]
-
-# Pickup ability items (same rates regardless of floor)
-get_pickup_items(1)  # [{"item": "Hyper Potion", "rate": 30}, ...]
 ```
 
 <details>
 <summary>Output</summary>
 
 ```
->>> get_items(1, 3)  # [{"item": "Hyper Potion", "rate": 31}, ...]
 [
   {'item': 'Hyper Potion', 'rate': 15},
   {'item': 'Fluffy Tail', 'rate': 15},
@@ -3700,7 +4973,18 @@ get_pickup_items(1)  # [{"item": "Hyper Potion", "rate": 30}, ...]
   {'item': 'Shell Bell', 'rate': 3},
   {'item': 'Max Revive', 'rate': 3},
 ]
->>> get_pickup_items(1)  # [{"item": "Hyper Potion", "rate": 30}, ...]
+```
+
+</details>
+
+```python
+get_pickup_items(1)  # [{"item": "Hyper Potion", "rate": 30}, ...]
+```
+
+<details>
+<summary>Output</summary>
+
+```
 [
   {'item': 'Hyper Potion', 'rate': 30},
   {'item': 'Fluffy Tail', 'rate': 10},
@@ -3716,7 +5000,6 @@ get_pickup_items(1)  # [{"item": "Hyper Potion", "rate": 30}, ...]
 ```
 
 </details>
-
 
 ---
 
