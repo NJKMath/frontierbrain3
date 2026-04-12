@@ -3,8 +3,9 @@
 Parse README.md, execute each Python code block, and output a new
 README with per-statement results in collapsible <details> sections.
 
-Each statement within a code block becomes its own fenced code block
-followed by a collapsible output section (if it produces output).
+Consecutive statements without output are merged into a single code
+block. When a statement produces output, it and all preceding quiet
+statements become one block with that output attached.
 
 Usage:
     python build_readme.py                          # README.md -> README_with_output.md
@@ -103,14 +104,12 @@ def _format_result(val) -> str:
 
 
 def _should_suppress(val) -> bool:
-    """Return True if this value's repr is just noise."""
     return type(val) in _SUPPRESS_TYPES
 
 
 # -- AST helpers ---------------------------------------------------------------
 
 def _source_lines(node: ast.AST, code_lines: list[str]) -> str:
-    """Get the full source text for a node (possibly multi-line)."""
     if not hasattr(node, "lineno"):
         return "?"
     start = node.lineno - 1
@@ -130,96 +129,85 @@ def _assign_targets(node: ast.Assign) -> list[str]:
     return names
 
 
-def _is_import(node: ast.AST) -> bool:
-    return isinstance(node, (ast.Import, ast.ImportFrom))
+# -- Single statement execution ------------------------------------------------
 
-
-# -- Statement grouping -------------------------------------------------------
-
-def _group_statements(tree: ast.Module, code_lines: list[str]) -> list[dict]:
+def _exec_node(node: ast.AST, namespace: dict) -> str | None:
     """
-    Group AST nodes into logical chunks. Consecutive imports merge into
-    one group. Everything else is its own group.
+    Execute one AST node. Returns output string if it produced something
+    worth showing, or None.
     """
-    groups = []
-    pending_imports = []
-
-    def flush_imports():
-        if pending_imports:
-            src = "\n".join(
-                _source_lines(n, code_lines) for n in pending_imports
-            )
-            groups.append({"nodes": list(pending_imports), "source": src, "kind": "imports"})
-            pending_imports.clear()
-
-    for node in tree.body:
-        if _is_import(node):
-            pending_imports.append(node)
-        else:
-            flush_imports()
-            src = _source_lines(node, code_lines)
-            if isinstance(node, ast.Expr):
-                groups.append({"nodes": [node], "source": src, "kind": "expr"})
-            elif isinstance(node, ast.Assign):
-                groups.append({"nodes": [node], "source": src, "kind": "assign"})
-            else:
-                groups.append({"nodes": [node], "source": src, "kind": "other"})
-
-    flush_imports()
-    return groups
-
-
-# -- Execution -----------------------------------------------------------------
-
-def _run_group(group: dict, namespace: dict) -> str | None:
-    """
-    Execute a statement group. Returns output string, or None if nothing
-    worth showing.
-    """
-    nodes = group["nodes"]
-    kind = group["kind"]
     output_parts = []
 
-    for node in nodes:
-        if kind == "imports" or kind == "other":
-            mod = ast.Module(body=[node], type_ignores=[])
-            ast.fix_missing_locations(mod)
-            captured = io.StringIO()
-            with redirect_stdout(captured):
-                exec(compile(mod, "<readme>", "exec"), namespace)
-            stdout = captured.getvalue()
-            if stdout.strip():
-                output_parts.append(stdout.rstrip())
+    if isinstance(node, ast.Expr):
+        expr_code = compile(ast.Expression(node.value), "<readme>", "eval")
+        captured = io.StringIO()
+        with redirect_stdout(captured):
+            result = eval(expr_code, namespace)
+        stdout = captured.getvalue()
+        if stdout.strip():
+            output_parts.append(stdout.rstrip())
+        if result is not None and not _should_suppress(result):
+            output_parts.append(_format_result(result))
 
-        elif kind == "expr":
-            expr_code = compile(ast.Expression(node.value), "<readme>", "eval")
-            captured = io.StringIO()
-            with redirect_stdout(captured):
-                result = eval(expr_code, namespace)
-            stdout = captured.getvalue()
-            if stdout.strip():
-                output_parts.append(stdout.rstrip())
-            if result is not None and not _should_suppress(result):
-                output_parts.append(_format_result(result))
+    elif isinstance(node, ast.Assign):
+        mod = ast.Module(body=[node], type_ignores=[])
+        ast.fix_missing_locations(mod)
+        captured = io.StringIO()
+        with redirect_stdout(captured):
+            exec(compile(mod, "<readme>", "exec"), namespace)
+        stdout = captured.getvalue()
+        if stdout.strip():
+            output_parts.append(stdout.rstrip())
+        names = _assign_targets(node)
+        for n in names:
+            if n in namespace and not n.startswith("_"):
+                val = namespace[n]
+                if not _should_suppress(val):
+                    output_parts.append(f"{n} = {_format_result(val)}")
 
-        elif kind == "assign":
-            mod = ast.Module(body=[node], type_ignores=[])
-            ast.fix_missing_locations(mod)
-            captured = io.StringIO()
-            with redirect_stdout(captured):
-                exec(compile(mod, "<readme>", "exec"), namespace)
-            stdout = captured.getvalue()
-            if stdout.strip():
-                output_parts.append(stdout.rstrip())
-            names = _assign_targets(node)
-            for n in names:
-                if n in namespace and not n.startswith("_"):
-                    val = namespace[n]
-                    if not _should_suppress(val):
-                        output_parts.append(f"{n} = {_format_result(val)}")
+    else:
+        mod = ast.Module(body=[node], type_ignores=[])
+        ast.fix_missing_locations(mod)
+        captured = io.StringIO()
+        with redirect_stdout(captured):
+            exec(compile(mod, "<readme>", "exec"), namespace)
+        stdout = captured.getvalue()
+        if stdout.strip():
+            output_parts.append(stdout.rstrip())
 
     combined = "\n".join(output_parts).strip()
     return combined if combined else None
+
+
+# -- Emit helpers --------------------------------------------------------------
+
+def _emit_block(output_lines: list, source_chunks: list[str],
+                result: str | None, is_first: bool):
+    """Emit one blockquote-wrapped code block with optional output."""
+    if not is_first:
+        output_lines.append("")
+        output_lines.append("<br>")
+
+    output_lines.append("")
+    output_lines.append("> ```python")
+    for chunk in source_chunks:
+        for line in chunk.splitlines():
+            output_lines.append(f"> {line}")
+    output_lines.append("> ```")
+
+    if result:
+        output_lines.append(">")
+        output_lines.append("> <details>")
+        output_lines.append("> <summary>Output</summary>")
+        output_lines.append(">")
+        output_lines.append("> ```")
+        for line in result.splitlines():
+            output_lines.append(f"> {line}")
+        output_lines.append("> ```")
+        output_lines.append(">")
+        output_lines.append("> </details>")
+
+    output_lines.append("")
 
 
 # -- Main builder --------------------------------------------------------------
@@ -248,7 +236,6 @@ def build_readme(input_path: str, output_path: str):
 
             code = "\n".join(code_lines)
             if not code.strip():
-                # Empty block, just emit it as-is
                 output_lines.append("```python")
                 output_lines.extend(code_lines)
                 output_lines.append("```")
@@ -265,41 +252,31 @@ def build_readme(input_path: str, output_path: str):
                 output_lines.append("```")
                 continue
 
-            groups = _group_statements(tree, code_lines)
+            # Execute statements one by one, accumulating source until output
+            pending_source = []
+            is_first_in_block = True
 
-            for gi, group in enumerate(groups):
-                src = group["source"]
+            for node in tree.body:
+                src = _source_lines(node, code_lines)
 
-                # Run it
                 try:
-                    result = _run_group(group, namespace)
+                    result = _exec_node(node, namespace)
                 except Exception as e:
                     result = f"ERROR: {type(e).__name__}: {e}"
 
-                # Separator between blocks (not before the first)
-                if gi > 0:
-                    output_lines.append("")
-                    output_lines.append("---")
+                pending_source.append(src)
 
-                # Emit as a blockquote-wrapped code block + optional output
-                output_lines.append("")
-                output_lines.append("> ```python")
-                for src_line in src.splitlines():
-                    output_lines.append(f"> {src_line}")
-                output_lines.append("> ```")
+                if result is not None:
+                    # Flush: emit accumulated source + this output
+                    _emit_block(output_lines, pending_source, result,
+                                is_first_in_block)
+                    pending_source = []
+                    is_first_in_block = False
 
-                if result:
-                    output_lines.append(">")
-                    output_lines.append("> <details>")
-                    output_lines.append("> <summary>Output</summary>")
-                    output_lines.append(">")
-                    output_lines.append("> ```")
-                    for res_line in result.splitlines():
-                        output_lines.append(f"> {res_line}")
-                    output_lines.append("> ```")
-                    output_lines.append(">")
-                    output_lines.append("> </details>")
-                output_lines.append("")
+            # Flush any remaining source without output
+            if pending_source:
+                _emit_block(output_lines, pending_source, None,
+                            is_first_in_block)
 
             print("done")
 
