@@ -16,26 +16,6 @@ cd frontierbrain3
 pip install -e .
 ```
 
-## Quick Start
-
-```python
-from frontierbrain3 import Database, CustomSet, calc_matchup, format_result
-
-db = Database()
-
-# Find all Water-types with Surf
-water_surfers = db.sets.hasType("Water").hasMove("surf")
-print(f"{len(water_surfers)} sets")  # SetCollection with .ids(), iteration, etc.
-
-# Damage calc: custom attacker vs frontier defender
-starmie = CustomSet("Starmie", nature="Timid", evs=[0,0,0,252,4,252],
-                    moves=["Surf", "Thunderbolt", "Ice Beam", "Psychic"])
-ttar = db.allSets("Tyranitar")._sets[0]
-
-result = calc_matchup(starmie, ttar, "Surf")
-print(format_result(result, "Surf"))
-```
-
 ## Package Structure
 
 ```
@@ -59,6 +39,26 @@ frontierbrain3/
     ├── pike.py          # Events, status, wild Pokemon, hints
     ├── pyramid.py       # Wild encounters, items, round themes
     └── arena.py         # Placeholder (no mechanics to model)
+```
+
+## Quick Start
+
+```python
+from frontierbrain3 import Database, CustomSet, calc_matchup, format_result
+
+db = Database()
+
+# Find all Water-types with Surf
+water_surfers = db.sets.hasType("Water").hasMove("surf")
+print(f"{len(water_surfers)} sets")  # SetCollection with .ids(), iteration, etc.
+
+# Damage calc: custom attacker vs frontier defender
+starmie = CustomSet("Starmie", nature="Timid", evs=[0,0,0,252,4,252],
+                    moves=["Surf", "Thunderbolt", "Ice Beam", "Psychic"])
+ttar = db.allSets("Tyranitar")._sets[0]
+
+result = calc_matchup(starmie, ttar, "Surf")
+print(format_result(result, "Surf"))
 ```
 
 ---

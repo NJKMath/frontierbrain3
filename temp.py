@@ -270,29 +270,31 @@ def build_readme(input_path: str, output_path: str):
             for group in groups:
                 src = group["source"]
 
-                # Emit the source as its own code block
-                output_lines.append("")
-                output_lines.append("```python")
-                output_lines.append(src)
-                output_lines.append("```")
-
                 # Run it
                 try:
                     result = _run_group(group, namespace)
                 except Exception as e:
                     result = f"ERROR: {type(e).__name__}: {e}"
 
-                # Emit output in a <details> block if any
+                # Emit as a blockquote-wrapped code block + optional output
+                output_lines.append("")
+                output_lines.append("> ```python")
+                for src_line in src.splitlines():
+                    output_lines.append(f"> {src_line}")
+                output_lines.append("> ```")
+
                 if result:
-                    output_lines.append("")
-                    output_lines.append("<details>")
-                    output_lines.append("<summary>Output</summary>")
-                    output_lines.append("")
-                    output_lines.append("```")
-                    output_lines.append(result)
-                    output_lines.append("```")
-                    output_lines.append("")
-                    output_lines.append("</details>")
+                    output_lines.append(">")
+                    output_lines.append("> <details>")
+                    output_lines.append("> <summary>Output</summary>")
+                    output_lines.append(">")
+                    output_lines.append("> ```")
+                    for res_line in result.splitlines():
+                        output_lines.append(f"> {res_line}")
+                    output_lines.append("> ```")
+                    output_lines.append(">")
+                    output_lines.append("> </details>")
+                output_lines.append("")
 
             print("done")
 
