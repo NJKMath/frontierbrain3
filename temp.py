@@ -62,7 +62,7 @@ def run_block_repl(code: str, namespace: dict) -> str:
                     for n in names:
                         if n in namespace and not n.startswith("_"):
                             output_parts.append(f">>> {src}")
-                            output_parts.append(f"  {n} = {_format_result(namespace[n])}")
+                            output_parts.append(f"{n} = {_format_result(namespace[n])}")
 
             else:
                 mod = ast.Module(body=[node], type_ignores=[])
@@ -104,33 +104,81 @@ def _assign_targets(node: ast.Assign) -> list[str]:
     return names
 
 
+MAX_LIST_ITEMS = 15    # show first/last N items for long lists
+MAX_DICT_ITEMS = 20   # show first N entries for long dicts
+
+
 def _format_result(val, max_width=120) -> str:
     """Format a value for display in the output block."""
-    # Round floats in dicts/lists
+    # Import here to avoid circular issues at module level
+    try:
+        from frontierbrain3.frontier_db import SetCollection, TrainerCollection
+        if isinstance(val, SetCollection):
+            ids = val.ids()
+            return f"{repr(val)}\n{_format_list(ids)}"
+        if isinstance(val, TrainerCollection):
+            names = val.names()
+            return f"{repr(val)}\n{_format_list(names)}"
+    except ImportError:
+        pass
+
     if isinstance(val, dict):
+        return _format_dict(val)
+    if isinstance(val, list):
+        return _format_list(val)
+    return _fmt_val(val)
+
+
+def _format_list(items: list, max_width=120) -> str:
+    """Format a list, truncating the middle if too long."""
+    if not items:
+        return "[]"
+    if len(items) <= MAX_LIST_ITEMS * 2:
+        r = repr(items)
+        if len(r) <= max_width:
+            return r
+        # Multi-line but still all items
+        lines = ["["]
+        for item in items:
+            lines.append(f"  {_fmt_val(item)},")
+        lines.append("]")
+        return "\n".join(lines)
+    # Truncate: show first N and last N
+    lines = [f"[  # {len(items)} items"]
+    for item in items[:MAX_LIST_ITEMS]:
+        lines.append(f"  {_fmt_val(item)},")
+    lines.append(f"  ... ({len(items) - MAX_LIST_ITEMS * 2} more) ...")
+    for item in items[-MAX_LIST_ITEMS:]:
+        lines.append(f"  {_fmt_val(item)},")
+    lines.append("]")
+    return "\n".join(lines)
+
+
+def _format_dict(d: dict) -> str:
+    """Format a dict, truncating if too many entries."""
+    if not d:
+        return "{}"
+    items = list(d.items())
+    if len(items) <= MAX_DICT_ITEMS:
         lines = ["{"]
-        for k, v in val.items():
+        for k, v in items:
             lines.append(f"  {repr(k)}: {_fmt_val(v)},")
         lines.append("}")
         return "\n".join(lines)
-    if isinstance(val, list) and len(val) > 0:
-        r = repr(val)
-        if len(r) <= max_width:
-            return r
-        # Multi-line for long lists
-        lines = ["["]
-        for item in val:
-            lines.append(f"  {repr(item)},")
-        lines.append("]")
-        return "\n".join(lines)
-    return _fmt_val(val)
+    lines = [f"{{  # {len(items)} entries"]
+    for k, v in items[:MAX_DICT_ITEMS]:
+        lines.append(f"  {repr(k)}: {_fmt_val(v)},")
+    lines.append(f"  ... ({len(items) - MAX_DICT_ITEMS} more) ...")
+    lines.append("}")
+    return "\n".join(lines)
 
 
 def _fmt_val(val) -> str:
     if isinstance(val, float):
-        return f"{val:.4f}" if val < 0.01 and val > 0 else f"{val:.2f}"
+        return f"{val:.4f}" if 0 < val < 0.01 else f"{val:.2f}"
+    if isinstance(val, list) and len(val) > MAX_LIST_ITEMS * 2:
+        return f"[{repr(val[0])}, {repr(val[1])}, ... {len(val)} items ... {repr(val[-2])}, {repr(val[-1])}]"
     r = repr(val)
-    # Truncate very long reprs
     r = re.sub(r'(\d+\.\d{2})\d+', r'\1', r)
     return r
 
