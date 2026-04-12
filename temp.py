@@ -49,11 +49,15 @@ def _first(pokemon):
     sets = db.allSets(pokemon)._sets
     return sets[0] if sets else None
 
+def _nth(pokemon, n):
+    sets = db.allSets(pokemon)._sets
+    return sets[n - 1] if len(sets) >= n else None
+
 META = _first("Metagross")
 TTAR = _first("Tyranitar")
 LAX  = _first("Snorlax")
 ZAM  = _first("Alakazam")
-SALA = _first("Salamence")
+SALA4 = _nth("Salamence", 4)
 GENGAR = _first("Gengar")
 STEELIX = _first("Steelix")
 SWAM = _first("Swampert")
@@ -124,7 +128,7 @@ def show(code, result):
 
 def show_matchup(attacker_label, defender_label, move_name, result):
     """Display a damage calc result with context."""
-    print(f">>> calc_matchup({attacker_label}, {defender_label}, \"{move_name}\")")
+    print(f'>>> calc_matchup({attacker_label}, {defender_label}, "{move_name}")')
     print(format_result(result, move_name))
     print()
 
@@ -192,6 +196,8 @@ def cat_database():
 def cat_stats():
     def ex_calc_stats():
         print("# Stat calculations at different IVs/levels\n")
+        show('ZAM = db.allSets("Alakazam")._sets[0]', ZAM)
+        show('LAX = db.allSets("Snorlax")._sets[0]', LAX)
         show('calc_stats(ZAM)',
              calc_stats(ZAM))
         show('calc_stats(ZAM, ivs=15)',
@@ -226,20 +232,24 @@ def cat_stats():
     def ex_paste():
         print("# Pokepaste import\n")
         paste = (
-            "BLEACH (Skarmory) (M) @ Chesto Berry\n"
-            "Ability: Sturdy\nLevel: 50\n"
-            "EVs: 252 HP / 140 Def / 116 SpD\nBold Nature\n"
-            "IVs: 0 Atk\n- Protect\n- Rest\n- Whirlwind\n- Torment\n\n"
-            "NO HALO (Latios) @ Lum Berry\n"
-            "Ability: Levitate\nLevel: 50\n"
-            "EVs: 172 HP / 108 Def / 4 SpA / 4 SpD / 220 Spe\nTimid Nature\n"
-            "IVs: 0 Atk\n- Substitute\n- Calm Mind\n- Recover\n- Dragon Claw"
+            "Flygon @ Choice Band\n"
+            "Ability: Levitate\n"
+            "EVs: 4 HP / 252 Atk / 252 Spe\n"
+            "Jolly Nature\n"
+            "- Earthquake\n"
+            "- Rock Slide\n"
+            "- Fire Blast\n"
+            "- Return"
         )
-        team = from_paste(paste)
-        print('>>> team = from_paste(paste)')
-        for name, cs in team.items():
-            print(f"  {name}: {cs}")
+        print("Input paste:")
+        for line in paste.splitlines():
+            print(f"  {line}")
         print()
+        team = from_paste(paste)
+        show('from_paste(paste)', team)
+        for name, cs in team.items():
+            show(f'  {name}', cs)
+            show(f'  {name}.get_stats()', cs.get_stats())
 
     return [ex_calc_stats, ex_stat_filter, ex_custom_set, ex_speed_compare, ex_paste]
 
@@ -249,20 +259,17 @@ def cat_stats():
 def cat_dmg_basics():
     def ex_frontier_vs_frontier():
         print("# Frontier set vs frontier set: Metagross-1 vs Tyranitar-1\n")
-        for move in ["Earthquake", "Meteor Mash"]:
-            res = calc_matchup(META, TTAR, move)
-            show_matchup("META", "TTAR", move, res)
+        show('META = db.allSets("Metagross")._sets[0]', META)
+        show('TTAR = db.allSets("Tyranitar")._sets[0]', TTAR)
+        res = calc_matchup(META, TTAR, "Meteor Mash")
+        show_matchup("META", "TTAR", "Meteor Mash", res)
 
     def ex_custom_vs_frontier():
         print("# CustomSet vs frontier set: Timid 252 SpA Starmie vs Snorlax-1\n")
+        show('STARMIE', STARMIE)
         for move in ["Surf", "Thunderbolt"]:
             res = calc_matchup(STARMIE, LAX, move)
             show_matchup("STARMIE", "LAX", move, res)
-
-    def ex_super_effective():
-        print("# Super effective: Starmie Surf vs Tyranitar (4x SE)\n")
-        res = calc_matchup(STARMIE, TTAR, "Surf")
-        show_matchup("STARMIE", "TTAR", "Surf", res)
 
     def ex_lvl50():
         print("# Level 50, 15 IVs: Metagross-1 vs Swampert-1\n")
@@ -274,15 +281,15 @@ def cat_dmg_basics():
 
     def ex_raw_api():
         print("# Raw API: damage_rolls + ko_chance\n")
-        rolls = damage_rolls(META, TTAR, "Earthquake")
-        show('damage_rolls(META, TTAR, "Earthquake")', rolls)
+        rolls = damage_rolls(META, TTAR, "Meteor Mash")
+        show('damage_rolls(META, TTAR, "Meteor Mash")', rolls)
         hp = calc_stats(TTAR)["hp"]
         show('calc_stats(TTAR)["hp"]', hp)
         kos = ko_chance(rolls, hp)
         show('ko_chance(rolls, hp)', kos)
 
     return [ex_frontier_vs_frontier, ex_custom_vs_frontier,
-            ex_super_effective, ex_lvl50, ex_raw_api]
+            ex_lvl50, ex_raw_api]
 
 
 # -- Category 4: Damage Calculator: Advanced ----------------------------------
@@ -298,25 +305,21 @@ def cat_dmg_advanced():
         print()
 
     def ex_screens():
-        print("# Reflect: Metagross-1 EQ vs Steelix-1\n")
-        res = calc_matchup(META, STEELIX, "Earthquake")
-        show_matchup("META", "STEELIX", "Earthquake", res)
-        print('>>> calc_matchup(META, STEELIX, "Earthquake", field=Field(reflect=True))')
-        res = calc_matchup(META, STEELIX, "Earthquake", field=Field(reflect=True))
-        print(format_result(res, "Earthquake (Reflect)"))
+        print("# Light Screen: Starmie Surf vs Steelix-1\n")
+        res = calc_matchup(STARMIE, STEELIX, "Surf")
+        show_matchup("STARMIE", "STEELIX", "Surf", res)
+        print('>>> calc_matchup(STARMIE, STEELIX, "Surf", field=Field(light_screen=True))')
+        res = calc_matchup(STARMIE, STEELIX, "Surf", field=Field(light_screen=True))
+        print(format_result(res, "Surf (Light Screen)"))
         print()
 
-    def ex_choice_band():
-        print("# Choice Band: Adamant CB Heracross Megahorn vs Alakazam-1\n")
-        res = calc_matchup(HERA, ZAM, "Megahorn")
-        show_matchup("HERA", "ZAM", "Megahorn", res)
-
     def ex_stat_boosts():
-        print("# Stat boosts: Salamence-1 EQ vs Tyranitar-1\n")
-        res = calc_matchup(SALA, TTAR, "Earthquake")
-        show_matchup("SALA", "TTAR", "Earthquake", res)
-        print('>>> calc_matchup(SALA, TTAR, "Earthquake", atk_boosts={"atk": 1})')
-        res = calc_matchup(SALA, TTAR, "Earthquake", atk_boosts={"atk": 1})
+        print("# Stat boosts: Salamence-4 EQ vs Tyranitar-1 (Dragon Dance)\n")
+        show('SALA4 = db.allSets("Salamence")._sets[3]', SALA4)
+        res = calc_matchup(SALA4, TTAR, "Earthquake")
+        show_matchup("SALA4", "TTAR", "Earthquake", res)
+        print('>>> calc_matchup(SALA4, TTAR, "Earthquake", atk_boosts={"atk": 1})')
+        res = calc_matchup(SALA4, TTAR, "Earthquake", atk_boosts={"atk": 1})
         print(format_result(res, "Earthquake (+1 Atk)"))
         print()
 
@@ -330,13 +333,13 @@ def cat_dmg_advanced():
         print()
 
     def ex_crit_ignores_boosts():
-        print("# Crit ignoring +2 Def: Salamence-1 EQ vs Snorlax-1\n")
-        print('>>> calc_matchup(SALA, LAX, "Earthquake", def_boosts={"def": 2})')
-        res = calc_matchup(SALA, LAX, "Earthquake", def_boosts={"def": 2})
+        print("# Crit ignoring +2 Def: Salamence-4 EQ vs Snorlax-1\n")
+        print('>>> calc_matchup(SALA4, LAX, "Earthquake", def_boosts={"def": 2})')
+        res = calc_matchup(SALA4, LAX, "Earthquake", def_boosts={"def": 2})
         print(format_result(res, "Earthquake vs +2 Def"))
         print()
-        print('>>> calc_matchup(SALA, LAX, "Earthquake", def_boosts={"def": 2}, critical=True)')
-        res = calc_matchup(SALA, LAX, "Earthquake", def_boosts={"def": 2}, critical=True)
+        print('>>> calc_matchup(SALA4, LAX, "Earthquake", def_boosts={"def": 2}, critical=True)')
+        res = calc_matchup(SALA4, LAX, "Earthquake", def_boosts={"def": 2}, critical=True)
         print(format_result(res, "Earthquake vs +2 Def (crit ignores)"))
         print()
 
@@ -358,7 +361,7 @@ def cat_dmg_advanced():
         res = calc_matchup(META, GENGAR, "Earthquake")
         show_matchup("META", "GENGAR", "Earthquake", res)
 
-    return [ex_weather, ex_screens, ex_choice_band, ex_stat_boosts,
+    return [ex_weather, ex_screens, ex_stat_boosts,
             ex_crit, ex_crit_ignores_boosts, ex_leftovers, ex_immunity]
 
 
@@ -446,13 +449,10 @@ def cat_special_moves():
 # -- Category 6: OHKO Filters -------------------------------------------------
 
 def cat_ohko():
-    def ex_will_ohko():
-        print("# willOHKO: guaranteed OHKO (min roll kills)\n")
+    def ex_will_can_ohko():
+        print("# willOHKO vs canOHKO: guaranteed vs possible\n")
         show('db.sets.willOHKO(ZAM)', db.sets.willOHKO(ZAM))
-
-    def ex_can_ohko():
-        print("# canOHKO: can OHKO (at least one roll kills)\n")
-        show('db.sets.canOHKO(LAX)', db.sets.canOHKO(LAX))
+        show('db.sets.canOHKO(ZAM)', db.sets.canOHKO(ZAM))
 
     def ex_dies_to():
         print("# diesTo: Normal-types that Metagross-1 guaranteed OHKOs\n")
@@ -475,15 +475,19 @@ def cat_ohko():
         show('db.sets.diesTo(META, atk_boosts={"atk": 1})',
              db.sets.diesTo(META, atk_boosts={"atk": 1}))
 
-    def ex_with_ivs():
-        print("# OHKO with different IVs for attacker/defender\n")
+    def ex_with_ivs_and_acc():
+        print("# OHKO with different IVs\n")
         show('db.sets.diesTo(META, atk_ivs=31, def_ivs=3)',
              db.sets.diesTo(META, atk_ivs=31, def_ivs=3))
+        print()
+        print("# willOHKO with accuracy (excludes imperfect-accuracy moves)\n")
+        show('db.sets.willOHKO(TTAR)',
+             db.sets.willOHKO(TTAR))
         show('db.sets.willOHKO(TTAR, include_acc=True)',
              db.sets.willOHKO(TTAR, include_acc=True))
 
-    return [ex_will_ohko, ex_can_ohko, ex_dies_to,
-            ex_can_die_to, ex_negated, ex_with_boosts, ex_with_ivs]
+    return [ex_will_can_ohko, ex_dies_to,
+            ex_can_die_to, ex_negated, ex_with_boosts, ex_with_ivs_and_acc]
 
 
 # -- Category 7: Battle Tower -------------------------------------------------

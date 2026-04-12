@@ -92,6 +92,12 @@ _MAGNITUDE_TABLE = [
     (10, 1), (30, 2), (50, 4), (70, 6), (90, 4), (110, 2), (150, 1),
 ]
 
+# Moves whose base power is calculated at runtime (safe to pass power=0 in dicts)
+_VARIABLE_POWER_MOVES = frozenset({
+    "flail", "reversal", "eruption", "waterspout",
+    "lowkick", "grassknot", "facade", "smellingsalt",
+})
+
 
 # -- Move data loading ---------------------------------------------------------
 
@@ -405,7 +411,7 @@ def damage_rolls(
             return [0] * 16
         power = 100 * stockpile_count
 
-    if power == 0 and not is_spit_up:
+    if power == 0 and not is_spit_up and move_name not in _VARIABLE_POWER_MOVES:
         return [0] * 16
 
     # -- Variable base power ---------------------------------------------------
