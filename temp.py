@@ -267,7 +267,7 @@ def build_readme(input_path: str, output_path: str):
 
             groups = _group_statements(tree, code_lines)
 
-            for group in groups:
+            for gi, group in enumerate(groups):
                 src = group["source"]
 
                 # Run it
@@ -275,6 +275,11 @@ def build_readme(input_path: str, output_path: str):
                     result = _run_group(group, namespace)
                 except Exception as e:
                     result = f"ERROR: {type(e).__name__}: {e}"
+
+                # Separator between blocks (not before the first)
+                if gi > 0:
+                    output_lines.append("")
+                    output_lines.append("---")
 
                 # Emit as a blockquote-wrapped code block + optional output
                 output_lines.append("")
