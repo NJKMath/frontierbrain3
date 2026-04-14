@@ -21,8 +21,9 @@ import sys
 from contextlib import redirect_stdout
 from pathlib import Path
 
-MAX_LIST_ITEMS = 15
-MAX_DICT_ITEMS = 20
+MAX_LIST_ITEMS = 800
+MAX_DICT_ITEMS = 50
+LINE_WIDTH = 100  # wrap long inline lists at this width
 
 # Types whose repr is just noise (memory addresses, etc.)
 _SUPPRESS_TYPES = set()
@@ -40,35 +41,53 @@ except ImportError:
 def _fmt_val(val) -> str:
     if isinstance(val, float):
         return f"{val:.4f}" if 0 < val < 0.01 else f"{val:.2f}"
-    if isinstance(val, list) and len(val) > MAX_LIST_ITEMS * 2:
-        return (f"[{repr(val[0])}, {repr(val[1])}, "
-                f"... {len(val)} items ... "
-                f"{repr(val[-2])}, {repr(val[-1])}]")
+    if isinstance(val, list) and len(repr(val)) > LINE_WIDTH:
+        return _format_list(val)
     r = repr(val)
     r = re.sub(r'(\d+\.\d{2})\d+', r'\1', r)
     return r
 
 
-def _format_list(items: list, max_width=120) -> str:
+def _format_list_inline(items: list, max_items: int = MAX_LIST_ITEMS,
+                        width: int = LINE_WIDTH) -> str:
+    """Format a list with items wrapped across lines to fill available width."""
     if not items:
         return "[]"
-    if len(items) <= MAX_LIST_ITEMS * 2:
-        r = repr(items)
-        if len(r) <= max_width:
-            return r
-        lines = ["["]
-        for item in items:
-            lines.append(f"  {_fmt_val(item)},")
-        lines.append("]")
-        return "\n".join(lines)
-    lines = [f"[  # {len(items)} items"]
-    for item in items[:MAX_LIST_ITEMS]:
-        lines.append(f"  {_fmt_val(item)},")
-    lines.append(f"  ... ({len(items) - MAX_LIST_ITEMS * 2} more) ...")
-    for item in items[-MAX_LIST_ITEMS:]:
-        lines.append(f"  {_fmt_val(item)},")
+    total = len(items)
+    truncated = total > max_items
+    show_items = items[:max_items] if truncated else items
+
+    # Build comma-separated items, wrapping at width
+    lines = ["["]
+    current_line = "  "
+    for i, item in enumerate(show_items):
+        piece = repr(item)
+        if i < len(show_items) - 1 or truncated:
+            piece += ","
+        if len(current_line) + len(piece) + 1 > width and current_line.strip():
+            lines.append(current_line)
+            current_line = "  " + piece
+        else:
+            if current_line.strip():
+                current_line += " " + piece
+            else:
+                current_line += piece
+    if current_line.strip():
+        lines.append(current_line)
+    if truncated:
+        lines.append(f"  ... and {total - max_items} more")
     lines.append("]")
     return "\n".join(lines)
+
+
+def _format_list(items: list, max_width=120) -> str:
+    """Format a list. Short lists go on one line, longer ones wrap."""
+    if not items:
+        return "[]"
+    r = repr(items)
+    if len(r) <= max_width:
+        return r
+    return _format_list_inline(items)
 
 
 def _format_dict(d: dict) -> str:
@@ -92,10 +111,10 @@ def _format_dict(d: dict) -> str:
 def _format_result(val) -> str:
     if SetCollection is not None and isinstance(val, SetCollection):
         ids = val.ids()
-        return f"{repr(val)}\n{_format_list(ids)}"
+        return f"{repr(val)}\n{_format_list_inline(ids)}"
     if TrainerCollection is not None and isinstance(val, TrainerCollection):
         names = val.names()
-        return f"{repr(val)}\n{_format_list(names)}"
+        return f"{repr(val)}\n{_format_list_inline(names)}"
     if isinstance(val, dict):
         return _format_dict(val)
     if isinstance(val, list):
