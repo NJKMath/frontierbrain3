@@ -16,14 +16,18 @@ Usage:
 import argparse
 import ast
 import io
+import os
 import re
 import sys
 from contextlib import redirect_stdout
 from pathlib import Path
 
-MAX_LIST_ITEMS = 800
 MAX_DICT_ITEMS = 50
-LINE_WIDTH = 100  # wrap long inline lists at this width
+
+try:
+    LINE_WIDTH = os.get_terminal_size().columns
+except (AttributeError, ValueError, OSError):
+    LINE_WIDTH = 150
 
 # Types whose repr is just noise (memory addresses, etc.)
 _SUPPRESS_TYPES = set()
@@ -48,21 +52,19 @@ def _fmt_val(val) -> str:
     return r
 
 
-def _format_list_inline(items: list, max_items: int = MAX_LIST_ITEMS,
-                        width: int = LINE_WIDTH) -> str:
+def _format_list_inline(items: list, width: int = None) -> str:
     """Format a list with items wrapped across lines to fill available width."""
+    if width is None:
+        width = LINE_WIDTH
     if not items:
         return "[]"
-    total = len(items)
-    truncated = total > max_items
-    show_items = items[:max_items] if truncated else items
 
     # Build comma-separated items, wrapping at width
     lines = ["["]
     current_line = "  "
-    for i, item in enumerate(show_items):
+    for i, item in enumerate(items):
         piece = repr(item)
-        if i < len(show_items) - 1 or truncated:
+        if i < len(items) - 1:
             piece += ","
         if len(current_line) + len(piece) + 1 > width and current_line.strip():
             lines.append(current_line)
@@ -74,8 +76,6 @@ def _format_list_inline(items: list, max_items: int = MAX_LIST_ITEMS,
                 current_line += piece
     if current_line.strip():
         lines.append(current_line)
-    if truncated:
-        lines.append(f"  ... and {total - max_items} more")
     lines.append("]")
     return "\n".join(lines)
 

@@ -227,13 +227,14 @@ class CustomSet:
         return self.get_stats()["spe"]
 
     def __repr__(self):
-        parts = [
-            self.pokemon,
-            f"nature={self.nature}",
-            f"evs={self.evs}",
-            f"ivs={self.ivs}",
-            f"level={self.level}",
-        ]
+        parts = [self.pokemon]
+        if self._raw_stats:
+            parts.append(f"stats={self._raw_stats}")
+        else:
+            parts.append(f"nature={self.nature}")
+            parts.append(f"evs={self.evs}")
+            parts.append(f"ivs={self.ivs}")
+        parts.append(f"level={self.level}")
         if self.item and self.item != "None":
             parts.append(f"item={self.item}")
         if self.ability:

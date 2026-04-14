@@ -255,7 +255,7 @@ db.sets.canOHKO(lax, min_chance=0.5)
 
 # Normal-types that Metagross-1 guaranteed OHKOs (each set is the defender)
 meta = db.allSets("Metagross")._sets[0]
-db.sets.hasType("Normal").diesTo(meta)
+db.sets.hasType("Normal").willDieTo(meta)
 
 # Sets that a custom Starmie can OHKO on at least one roll
 starmie = CustomSet("Starmie", nature="Timid", evs=[0,0,0,252,4,252],
@@ -267,7 +267,7 @@ Specify IVs for the attacker and defender independently, useful for analyzing pl
 
 ```python
 # Frontier sets at 3 IVs that a 31 IV Metagross-1 guaranteed OHKOs
-db.sets.diesTo(meta, atk_ivs=31, def_ivs=3)
+db.sets.willDieTo(meta, atk_ivs=31, def_ivs=3)
 
 # Frontier sets at 31 IVs that can OHKO a 15 IV Alakazam-1
 db.sets.canOHKO(zam, atk_ivs=31, def_ivs=15)
@@ -279,7 +279,7 @@ Other optional parameters are passed through to the damage calculator:
 from frontierbrain3 import Field
 
 # With stat boosts
-db.sets.diesTo(meta, atk_boosts={"atk": 1})
+db.sets.willDieTo(meta, atk_boosts={"atk": 1})
 
 # With weather
 ttar = db.allSets("Tyranitar")._sets[0]

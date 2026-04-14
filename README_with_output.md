@@ -56,16 +56,15 @@ frontierbrain3/
 > ```
 > water_surfers = SetCollection(65 sets)
 > [
->   'Wartortle-2', 'Sealeo-2', 'Pelipper-2', 'Sharpedo-2', 'Mantine-2', 'Huntail-2', 'Gorebyss-2',
->   'Politoed-2', 'Lanturn-1', 'Ludicolo-1', 'Slowbro-1', 'Wailord-1', 'Vaporeon-1', 'Feraligatr-1',
->   'Lapras-1', 'Lanturn-2', 'Whiscash-2', 'Ludicolo-2', 'Slowbro-2', 'Slowking-2', 'Golduck-2',
->   'Tentacruel-2', 'Vaporeon-2', 'Feraligatr-2', 'Lapras-2', 'Swampert-2', 'Kingdra-2', 'Milotic-2',
->   'Whiscash-3', 'Slowbro-3', 'Slowking-3', 'Tentacruel-3', 'Starmie-3', 'Vaporeon-3', 'Blastoise-3',
->   'Walrein-3', 'Swampert-3', 'Gyarados-3', 'Milotic-3', 'Lanturn-4', 'Whiscash-4', 'Quagsire-4',
->   'Dewgong-4', 'Slowbro-4', 'Slowking-4', 'Golduck-4', 'Wailord-4', 'Vaporeon-4', 'Blastoise-4',
->   'Walrein-4', 'Lapras-4', 'Swampert-4', 'Milotic-4', 'Suicune-1', 'Suicune-3', 'Suicune-4',
->   'Starmie-5', 'Starmie-6', 'Starmie-8', 'Suicune-5', 'Suicune-6', 'Swampert-TuckerSilver',
->   'Swampert-TuckerGold', 'Suicune-SpenserGold', 'Milotic-LucySilver'
+>   'Wartortle-2', 'Sealeo-2', 'Pelipper-2', 'Sharpedo-2', 'Mantine-2', 'Huntail-2', 'Gorebyss-2', 'Politoed-2',
+>   'Lanturn-1', 'Ludicolo-1', 'Slowbro-1', 'Wailord-1', 'Vaporeon-1', 'Feraligatr-1', 'Lapras-1', 'Lanturn-2',
+>   'Whiscash-2', 'Ludicolo-2', 'Slowbro-2', 'Slowking-2', 'Golduck-2', 'Tentacruel-2', 'Vaporeon-2', 'Feraligatr-2',
+>   'Lapras-2', 'Swampert-2', 'Kingdra-2', 'Milotic-2', 'Whiscash-3', 'Slowbro-3', 'Slowking-3', 'Tentacruel-3',
+>   'Starmie-3', 'Vaporeon-3', 'Blastoise-3', 'Walrein-3', 'Swampert-3', 'Gyarados-3', 'Milotic-3', 'Lanturn-4',
+>   'Whiscash-4', 'Quagsire-4', 'Dewgong-4', 'Slowbro-4', 'Slowking-4', 'Golduck-4', 'Wailord-4', 'Vaporeon-4',
+>   'Blastoise-4', 'Walrein-4', 'Lapras-4', 'Swampert-4', 'Milotic-4', 'Suicune-1', 'Suicune-3', 'Suicune-4', 'Starmie-5',
+>   'Starmie-6', 'Starmie-8', 'Suicune-5', 'Suicune-6', 'Swampert-TuckerSilver', 'Swampert-TuckerGold',
+>   'Suicune-SpenserGold', 'Milotic-LucySilver'
 > ]
 > ```
 >
@@ -359,7 +358,7 @@ The `stats` parameter lets you override calculated stats with exact values if ne
 > <summary>Output</summary>
 >
 > ```
-> custom = CustomSet(Flygon, nature=hardy, evs=[0, 0, 0, 0, 0, 0], ivs=[31, 31, 31, 31, 31, 31], level=100, ability=levitate)
+> custom = CustomSet(Flygon, stats={'hp': 302, 'atk': 299, 'def': 196, 'spa': 176, 'spd': 196, 'spe': 328}, level=100, ability=levitate)
 > ```
 >
 > </details>
@@ -557,122 +556,119 @@ Import teams from [Pokepaste](https://pokepast.es/) format:
 > ```
 > SetCollection(918 sets)
 > [
->   'Sunkern-1', 'Azurill-1', 'Caterpie-1', 'Weedle-1', 'Wurmple-1', 'Ralts-1', 'Magikarp-1',
->   'Feebas-1', 'Metapod-1', 'Kakuna-1', 'Pichu-1', 'Silcoon-1', 'Cascoon-1', 'Igglybuff-1',
->   'Wooper-1', 'Tyrogue-1', 'Sentret-1', 'Cleffa-1', 'Seedot-1', 'Lotad-1', 'Poochyena-1',
->   'Shedinja-1', 'Makuhita-1', 'Whismur-1', 'Zigzagoon-1', 'Zubat-1', 'Togepi-1', 'Spinarak-1',
->   'Marill-1', 'Hoppip-1', 'Slugma-1', 'Swinub-1', 'Smeargle-1', 'Pidgey-1', 'Rattata-1', 'Wynaut-1',
->   'Skitty-1', 'Spearow-1', 'Hoothoot-1', 'Diglett-1', 'Ledyba-1', 'Nincada-1', 'Surskit-1',
->   'Jigglypuff-1', 'Taillow-1', 'Wingull-1', 'NidoranM-1', 'NidoranF-1', 'Kirlia-1', 'Mareep-1',
->   'Meditite-1', 'Slakoth-1', 'Paras-1', 'Ekans-1', 'Ditto-1', 'Barboach-1', 'Meowth-1', 'Pineco-1',
->   'Trapinch-1', 'Spheal-1', 'Horsea-1', 'Shroomish-1', 'Shuppet-1', 'Duskull-1', 'Electrike-1',
->   'Vulpix-1', 'Pikachu-1', 'Sandshrew-1', 'Poliwag-1', 'Bellsprout-1', 'Geodude-1', 'Dratini-1',
->   'Snubbull-1', 'Remoraid-1', 'Larvitar-1', 'Baltoy-1', 'Snorunt-1', 'Bagon-1', 'Beldum-1',
->   'Gulpin-1', 'Venonat-1', 'Mankey-1', 'Machop-1', 'Shellder-1', 'Smoochum-1', 'Numel-1',
->   'Carvanha-1', 'Corphish-1', 'Charmander-1', 'Cyndaquil-1', 'Abra-1', 'Doduo-1', 'Gastly-1',
->   'Swablu-1', 'Treecko-1', 'Torchic-1', 'Mudkip-1', 'Squirtle-1', 'Totodile-1', 'Slowpoke-1',
->   'Bulbasaur-1', 'Chikorita-1', 'Oddish-1', 'Psyduck-1', 'Cubone-1', 'Goldeen-1', 'Natu-1',
->   'Clefairy-1', 'Magnemite-1', 'Seel-1', 'Grimer-1', 'Krabby-1', 'Exeggcute-1', 'Eevee-1',
->   'Drowzee-1', 'Voltorb-1', 'Chinchou-1', 'Teddiursa-1', 'Delibird-1', 'Houndour-1', 'Phanpy-1',
->   'Spoink-1', 'Aron-1', 'Luvdisc-1', 'Tentacool-1', 'Cacnea-1', 'Unown-1', 'Koffing-1', 'Staryu-1',
->   'Skiploom-1', 'Nuzleaf-1', 'Lombre-1', 'Vibrava-1', 'Rhyhorn-1', 'Clamperl-1', 'Pidgeotto-1',
->   'Growlithe-1', "Farfetch'd-1", 'Omanyte-1', 'Kabuto-1', 'Lileep-1', 'Anorith-1', 'Aipom-1',
->   'Elekid-1', 'Loudred-1', 'Spinda-1', 'Nidorina-1', 'Nidorino-1', 'Flaaffy-1', 'Magby-1',
->   'Nosepass-1', 'Corsola-1', 'Mawile-1', 'Butterfree-1', 'Beedrill-1', 'Poliwhirl-1', 'Onix-1',
->   'Beautifly-1', 'Dustox-1', 'Ledian-1', 'Ariados-1', 'Yanma-1', 'Delcatty-1', 'Sableye-1',
->   'Lickitung-1', 'Weepinbell-1', 'Graveler-1', 'Gloom-1', 'Porygon-1', 'Kadabra-1', 'Wailmer-1',
->   'Roselia-1', 'Volbeat-1', 'Illumise-1', 'Ivysaur-1', 'Charmeleon-1', 'Wartortle-1', 'Parasect-1',
->   'Machoke-1', 'Haunter-1', 'Bayleef-1', 'Quilava-1', 'Croconaw-1', 'Togetic-1', 'Murkrow-1',
->   'Wobbuffet-1', 'Plusle-1', 'Minun-1', 'Grovyle-1', 'Combusken-1', 'Marshtomp-1', 'Ponyta-1',
->   'Azumarill-1', 'Sudowoodo-1', 'Magcargo-1', 'Pupitar-1', 'Sealeo-1', 'Raticate-1', 'Masquerain-1',
->   'Furret-1', 'Dunsparce-1', 'Dragonair-1', 'Mightyena-1', 'Linoone-1', 'Castform-1', 'Shelgon-1',
->   'Metang-1', 'Wigglytuff-1', 'Sunflora-1', 'Chimecho-1', 'Gligar-1', 'Qwilfish-1', 'Sneasel-1',
->   'Pelipper-1', 'Swellow-1', 'Lairon-1', 'Tangela-1', 'Arbok-1', 'Persian-1', 'Seadra-1',
->   'Kecleon-1', 'Vigoroth-1', 'Lunatone-1', 'Solrock-1', 'Noctowl-1', 'Sandslash-1', 'Venomoth-1',
->   'Chansey-1', 'Seaking-1', 'Jumpluff-1', 'Piloswine-1', 'Golbat-1', 'Primeape-1', 'Hitmonlee-1',
->   'Hitmonchan-1', 'Girafarig-1', 'Hitmontop-1', 'Banette-1', 'Ninjask-1', 'Seviper-1', 'Zangoose-1',
->   'Camerupt-1', 'Sharpedo-1', 'Tropius-1', 'Magneton-1', 'Mantine-1', 'Stantler-1', 'Absol-1',
->   'Swalot-1', 'Crawdaunt-1', 'Pidgeot-1', 'Grumpig-1', 'Torkoal-1', 'Kingler-1', 'Cacturne-1',
->   'Bellossom-1', 'Octillery-1', 'Huntail-1', 'Gorebyss-1', 'Relicanth-1', 'Omastar-1', 'Kabutops-1',
->   'Poliwrath-1', 'Scyther-1', 'Pinsir-1', 'Politoed-1', 'Cloyster-1', 'Delcatty-2', 'Sableye-2',
->   'Lickitung-2', 'Weepinbell-2', 'Graveler-2', 'Gloom-2', 'Porygon-2', 'Kadabra-2', 'Wailmer-2',
->   'Roselia-2', 'Volbeat-2', 'Illumise-2', 'Ivysaur-2', 'Charmeleon-2', 'Wartortle-2', 'Parasect-2',
->   'Machoke-2', 'Haunter-2', 'Bayleef-2', 'Quilava-2', 'Croconaw-2', 'Togetic-2', 'Murkrow-2',
->   'Wobbuffet-2', 'Plusle-2', 'Minun-2', 'Grovyle-2', 'Combusken-2', 'Marshtomp-2', 'Ponyta-2',
->   'Azumarill-2', 'Sudowoodo-2', 'Magcargo-2', 'Pupitar-2', 'Sealeo-2', 'Raticate-2', 'Masquerain-2',
->   'Furret-2', 'Dunsparce-2', 'Dragonair-2', 'Mightyena-2', 'Linoone-2', 'Castform-2', 'Shelgon-2',
->   'Metang-2', 'Wigglytuff-2', 'Sunflora-2', 'Chimecho-2', 'Gligar-2', 'Qwilfish-2', 'Sneasel-2',
->   'Pelipper-2', 'Swellow-2', 'Lairon-2', 'Tangela-2', 'Arbok-2', 'Persian-2', 'Seadra-2',
->   'Kecleon-2', 'Vigoroth-2', 'Lunatone-2', 'Solrock-2', 'Noctowl-2', 'Sandslash-2', 'Venomoth-2',
->   'Chansey-2', 'Seaking-2', 'Jumpluff-2', 'Piloswine-2', 'Golbat-2', 'Primeape-2', 'Hitmonlee-2',
->   'Hitmonchan-2', 'Girafarig-2', 'Hitmontop-2', 'Banette-2', 'Ninjask-2', 'Seviper-2', 'Zangoose-2',
->   'Camerupt-2', 'Sharpedo-2', 'Tropius-2', 'Magneton-2', 'Mantine-2', 'Stantler-2', 'Absol-2',
->   'Swalot-2', 'Crawdaunt-2', 'Pidgeot-2', 'Grumpig-2', 'Torkoal-2', 'Kingler-2', 'Cacturne-2',
->   'Bellossom-2', 'Octillery-2', 'Huntail-2', 'Gorebyss-2', 'Relicanth-2', 'Omastar-2', 'Kabutops-2',
->   'Poliwrath-2', 'Scyther-2', 'Pinsir-2', 'Politoed-2', 'Cloyster-2', 'Dugtrio-1', 'Medicham-1',
->   'Misdreavus-1', 'Fearow-1', 'Granbull-1', 'Jynx-1', 'Dusclops-1', 'Dodrio-1', 'Mr. Mime-1',
->   'Lanturn-1', 'Breloom-1', 'Forretress-1', 'Whiscash-1', 'Xatu-1', 'Skarmory-1', 'Marowak-1',
->   'Quagsire-1', 'Clefable-1', 'Hariyama-1', 'Raichu-1', 'Dewgong-1', 'Manectric-1', 'Vileplume-1',
->   'Victreebel-1', 'Electrode-1', 'Exploud-1', 'Shiftry-1', 'Glalie-1', 'Ludicolo-1', 'Hypno-1',
->   'Golem-1', 'Rhydon-1', 'Alakazam-1', 'Weezing-1', 'Kangaskhan-1', 'Electabuzz-1', 'Tauros-1',
->   'Slowbro-1', 'Slowking-1', 'Miltank-1', 'Altaria-1', 'Nidoqueen-1', 'Nidoking-1', 'Magmar-1',
->   'Cradily-1', 'Armaldo-1', 'Golduck-1', 'Rapidash-1', 'Muk-1', 'Gengar-1', 'Ampharos-1',
->   'Scizor-1', 'Heracross-1', 'Ursaring-1', 'Houndoom-1', 'Donphan-1', 'Claydol-1', 'Wailord-1',
->   'Ninetales-1', 'Machamp-1', 'Shuckle-1', 'Steelix-1', 'Tentacruel-1', 'Aerodactyl-1',
->   'Porygon2-1', 'Gardevoir-1', 'Exeggutor-1', 'Starmie-1', 'Flygon-1', 'Venusaur-1', 'Vaporeon-1',
->   'Jolteon-1', 'Flareon-1', 'Meganium-1', 'Espeon-1', 'Umbreon-1', 'Blastoise-1', 'Feraligatr-1',
->   'Aggron-1', 'Blaziken-1', 'Walrein-1', 'Sceptile-1', 'Charizard-1', 'Typhlosion-1', 'Lapras-1',
->   'Crobat-1', 'Swampert-1', 'Gyarados-1', 'Snorlax-1', 'Kingdra-1', 'Blissey-1', 'Milotic-1',
->   'Arcanine-1', 'Salamence-1', 'Metagross-1', 'Slaking-1', 'Dugtrio-2', 'Medicham-2', 'Marowak-2',
->   'Quagsire-2', 'Misdreavus-2', 'Fearow-2', 'Granbull-2', 'Jynx-2', 'Dusclops-2', 'Dodrio-2',
->   'Mr. Mime-2', 'Lanturn-2', 'Breloom-2', 'Forretress-2', 'Skarmory-2', 'Whiscash-2', 'Xatu-2',
->   'Clefable-2', 'Hariyama-2', 'Raichu-2', 'Dewgong-2', 'Manectric-2', 'Vileplume-2', 'Victreebel-2',
->   'Electrode-2', 'Exploud-2', 'Shiftry-2', 'Glalie-2', 'Ludicolo-2', 'Hypno-2', 'Golem-2',
->   'Rhydon-2', 'Alakazam-2', 'Weezing-2', 'Kangaskhan-2', 'Electabuzz-2', 'Tauros-2', 'Slowbro-2',
->   'Slowking-2', 'Miltank-2', 'Altaria-2', 'Nidoqueen-2', 'Nidoking-2', 'Magmar-2', 'Cradily-2',
->   'Armaldo-2', 'Golduck-2', 'Rapidash-2', 'Muk-2', 'Gengar-2', 'Ampharos-2', 'Scizor-2',
->   'Heracross-2', 'Ursaring-2', 'Houndoom-2', 'Donphan-2', 'Claydol-2', 'Wailord-2', 'Ninetales-2',
->   'Machamp-2', 'Shuckle-2', 'Steelix-2', 'Tentacruel-2', 'Aerodactyl-2', 'Porygon2-2',
->   'Gardevoir-2', 'Exeggutor-2', 'Starmie-2', 'Flygon-2', 'Venusaur-2', 'Vaporeon-2', 'Jolteon-2',
->   'Flareon-2', 'Meganium-2', 'Espeon-2', 'Umbreon-2', 'Blastoise-2', 'Feraligatr-2', 'Aggron-2',
->   'Blaziken-2', 'Walrein-2', 'Sceptile-2', 'Charizard-2', 'Typhlosion-2', 'Lapras-2', 'Crobat-2',
->   'Swampert-2', 'Gyarados-2', 'Snorlax-2', 'Kingdra-2', 'Blissey-2', 'Milotic-2', 'Arcanine-2',
->   'Salamence-2', 'Metagross-2', 'Slaking-2', 'Dugtrio-3', 'Medicham-3', 'Misdreavus-3', 'Fearow-3',
->   'Granbull-3', 'Jynx-3', 'Dusclops-3', 'Dodrio-3', 'Mr. Mime-3', 'Lanturn-3', 'Breloom-3',
->   'Forretress-3', 'Whiscash-3', 'Xatu-3', 'Skarmory-3', 'Marowak-3', 'Quagsire-3', 'Clefable-3',
->   'Hariyama-3', 'Raichu-3', 'Dewgong-3', 'Manectric-3', 'Vileplume-3', 'Victreebel-3',
->   'Electrode-3', 'Exploud-3', 'Shiftry-3', 'Glalie-3', 'Ludicolo-3', 'Hypno-3', 'Golem-3',
->   'Rhydon-3', 'Alakazam-3', 'Weezing-3', 'Kangaskhan-3', 'Electabuzz-3', 'Tauros-3', 'Slowbro-3',
->   'Slowking-3', 'Miltank-3', 'Altaria-3', 'Nidoqueen-3', 'Nidoking-3', 'Magmar-3', 'Cradily-3',
->   'Armaldo-3', 'Golduck-3', 'Rapidash-3', 'Muk-3', 'Gengar-3', 'Ampharos-3', 'Scizor-3',
->   'Heracross-3', 'Ursaring-3', 'Houndoom-3', 'Donphan-3', 'Claydol-3', 'Wailord-3', 'Ninetales-3',
->   'Machamp-3', 'Shuckle-3', 'Steelix-3', 'Tentacruel-3', 'Aerodactyl-3', 'Porygon2-3',
->   'Gardevoir-3', 'Exeggutor-3', 'Starmie-3', 'Flygon-3', 'Venusaur-3', 'Vaporeon-3', 'Jolteon-3',
->   'Flareon-3', 'Meganium-3', 'Espeon-3', 'Umbreon-3', 'Blastoise-3', 'Feraligatr-3', 'Aggron-3',
->   'Blaziken-3', 'Walrein-3', 'Sceptile-3', 'Charizard-3', 'Typhlosion-3', 'Lapras-3', 'Crobat-3',
->   'Swampert-3', 'Gyarados-3', 'Snorlax-3', 'Kingdra-3', 'Blissey-3', 'Milotic-3', 'Arcanine-3',
->   'Salamence-3', 'Metagross-3', 'Slaking-3', 'Dugtrio-4', 'Medicham-4', 'Misdreavus-4', 'Fearow-4',
->   'Granbull-4', 'Jynx-4', 'Dusclops-4', 'Dodrio-4', 'Mr. Mime-4', 'Lanturn-4', 'Breloom-4',
->   'Forretress-4', 'Whiscash-4', 'Xatu-4', 'Skarmory-4', 'Marowak-4', 'Quagsire-4', 'Clefable-4',
->   'Hariyama-4', 'Raichu-4', 'Dewgong-4', 'Manectric-4', 'Vileplume-4', 'Victreebel-4',
->   'Electrode-4', 'Exploud-4', 'Shiftry-4', 'Glalie-4', 'Ludicolo-4', 'Hypno-4', 'Golem-4',
->   'Rhydon-4', 'Alakazam-4', 'Weezing-4', 'Kangaskhan-4', 'Electabuzz-4', 'Tauros-4', 'Slowbro-4',
->   'Slowking-4', 'Miltank-4', 'Altaria-4', 'Nidoqueen-4', 'Nidoking-4', 'Magmar-4', 'Cradily-4',
->   'Armaldo-4', 'Golduck-4', 'Rapidash-4', 'Muk-4', 'Gengar-4', 'Ampharos-4', 'Scizor-4',
->   'Heracross-4', 'Ursaring-4', 'Houndoom-4', 'Donphan-4', 'Claydol-4', 'Wailord-4', 'Ninetales-4',
->   'Machamp-4', 'Shuckle-4', 'Steelix-4', 'Tentacruel-4', 'Aerodactyl-4', 'Porygon2-4',
->   'Gardevoir-4', 'Exeggutor-4', 'Starmie-4', 'Flygon-4', 'Venusaur-4', 'Vaporeon-4', 'Jolteon-4',
->   'Flareon-4', 'Meganium-4', 'Espeon-4', 'Umbreon-4', 'Blastoise-4', 'Feraligatr-4', 'Aggron-4',
->   'Blaziken-4', 'Walrein-4', 'Sceptile-4', 'Charizard-4', 'Typhlosion-4', 'Lapras-4', 'Crobat-4',
->   'Swampert-4', 'Gyarados-4', 'Snorlax-4', 'Kingdra-4', 'Blissey-4', 'Milotic-4', 'Arcanine-4',
->   'Salamence-4', 'Metagross-4', 'Slaking-4', 'Articuno-1', 'Zapdos-1', 'Moltres-1', 'Raikou-1',
->   'Entei-1', 'Suicune-1', 'Regirock-1', 'Regice-1', 'Registeel-1', 'Latias-1', 'Latios-1',
->   'Articuno-2', 'Zapdos-2', 'Moltres-2', 'Raikou-2', 'Entei-2', 'Suicune-2', 'Regirock-2',
->   'Regice-2', 'Registeel-2', 'Latias-2', 'Latios-2', 'Articuno-3', 'Zapdos-3', 'Moltres-3',
->   'Raikou-3', 'Entei-3', 'Suicune-3', 'Regirock-3', 'Regice-3', 'Registeel-3', 'Latias-3',
->   'Latios-3', 'Articuno-4', 'Zapdos-4', 'Moltres-4', 'Raikou-4', 'Entei-4', 'Suicune-4',
->   'Regirock-4', 'Regice-4', 'Registeel-4', 'Latias-4', 'Latios-4',
->   ... and 118 more
+>   'Sunkern-1', 'Azurill-1', 'Caterpie-1', 'Weedle-1', 'Wurmple-1', 'Ralts-1', 'Magikarp-1', 'Feebas-1', 'Metapod-1',
+>   'Kakuna-1', 'Pichu-1', 'Silcoon-1', 'Cascoon-1', 'Igglybuff-1', 'Wooper-1', 'Tyrogue-1', 'Sentret-1', 'Cleffa-1',
+>   'Seedot-1', 'Lotad-1', 'Poochyena-1', 'Shedinja-1', 'Makuhita-1', 'Whismur-1', 'Zigzagoon-1', 'Zubat-1', 'Togepi-1',
+>   'Spinarak-1', 'Marill-1', 'Hoppip-1', 'Slugma-1', 'Swinub-1', 'Smeargle-1', 'Pidgey-1', 'Rattata-1', 'Wynaut-1',
+>   'Skitty-1', 'Spearow-1', 'Hoothoot-1', 'Diglett-1', 'Ledyba-1', 'Nincada-1', 'Surskit-1', 'Jigglypuff-1', 'Taillow-1',
+>   'Wingull-1', 'NidoranM-1', 'NidoranF-1', 'Kirlia-1', 'Mareep-1', 'Meditite-1', 'Slakoth-1', 'Paras-1', 'Ekans-1',
+>   'Ditto-1', 'Barboach-1', 'Meowth-1', 'Pineco-1', 'Trapinch-1', 'Spheal-1', 'Horsea-1', 'Shroomish-1', 'Shuppet-1',
+>   'Duskull-1', 'Electrike-1', 'Vulpix-1', 'Pikachu-1', 'Sandshrew-1', 'Poliwag-1', 'Bellsprout-1', 'Geodude-1',
+>   'Dratini-1', 'Snubbull-1', 'Remoraid-1', 'Larvitar-1', 'Baltoy-1', 'Snorunt-1', 'Bagon-1', 'Beldum-1', 'Gulpin-1',
+>   'Venonat-1', 'Mankey-1', 'Machop-1', 'Shellder-1', 'Smoochum-1', 'Numel-1', 'Carvanha-1', 'Corphish-1',
+>   'Charmander-1', 'Cyndaquil-1', 'Abra-1', 'Doduo-1', 'Gastly-1', 'Swablu-1', 'Treecko-1', 'Torchic-1', 'Mudkip-1',
+>   'Squirtle-1', 'Totodile-1', 'Slowpoke-1', 'Bulbasaur-1', 'Chikorita-1', 'Oddish-1', 'Psyduck-1', 'Cubone-1',
+>   'Goldeen-1', 'Natu-1', 'Clefairy-1', 'Magnemite-1', 'Seel-1', 'Grimer-1', 'Krabby-1', 'Exeggcute-1', 'Eevee-1',
+>   'Drowzee-1', 'Voltorb-1', 'Chinchou-1', 'Teddiursa-1', 'Delibird-1', 'Houndour-1', 'Phanpy-1', 'Spoink-1', 'Aron-1',
+>   'Luvdisc-1', 'Tentacool-1', 'Cacnea-1', 'Unown-1', 'Koffing-1', 'Staryu-1', 'Skiploom-1', 'Nuzleaf-1', 'Lombre-1',
+>   'Vibrava-1', 'Rhyhorn-1', 'Clamperl-1', 'Pidgeotto-1', 'Growlithe-1', "Farfetch'd-1", 'Omanyte-1', 'Kabuto-1',
+>   'Lileep-1', 'Anorith-1', 'Aipom-1', 'Elekid-1', 'Loudred-1', 'Spinda-1', 'Nidorina-1', 'Nidorino-1', 'Flaaffy-1',
+>   'Magby-1', 'Nosepass-1', 'Corsola-1', 'Mawile-1', 'Butterfree-1', 'Beedrill-1', 'Poliwhirl-1', 'Onix-1',
+>   'Beautifly-1', 'Dustox-1', 'Ledian-1', 'Ariados-1', 'Yanma-1', 'Delcatty-1', 'Sableye-1', 'Lickitung-1',
+>   'Weepinbell-1', 'Graveler-1', 'Gloom-1', 'Porygon-1', 'Kadabra-1', 'Wailmer-1', 'Roselia-1', 'Volbeat-1',
+>   'Illumise-1', 'Ivysaur-1', 'Charmeleon-1', 'Wartortle-1', 'Parasect-1', 'Machoke-1', 'Haunter-1', 'Bayleef-1',
+>   'Quilava-1', 'Croconaw-1', 'Togetic-1', 'Murkrow-1', 'Wobbuffet-1', 'Plusle-1', 'Minun-1', 'Grovyle-1', 'Combusken-1',
+>   'Marshtomp-1', 'Ponyta-1', 'Azumarill-1', 'Sudowoodo-1', 'Magcargo-1', 'Pupitar-1', 'Sealeo-1', 'Raticate-1',
+>   'Masquerain-1', 'Furret-1', 'Dunsparce-1', 'Dragonair-1', 'Mightyena-1', 'Linoone-1', 'Castform-1', 'Shelgon-1',
+>   'Metang-1', 'Wigglytuff-1', 'Sunflora-1', 'Chimecho-1', 'Gligar-1', 'Qwilfish-1', 'Sneasel-1', 'Pelipper-1',
+>   'Swellow-1', 'Lairon-1', 'Tangela-1', 'Arbok-1', 'Persian-1', 'Seadra-1', 'Kecleon-1', 'Vigoroth-1', 'Lunatone-1',
+>   'Solrock-1', 'Noctowl-1', 'Sandslash-1', 'Venomoth-1', 'Chansey-1', 'Seaking-1', 'Jumpluff-1', 'Piloswine-1',
+>   'Golbat-1', 'Primeape-1', 'Hitmonlee-1', 'Hitmonchan-1', 'Girafarig-1', 'Hitmontop-1', 'Banette-1', 'Ninjask-1',
+>   'Seviper-1', 'Zangoose-1', 'Camerupt-1', 'Sharpedo-1', 'Tropius-1', 'Magneton-1', 'Mantine-1', 'Stantler-1',
+>   'Absol-1', 'Swalot-1', 'Crawdaunt-1', 'Pidgeot-1', 'Grumpig-1', 'Torkoal-1', 'Kingler-1', 'Cacturne-1', 'Bellossom-1',
+>   'Octillery-1', 'Huntail-1', 'Gorebyss-1', 'Relicanth-1', 'Omastar-1', 'Kabutops-1', 'Poliwrath-1', 'Scyther-1',
+>   'Pinsir-1', 'Politoed-1', 'Cloyster-1', 'Delcatty-2', 'Sableye-2', 'Lickitung-2', 'Weepinbell-2', 'Graveler-2',
+>   'Gloom-2', 'Porygon-2', 'Kadabra-2', 'Wailmer-2', 'Roselia-2', 'Volbeat-2', 'Illumise-2', 'Ivysaur-2', 'Charmeleon-2',
+>   'Wartortle-2', 'Parasect-2', 'Machoke-2', 'Haunter-2', 'Bayleef-2', 'Quilava-2', 'Croconaw-2', 'Togetic-2',
+>   'Murkrow-2', 'Wobbuffet-2', 'Plusle-2', 'Minun-2', 'Grovyle-2', 'Combusken-2', 'Marshtomp-2', 'Ponyta-2',
+>   'Azumarill-2', 'Sudowoodo-2', 'Magcargo-2', 'Pupitar-2', 'Sealeo-2', 'Raticate-2', 'Masquerain-2', 'Furret-2',
+>   'Dunsparce-2', 'Dragonair-2', 'Mightyena-2', 'Linoone-2', 'Castform-2', 'Shelgon-2', 'Metang-2', 'Wigglytuff-2',
+>   'Sunflora-2', 'Chimecho-2', 'Gligar-2', 'Qwilfish-2', 'Sneasel-2', 'Pelipper-2', 'Swellow-2', 'Lairon-2', 'Tangela-2',
+>   'Arbok-2', 'Persian-2', 'Seadra-2', 'Kecleon-2', 'Vigoroth-2', 'Lunatone-2', 'Solrock-2', 'Noctowl-2', 'Sandslash-2',
+>   'Venomoth-2', 'Chansey-2', 'Seaking-2', 'Jumpluff-2', 'Piloswine-2', 'Golbat-2', 'Primeape-2', 'Hitmonlee-2',
+>   'Hitmonchan-2', 'Girafarig-2', 'Hitmontop-2', 'Banette-2', 'Ninjask-2', 'Seviper-2', 'Zangoose-2', 'Camerupt-2',
+>   'Sharpedo-2', 'Tropius-2', 'Magneton-2', 'Mantine-2', 'Stantler-2', 'Absol-2', 'Swalot-2', 'Crawdaunt-2', 'Pidgeot-2',
+>   'Grumpig-2', 'Torkoal-2', 'Kingler-2', 'Cacturne-2', 'Bellossom-2', 'Octillery-2', 'Huntail-2', 'Gorebyss-2',
+>   'Relicanth-2', 'Omastar-2', 'Kabutops-2', 'Poliwrath-2', 'Scyther-2', 'Pinsir-2', 'Politoed-2', 'Cloyster-2',
+>   'Dugtrio-1', 'Medicham-1', 'Misdreavus-1', 'Fearow-1', 'Granbull-1', 'Jynx-1', 'Dusclops-1', 'Dodrio-1', 'Mr. Mime-1',
+>   'Lanturn-1', 'Breloom-1', 'Forretress-1', 'Whiscash-1', 'Xatu-1', 'Skarmory-1', 'Marowak-1', 'Quagsire-1',
+>   'Clefable-1', 'Hariyama-1', 'Raichu-1', 'Dewgong-1', 'Manectric-1', 'Vileplume-1', 'Victreebel-1', 'Electrode-1',
+>   'Exploud-1', 'Shiftry-1', 'Glalie-1', 'Ludicolo-1', 'Hypno-1', 'Golem-1', 'Rhydon-1', 'Alakazam-1', 'Weezing-1',
+>   'Kangaskhan-1', 'Electabuzz-1', 'Tauros-1', 'Slowbro-1', 'Slowking-1', 'Miltank-1', 'Altaria-1', 'Nidoqueen-1',
+>   'Nidoking-1', 'Magmar-1', 'Cradily-1', 'Armaldo-1', 'Golduck-1', 'Rapidash-1', 'Muk-1', 'Gengar-1', 'Ampharos-1',
+>   'Scizor-1', 'Heracross-1', 'Ursaring-1', 'Houndoom-1', 'Donphan-1', 'Claydol-1', 'Wailord-1', 'Ninetales-1',
+>   'Machamp-1', 'Shuckle-1', 'Steelix-1', 'Tentacruel-1', 'Aerodactyl-1', 'Porygon2-1', 'Gardevoir-1', 'Exeggutor-1',
+>   'Starmie-1', 'Flygon-1', 'Venusaur-1', 'Vaporeon-1', 'Jolteon-1', 'Flareon-1', 'Meganium-1', 'Espeon-1', 'Umbreon-1',
+>   'Blastoise-1', 'Feraligatr-1', 'Aggron-1', 'Blaziken-1', 'Walrein-1', 'Sceptile-1', 'Charizard-1', 'Typhlosion-1',
+>   'Lapras-1', 'Crobat-1', 'Swampert-1', 'Gyarados-1', 'Snorlax-1', 'Kingdra-1', 'Blissey-1', 'Milotic-1', 'Arcanine-1',
+>   'Salamence-1', 'Metagross-1', 'Slaking-1', 'Dugtrio-2', 'Medicham-2', 'Marowak-2', 'Quagsire-2', 'Misdreavus-2',
+>   'Fearow-2', 'Granbull-2', 'Jynx-2', 'Dusclops-2', 'Dodrio-2', 'Mr. Mime-2', 'Lanturn-2', 'Breloom-2', 'Forretress-2',
+>   'Skarmory-2', 'Whiscash-2', 'Xatu-2', 'Clefable-2', 'Hariyama-2', 'Raichu-2', 'Dewgong-2', 'Manectric-2',
+>   'Vileplume-2', 'Victreebel-2', 'Electrode-2', 'Exploud-2', 'Shiftry-2', 'Glalie-2', 'Ludicolo-2', 'Hypno-2',
+>   'Golem-2', 'Rhydon-2', 'Alakazam-2', 'Weezing-2', 'Kangaskhan-2', 'Electabuzz-2', 'Tauros-2', 'Slowbro-2',
+>   'Slowking-2', 'Miltank-2', 'Altaria-2', 'Nidoqueen-2', 'Nidoking-2', 'Magmar-2', 'Cradily-2', 'Armaldo-2',
+>   'Golduck-2', 'Rapidash-2', 'Muk-2', 'Gengar-2', 'Ampharos-2', 'Scizor-2', 'Heracross-2', 'Ursaring-2', 'Houndoom-2',
+>   'Donphan-2', 'Claydol-2', 'Wailord-2', 'Ninetales-2', 'Machamp-2', 'Shuckle-2', 'Steelix-2', 'Tentacruel-2',
+>   'Aerodactyl-2', 'Porygon2-2', 'Gardevoir-2', 'Exeggutor-2', 'Starmie-2', 'Flygon-2', 'Venusaur-2', 'Vaporeon-2',
+>   'Jolteon-2', 'Flareon-2', 'Meganium-2', 'Espeon-2', 'Umbreon-2', 'Blastoise-2', 'Feraligatr-2', 'Aggron-2',
+>   'Blaziken-2', 'Walrein-2', 'Sceptile-2', 'Charizard-2', 'Typhlosion-2', 'Lapras-2', 'Crobat-2', 'Swampert-2',
+>   'Gyarados-2', 'Snorlax-2', 'Kingdra-2', 'Blissey-2', 'Milotic-2', 'Arcanine-2', 'Salamence-2', 'Metagross-2',
+>   'Slaking-2', 'Dugtrio-3', 'Medicham-3', 'Misdreavus-3', 'Fearow-3', 'Granbull-3', 'Jynx-3', 'Dusclops-3', 'Dodrio-3',
+>   'Mr. Mime-3', 'Lanturn-3', 'Breloom-3', 'Forretress-3', 'Whiscash-3', 'Xatu-3', 'Skarmory-3', 'Marowak-3',
+>   'Quagsire-3', 'Clefable-3', 'Hariyama-3', 'Raichu-3', 'Dewgong-3', 'Manectric-3', 'Vileplume-3', 'Victreebel-3',
+>   'Electrode-3', 'Exploud-3', 'Shiftry-3', 'Glalie-3', 'Ludicolo-3', 'Hypno-3', 'Golem-3', 'Rhydon-3', 'Alakazam-3',
+>   'Weezing-3', 'Kangaskhan-3', 'Electabuzz-3', 'Tauros-3', 'Slowbro-3', 'Slowking-3', 'Miltank-3', 'Altaria-3',
+>   'Nidoqueen-3', 'Nidoking-3', 'Magmar-3', 'Cradily-3', 'Armaldo-3', 'Golduck-3', 'Rapidash-3', 'Muk-3', 'Gengar-3',
+>   'Ampharos-3', 'Scizor-3', 'Heracross-3', 'Ursaring-3', 'Houndoom-3', 'Donphan-3', 'Claydol-3', 'Wailord-3',
+>   'Ninetales-3', 'Machamp-3', 'Shuckle-3', 'Steelix-3', 'Tentacruel-3', 'Aerodactyl-3', 'Porygon2-3', 'Gardevoir-3',
+>   'Exeggutor-3', 'Starmie-3', 'Flygon-3', 'Venusaur-3', 'Vaporeon-3', 'Jolteon-3', 'Flareon-3', 'Meganium-3',
+>   'Espeon-3', 'Umbreon-3', 'Blastoise-3', 'Feraligatr-3', 'Aggron-3', 'Blaziken-3', 'Walrein-3', 'Sceptile-3',
+>   'Charizard-3', 'Typhlosion-3', 'Lapras-3', 'Crobat-3', 'Swampert-3', 'Gyarados-3', 'Snorlax-3', 'Kingdra-3',
+>   'Blissey-3', 'Milotic-3', 'Arcanine-3', 'Salamence-3', 'Metagross-3', 'Slaking-3', 'Dugtrio-4', 'Medicham-4',
+>   'Misdreavus-4', 'Fearow-4', 'Granbull-4', 'Jynx-4', 'Dusclops-4', 'Dodrio-4', 'Mr. Mime-4', 'Lanturn-4', 'Breloom-4',
+>   'Forretress-4', 'Whiscash-4', 'Xatu-4', 'Skarmory-4', 'Marowak-4', 'Quagsire-4', 'Clefable-4', 'Hariyama-4',
+>   'Raichu-4', 'Dewgong-4', 'Manectric-4', 'Vileplume-4', 'Victreebel-4', 'Electrode-4', 'Exploud-4', 'Shiftry-4',
+>   'Glalie-4', 'Ludicolo-4', 'Hypno-4', 'Golem-4', 'Rhydon-4', 'Alakazam-4', 'Weezing-4', 'Kangaskhan-4', 'Electabuzz-4',
+>   'Tauros-4', 'Slowbro-4', 'Slowking-4', 'Miltank-4', 'Altaria-4', 'Nidoqueen-4', 'Nidoking-4', 'Magmar-4', 'Cradily-4',
+>   'Armaldo-4', 'Golduck-4', 'Rapidash-4', 'Muk-4', 'Gengar-4', 'Ampharos-4', 'Scizor-4', 'Heracross-4', 'Ursaring-4',
+>   'Houndoom-4', 'Donphan-4', 'Claydol-4', 'Wailord-4', 'Ninetales-4', 'Machamp-4', 'Shuckle-4', 'Steelix-4',
+>   'Tentacruel-4', 'Aerodactyl-4', 'Porygon2-4', 'Gardevoir-4', 'Exeggutor-4', 'Starmie-4', 'Flygon-4', 'Venusaur-4',
+>   'Vaporeon-4', 'Jolteon-4', 'Flareon-4', 'Meganium-4', 'Espeon-4', 'Umbreon-4', 'Blastoise-4', 'Feraligatr-4',
+>   'Aggron-4', 'Blaziken-4', 'Walrein-4', 'Sceptile-4', 'Charizard-4', 'Typhlosion-4', 'Lapras-4', 'Crobat-4',
+>   'Swampert-4', 'Gyarados-4', 'Snorlax-4', 'Kingdra-4', 'Blissey-4', 'Milotic-4', 'Arcanine-4', 'Salamence-4',
+>   'Metagross-4', 'Slaking-4', 'Articuno-1', 'Zapdos-1', 'Moltres-1', 'Raikou-1', 'Entei-1', 'Suicune-1', 'Regirock-1',
+>   'Regice-1', 'Registeel-1', 'Latias-1', 'Latios-1', 'Articuno-2', 'Zapdos-2', 'Moltres-2', 'Raikou-2', 'Entei-2',
+>   'Suicune-2', 'Regirock-2', 'Regice-2', 'Registeel-2', 'Latias-2', 'Latios-2', 'Articuno-3', 'Zapdos-3', 'Moltres-3',
+>   'Raikou-3', 'Entei-3', 'Suicune-3', 'Regirock-3', 'Regice-3', 'Registeel-3', 'Latias-3', 'Latios-3', 'Articuno-4',
+>   'Zapdos-4', 'Moltres-4', 'Raikou-4', 'Entei-4', 'Suicune-4', 'Regirock-4', 'Regice-4', 'Registeel-4', 'Latias-4',
+>   'Latios-4', 'Gengar-5', 'Gengar-6', 'Gengar-7', 'Gengar-8', 'Ursaring-5', 'Ursaring-6', 'Ursaring-7', 'Ursaring-8',
+>   'Machamp-5', 'Machamp-6', 'Machamp-7', 'Machamp-8', 'Gardevoir-5', 'Gardevoir-6', 'Gardevoir-7', 'Gardevoir-8',
+>   'Starmie-5', 'Starmie-6', 'Starmie-7', 'Starmie-8', 'Lapras-5', 'Lapras-6', 'Lapras-7', 'Lapras-8', 'Snorlax-5',
+>   'Snorlax-6', 'Snorlax-7', 'Snorlax-8', 'Salamence-5', 'Salamence-6', 'Salamence-7', 'Salamence-8', 'Metagross-5',
+>   'Metagross-6', 'Metagross-7', 'Metagross-8', 'Regirock-5', 'Regirock-6', 'Regice-5', 'Regice-6', 'Registeel-5',
+>   'Registeel-6', 'Latias-5', 'Latias-6', 'Latias-7', 'Latias-8', 'Latios-5', 'Latios-6', 'Latios-7', 'Latios-8',
+>   'Dragonite-1', 'Dragonite-2', 'Dragonite-3', 'Dragonite-4', 'Dragonite-5', 'Dragonite-6', 'Dragonite-7',
+>   'Dragonite-8', 'Dragonite-9', 'Dragonite-10', 'Tyranitar-1', 'Tyranitar-2', 'Tyranitar-3', 'Tyranitar-4',
+>   'Tyranitar-5', 'Tyranitar-6', 'Tyranitar-7', 'Tyranitar-8', 'Tyranitar-9', 'Tyranitar-10', 'Articuno-5', 'Articuno-6',
+>   'Zapdos-5', 'Zapdos-6', 'Moltres-5', 'Moltres-6', 'Raikou-5', 'Raikou-6', 'Entei-5', 'Entei-6', 'Suicune-5',
+>   'Suicune-6', 'Alakazam-AnabelSilver', 'Entei-AnabelSilver', 'Snorlax-AnabelSilver', 'Raikou-AnabelGold',
+>   'Latios-AnabelGold', 'Snorlax-AnabelGold', 'Swampert-TuckerSilver', 'Salamence-TuckerSilver',
+>   'Charizard-TuckerSilver', 'Swampert-TuckerGold', 'Metagross-TuckerGold', 'Latias-TuckerGold', 'Crobat-SpenserSilver',
+>   'Slaking-SpenserSilver', 'Lapras-SpenserSilver', 'Arcanine-SpenserGold', 'Slaking-SpenserGold', 'Suicune-SpenserGold',
+>   'Heracross-GretaSilver', 'Umbreon-GretaSilver', 'Shedinja-GretaSilver', 'Umbreon-GretaGold', 'Gengar-GretaGold',
+>   'Breloom-GretaGold', 'Seviper-LucySilver', 'Shuckle-LucySilver', 'Milotic-LucySilver', 'Seviper-LucyGold',
+>   'Steelix-LucyGold', 'Gyarados-LucyGold', 'Regirock-BrandonSilver', 'Registeel-BrandonSilver', 'Regice-BrandonSilver',
+>   'Articuno-BrandonGold', 'Zapdos-BrandonGold', 'Moltres-BrandonGold'
 > ]
 > ```
 >
@@ -691,84 +687,71 @@ Import teams from [Pokepaste](https://pokepast.es/) format:
 > ```
 > TrainerCollection(312 trainers)
 > [
->   'YOUNGSTER BRADY', 'YOUNGSTER CONNER', 'YOUNGSTER BRADLEY', 'LASS CYBIL', 'LASS RODETTE',
->   'LASS PEGGY', 'SCHOOL KID (M) KEITH', 'SCHOOL KID (M) GRAYSON', 'SCHOOL KID (M) GLENN',
->   'SCHOOL KID (F) LILIANA', 'SCHOOL KID (F) ELISE', 'SCHOOL KID (F) ZOEY', 'RICH BOY MANUEL',
->   'RICH BOY RUSS', 'RICH BOY DUSTIN', 'LADY TINA', 'LADY GILLIAN', 'LADY ZOE', 'CAMPER CHEN',
->   'CAMPER AL', 'CAMPER MITCH', 'PICNICKER ANNE', 'PICNICKER ALIZE', 'PICNICKER LAUREN',
->   'TUBER (M) KIPP', 'TUBER (M) JASON', 'TUBER (M) JOHN', 'TUBER (F) ANN', 'TUBER (F) EILEEN',
->   'TUBER (F) CARLIE', 'SWIMMER? GORDON', 'SWIMMER? AYDEN', 'SWIMMER? MARCO', 'SWIMMER? CIERRA',
->   'SWIMMER? MARCY', 'SWIMMER? KATHY', 'POKÉFAN (M) PEYTON', 'POKÉFAN (M) JULIAN',
->   'POKÉFAN (M) QUINN', 'POKÉFAN (F) HAYLEE', 'POKÉFAN (F) AMANDA', 'POKÉFAN (F) STACY',
->   'PKMN BREEDER (M) RAFAEL', 'PKMN BREEDER (M) OLIVER', 'PKMN BREEDER (M) PAYTON',
->   'PKMN BREEDER (F) PAMELA', 'PKMN BREEDER (F) ELIZA', 'PKMN BREEDER (F) MARISA',
->   'BUG CATCHER LEWIS', 'BUG CATCHER YOSHI', 'BUG CATCHER DESTIN', 'NINJA BOY KEON',
->   'NINJA BOY STUART', 'NINJA BOY NESTOR', 'BUG MANIAC DERRICK', 'BUG MANIAC BRYSON',
->   'BUG MANIAC CLAYTON', 'FISHERMAN TRENTON', 'FISHERMAN JENSON', 'FISHERMAN WESLEY',
->   'RUIN MANIAC ANTON', 'RUIN MANIAC LAWSON', 'RUIN MANIAC SAMMY', 'COLLECTOR ARNIE',
->   'COLLECTOR ADRIAN', 'COLLECTOR TRISTAN', 'PARASOL LADY JULIANA', 'PARASOL LADY RYLEE',
->   'PARASOL LADY CHELSEA', 'BEAUTY DANELA', 'BEAUTY LIZBETH', 'BEAUTY AMELIA', 'AROMA LADY JILLIAN',
->   'AROMA LADY ABBIE', 'AROMA LADY BRIANA', 'GUITARIST ANTONIO', 'GUITARIST JADEN',
->   'GUITARIST DAKOTA', 'BIRD KEEPER BRAYDEN', 'BIRD KEEPER CORSON', 'BIRD KEEPER TREVIN',
->   'SAILOR PATRICK', 'SAILOR KADEN', 'SAILOR MAXWELL', 'HIKER DARYL', 'HIKER KENNETH', 'HIKER RICH',
->   'KINDLER CADEN', 'KINDLER MARLON', 'KINDLER NASH', 'TRIATHLETE (M RUNNER) ROBBY',
+>   'YOUNGSTER BRADY', 'YOUNGSTER CONNER', 'YOUNGSTER BRADLEY', 'LASS CYBIL', 'LASS RODETTE', 'LASS PEGGY',
+>   'SCHOOL KID (M) KEITH', 'SCHOOL KID (M) GRAYSON', 'SCHOOL KID (M) GLENN', 'SCHOOL KID (F) LILIANA',
+>   'SCHOOL KID (F) ELISE', 'SCHOOL KID (F) ZOEY', 'RICH BOY MANUEL', 'RICH BOY RUSS', 'RICH BOY DUSTIN', 'LADY TINA',
+>   'LADY GILLIAN', 'LADY ZOE', 'CAMPER CHEN', 'CAMPER AL', 'CAMPER MITCH', 'PICNICKER ANNE', 'PICNICKER ALIZE',
+>   'PICNICKER LAUREN', 'TUBER (M) KIPP', 'TUBER (M) JASON', 'TUBER (M) JOHN', 'TUBER (F) ANN', 'TUBER (F) EILEEN',
+>   'TUBER (F) CARLIE', 'SWIMMER? GORDON', 'SWIMMER? AYDEN', 'SWIMMER? MARCO', 'SWIMMER? CIERRA', 'SWIMMER? MARCY',
+>   'SWIMMER? KATHY', 'POKÉFAN (M) PEYTON', 'POKÉFAN (M) JULIAN', 'POKÉFAN (M) QUINN', 'POKÉFAN (F) HAYLEE',
+>   'POKÉFAN (F) AMANDA', 'POKÉFAN (F) STACY', 'PKMN BREEDER (M) RAFAEL', 'PKMN BREEDER (M) OLIVER',
+>   'PKMN BREEDER (M) PAYTON', 'PKMN BREEDER (F) PAMELA', 'PKMN BREEDER (F) ELIZA', 'PKMN BREEDER (F) MARISA',
+>   'BUG CATCHER LEWIS', 'BUG CATCHER YOSHI', 'BUG CATCHER DESTIN', 'NINJA BOY KEON', 'NINJA BOY STUART',
+>   'NINJA BOY NESTOR', 'BUG MANIAC DERRICK', 'BUG MANIAC BRYSON', 'BUG MANIAC CLAYTON', 'FISHERMAN TRENTON',
+>   'FISHERMAN JENSON', 'FISHERMAN WESLEY', 'RUIN MANIAC ANTON', 'RUIN MANIAC LAWSON', 'RUIN MANIAC SAMMY',
+>   'COLLECTOR ARNIE', 'COLLECTOR ADRIAN', 'COLLECTOR TRISTAN', 'PARASOL LADY JULIANA', 'PARASOL LADY RYLEE',
+>   'PARASOL LADY CHELSEA', 'BEAUTY DANELA', 'BEAUTY LIZBETH', 'BEAUTY AMELIA', 'AROMA LADY JILLIAN', 'AROMA LADY ABBIE',
+>   'AROMA LADY BRIANA', 'GUITARIST ANTONIO', 'GUITARIST JADEN', 'GUITARIST DAKOTA', 'BIRD KEEPER BRAYDEN',
+>   'BIRD KEEPER CORSON', 'BIRD KEEPER TREVIN', 'SAILOR PATRICK', 'SAILOR KADEN', 'SAILOR MAXWELL', 'HIKER DARYL',
+>   'HIKER KENNETH', 'HIKER RICH', 'KINDLER CADEN', 'KINDLER MARLON', 'KINDLER NASH', 'TRIATHLETE (M RUNNER) ROBBY',
 >   'TRIATHLETE (M RUNNER) REECE', 'TRIATHLETE (F RUNNER) KATHRYN', 'TRIATHLETE (F RUNNER) ELLEN',
 >   'TRIATHLETE (M SWIMMER) RAMON', 'TRIATHLETE (M SWIMMER) ARTHUR', 'TRIATHLETE (F SWIMMER) ALONDRA',
 >   'TRIATHLETE (F SWIMMER) ADRIANA', 'TRIATHLETE (M BIKER) MALIK', 'TRIATHLETE (F BIKER) JILL',
 >   'TRIATHLETE (M RUNNER) ERIK', 'TRIATHLETE (F RUNNER) YAZMIN', 'TRIATHLETE (M SWIMMER) JAMAL',
 >   'TRIATHLETE (F SWIMMER) LESLIE', 'TRIATHLETE (M BIKER) DAVE', 'TRIATHLETE (M BIKER) CARLO',
->   'TRIATHLETE (F BIKER) EMILIA', 'TRIATHLETE (F BIKER) DALIA', 'BLACK BELT HITOMI',
->   'BLACK BELT RICARDO', 'BLACK BELT SHIZUKA', 'BATTLE GIRL JOANA', 'BATTLE GIRL KELLY',
->   'BATTLE GIRL RAYNA', 'EXPERT (M) EVAN', 'EXPERT (M) JORDAN', 'EXPERT (M) JOEL',
->   'EXPERT (F) KRISTEN', 'EXPERT (F) SELPHY', 'EXPERT (F) CHLOE', 'PSYCHIC (M) NORTON',
->   'PSYCHIC (M) LUKAS', 'PSYCHIC (M) ZACH', 'PSYCHIC (F) KAITLYN', 'PSYCHIC (F) BREANNA',
->   'PSYCHIC (F) KENDRA', 'HEX MANIAC MOLLY', 'HEX MANIAC JAZMIN', 'HEX MANIAC KELSEY',
->   'POKÉMANIAC JALEN', 'POKÉMANIAC GRIFFEN', 'POKÉMANIAC XANDER', 'GENTLEMAN MARVIN',
->   'GENTLEMAN BRENNAN', 'BUG MANIAC BALEY', 'RUIN MANIAC ZACKARY', 'COLLECTOR GABRIEL',
->   'PARASOL LADY EMILY', 'BEAUTY JORDYN', 'AROMA LADY SOFIA', 'COOLTRAINER (M) BRADEN',
->   'COOLTRAINER (M) KAYDEN', 'COOLTRAINER (M) COOPER', 'COOLTRAINER (F) JULIA',
->   'COOLTRAINER (F) AMARA', 'COOLTRAINER (F) LYNN', 'PKMN RANGER (M) JOVAN',
->   'PKMN RANGER (M) DOMINIC', 'PKMN RANGER (M) NIKOLAS', 'PKMN RANGER (F) VALERIA',
->   'PKMN RANGER (F) DELANEY', 'PKMN RANGER (F) MEGHAN', 'DRAGON TAMER ROBERTO',
->   'DRAGON TAMER DAMIAN', 'DRAGON TAMER BRODY', 'DRAGON TAMER GRAHAM', 'POKÉFAN (M) TYLOR',
->   'POKÉFAN (F) JAREN', 'PKMN BREEDER (M) CORDELL', 'PKMN BREEDER (F) JAZLYN', 'YOUNGSTER ZACHERY',
->   'YOUNGSTER JOHAN', 'LASS SHEA', 'LASS KAILA', 'SCHOOL KID (M) ISIAH', 'SCHOOL KID (M) GARRETT',
->   'SCHOOL KID (F) HAYLIE', 'SCHOOL KID (F) MEGAN', 'RICH BOY ISSAC', 'RICH BOY QUINTON',
->   'LADY SALMA', 'LADY ANSLEY', 'BUG CATCHER HOLDEN', 'BUG CATCHER LUCA', 'NINJA BOY JAMISON',
->   'NINJA BOY GUNNAR', 'TUBER (M) CRAIG', 'TUBER (M) PIERCE', 'TUBER (F) REGINA', 'TUBER (F) ALISON',
->   'BUG MANIAC HANK', 'BUG MANIAC EARL', 'FISHERMAN RAMIRO', 'FISHERMAN HUNTER', 'RUIN MANIAC AIDEN',
->   'RUIN MANIAC XAVIER', 'COLLECTOR CLINTON', 'COLLECTOR JESSE', 'GUITARIST EDUARDO',
->   'GUITARIST HAL', 'BIRD KEEPER GAGE', 'BIRD KEEPER ARNOLD', 'SAILOR JARRETT', 'SAILOR GARETT',
->   'HIKER EMANUEL', 'HIKER GUSTAVO', 'KINDLER KAMERON', 'KINDLER ALFREDO', 'GENTLEMAN RUBEN',
->   'GENTLEMAN LAMAR', 'YOUNGSTER JAXON', 'YOUNGSTER LOGAN', 'LASS EMILEE', 'LASS JOSIE',
->   'CAMPER ARMANDO', 'CAMPER SKYLER', 'PICNICKER RUTH', 'PICNICKER MELODY', 'SWIMMER? PEDRO',
->   'SWIMMER? ERICK', 'SWIMMER? ELAINE', 'SWIMMER? JOYCE', 'POKÉFAN (M) TODD', 'POKÉFAN (M) GAVIN',
->   'POKÉFAN (F) MALORY', 'POKÉFAN (F) ESTHER', 'PKMN BREEDER (M) OSCAR', 'PKMN BREEDER (M) WILSON',
->   'PKMN BREEDER (F) CLARE', 'PKMN BREEDER (F) TESS', 'COOLTRAINER (M) LEON',
->   'COOLTRAINER (M) ALONZO', 'COOLTRAINER (M) VINCE', 'COOLTRAINER (M) BRYON', 'COOLTRAINER (F) AVA',
->   'COOLTRAINER (F) MIRIAM', 'COOLTRAINER (F) CARRIE', 'COOLTRAINER (F) GILLIAN',
->   'PKMN RANGER (M) TYLER', 'PKMN RANGER (M) CHAZ', 'PKMN RANGER (M) NELSON',
->   'PKMN RANGER (F) SHANIA', 'PKMN RANGER (F) STELLA', 'PKMN RANGER (F) DORINE',
->   'DRAGON TAMER MADDOX', 'DRAGON TAMER DAVIN', 'DRAGON TAMER TREVON', 'BLACK BELT MATEO',
->   'BLACK BELT BRET', 'BLACK BELT RAUL', 'BATTLE GIRL KAY', 'BATTLE GIRL ELENA', 'BATTLE GIRL ALANA',
->   'EXPERT (M) ALEXAS', 'EXPERT (M) WESTON', 'EXPERT (M) JASPER', 'EXPERT (F) NADIA',
->   'EXPERT (F) MIRANDA', 'EXPERT (F) EMMA', 'PSYCHIC (M) ROLANDO', 'PSYCHIC (M) STANLY',
->   'PSYCHIC (M) DARIO', 'PSYCHIC (F) KARLEE', 'PSYCHIC (F) JAYLIN', 'PSYCHIC (F) INGRID',
->   'HEX MANIAC DELILAH', 'HEX MANIAC CARLY', 'HEX MANIAC LEXIE', 'POKÉMANIAC MILLER',
->   'POKÉMANIAC MARV', 'POKÉMANIAC LAYTON', 'GENTLEMAN BROOKS', 'GENTLEMAN GREGORY',
->   'GENTLEMAN REESE', 'TRIATHLETE (M RUNNER) MASON', 'TRIATHLETE (M RUNNER) TOBY',
->   'TRIATHLETE (F RUNNER) DOROTHY', 'TRIATHLETE (F RUNNER) PIPER', 'TRIATHLETE (M SWIMMER) FINN',
->   'TRIATHLETE (M SWIMMER) SAMIR', 'TRIATHLETE (F SWIMMER) FIONA', 'TRIATHLETE (F SWIMMER) GLORIA',
->   'TRIATHLETE (M BIKER) NICO', 'TRIATHLETE (M BIKER) JEREMY', 'TRIATHLETE (F BIKER) CAITLIN',
->   'TRIATHLETE (F BIKER) REENA', 'BUG MANIAC AVERY', 'BUG MANIAC LIAM', 'FISHERMAN THEO',
->   'FISHERMAN BAILEY', 'RUIN MANIAC HUGO', 'RUIN MANIAC BRYCE', 'COLLECTOR GIDEON',
->   'COLLECTOR TRISTON', 'GUITARIST CHARLES', 'GUITARIST RAYMOND', 'BIRD KEEPER DIRK',
->   'BIRD KEEPER HAROLD', 'SAILOR OMAR', 'SAILOR PETER', 'HIKER DEV', 'HIKER COREY', 'KINDLER ANDRE',
->   'KINDLER FERRIS', 'PARASOL LADY ALIVIA', 'PARASOL LADY PAIGE', 'BEAUTY ANYA', 'BEAUTY DAWN',
->   'AROMA LADY ABBY', 'AROMA LADY GRETEL', 'SALON MAIDEN ANABEL', 'SALON MAIDEN ANABEL',
->   'DOME ACE TUCKER', 'DOME ACE TUCKER', 'PALACE MAVEN SPENSER', 'PALACE MAVEN SPENSER',
->   'ARENA TYCOON GRETA', 'ARENA TYCOON GRETA', 'PIKE QUEEN LUCY', 'PIKE QUEEN LUCY',
->   'PYRAMID KING BRANDON', 'PYRAMID KING BRANDON'
+>   'TRIATHLETE (F BIKER) EMILIA', 'TRIATHLETE (F BIKER) DALIA', 'BLACK BELT HITOMI', 'BLACK BELT RICARDO',
+>   'BLACK BELT SHIZUKA', 'BATTLE GIRL JOANA', 'BATTLE GIRL KELLY', 'BATTLE GIRL RAYNA', 'EXPERT (M) EVAN',
+>   'EXPERT (M) JORDAN', 'EXPERT (M) JOEL', 'EXPERT (F) KRISTEN', 'EXPERT (F) SELPHY', 'EXPERT (F) CHLOE',
+>   'PSYCHIC (M) NORTON', 'PSYCHIC (M) LUKAS', 'PSYCHIC (M) ZACH', 'PSYCHIC (F) KAITLYN', 'PSYCHIC (F) BREANNA',
+>   'PSYCHIC (F) KENDRA', 'HEX MANIAC MOLLY', 'HEX MANIAC JAZMIN', 'HEX MANIAC KELSEY', 'POKÉMANIAC JALEN',
+>   'POKÉMANIAC GRIFFEN', 'POKÉMANIAC XANDER', 'GENTLEMAN MARVIN', 'GENTLEMAN BRENNAN', 'BUG MANIAC BALEY',
+>   'RUIN MANIAC ZACKARY', 'COLLECTOR GABRIEL', 'PARASOL LADY EMILY', 'BEAUTY JORDYN', 'AROMA LADY SOFIA',
+>   'COOLTRAINER (M) BRADEN', 'COOLTRAINER (M) KAYDEN', 'COOLTRAINER (M) COOPER', 'COOLTRAINER (F) JULIA',
+>   'COOLTRAINER (F) AMARA', 'COOLTRAINER (F) LYNN', 'PKMN RANGER (M) JOVAN', 'PKMN RANGER (M) DOMINIC',
+>   'PKMN RANGER (M) NIKOLAS', 'PKMN RANGER (F) VALERIA', 'PKMN RANGER (F) DELANEY', 'PKMN RANGER (F) MEGHAN',
+>   'DRAGON TAMER ROBERTO', 'DRAGON TAMER DAMIAN', 'DRAGON TAMER BRODY', 'DRAGON TAMER GRAHAM', 'POKÉFAN (M) TYLOR',
+>   'POKÉFAN (F) JAREN', 'PKMN BREEDER (M) CORDELL', 'PKMN BREEDER (F) JAZLYN', 'YOUNGSTER ZACHERY', 'YOUNGSTER JOHAN',
+>   'LASS SHEA', 'LASS KAILA', 'SCHOOL KID (M) ISIAH', 'SCHOOL KID (M) GARRETT', 'SCHOOL KID (F) HAYLIE',
+>   'SCHOOL KID (F) MEGAN', 'RICH BOY ISSAC', 'RICH BOY QUINTON', 'LADY SALMA', 'LADY ANSLEY', 'BUG CATCHER HOLDEN',
+>   'BUG CATCHER LUCA', 'NINJA BOY JAMISON', 'NINJA BOY GUNNAR', 'TUBER (M) CRAIG', 'TUBER (M) PIERCE',
+>   'TUBER (F) REGINA', 'TUBER (F) ALISON', 'BUG MANIAC HANK', 'BUG MANIAC EARL', 'FISHERMAN RAMIRO', 'FISHERMAN HUNTER',
+>   'RUIN MANIAC AIDEN', 'RUIN MANIAC XAVIER', 'COLLECTOR CLINTON', 'COLLECTOR JESSE', 'GUITARIST EDUARDO',
+>   'GUITARIST HAL', 'BIRD KEEPER GAGE', 'BIRD KEEPER ARNOLD', 'SAILOR JARRETT', 'SAILOR GARETT', 'HIKER EMANUEL',
+>   'HIKER GUSTAVO', 'KINDLER KAMERON', 'KINDLER ALFREDO', 'GENTLEMAN RUBEN', 'GENTLEMAN LAMAR', 'YOUNGSTER JAXON',
+>   'YOUNGSTER LOGAN', 'LASS EMILEE', 'LASS JOSIE', 'CAMPER ARMANDO', 'CAMPER SKYLER', 'PICNICKER RUTH',
+>   'PICNICKER MELODY', 'SWIMMER? PEDRO', 'SWIMMER? ERICK', 'SWIMMER? ELAINE', 'SWIMMER? JOYCE', 'POKÉFAN (M) TODD',
+>   'POKÉFAN (M) GAVIN', 'POKÉFAN (F) MALORY', 'POKÉFAN (F) ESTHER', 'PKMN BREEDER (M) OSCAR', 'PKMN BREEDER (M) WILSON',
+>   'PKMN BREEDER (F) CLARE', 'PKMN BREEDER (F) TESS', 'COOLTRAINER (M) LEON', 'COOLTRAINER (M) ALONZO',
+>   'COOLTRAINER (M) VINCE', 'COOLTRAINER (M) BRYON', 'COOLTRAINER (F) AVA', 'COOLTRAINER (F) MIRIAM',
+>   'COOLTRAINER (F) CARRIE', 'COOLTRAINER (F) GILLIAN', 'PKMN RANGER (M) TYLER', 'PKMN RANGER (M) CHAZ',
+>   'PKMN RANGER (M) NELSON', 'PKMN RANGER (F) SHANIA', 'PKMN RANGER (F) STELLA', 'PKMN RANGER (F) DORINE',
+>   'DRAGON TAMER MADDOX', 'DRAGON TAMER DAVIN', 'DRAGON TAMER TREVON', 'BLACK BELT MATEO', 'BLACK BELT BRET',
+>   'BLACK BELT RAUL', 'BATTLE GIRL KAY', 'BATTLE GIRL ELENA', 'BATTLE GIRL ALANA', 'EXPERT (M) ALEXAS',
+>   'EXPERT (M) WESTON', 'EXPERT (M) JASPER', 'EXPERT (F) NADIA', 'EXPERT (F) MIRANDA', 'EXPERT (F) EMMA',
+>   'PSYCHIC (M) ROLANDO', 'PSYCHIC (M) STANLY', 'PSYCHIC (M) DARIO', 'PSYCHIC (F) KARLEE', 'PSYCHIC (F) JAYLIN',
+>   'PSYCHIC (F) INGRID', 'HEX MANIAC DELILAH', 'HEX MANIAC CARLY', 'HEX MANIAC LEXIE', 'POKÉMANIAC MILLER',
+>   'POKÉMANIAC MARV', 'POKÉMANIAC LAYTON', 'GENTLEMAN BROOKS', 'GENTLEMAN GREGORY', 'GENTLEMAN REESE',
+>   'TRIATHLETE (M RUNNER) MASON', 'TRIATHLETE (M RUNNER) TOBY', 'TRIATHLETE (F RUNNER) DOROTHY',
+>   'TRIATHLETE (F RUNNER) PIPER', 'TRIATHLETE (M SWIMMER) FINN', 'TRIATHLETE (M SWIMMER) SAMIR',
+>   'TRIATHLETE (F SWIMMER) FIONA', 'TRIATHLETE (F SWIMMER) GLORIA', 'TRIATHLETE (M BIKER) NICO',
+>   'TRIATHLETE (M BIKER) JEREMY', 'TRIATHLETE (F BIKER) CAITLIN', 'TRIATHLETE (F BIKER) REENA', 'BUG MANIAC AVERY',
+>   'BUG MANIAC LIAM', 'FISHERMAN THEO', 'FISHERMAN BAILEY', 'RUIN MANIAC HUGO', 'RUIN MANIAC BRYCE', 'COLLECTOR GIDEON',
+>   'COLLECTOR TRISTON', 'GUITARIST CHARLES', 'GUITARIST RAYMOND', 'BIRD KEEPER DIRK', 'BIRD KEEPER HAROLD',
+>   'SAILOR OMAR', 'SAILOR PETER', 'HIKER DEV', 'HIKER COREY', 'KINDLER ANDRE', 'KINDLER FERRIS', 'PARASOL LADY ALIVIA',
+>   'PARASOL LADY PAIGE', 'BEAUTY ANYA', 'BEAUTY DAWN', 'AROMA LADY ABBY', 'AROMA LADY GRETEL', 'SALON MAIDEN ANABEL',
+>   'SALON MAIDEN ANABEL', 'DOME ACE TUCKER', 'DOME ACE TUCKER', 'PALACE MAVEN SPENSER', 'PALACE MAVEN SPENSER',
+>   'ARENA TYCOON GRETA', 'ARENA TYCOON GRETA', 'PIKE QUEEN LUCY', 'PIKE QUEEN LUCY', 'PYRAMID KING BRANDON',
+>   'PYRAMID KING BRANDON'
 > ]
 > ```
 >
@@ -792,33 +775,29 @@ All filter methods return a new `SetCollection`, so they chain freely. Every `Se
 > ```
 > SetCollection(179 sets)
 > [
->   'Magikarp-1', 'Feebas-1', 'Wooper-1', 'Lotad-1', 'Marill-1', 'Surskit-1', 'Wingull-1',
->   'Barboach-1', 'Spheal-1', 'Horsea-1', 'Poliwag-1', 'Remoraid-1', 'Shellder-1', 'Carvanha-1',
->   'Corphish-1', 'Mudkip-1', 'Squirtle-1', 'Totodile-1', 'Slowpoke-1', 'Psyduck-1', 'Goldeen-1',
->   'Seel-1', 'Krabby-1', 'Chinchou-1', 'Luvdisc-1', 'Tentacool-1', 'Staryu-1', 'Lombre-1',
->   'Clamperl-1', 'Omanyte-1', 'Kabuto-1', 'Corsola-1', 'Poliwhirl-1', 'Wailmer-1', 'Wartortle-1',
->   'Croconaw-1', 'Marshtomp-1', 'Azumarill-1', 'Sealeo-1', 'Qwilfish-1', 'Pelipper-1', 'Seadra-1',
->   'Seaking-1', 'Sharpedo-1', 'Mantine-1', 'Crawdaunt-1', 'Kingler-1', 'Octillery-1', 'Huntail-1',
->   'Gorebyss-1', 'Relicanth-1', 'Omastar-1', 'Kabutops-1', 'Poliwrath-1', 'Politoed-1', 'Cloyster-1',
->   'Wailmer-2', 'Wartortle-2', 'Croconaw-2', 'Marshtomp-2', 'Azumarill-2', 'Sealeo-2', 'Qwilfish-2',
->   'Pelipper-2', 'Seadra-2', 'Seaking-2', 'Sharpedo-2', 'Mantine-2', 'Crawdaunt-2', 'Kingler-2',
->   'Octillery-2', 'Huntail-2', 'Gorebyss-2', 'Relicanth-2', 'Omastar-2', 'Kabutops-2', 'Poliwrath-2',
->   'Politoed-2', 'Cloyster-2', 'Lanturn-1', 'Whiscash-1', 'Quagsire-1', 'Dewgong-1', 'Ludicolo-1',
->   'Slowbro-1', 'Slowking-1', 'Golduck-1', 'Wailord-1', 'Tentacruel-1', 'Starmie-1', 'Vaporeon-1',
->   'Blastoise-1', 'Feraligatr-1', 'Walrein-1', 'Lapras-1', 'Swampert-1', 'Gyarados-1', 'Kingdra-1',
->   'Milotic-1', 'Quagsire-2', 'Lanturn-2', 'Whiscash-2', 'Dewgong-2', 'Ludicolo-2', 'Slowbro-2',
->   'Slowking-2', 'Golduck-2', 'Wailord-2', 'Tentacruel-2', 'Starmie-2', 'Vaporeon-2', 'Blastoise-2',
->   'Feraligatr-2', 'Walrein-2', 'Lapras-2', 'Swampert-2', 'Gyarados-2', 'Kingdra-2', 'Milotic-2',
->   'Lanturn-3', 'Whiscash-3', 'Quagsire-3', 'Dewgong-3', 'Ludicolo-3', 'Slowbro-3', 'Slowking-3',
->   'Golduck-3', 'Wailord-3', 'Tentacruel-3', 'Starmie-3', 'Vaporeon-3', 'Blastoise-3',
->   'Feraligatr-3', 'Walrein-3', 'Lapras-3', 'Swampert-3', 'Gyarados-3', 'Kingdra-3', 'Milotic-3',
->   'Lanturn-4', 'Whiscash-4', 'Quagsire-4', 'Dewgong-4', 'Ludicolo-4', 'Slowbro-4', 'Slowking-4',
->   'Golduck-4', 'Wailord-4', 'Tentacruel-4', 'Starmie-4', 'Vaporeon-4', 'Blastoise-4',
->   'Feraligatr-4', 'Walrein-4', 'Lapras-4', 'Swampert-4', 'Gyarados-4', 'Kingdra-4', 'Milotic-4',
->   'Suicune-1', 'Suicune-2', 'Suicune-3', 'Suicune-4', 'Starmie-5', 'Starmie-6', 'Starmie-7',
->   'Starmie-8', 'Lapras-5', 'Lapras-6', 'Lapras-7', 'Lapras-8', 'Suicune-5', 'Suicune-6',
->   'Swampert-TuckerSilver', 'Swampert-TuckerGold', 'Lapras-SpenserSilver', 'Suicune-SpenserGold',
->   'Milotic-LucySilver', 'Gyarados-LucyGold'
+>   'Magikarp-1', 'Feebas-1', 'Wooper-1', 'Lotad-1', 'Marill-1', 'Surskit-1', 'Wingull-1', 'Barboach-1', 'Spheal-1',
+>   'Horsea-1', 'Poliwag-1', 'Remoraid-1', 'Shellder-1', 'Carvanha-1', 'Corphish-1', 'Mudkip-1', 'Squirtle-1',
+>   'Totodile-1', 'Slowpoke-1', 'Psyduck-1', 'Goldeen-1', 'Seel-1', 'Krabby-1', 'Chinchou-1', 'Luvdisc-1', 'Tentacool-1',
+>   'Staryu-1', 'Lombre-1', 'Clamperl-1', 'Omanyte-1', 'Kabuto-1', 'Corsola-1', 'Poliwhirl-1', 'Wailmer-1', 'Wartortle-1',
+>   'Croconaw-1', 'Marshtomp-1', 'Azumarill-1', 'Sealeo-1', 'Qwilfish-1', 'Pelipper-1', 'Seadra-1', 'Seaking-1',
+>   'Sharpedo-1', 'Mantine-1', 'Crawdaunt-1', 'Kingler-1', 'Octillery-1', 'Huntail-1', 'Gorebyss-1', 'Relicanth-1',
+>   'Omastar-1', 'Kabutops-1', 'Poliwrath-1', 'Politoed-1', 'Cloyster-1', 'Wailmer-2', 'Wartortle-2', 'Croconaw-2',
+>   'Marshtomp-2', 'Azumarill-2', 'Sealeo-2', 'Qwilfish-2', 'Pelipper-2', 'Seadra-2', 'Seaking-2', 'Sharpedo-2',
+>   'Mantine-2', 'Crawdaunt-2', 'Kingler-2', 'Octillery-2', 'Huntail-2', 'Gorebyss-2', 'Relicanth-2', 'Omastar-2',
+>   'Kabutops-2', 'Poliwrath-2', 'Politoed-2', 'Cloyster-2', 'Lanturn-1', 'Whiscash-1', 'Quagsire-1', 'Dewgong-1',
+>   'Ludicolo-1', 'Slowbro-1', 'Slowking-1', 'Golduck-1', 'Wailord-1', 'Tentacruel-1', 'Starmie-1', 'Vaporeon-1',
+>   'Blastoise-1', 'Feraligatr-1', 'Walrein-1', 'Lapras-1', 'Swampert-1', 'Gyarados-1', 'Kingdra-1', 'Milotic-1',
+>   'Quagsire-2', 'Lanturn-2', 'Whiscash-2', 'Dewgong-2', 'Ludicolo-2', 'Slowbro-2', 'Slowking-2', 'Golduck-2',
+>   'Wailord-2', 'Tentacruel-2', 'Starmie-2', 'Vaporeon-2', 'Blastoise-2', 'Feraligatr-2', 'Walrein-2', 'Lapras-2',
+>   'Swampert-2', 'Gyarados-2', 'Kingdra-2', 'Milotic-2', 'Lanturn-3', 'Whiscash-3', 'Quagsire-3', 'Dewgong-3',
+>   'Ludicolo-3', 'Slowbro-3', 'Slowking-3', 'Golduck-3', 'Wailord-3', 'Tentacruel-3', 'Starmie-3', 'Vaporeon-3',
+>   'Blastoise-3', 'Feraligatr-3', 'Walrein-3', 'Lapras-3', 'Swampert-3', 'Gyarados-3', 'Kingdra-3', 'Milotic-3',
+>   'Lanturn-4', 'Whiscash-4', 'Quagsire-4', 'Dewgong-4', 'Ludicolo-4', 'Slowbro-4', 'Slowking-4', 'Golduck-4',
+>   'Wailord-4', 'Tentacruel-4', 'Starmie-4', 'Vaporeon-4', 'Blastoise-4', 'Feraligatr-4', 'Walrein-4', 'Lapras-4',
+>   'Swampert-4', 'Gyarados-4', 'Kingdra-4', 'Milotic-4', 'Suicune-1', 'Suicune-2', 'Suicune-3', 'Suicune-4', 'Starmie-5',
+>   'Starmie-6', 'Starmie-7', 'Starmie-8', 'Lapras-5', 'Lapras-6', 'Lapras-7', 'Lapras-8', 'Suicune-5', 'Suicune-6',
+>   'Swampert-TuckerSilver', 'Swampert-TuckerGold', 'Lapras-SpenserSilver', 'Suicune-SpenserGold', 'Milotic-LucySilver',
+>   'Gyarados-LucyGold'
 > ]
 > ```
 >
@@ -837,12 +816,11 @@ All filter methods return a new `SetCollection`, so they chain freely. Every `Se
 > ```
 > SetCollection(40 sets)
 > [
->   'Ralts-1', 'Wynaut-1', 'Kirlia-1', 'Abra-1', 'Drowzee-1', 'Spoink-1', 'Unown-1', 'Kadabra-1',
->   'Wobbuffet-1', 'Chimecho-1', 'Grumpig-1', 'Kadabra-2', 'Wobbuffet-2', 'Chimecho-2', 'Grumpig-2',
->   'Mr. Mime-1', 'Hypno-1', 'Alakazam-1', 'Gardevoir-1', 'Espeon-1', 'Mr. Mime-2', 'Hypno-2',
->   'Alakazam-2', 'Gardevoir-2', 'Espeon-2', 'Mr. Mime-3', 'Hypno-3', 'Alakazam-3', 'Gardevoir-3',
->   'Espeon-3', 'Mr. Mime-4', 'Hypno-4', 'Alakazam-4', 'Gardevoir-4', 'Espeon-4', 'Gardevoir-5',
->   'Gardevoir-6', 'Gardevoir-7', 'Gardevoir-8', 'Alakazam-AnabelSilver'
+>   'Ralts-1', 'Wynaut-1', 'Kirlia-1', 'Abra-1', 'Drowzee-1', 'Spoink-1', 'Unown-1', 'Kadabra-1', 'Wobbuffet-1',
+>   'Chimecho-1', 'Grumpig-1', 'Kadabra-2', 'Wobbuffet-2', 'Chimecho-2', 'Grumpig-2', 'Mr. Mime-1', 'Hypno-1',
+>   'Alakazam-1', 'Gardevoir-1', 'Espeon-1', 'Mr. Mime-2', 'Hypno-2', 'Alakazam-2', 'Gardevoir-2', 'Espeon-2',
+>   'Mr. Mime-3', 'Hypno-3', 'Alakazam-3', 'Gardevoir-3', 'Espeon-3', 'Mr. Mime-4', 'Hypno-4', 'Alakazam-4',
+>   'Gardevoir-4', 'Espeon-4', 'Gardevoir-5', 'Gardevoir-6', 'Gardevoir-7', 'Gardevoir-8', 'Alakazam-AnabelSilver'
 > ]
 > ```
 >
@@ -861,8 +839,8 @@ All filter methods return a new `SetCollection`, so they chain freely. Every `Se
 > ```
 > SetCollection(12 sets)
 > [
->   'Charizard-1', 'Charizard-2', 'Charizard-3', 'Charizard-4', 'Moltres-1', 'Moltres-2', 'Moltres-3',
->   'Moltres-4', 'Moltres-5', 'Moltres-6', 'Charizard-TuckerSilver', 'Moltres-BrandonGold'
+>   'Charizard-1', 'Charizard-2', 'Charizard-3', 'Charizard-4', 'Moltres-1', 'Moltres-2', 'Moltres-3', 'Moltres-4',
+>   'Moltres-5', 'Moltres-6', 'Charizard-TuckerSilver', 'Moltres-BrandonGold'
 > ]
 > ```
 >
@@ -882,17 +860,16 @@ All filter methods return a new `SetCollection`, so they chain freely. Every `Se
 > ```
 > SetCollection(72 sets)
 > [
->   'Wartortle-2', 'Sealeo-2', 'Pelipper-2', 'Sharpedo-2', 'Mantine-2', 'Huntail-2', 'Gorebyss-2',
->   'Politoed-2', 'Lanturn-1', 'Ludicolo-1', 'Slowbro-1', 'Wailord-1', 'Vaporeon-1', 'Feraligatr-1',
->   'Lapras-1', 'Lanturn-2', 'Whiscash-2', 'Ludicolo-2', 'Slowbro-2', 'Slowking-2', 'Golduck-2',
->   'Tentacruel-2', 'Vaporeon-2', 'Feraligatr-2', 'Lapras-2', 'Swampert-2', 'Kingdra-2', 'Milotic-2',
->   'Whiscash-3', 'Slowbro-3', 'Slowking-3', 'Nidoking-3', 'Tentacruel-3', 'Starmie-3', 'Vaporeon-3',
->   'Blastoise-3', 'Aggron-3', 'Walrein-3', 'Swampert-3', 'Gyarados-3', 'Milotic-3', 'Lanturn-4',
->   'Whiscash-4', 'Quagsire-4', 'Dewgong-4', 'Tauros-4', 'Slowbro-4', 'Slowking-4', 'Golduck-4',
->   'Wailord-4', 'Vaporeon-4', 'Blastoise-4', 'Walrein-4', 'Lapras-4', 'Swampert-4', 'Milotic-4',
->   'Suicune-1', 'Suicune-3', 'Suicune-4', 'Starmie-5', 'Starmie-6', 'Starmie-8', 'Dragonite-6',
->   'Dragonite-7', 'Dragonite-9', 'Tyranitar-1', 'Suicune-5', 'Suicune-6', 'Swampert-TuckerSilver',
->   'Swampert-TuckerGold', 'Suicune-SpenserGold', 'Milotic-LucySilver'
+>   'Wartortle-2', 'Sealeo-2', 'Pelipper-2', 'Sharpedo-2', 'Mantine-2', 'Huntail-2', 'Gorebyss-2', 'Politoed-2',
+>   'Lanturn-1', 'Ludicolo-1', 'Slowbro-1', 'Wailord-1', 'Vaporeon-1', 'Feraligatr-1', 'Lapras-1', 'Lanturn-2',
+>   'Whiscash-2', 'Ludicolo-2', 'Slowbro-2', 'Slowking-2', 'Golduck-2', 'Tentacruel-2', 'Vaporeon-2', 'Feraligatr-2',
+>   'Lapras-2', 'Swampert-2', 'Kingdra-2', 'Milotic-2', 'Whiscash-3', 'Slowbro-3', 'Slowking-3', 'Nidoking-3',
+>   'Tentacruel-3', 'Starmie-3', 'Vaporeon-3', 'Blastoise-3', 'Aggron-3', 'Walrein-3', 'Swampert-3', 'Gyarados-3',
+>   'Milotic-3', 'Lanturn-4', 'Whiscash-4', 'Quagsire-4', 'Dewgong-4', 'Tauros-4', 'Slowbro-4', 'Slowking-4', 'Golduck-4',
+>   'Wailord-4', 'Vaporeon-4', 'Blastoise-4', 'Walrein-4', 'Lapras-4', 'Swampert-4', 'Milotic-4', 'Suicune-1',
+>   'Suicune-3', 'Suicune-4', 'Starmie-5', 'Starmie-6', 'Starmie-8', 'Dragonite-6', 'Dragonite-7', 'Dragonite-9',
+>   'Tyranitar-1', 'Suicune-5', 'Suicune-6', 'Swampert-TuckerSilver', 'Swampert-TuckerGold', 'Suicune-SpenserGold',
+>   'Milotic-LucySilver'
 > ]
 > ```
 >
@@ -911,40 +888,35 @@ All filter methods return a new `SetCollection`, so they chain freely. Every `Se
 > ```
 > SetCollection(222 sets)
 > [
->   'Lickitung-2', 'Graveler-2', 'Wailmer-2', 'Wartortle-2', 'Marshtomp-2', 'Sudowoodo-2',
->   'Magcargo-2', 'Pupitar-2', 'Sealeo-2', 'Gligar-2', 'Pelipper-2', 'Lairon-2', 'Arbok-2',
->   'Solrock-2', 'Sandslash-2', 'Piloswine-2', 'Seviper-2', 'Camerupt-2', 'Sharpedo-2', 'Mantine-2',
->   'Huntail-2', 'Gorebyss-2', 'Relicanth-2', 'Politoed-2', 'Dugtrio-1', 'Lanturn-1', 'Whiscash-1',
->   'Quagsire-1', 'Ludicolo-1', 'Golem-1', 'Rhydon-1', 'Tauros-1', 'Slowbro-1', 'Donphan-1',
->   'Claydol-1', 'Wailord-1', 'Steelix-1', 'Flygon-1', 'Vaporeon-1', 'Feraligatr-1', 'Aggron-1',
->   'Lapras-1', 'Swampert-1', 'Dugtrio-2', 'Marowak-2', 'Lanturn-2', 'Forretress-2', 'Whiscash-2',
->   'Exploud-2', 'Ludicolo-2', 'Rhydon-2', 'Tauros-2', 'Slowbro-2', 'Slowking-2', 'Nidoqueen-2',
->   'Nidoking-2', 'Cradily-2', 'Golduck-2', 'Heracross-2', 'Ursaring-2', 'Donphan-2', 'Claydol-2',
->   'Machamp-2', 'Steelix-2', 'Tentacruel-2', 'Aerodactyl-2', 'Vaporeon-2', 'Feraligatr-2',
->   'Aggron-2', 'Walrein-2', 'Charizard-2', 'Lapras-2', 'Swampert-2', 'Snorlax-2', 'Kingdra-2',
->   'Milotic-2', 'Metagross-2', 'Dugtrio-3', 'Granbull-3', 'Dusclops-3', 'Forretress-3', 'Whiscash-3',
->   'Marowak-3', 'Quagsire-3', 'Hariyama-3', 'Glalie-3', 'Golem-3', 'Rhydon-3', 'Kangaskhan-3',
->   'Tauros-3', 'Slowbro-3', 'Slowking-3', 'Miltank-3', 'Altaria-3', 'Nidoking-3', 'Armaldo-3',
->   'Heracross-3', 'Donphan-3', 'Steelix-3', 'Tentacruel-3', 'Starmie-3', 'Flygon-3', 'Venusaur-3',
->   'Vaporeon-3', 'Meganium-3', 'Blastoise-3', 'Feraligatr-3', 'Aggron-3', 'Blaziken-3', 'Walrein-3',
->   'Sceptile-3', 'Typhlosion-3', 'Swampert-3', 'Gyarados-3', 'Milotic-3', 'Salamence-3',
->   'Metagross-3', 'Slaking-3', 'Dugtrio-4', 'Granbull-4', 'Lanturn-4', 'Forretress-4', 'Whiscash-4',
->   'Marowak-4', 'Quagsire-4', 'Hariyama-4', 'Dewgong-4', 'Exploud-4', 'Glalie-4', 'Golem-4',
->   'Rhydon-4', 'Kangaskhan-4', 'Tauros-4', 'Slowbro-4', 'Slowking-4', 'Altaria-4', 'Nidoqueen-4',
->   'Nidoking-4', 'Armaldo-4', 'Golduck-4', 'Heracross-4', 'Ursaring-4', 'Donphan-4', 'Claydol-4',
->   'Wailord-4', 'Machamp-4', 'Steelix-4', 'Aerodactyl-4', 'Flygon-4', 'Venusaur-4', 'Vaporeon-4',
->   'Meganium-4', 'Blastoise-4', 'Feraligatr-4', 'Aggron-4', 'Blaziken-4', 'Walrein-4', 'Charizard-4',
->   'Typhlosion-4', 'Lapras-4', 'Swampert-4', 'Gyarados-4', 'Milotic-4', 'Salamence-4', 'Metagross-4',
->   'Suicune-1', 'Regirock-1', 'Regirock-2', 'Registeel-2', 'Latias-2', 'Latios-2', 'Suicune-3',
->   'Regirock-3', 'Latias-3', 'Latios-3', 'Suicune-4', 'Registeel-4', 'Ursaring-7', 'Ursaring-8',
->   'Machamp-5', 'Machamp-6', 'Starmie-5', 'Starmie-6', 'Starmie-8', 'Snorlax-6', 'Snorlax-7',
->   'Salamence-5', 'Metagross-5', 'Metagross-7', 'Metagross-8', 'Regice-5', 'Latias-7', 'Latias-8',
->   'Latios-7', 'Latios-8', 'Dragonite-1', 'Dragonite-2', 'Dragonite-6', 'Dragonite-7', 'Dragonite-9',
->   'Dragonite-10', 'Tyranitar-1', 'Tyranitar-2', 'Tyranitar-3', 'Tyranitar-5', 'Tyranitar-6',
->   'Tyranitar-9', 'Tyranitar-10', 'Suicune-5', 'Suicune-6', 'Swampert-TuckerSilver',
+>   'Lickitung-2', 'Graveler-2', 'Wailmer-2', 'Wartortle-2', 'Marshtomp-2', 'Sudowoodo-2', 'Magcargo-2', 'Pupitar-2',
+>   'Sealeo-2', 'Gligar-2', 'Pelipper-2', 'Lairon-2', 'Arbok-2', 'Solrock-2', 'Sandslash-2', 'Piloswine-2', 'Seviper-2',
+>   'Camerupt-2', 'Sharpedo-2', 'Mantine-2', 'Huntail-2', 'Gorebyss-2', 'Relicanth-2', 'Politoed-2', 'Dugtrio-1',
+>   'Lanturn-1', 'Whiscash-1', 'Quagsire-1', 'Ludicolo-1', 'Golem-1', 'Rhydon-1', 'Tauros-1', 'Slowbro-1', 'Donphan-1',
+>   'Claydol-1', 'Wailord-1', 'Steelix-1', 'Flygon-1', 'Vaporeon-1', 'Feraligatr-1', 'Aggron-1', 'Lapras-1', 'Swampert-1',
+>   'Dugtrio-2', 'Marowak-2', 'Lanturn-2', 'Forretress-2', 'Whiscash-2', 'Exploud-2', 'Ludicolo-2', 'Rhydon-2',
+>   'Tauros-2', 'Slowbro-2', 'Slowking-2', 'Nidoqueen-2', 'Nidoking-2', 'Cradily-2', 'Golduck-2', 'Heracross-2',
+>   'Ursaring-2', 'Donphan-2', 'Claydol-2', 'Machamp-2', 'Steelix-2', 'Tentacruel-2', 'Aerodactyl-2', 'Vaporeon-2',
+>   'Feraligatr-2', 'Aggron-2', 'Walrein-2', 'Charizard-2', 'Lapras-2', 'Swampert-2', 'Snorlax-2', 'Kingdra-2',
+>   'Milotic-2', 'Metagross-2', 'Dugtrio-3', 'Granbull-3', 'Dusclops-3', 'Forretress-3', 'Whiscash-3', 'Marowak-3',
+>   'Quagsire-3', 'Hariyama-3', 'Glalie-3', 'Golem-3', 'Rhydon-3', 'Kangaskhan-3', 'Tauros-3', 'Slowbro-3', 'Slowking-3',
+>   'Miltank-3', 'Altaria-3', 'Nidoking-3', 'Armaldo-3', 'Heracross-3', 'Donphan-3', 'Steelix-3', 'Tentacruel-3',
+>   'Starmie-3', 'Flygon-3', 'Venusaur-3', 'Vaporeon-3', 'Meganium-3', 'Blastoise-3', 'Feraligatr-3', 'Aggron-3',
+>   'Blaziken-3', 'Walrein-3', 'Sceptile-3', 'Typhlosion-3', 'Swampert-3', 'Gyarados-3', 'Milotic-3', 'Salamence-3',
+>   'Metagross-3', 'Slaking-3', 'Dugtrio-4', 'Granbull-4', 'Lanturn-4', 'Forretress-4', 'Whiscash-4', 'Marowak-4',
+>   'Quagsire-4', 'Hariyama-4', 'Dewgong-4', 'Exploud-4', 'Glalie-4', 'Golem-4', 'Rhydon-4', 'Kangaskhan-4', 'Tauros-4',
+>   'Slowbro-4', 'Slowking-4', 'Altaria-4', 'Nidoqueen-4', 'Nidoking-4', 'Armaldo-4', 'Golduck-4', 'Heracross-4',
+>   'Ursaring-4', 'Donphan-4', 'Claydol-4', 'Wailord-4', 'Machamp-4', 'Steelix-4', 'Aerodactyl-4', 'Flygon-4',
+>   'Venusaur-4', 'Vaporeon-4', 'Meganium-4', 'Blastoise-4', 'Feraligatr-4', 'Aggron-4', 'Blaziken-4', 'Walrein-4',
+>   'Charizard-4', 'Typhlosion-4', 'Lapras-4', 'Swampert-4', 'Gyarados-4', 'Milotic-4', 'Salamence-4', 'Metagross-4',
+>   'Suicune-1', 'Regirock-1', 'Regirock-2', 'Registeel-2', 'Latias-2', 'Latios-2', 'Suicune-3', 'Regirock-3', 'Latias-3',
+>   'Latios-3', 'Suicune-4', 'Registeel-4', 'Ursaring-7', 'Ursaring-8', 'Machamp-5', 'Machamp-6', 'Starmie-5',
+>   'Starmie-6', 'Starmie-8', 'Snorlax-6', 'Snorlax-7', 'Salamence-5', 'Metagross-5', 'Metagross-7', 'Metagross-8',
+>   'Regice-5', 'Latias-7', 'Latias-8', 'Latios-7', 'Latios-8', 'Dragonite-1', 'Dragonite-2', 'Dragonite-6',
+>   'Dragonite-7', 'Dragonite-9', 'Dragonite-10', 'Tyranitar-1', 'Tyranitar-2', 'Tyranitar-3', 'Tyranitar-5',
+>   'Tyranitar-6', 'Tyranitar-9', 'Tyranitar-10', 'Suicune-5', 'Suicune-6', 'Swampert-TuckerSilver',
 >   'Salamence-TuckerSilver', 'Charizard-TuckerSilver', 'Swampert-TuckerGold', 'Metagross-TuckerGold',
->   'Slaking-SpenserSilver', 'Slaking-SpenserGold', 'Suicune-SpenserGold', 'Milotic-LucySilver',
->   'Steelix-LucyGold', 'Regirock-BrandonSilver', 'Registeel-BrandonSilver'
+>   'Slaking-SpenserSilver', 'Slaking-SpenserGold', 'Suicune-SpenserGold', 'Milotic-LucySilver', 'Steelix-LucyGold',
+>   'Regirock-BrandonSilver', 'Registeel-BrandonSilver'
 > ]
 > ```
 >
@@ -983,8 +955,8 @@ All filter methods return a new `SetCollection`, so they chain freely. Every `Se
 > ```
 > SetCollection(12 sets)
 > [
->   'Beldum-1', 'Furret-2', 'Linoone-2', 'Kecleon-2', 'Absol-2', 'Aerodactyl-2', 'Mr. Mime-3',
->   'Alakazam-3', 'Slaking-3', 'Granbull-4', 'Armaldo-4', 'Ursaring-5'
+>   'Beldum-1', 'Furret-2', 'Linoone-2', 'Kecleon-2', 'Absol-2', 'Aerodactyl-2', 'Mr. Mime-3', 'Alakazam-3', 'Slaking-3',
+>   'Granbull-4', 'Armaldo-4', 'Ursaring-5'
 > ]
 > ```
 >
@@ -1003,24 +975,22 @@ All filter methods return a new `SetCollection`, so they chain freely. Every `Se
 > ```
 > SetCollection(121 sets)
 > [
->   'Slakoth-1', 'Carvanha-1', 'Staryu-1', 'Octillery-1', 'Omastar-1', 'Politoed-1', 'Wartortle-2',
->   'Parasect-2', 'Azumarill-2', 'Sunflora-2', 'Pelipper-2', 'Seadra-2', 'Chansey-2', 'Jumpluff-2',
->   'Piloswine-2', 'Mantine-2', 'Swalot-2', 'Huntail-2', 'Gorebyss-2', 'Cloyster-2', 'Jynx-1',
->   'Dusclops-1', 'Mr. Mime-1', 'Clefable-1', 'Ludicolo-1', 'Slowbro-1', 'Slowking-1', 'Cradily-1',
->   'Golduck-1', 'Gengar-1', 'Wailord-1', 'Porygon2-1', 'Gardevoir-1', 'Starmie-1', 'Blastoise-1',
->   'Walrein-1', 'Sceptile-1', 'Lapras-1', 'Snorlax-1', 'Metagross-1', 'Quagsire-2', 'Misdreavus-2',
->   'Dusclops-2', 'Whiscash-2', 'Xatu-2', 'Dewgong-2', 'Victreebel-2', 'Ludicolo-2', 'Electabuzz-2',
->   'Slowbro-2', 'Slowking-2', 'Miltank-2', 'Altaria-2', 'Nidoqueen-2', 'Nidoking-2', 'Rapidash-2',
->   'Gengar-2', 'Claydol-2', 'Shuckle-2', 'Steelix-2', 'Tentacruel-2', 'Starmie-2', 'Vaporeon-2',
->   'Meganium-2', 'Umbreon-2', 'Blastoise-2', 'Crobat-2', 'Gyarados-2', 'Blissey-2', 'Salamence-2',
->   'Slaking-2', 'Dusclops-3', 'Breloom-3', 'Vileplume-3', 'Glalie-3', 'Ludicolo-3', 'Tauros-3',
->   'Cradily-3', 'Golduck-3', 'Claydol-3', 'Shuckle-3', 'Tentacruel-3', 'Exeggutor-3', 'Swampert-3',
->   'Milotic-3', 'Quagsire-4', 'Glalie-4', 'Ludicolo-4', 'Altaria-4', 'Cradily-4', 'Tentacruel-4',
->   'Umbreon-4', 'Swampert-4', 'Milotic-4', 'Articuno-2', 'Suicune-2', 'Zapdos-3', 'Zapdos-4',
->   'Regirock-4', 'Regice-4', 'Registeel-4', 'Latias-4', 'Starmie-6', 'Lapras-5', 'Snorlax-6',
->   'Salamence-8', 'Metagross-7', 'Regice-5', 'Registeel-5', 'Latias-6', 'Latias-7', 'Latios-6',
->   'Dragonite-3', 'Dragonite-6', 'Dragonite-7', 'Dragonite-8', 'Swampert-TuckerGold',
->   'Umbreon-GretaSilver', 'Gengar-GretaGold', 'Milotic-LucySilver', 'Registeel-BrandonSilver'
+>   'Slakoth-1', 'Carvanha-1', 'Staryu-1', 'Octillery-1', 'Omastar-1', 'Politoed-1', 'Wartortle-2', 'Parasect-2',
+>   'Azumarill-2', 'Sunflora-2', 'Pelipper-2', 'Seadra-2', 'Chansey-2', 'Jumpluff-2', 'Piloswine-2', 'Mantine-2',
+>   'Swalot-2', 'Huntail-2', 'Gorebyss-2', 'Cloyster-2', 'Jynx-1', 'Dusclops-1', 'Mr. Mime-1', 'Clefable-1', 'Ludicolo-1',
+>   'Slowbro-1', 'Slowking-1', 'Cradily-1', 'Golduck-1', 'Gengar-1', 'Wailord-1', 'Porygon2-1', 'Gardevoir-1',
+>   'Starmie-1', 'Blastoise-1', 'Walrein-1', 'Sceptile-1', 'Lapras-1', 'Snorlax-1', 'Metagross-1', 'Quagsire-2',
+>   'Misdreavus-2', 'Dusclops-2', 'Whiscash-2', 'Xatu-2', 'Dewgong-2', 'Victreebel-2', 'Ludicolo-2', 'Electabuzz-2',
+>   'Slowbro-2', 'Slowking-2', 'Miltank-2', 'Altaria-2', 'Nidoqueen-2', 'Nidoking-2', 'Rapidash-2', 'Gengar-2',
+>   'Claydol-2', 'Shuckle-2', 'Steelix-2', 'Tentacruel-2', 'Starmie-2', 'Vaporeon-2', 'Meganium-2', 'Umbreon-2',
+>   'Blastoise-2', 'Crobat-2', 'Gyarados-2', 'Blissey-2', 'Salamence-2', 'Slaking-2', 'Dusclops-3', 'Breloom-3',
+>   'Vileplume-3', 'Glalie-3', 'Ludicolo-3', 'Tauros-3', 'Cradily-3', 'Golduck-3', 'Claydol-3', 'Shuckle-3',
+>   'Tentacruel-3', 'Exeggutor-3', 'Swampert-3', 'Milotic-3', 'Quagsire-4', 'Glalie-4', 'Ludicolo-4', 'Altaria-4',
+>   'Cradily-4', 'Tentacruel-4', 'Umbreon-4', 'Swampert-4', 'Milotic-4', 'Articuno-2', 'Suicune-2', 'Zapdos-3',
+>   'Zapdos-4', 'Regirock-4', 'Regice-4', 'Registeel-4', 'Latias-4', 'Starmie-6', 'Lapras-5', 'Snorlax-6', 'Salamence-8',
+>   'Metagross-7', 'Regice-5', 'Registeel-5', 'Latias-6', 'Latias-7', 'Latios-6', 'Dragonite-3', 'Dragonite-6',
+>   'Dragonite-7', 'Dragonite-8', 'Swampert-TuckerGold', 'Umbreon-GretaSilver', 'Gengar-GretaGold', 'Milotic-LucySilver',
+>   'Registeel-BrandonSilver'
 > ]
 > ```
 >
@@ -1039,36 +1009,31 @@ All filter methods return a new `SetCollection`, so they chain freely. Every `Se
 > ```
 > SetCollection(197 sets)
 > [
->   'Machop-1', 'Graveler-1', 'Machoke-1', 'Linoone-1', 'Swellow-1', 'Arbok-1', 'Sandslash-1',
->   'Hitmonlee-1', 'Hitmonchan-1', 'Sharpedo-1', 'Absol-1', 'Crawdaunt-1', 'Kabutops-1',
->   'Poliwrath-1', 'Lickitung-2', 'Graveler-2', 'Machoke-2', 'Croconaw-2', 'Azumarill-2',
->   'Raticate-2', 'Furret-2', 'Dragonair-2', 'Gligar-2', 'Qwilfish-2', 'Swellow-2', 'Arbok-2',
->   'Vigoroth-2', 'Sandslash-2', 'Piloswine-2', 'Golbat-2', 'Hitmonlee-2', 'Hitmonchan-2',
->   'Hitmontop-2', 'Banette-2', 'Zangoose-2', 'Stantler-2', 'Absol-2', 'Swalot-2', 'Crawdaunt-2',
->   'Pidgeot-2', 'Kingler-2', 'Kabutops-2', 'Poliwrath-2', 'Scyther-2', 'Dugtrio-1', 'Fearow-1',
->   'Granbull-1', 'Dodrio-1', 'Forretress-1', 'Whiscash-1', 'Skarmory-1', 'Marowak-1', 'Quagsire-1',
->   'Hariyama-1', 'Golem-1', 'Rhydon-1', 'Weezing-1', 'Kangaskhan-1', 'Tauros-1', 'Nidoqueen-1',
->   'Nidoking-1', 'Armaldo-1', 'Muk-1', 'Scizor-1', 'Heracross-1', 'Donphan-1', 'Claydol-1',
->   'Machamp-1', 'Steelix-1', 'Aerodactyl-1', 'Porygon2-1', 'Flygon-1', 'Aggron-1', 'Swampert-1',
->   'Snorlax-1', 'Arcanine-1', 'Metagross-1', 'Slaking-1', 'Dugtrio-2', 'Marowak-2', 'Fearow-2',
->   'Dodrio-2', 'Mr. Mime-2', 'Forretress-2', 'Clefable-2', 'Raichu-2', 'Golem-2', 'Rhydon-2',
->   'Weezing-2', 'Kangaskhan-2', 'Tauros-2', 'Nidoqueen-2', 'Nidoking-2', 'Cradily-2', 'Armaldo-2',
->   'Gengar-2', 'Scizor-2', 'Ursaring-2', 'Wailord-2', 'Machamp-2', 'Aerodactyl-2', 'Umbreon-2',
->   'Aggron-2', 'Charizard-2', 'Snorlax-2', 'Metagross-2', 'Slaking-2', 'Dugtrio-3', 'Granbull-3',
->   'Dusclops-3', 'Dodrio-3', 'Breloom-3', 'Marowak-3', 'Quagsire-3', 'Hariyama-3', 'Hypno-3',
->   'Golem-3', 'Rhydon-3', 'Miltank-3', 'Altaria-3', 'Armaldo-3', 'Heracross-3', 'Donphan-3',
->   'Steelix-3', 'Venusaur-3', 'Typhlosion-3', 'Crobat-3', 'Snorlax-3', 'Kingdra-3', 'Metagross-3',
->   'Slaking-3', 'Dugtrio-4', 'Dusclops-4', 'Dodrio-4', 'Breloom-4', 'Forretress-4', 'Skarmory-4',
->   'Marowak-4', 'Hariyama-4', 'Golem-4', 'Rhydon-4', 'Weezing-4', 'Kangaskhan-4', 'Miltank-4',
->   'Nidoqueen-4', 'Armaldo-4', 'Heracross-4', 'Ursaring-4', 'Donphan-4', 'Claydol-4', 'Steelix-4',
->   'Aggron-4', 'Crobat-4', 'Gyarados-4', 'Snorlax-4', 'Salamence-4', 'Regirock-1', 'Registeel-1',
->   'Regirock-2', 'Regirock-3', 'Registeel-3', 'Ursaring-5', 'Ursaring-6', 'Machamp-5', 'Machamp-6',
->   'Machamp-7', 'Machamp-8', 'Snorlax-5', 'Snorlax-6', 'Snorlax-7', 'Snorlax-8', 'Salamence-5',
->   'Metagross-8', 'Regirock-5', 'Regirock-6', 'Registeel-5', 'Registeel-6', 'Latias-7', 'Latios-7',
->   'Dragonite-1', 'Dragonite-2', 'Dragonite-3', 'Dragonite-4', 'Tyranitar-3', 'Tyranitar-5',
->   'Tyranitar-6', 'Tyranitar-7', 'Tyranitar-8', 'Tyranitar-10', 'Snorlax-AnabelSilver',
->   'Snorlax-AnabelGold', 'Salamence-TuckerSilver', 'Crobat-SpenserSilver', 'Shedinja-GretaSilver',
->   'Gyarados-LucyGold', 'Regirock-BrandonSilver', 'Registeel-BrandonSilver'
+>   'Machop-1', 'Graveler-1', 'Machoke-1', 'Linoone-1', 'Swellow-1', 'Arbok-1', 'Sandslash-1', 'Hitmonlee-1',
+>   'Hitmonchan-1', 'Sharpedo-1', 'Absol-1', 'Crawdaunt-1', 'Kabutops-1', 'Poliwrath-1', 'Lickitung-2', 'Graveler-2',
+>   'Machoke-2', 'Croconaw-2', 'Azumarill-2', 'Raticate-2', 'Furret-2', 'Dragonair-2', 'Gligar-2', 'Qwilfish-2',
+>   'Swellow-2', 'Arbok-2', 'Vigoroth-2', 'Sandslash-2', 'Piloswine-2', 'Golbat-2', 'Hitmonlee-2', 'Hitmonchan-2',
+>   'Hitmontop-2', 'Banette-2', 'Zangoose-2', 'Stantler-2', 'Absol-2', 'Swalot-2', 'Crawdaunt-2', 'Pidgeot-2',
+>   'Kingler-2', 'Kabutops-2', 'Poliwrath-2', 'Scyther-2', 'Dugtrio-1', 'Fearow-1', 'Granbull-1', 'Dodrio-1',
+>   'Forretress-1', 'Whiscash-1', 'Skarmory-1', 'Marowak-1', 'Quagsire-1', 'Hariyama-1', 'Golem-1', 'Rhydon-1',
+>   'Weezing-1', 'Kangaskhan-1', 'Tauros-1', 'Nidoqueen-1', 'Nidoking-1', 'Armaldo-1', 'Muk-1', 'Scizor-1', 'Heracross-1',
+>   'Donphan-1', 'Claydol-1', 'Machamp-1', 'Steelix-1', 'Aerodactyl-1', 'Porygon2-1', 'Flygon-1', 'Aggron-1',
+>   'Swampert-1', 'Snorlax-1', 'Arcanine-1', 'Metagross-1', 'Slaking-1', 'Dugtrio-2', 'Marowak-2', 'Fearow-2', 'Dodrio-2',
+>   'Mr. Mime-2', 'Forretress-2', 'Clefable-2', 'Raichu-2', 'Golem-2', 'Rhydon-2', 'Weezing-2', 'Kangaskhan-2',
+>   'Tauros-2', 'Nidoqueen-2', 'Nidoking-2', 'Cradily-2', 'Armaldo-2', 'Gengar-2', 'Scizor-2', 'Ursaring-2', 'Wailord-2',
+>   'Machamp-2', 'Aerodactyl-2', 'Umbreon-2', 'Aggron-2', 'Charizard-2', 'Snorlax-2', 'Metagross-2', 'Slaking-2',
+>   'Dugtrio-3', 'Granbull-3', 'Dusclops-3', 'Dodrio-3', 'Breloom-3', 'Marowak-3', 'Quagsire-3', 'Hariyama-3', 'Hypno-3',
+>   'Golem-3', 'Rhydon-3', 'Miltank-3', 'Altaria-3', 'Armaldo-3', 'Heracross-3', 'Donphan-3', 'Steelix-3', 'Venusaur-3',
+>   'Typhlosion-3', 'Crobat-3', 'Snorlax-3', 'Kingdra-3', 'Metagross-3', 'Slaking-3', 'Dugtrio-4', 'Dusclops-4',
+>   'Dodrio-4', 'Breloom-4', 'Forretress-4', 'Skarmory-4', 'Marowak-4', 'Hariyama-4', 'Golem-4', 'Rhydon-4', 'Weezing-4',
+>   'Kangaskhan-4', 'Miltank-4', 'Nidoqueen-4', 'Armaldo-4', 'Heracross-4', 'Ursaring-4', 'Donphan-4', 'Claydol-4',
+>   'Steelix-4', 'Aggron-4', 'Crobat-4', 'Gyarados-4', 'Snorlax-4', 'Salamence-4', 'Regirock-1', 'Registeel-1',
+>   'Regirock-2', 'Regirock-3', 'Registeel-3', 'Ursaring-5', 'Ursaring-6', 'Machamp-5', 'Machamp-6', 'Machamp-7',
+>   'Machamp-8', 'Snorlax-5', 'Snorlax-6', 'Snorlax-7', 'Snorlax-8', 'Salamence-5', 'Metagross-8', 'Regirock-5',
+>   'Regirock-6', 'Registeel-5', 'Registeel-6', 'Latias-7', 'Latios-7', 'Dragonite-1', 'Dragonite-2', 'Dragonite-3',
+>   'Dragonite-4', 'Tyranitar-3', 'Tyranitar-5', 'Tyranitar-6', 'Tyranitar-7', 'Tyranitar-8', 'Tyranitar-10',
+>   'Snorlax-AnabelSilver', 'Snorlax-AnabelGold', 'Salamence-TuckerSilver', 'Crobat-SpenserSilver',
+>   'Shedinja-GretaSilver', 'Gyarados-LucyGold', 'Regirock-BrandonSilver', 'Registeel-BrandonSilver'
 > ]
 > ```
 >
@@ -1087,12 +1052,11 @@ All filter methods return a new `SetCollection`, so they chain freely. Every `Se
 > ```
 > SetCollection(41 sets)
 > [
->   'Ekans-1', 'Snubbull-1', 'Growlithe-1', 'Mawile-1', 'Masquerain-1', 'Mightyena-1', 'Arbok-1',
->   'Hitmontop-1', 'Stantler-1', 'Masquerain-2', 'Mightyena-2', 'Arbok-2', 'Hitmontop-2',
->   'Stantler-2', 'Granbull-1', 'Tauros-1', 'Gyarados-1', 'Arcanine-1', 'Salamence-1', 'Granbull-2',
->   'Tauros-2', 'Gyarados-2', 'Arcanine-2', 'Salamence-2', 'Granbull-3', 'Tauros-3', 'Gyarados-3',
->   'Arcanine-3', 'Salamence-3', 'Granbull-4', 'Tauros-4', 'Gyarados-4', 'Arcanine-4', 'Salamence-4',
->   'Salamence-5', 'Salamence-6', 'Salamence-7', 'Salamence-8', 'Swampert-TuckerSilver',
+>   'Ekans-1', 'Snubbull-1', 'Growlithe-1', 'Mawile-1', 'Masquerain-1', 'Mightyena-1', 'Arbok-1', 'Hitmontop-1',
+>   'Stantler-1', 'Masquerain-2', 'Mightyena-2', 'Arbok-2', 'Hitmontop-2', 'Stantler-2', 'Granbull-1', 'Tauros-1',
+>   'Gyarados-1', 'Arcanine-1', 'Salamence-1', 'Granbull-2', 'Tauros-2', 'Gyarados-2', 'Arcanine-2', 'Salamence-2',
+>   'Granbull-3', 'Tauros-3', 'Gyarados-3', 'Arcanine-3', 'Salamence-3', 'Granbull-4', 'Tauros-4', 'Gyarados-4',
+>   'Arcanine-4', 'Salamence-4', 'Salamence-5', 'Salamence-6', 'Salamence-7', 'Salamence-8', 'Swampert-TuckerSilver',
 >   'Arcanine-SpenserGold', 'Gyarados-LucyGold'
 > ]
 > ```
@@ -1115,33 +1079,29 @@ Filter by calculated stat value. Specify `ivs` and `level` to match the format y
 > ```
 > SetCollection(172 sets)
 > [
->   'Krabby-1', 'Hitmonlee-1', 'Zangoose-1', 'Sharpedo-1', 'Absol-1', 'Crawdaunt-1', 'Octillery-1',
->   'Huntail-1', 'Kabutops-1', 'Scyther-1', 'Pinsir-1', 'Machoke-2', 'Hitmonlee-2', 'Zangoose-2',
->   'Sharpedo-2', 'Stantler-2', 'Absol-2', 'Crawdaunt-2', 'Kingler-2', 'Kabutops-2', 'Scyther-2',
->   'Fearow-1', 'Granbull-1', 'Dodrio-1', 'Breloom-1', 'Forretress-1', 'Hariyama-1', 'Golem-1',
->   'Rhydon-1', 'Weezing-1', 'Kangaskhan-1', 'Tauros-1', 'Nidoking-1', 'Armaldo-1', 'Muk-1',
->   'Scizor-1', 'Heracross-1', 'Ursaring-1', 'Donphan-1', 'Machamp-1', 'Aerodactyl-1', 'Flygon-1',
->   'Aggron-1', 'Blaziken-1', 'Snorlax-1', 'Arcanine-1', 'Salamence-1', 'Metagross-1', 'Slaking-1',
->   'Fearow-2', 'Dodrio-2', 'Forretress-2', 'Hariyama-2', 'Raichu-2', 'Victreebel-2', 'Golem-2',
->   'Rhydon-2', 'Weezing-2', 'Kangaskhan-2', 'Tauros-2', 'Nidoking-2', 'Armaldo-2', 'Muk-2',
->   'Scizor-2', 'Ursaring-2', 'Donphan-2', 'Machamp-2', 'Aerodactyl-2', 'Aggron-2', 'Blaziken-2',
->   'Salamence-2', 'Metagross-2', 'Slaking-2', 'Granbull-3', 'Dodrio-3', 'Breloom-3', 'Hariyama-3',
->   'Victreebel-3', 'Golem-3', 'Rhydon-3', 'Armaldo-3', 'Scizor-3', 'Heracross-3', 'Donphan-3',
->   'Machamp-3', 'Aerodactyl-3', 'Flareon-3', 'Blaziken-3', 'Crobat-3', 'Swampert-3', 'Gyarados-3',
->   'Salamence-3', 'Metagross-3', 'Slaking-3', 'Granbull-4', 'Dodrio-4', 'Breloom-4', 'Forretress-4',
->   'Hariyama-4', 'Victreebel-4', 'Golem-4', 'Rhydon-4', 'Weezing-4', 'Kangaskhan-4', 'Armaldo-4',
->   'Muk-4', 'Heracross-4', 'Ursaring-4', 'Donphan-4', 'Machamp-4', 'Aerodactyl-4', 'Flareon-4',
->   'Aggron-4', 'Blaziken-4', 'Crobat-4', 'Swampert-4', 'Gyarados-4', 'Snorlax-4', 'Salamence-4',
->   'Metagross-4', 'Slaking-4', 'Regirock-1', 'Regirock-2', 'Entei-3', 'Ursaring-5', 'Ursaring-6',
->   'Ursaring-7', 'Ursaring-8', 'Machamp-5', 'Machamp-6', 'Machamp-7', 'Machamp-8', 'Snorlax-5',
->   'Snorlax-6', 'Salamence-5', 'Salamence-6', 'Metagross-5', 'Metagross-6', 'Metagross-7',
->   'Metagross-8', 'Regirock-5', 'Dragonite-1', 'Dragonite-2', 'Dragonite-3', 'Dragonite-4',
->   'Dragonite-5', 'Dragonite-9', 'Dragonite-10', 'Tyranitar-1', 'Tyranitar-2', 'Tyranitar-3',
->   'Tyranitar-5', 'Tyranitar-6', 'Tyranitar-7', 'Tyranitar-8', 'Tyranitar-9', 'Tyranitar-10',
->   'Entei-AnabelSilver', 'Snorlax-AnabelSilver', 'Snorlax-AnabelGold', 'Swampert-TuckerSilver',
->   'Salamence-TuckerSilver', 'Swampert-TuckerGold', 'Metagross-TuckerGold', 'Slaking-SpenserSilver',
->   'Arcanine-SpenserGold', 'Slaking-SpenserGold', 'Heracross-GretaSilver', 'Shedinja-GretaSilver',
->   'Breloom-GretaGold', 'Gyarados-LucyGold', 'Regirock-BrandonSilver'
+>   'Krabby-1', 'Hitmonlee-1', 'Zangoose-1', 'Sharpedo-1', 'Absol-1', 'Crawdaunt-1', 'Octillery-1', 'Huntail-1',
+>   'Kabutops-1', 'Scyther-1', 'Pinsir-1', 'Machoke-2', 'Hitmonlee-2', 'Zangoose-2', 'Sharpedo-2', 'Stantler-2',
+>   'Absol-2', 'Crawdaunt-2', 'Kingler-2', 'Kabutops-2', 'Scyther-2', 'Fearow-1', 'Granbull-1', 'Dodrio-1', 'Breloom-1',
+>   'Forretress-1', 'Hariyama-1', 'Golem-1', 'Rhydon-1', 'Weezing-1', 'Kangaskhan-1', 'Tauros-1', 'Nidoking-1',
+>   'Armaldo-1', 'Muk-1', 'Scizor-1', 'Heracross-1', 'Ursaring-1', 'Donphan-1', 'Machamp-1', 'Aerodactyl-1', 'Flygon-1',
+>   'Aggron-1', 'Blaziken-1', 'Snorlax-1', 'Arcanine-1', 'Salamence-1', 'Metagross-1', 'Slaking-1', 'Fearow-2',
+>   'Dodrio-2', 'Forretress-2', 'Hariyama-2', 'Raichu-2', 'Victreebel-2', 'Golem-2', 'Rhydon-2', 'Weezing-2',
+>   'Kangaskhan-2', 'Tauros-2', 'Nidoking-2', 'Armaldo-2', 'Muk-2', 'Scizor-2', 'Ursaring-2', 'Donphan-2', 'Machamp-2',
+>   'Aerodactyl-2', 'Aggron-2', 'Blaziken-2', 'Salamence-2', 'Metagross-2', 'Slaking-2', 'Granbull-3', 'Dodrio-3',
+>   'Breloom-3', 'Hariyama-3', 'Victreebel-3', 'Golem-3', 'Rhydon-3', 'Armaldo-3', 'Scizor-3', 'Heracross-3', 'Donphan-3',
+>   'Machamp-3', 'Aerodactyl-3', 'Flareon-3', 'Blaziken-3', 'Crobat-3', 'Swampert-3', 'Gyarados-3', 'Salamence-3',
+>   'Metagross-3', 'Slaking-3', 'Granbull-4', 'Dodrio-4', 'Breloom-4', 'Forretress-4', 'Hariyama-4', 'Victreebel-4',
+>   'Golem-4', 'Rhydon-4', 'Weezing-4', 'Kangaskhan-4', 'Armaldo-4', 'Muk-4', 'Heracross-4', 'Ursaring-4', 'Donphan-4',
+>   'Machamp-4', 'Aerodactyl-4', 'Flareon-4', 'Aggron-4', 'Blaziken-4', 'Crobat-4', 'Swampert-4', 'Gyarados-4',
+>   'Snorlax-4', 'Salamence-4', 'Metagross-4', 'Slaking-4', 'Regirock-1', 'Regirock-2', 'Entei-3', 'Ursaring-5',
+>   'Ursaring-6', 'Ursaring-7', 'Ursaring-8', 'Machamp-5', 'Machamp-6', 'Machamp-7', 'Machamp-8', 'Snorlax-5',
+>   'Snorlax-6', 'Salamence-5', 'Salamence-6', 'Metagross-5', 'Metagross-6', 'Metagross-7', 'Metagross-8', 'Regirock-5',
+>   'Dragonite-1', 'Dragonite-2', 'Dragonite-3', 'Dragonite-4', 'Dragonite-5', 'Dragonite-9', 'Dragonite-10',
+>   'Tyranitar-1', 'Tyranitar-2', 'Tyranitar-3', 'Tyranitar-5', 'Tyranitar-6', 'Tyranitar-7', 'Tyranitar-8',
+>   'Tyranitar-9', 'Tyranitar-10', 'Entei-AnabelSilver', 'Snorlax-AnabelSilver', 'Snorlax-AnabelGold',
+>   'Swampert-TuckerSilver', 'Salamence-TuckerSilver', 'Swampert-TuckerGold', 'Metagross-TuckerGold',
+>   'Slaking-SpenserSilver', 'Arcanine-SpenserGold', 'Slaking-SpenserGold', 'Heracross-GretaSilver',
+>   'Shedinja-GretaSilver', 'Breloom-GretaGold', 'Gyarados-LucyGold', 'Regirock-BrandonSilver'
 > ]
 > ```
 >
@@ -1160,26 +1120,23 @@ Filter by calculated stat value. Specify `ivs` and `level` to match the format y
 > ```
 > SetCollection(138 sets)
 > [
->   'Spearow-1', 'Taillow-1', 'Wingull-1', 'Meowth-1', 'Electrike-1', 'Vulpix-1', 'Remoraid-1',
->   'Doduo-1', 'Eevee-1', 'Voltorb-1', 'Luvdisc-1', 'Staryu-1', 'Elekid-1', 'Magby-1', 'Beedrill-1',
->   'Poliwhirl-1', 'Beautifly-1', 'Dustox-1', 'Yanma-1', 'Kadabra-1', 'Illumise-1', 'Haunter-1',
->   'Murkrow-1', 'Plusle-1', 'Minun-1', 'Grovyle-1', 'Ponyta-1', 'Pupitar-1', 'Furret-1', 'Linoone-1',
->   'Gligar-1', 'Qwilfish-1', 'Sneasel-1', 'Vigoroth-1', 'Primeape-1', 'Hitmonlee-1', 'Zangoose-1',
->   'Sharpedo-1', 'Magneton-1', 'Stantler-1', 'Pidgeot-1', 'Cacturne-1', 'Scyther-1', 'Pinsir-1',
->   'Delcatty-2', 'Kadabra-2', 'Haunter-2', 'Murkrow-2', 'Gligar-2', 'Qwilfish-2', 'Seadra-2',
->   'Vigoroth-2', 'Golbat-2', 'Primeape-2', 'Hitmonlee-2', 'Girafarig-2', 'Absol-2', 'Misdreavus-1',
->   'Jynx-1', 'Xatu-1', 'Kangaskhan-1', 'Electabuzz-1', 'Miltank-1', 'Nidoking-1', 'Heracross-1',
->   'Tentacruel-1', 'Kingdra-1', 'Metagross-1', 'Slaking-1', 'Misdreavus-2', 'Jynx-2', 'Mr. Mime-2',
->   'Breloom-2', 'Xatu-2', 'Kangaskhan-2', 'Miltank-2', 'Nidoking-2', 'Golduck-2', 'Donphan-2',
->   'Tentacruel-2', 'Lapras-2', 'Kingdra-2', 'Metagross-2', 'Slaking-2', 'Misdreavus-3', 'Jynx-3',
->   'Mr. Mime-3', 'Lanturn-3', 'Breloom-3', 'Exploud-3', 'Glalie-3', 'Miltank-3', 'Nidoking-3',
->   'Magmar-3', 'Golduck-3', 'Kingdra-3', 'Salamence-3', 'Metagross-3', 'Slaking-3', 'Fearow-4',
->   'Jynx-4', 'Mr. Mime-4', 'Lanturn-4', 'Breloom-4', 'Xatu-4', 'Raichu-4', 'Electabuzz-4',
->   'Miltank-4', 'Nidoking-4', 'Magmar-4', 'Tentacruel-4', 'Kingdra-4', 'Salamence-4', 'Slaking-4',
->   'Moltres-1', 'Articuno-2', 'Moltres-2', 'Suicune-2', 'Articuno-3', 'Articuno-4', 'Zapdos-4',
->   'Gardevoir-5', 'Salamence-5', 'Salamence-6', 'Metagross-5', 'Metagross-8', 'Articuno-5',
->   'Articuno-6', 'Zapdos-5', 'Moltres-6', 'Entei-5', 'Entei-6', 'Suicune-5', 'Suicune-6',
->   'Entei-AnabelSilver', 'Charizard-TuckerSilver', 'Arcanine-SpenserGold', 'Suicune-SpenserGold'
+>   'Spearow-1', 'Taillow-1', 'Wingull-1', 'Meowth-1', 'Electrike-1', 'Vulpix-1', 'Remoraid-1', 'Doduo-1', 'Eevee-1',
+>   'Voltorb-1', 'Luvdisc-1', 'Staryu-1', 'Elekid-1', 'Magby-1', 'Beedrill-1', 'Poliwhirl-1', 'Beautifly-1', 'Dustox-1',
+>   'Yanma-1', 'Kadabra-1', 'Illumise-1', 'Haunter-1', 'Murkrow-1', 'Plusle-1', 'Minun-1', 'Grovyle-1', 'Ponyta-1',
+>   'Pupitar-1', 'Furret-1', 'Linoone-1', 'Gligar-1', 'Qwilfish-1', 'Sneasel-1', 'Vigoroth-1', 'Primeape-1',
+>   'Hitmonlee-1', 'Zangoose-1', 'Sharpedo-1', 'Magneton-1', 'Stantler-1', 'Pidgeot-1', 'Cacturne-1', 'Scyther-1',
+>   'Pinsir-1', 'Delcatty-2', 'Kadabra-2', 'Haunter-2', 'Murkrow-2', 'Gligar-2', 'Qwilfish-2', 'Seadra-2', 'Vigoroth-2',
+>   'Golbat-2', 'Primeape-2', 'Hitmonlee-2', 'Girafarig-2', 'Absol-2', 'Misdreavus-1', 'Jynx-1', 'Xatu-1', 'Kangaskhan-1',
+>   'Electabuzz-1', 'Miltank-1', 'Nidoking-1', 'Heracross-1', 'Tentacruel-1', 'Kingdra-1', 'Metagross-1', 'Slaking-1',
+>   'Misdreavus-2', 'Jynx-2', 'Mr. Mime-2', 'Breloom-2', 'Xatu-2', 'Kangaskhan-2', 'Miltank-2', 'Nidoking-2', 'Golduck-2',
+>   'Donphan-2', 'Tentacruel-2', 'Lapras-2', 'Kingdra-2', 'Metagross-2', 'Slaking-2', 'Misdreavus-3', 'Jynx-3',
+>   'Mr. Mime-3', 'Lanturn-3', 'Breloom-3', 'Exploud-3', 'Glalie-3', 'Miltank-3', 'Nidoking-3', 'Magmar-3', 'Golduck-3',
+>   'Kingdra-3', 'Salamence-3', 'Metagross-3', 'Slaking-3', 'Fearow-4', 'Jynx-4', 'Mr. Mime-4', 'Lanturn-4', 'Breloom-4',
+>   'Xatu-4', 'Raichu-4', 'Electabuzz-4', 'Miltank-4', 'Nidoking-4', 'Magmar-4', 'Tentacruel-4', 'Kingdra-4',
+>   'Salamence-4', 'Slaking-4', 'Moltres-1', 'Articuno-2', 'Moltres-2', 'Suicune-2', 'Articuno-3', 'Articuno-4',
+>   'Zapdos-4', 'Gardevoir-5', 'Salamence-5', 'Salamence-6', 'Metagross-5', 'Metagross-8', 'Articuno-5', 'Articuno-6',
+>   'Zapdos-5', 'Moltres-6', 'Entei-5', 'Entei-6', 'Suicune-5', 'Suicune-6', 'Entei-AnabelSilver',
+>   'Charizard-TuckerSilver', 'Arcanine-SpenserGold', 'Suicune-SpenserGold'
 > ]
 > ```
 >
@@ -1198,23 +1155,21 @@ Filter by calculated stat value. Specify `ivs` and `level` to match the format y
 > ```
 > SetCollection(116 sets)
 > [
->   'Magneton-1', 'Gorebyss-1', 'Omastar-1', 'Jynx-1', 'Manectric-1', 'Alakazam-1', 'Golduck-1',
->   'Gengar-1', 'Ampharos-1', 'Exeggutor-1', 'Starmie-1', 'Venusaur-1', 'Vaporeon-1', 'Jolteon-1',
->   'Flareon-1', 'Espeon-1', 'Blaziken-1', 'Sceptile-1', 'Charizard-1', 'Typhlosion-1', 'Kingdra-1',
->   'Manectric-2', 'Alakazam-2', 'Slowking-2', 'Magmar-2', 'Ampharos-2', 'Houndoom-2', 'Porygon2-2',
->   'Gardevoir-2', 'Jolteon-2', 'Blaziken-2', 'Sceptile-2', 'Milotic-2', 'Mr. Mime-3', 'Alakazam-3',
->   'Slowbro-3', 'Gengar-3', 'Ampharos-3', 'Porygon2-3', 'Gardevoir-3', 'Starmie-3', 'Espeon-3',
->   'Charizard-3', 'Arcanine-3', 'Salamence-3', 'Jynx-4', 'Mr. Mime-4', 'Manectric-4', 'Vileplume-4',
->   'Alakazam-4', 'Slowking-4', 'Gengar-4', 'Ampharos-4', 'Houndoom-4', 'Porygon2-4', 'Gardevoir-4',
->   'Exeggutor-4', 'Starmie-4', 'Jolteon-4', 'Flareon-4', 'Espeon-4', 'Blaziken-4', 'Walrein-4',
->   'Sceptile-4', 'Slaking-4', 'Articuno-1', 'Zapdos-1', 'Moltres-1', 'Raikou-1', 'Regice-1',
->   'Latias-1', 'Latios-1', 'Moltres-2', 'Raikou-2', 'Regice-2', 'Latias-2', 'Latios-2', 'Zapdos-3',
->   'Moltres-3', 'Raikou-3', 'Regice-3', 'Latias-3', 'Latios-3', 'Zapdos-4', 'Moltres-4', 'Raikou-4',
->   'Latios-4', 'Gengar-5', 'Gengar-6', 'Gengar-7', 'Gengar-8', 'Gardevoir-8', 'Starmie-5',
->   'Starmie-7', 'Starmie-8', 'Salamence-7', 'Salamence-8', 'Regice-6', 'Latias-6', 'Latios-5',
->   'Latios-6', 'Latios-8', 'Dragonite-6', 'Dragonite-7', 'Dragonite-8', 'Tyranitar-4', 'Zapdos-5',
->   'Zapdos-6', 'Moltres-5', 'Moltres-6', 'Raikou-5', 'Alakazam-AnabelSilver', 'Latios-AnabelGold',
->   'Gengar-GretaGold', 'Zapdos-BrandonGold', 'Moltres-BrandonGold'
+>   'Magneton-1', 'Gorebyss-1', 'Omastar-1', 'Jynx-1', 'Manectric-1', 'Alakazam-1', 'Golduck-1', 'Gengar-1', 'Ampharos-1',
+>   'Exeggutor-1', 'Starmie-1', 'Venusaur-1', 'Vaporeon-1', 'Jolteon-1', 'Flareon-1', 'Espeon-1', 'Blaziken-1',
+>   'Sceptile-1', 'Charizard-1', 'Typhlosion-1', 'Kingdra-1', 'Manectric-2', 'Alakazam-2', 'Slowking-2', 'Magmar-2',
+>   'Ampharos-2', 'Houndoom-2', 'Porygon2-2', 'Gardevoir-2', 'Jolteon-2', 'Blaziken-2', 'Sceptile-2', 'Milotic-2',
+>   'Mr. Mime-3', 'Alakazam-3', 'Slowbro-3', 'Gengar-3', 'Ampharos-3', 'Porygon2-3', 'Gardevoir-3', 'Starmie-3',
+>   'Espeon-3', 'Charizard-3', 'Arcanine-3', 'Salamence-3', 'Jynx-4', 'Mr. Mime-4', 'Manectric-4', 'Vileplume-4',
+>   'Alakazam-4', 'Slowking-4', 'Gengar-4', 'Ampharos-4', 'Houndoom-4', 'Porygon2-4', 'Gardevoir-4', 'Exeggutor-4',
+>   'Starmie-4', 'Jolteon-4', 'Flareon-4', 'Espeon-4', 'Blaziken-4', 'Walrein-4', 'Sceptile-4', 'Slaking-4', 'Articuno-1',
+>   'Zapdos-1', 'Moltres-1', 'Raikou-1', 'Regice-1', 'Latias-1', 'Latios-1', 'Moltres-2', 'Raikou-2', 'Regice-2',
+>   'Latias-2', 'Latios-2', 'Zapdos-3', 'Moltres-3', 'Raikou-3', 'Regice-3', 'Latias-3', 'Latios-3', 'Zapdos-4',
+>   'Moltres-4', 'Raikou-4', 'Latios-4', 'Gengar-5', 'Gengar-6', 'Gengar-7', 'Gengar-8', 'Gardevoir-8', 'Starmie-5',
+>   'Starmie-7', 'Starmie-8', 'Salamence-7', 'Salamence-8', 'Regice-6', 'Latias-6', 'Latios-5', 'Latios-6', 'Latios-8',
+>   'Dragonite-6', 'Dragonite-7', 'Dragonite-8', 'Tyranitar-4', 'Zapdos-5', 'Zapdos-6', 'Moltres-5', 'Moltres-6',
+>   'Raikou-5', 'Alakazam-AnabelSilver', 'Latios-AnabelGold', 'Gengar-GretaGold', 'Zapdos-BrandonGold',
+>   'Moltres-BrandonGold'
 > ]
 > ```
 >
@@ -1252,10 +1207,10 @@ Compare frontier sets against a `CustomSet` benchmark:
 > ```
 > SetCollection(27 sets)
 > [
->   'Ninjask-1', 'Sneasel-2', 'Ninjask-2', 'Dugtrio-1', 'Aerodactyl-1', 'Jolteon-1', 'Sceptile-1',
->   'Dugtrio-2', 'Aerodactyl-2', 'Sceptile-2', 'Dugtrio-3', 'Starmie-3', 'Crobat-3', 'Dugtrio-4',
->   'Starmie-4', 'Jolteon-4', 'Sceptile-4', 'Crobat-4', 'Raikou-1', 'Raikou-2', 'Raikou-3',
->   'Raikou-4', 'Starmie-5', 'Starmie-7', 'Starmie-8', 'Raikou-5', 'Crobat-SpenserSilver'
+>   'Ninjask-1', 'Sneasel-2', 'Ninjask-2', 'Dugtrio-1', 'Aerodactyl-1', 'Jolteon-1', 'Sceptile-1', 'Dugtrio-2',
+>   'Aerodactyl-2', 'Sceptile-2', 'Dugtrio-3', 'Starmie-3', 'Crobat-3', 'Dugtrio-4', 'Starmie-4', 'Jolteon-4',
+>   'Sceptile-4', 'Crobat-4', 'Raikou-1', 'Raikou-2', 'Raikou-3', 'Raikou-4', 'Starmie-5', 'Starmie-7', 'Starmie-8',
+>   'Raikou-5', 'Crobat-SpenserSilver'
 > ]
 > ```
 >
@@ -1274,122 +1229,116 @@ Compare frontier sets against a `CustomSet` benchmark:
 > ```
 > SetCollection(890 sets)
 > [
->   'Sunkern-1', 'Azurill-1', 'Caterpie-1', 'Weedle-1', 'Wurmple-1', 'Ralts-1', 'Magikarp-1',
->   'Feebas-1', 'Metapod-1', 'Kakuna-1', 'Pichu-1', 'Silcoon-1', 'Cascoon-1', 'Igglybuff-1',
->   'Wooper-1', 'Tyrogue-1', 'Sentret-1', 'Cleffa-1', 'Seedot-1', 'Lotad-1', 'Poochyena-1',
->   'Shedinja-1', 'Makuhita-1', 'Whismur-1', 'Zigzagoon-1', 'Zubat-1', 'Togepi-1', 'Spinarak-1',
->   'Marill-1', 'Hoppip-1', 'Slugma-1', 'Swinub-1', 'Smeargle-1', 'Pidgey-1', 'Rattata-1', 'Wynaut-1',
->   'Skitty-1', 'Spearow-1', 'Hoothoot-1', 'Diglett-1', 'Ledyba-1', 'Nincada-1', 'Surskit-1',
->   'Jigglypuff-1', 'Taillow-1', 'Wingull-1', 'NidoranM-1', 'NidoranF-1', 'Kirlia-1', 'Mareep-1',
->   'Meditite-1', 'Slakoth-1', 'Paras-1', 'Ekans-1', 'Ditto-1', 'Barboach-1', 'Meowth-1', 'Pineco-1',
->   'Trapinch-1', 'Spheal-1', 'Horsea-1', 'Shroomish-1', 'Shuppet-1', 'Duskull-1', 'Electrike-1',
->   'Vulpix-1', 'Pikachu-1', 'Sandshrew-1', 'Poliwag-1', 'Bellsprout-1', 'Geodude-1', 'Dratini-1',
->   'Snubbull-1', 'Remoraid-1', 'Larvitar-1', 'Baltoy-1', 'Snorunt-1', 'Bagon-1', 'Beldum-1',
->   'Gulpin-1', 'Venonat-1', 'Mankey-1', 'Machop-1', 'Shellder-1', 'Smoochum-1', 'Numel-1',
->   'Carvanha-1', 'Corphish-1', 'Charmander-1', 'Cyndaquil-1', 'Abra-1', 'Doduo-1', 'Gastly-1',
->   'Swablu-1', 'Treecko-1', 'Torchic-1', 'Mudkip-1', 'Squirtle-1', 'Totodile-1', 'Slowpoke-1',
->   'Bulbasaur-1', 'Chikorita-1', 'Oddish-1', 'Psyduck-1', 'Cubone-1', 'Goldeen-1', 'Natu-1',
->   'Clefairy-1', 'Magnemite-1', 'Seel-1', 'Grimer-1', 'Krabby-1', 'Exeggcute-1', 'Eevee-1',
->   'Drowzee-1', 'Voltorb-1', 'Chinchou-1', 'Teddiursa-1', 'Delibird-1', 'Houndour-1', 'Phanpy-1',
->   'Spoink-1', 'Aron-1', 'Luvdisc-1', 'Tentacool-1', 'Cacnea-1', 'Unown-1', 'Koffing-1', 'Staryu-1',
->   'Skiploom-1', 'Nuzleaf-1', 'Lombre-1', 'Vibrava-1', 'Rhyhorn-1', 'Clamperl-1', 'Pidgeotto-1',
->   'Growlithe-1', "Farfetch'd-1", 'Omanyte-1', 'Kabuto-1', 'Lileep-1', 'Anorith-1', 'Aipom-1',
->   'Elekid-1', 'Loudred-1', 'Spinda-1', 'Nidorina-1', 'Nidorino-1', 'Flaaffy-1', 'Magby-1',
->   'Nosepass-1', 'Corsola-1', 'Mawile-1', 'Butterfree-1', 'Beedrill-1', 'Poliwhirl-1', 'Onix-1',
->   'Beautifly-1', 'Dustox-1', 'Ledian-1', 'Ariados-1', 'Yanma-1', 'Delcatty-1', 'Sableye-1',
->   'Lickitung-1', 'Weepinbell-1', 'Graveler-1', 'Gloom-1', 'Porygon-1', 'Kadabra-1', 'Wailmer-1',
->   'Roselia-1', 'Volbeat-1', 'Illumise-1', 'Ivysaur-1', 'Charmeleon-1', 'Wartortle-1', 'Parasect-1',
->   'Machoke-1', 'Haunter-1', 'Bayleef-1', 'Quilava-1', 'Croconaw-1', 'Togetic-1', 'Murkrow-1',
->   'Wobbuffet-1', 'Plusle-1', 'Minun-1', 'Grovyle-1', 'Combusken-1', 'Marshtomp-1', 'Ponyta-1',
->   'Azumarill-1', 'Sudowoodo-1', 'Magcargo-1', 'Pupitar-1', 'Sealeo-1', 'Raticate-1', 'Masquerain-1',
->   'Furret-1', 'Dunsparce-1', 'Dragonair-1', 'Mightyena-1', 'Linoone-1', 'Castform-1', 'Shelgon-1',
->   'Metang-1', 'Wigglytuff-1', 'Sunflora-1', 'Chimecho-1', 'Gligar-1', 'Qwilfish-1', 'Sneasel-1',
->   'Pelipper-1', 'Swellow-1', 'Lairon-1', 'Tangela-1', 'Arbok-1', 'Persian-1', 'Seadra-1',
->   'Kecleon-1', 'Vigoroth-1', 'Lunatone-1', 'Solrock-1', 'Noctowl-1', 'Sandslash-1', 'Venomoth-1',
->   'Chansey-1', 'Seaking-1', 'Jumpluff-1', 'Piloswine-1', 'Golbat-1', 'Primeape-1', 'Hitmonlee-1',
->   'Hitmonchan-1', 'Girafarig-1', 'Hitmontop-1', 'Banette-1', 'Seviper-1', 'Zangoose-1',
->   'Camerupt-1', 'Sharpedo-1', 'Tropius-1', 'Magneton-1', 'Mantine-1', 'Stantler-1', 'Absol-1',
->   'Swalot-1', 'Crawdaunt-1', 'Pidgeot-1', 'Grumpig-1', 'Torkoal-1', 'Kingler-1', 'Cacturne-1',
->   'Bellossom-1', 'Octillery-1', 'Huntail-1', 'Gorebyss-1', 'Relicanth-1', 'Omastar-1', 'Kabutops-1',
->   'Poliwrath-1', 'Scyther-1', 'Pinsir-1', 'Politoed-1', 'Cloyster-1', 'Delcatty-2', 'Sableye-2',
->   'Lickitung-2', 'Weepinbell-2', 'Graveler-2', 'Gloom-2', 'Porygon-2', 'Kadabra-2', 'Wailmer-2',
->   'Roselia-2', 'Volbeat-2', 'Illumise-2', 'Ivysaur-2', 'Charmeleon-2', 'Wartortle-2', 'Parasect-2',
->   'Machoke-2', 'Haunter-2', 'Bayleef-2', 'Quilava-2', 'Croconaw-2', 'Togetic-2', 'Murkrow-2',
->   'Wobbuffet-2', 'Plusle-2', 'Minun-2', 'Grovyle-2', 'Combusken-2', 'Marshtomp-2', 'Ponyta-2',
->   'Azumarill-2', 'Sudowoodo-2', 'Magcargo-2', 'Pupitar-2', 'Sealeo-2', 'Raticate-2', 'Masquerain-2',
->   'Furret-2', 'Dunsparce-2', 'Dragonair-2', 'Mightyena-2', 'Castform-2', 'Shelgon-2', 'Metang-2',
->   'Wigglytuff-2', 'Sunflora-2', 'Chimecho-2', 'Gligar-2', 'Qwilfish-2', 'Pelipper-2', 'Swellow-2',
->   'Lairon-2', 'Tangela-2', 'Arbok-2', 'Persian-2', 'Seadra-2', 'Kecleon-2', 'Vigoroth-2',
->   'Lunatone-2', 'Solrock-2', 'Noctowl-2', 'Sandslash-2', 'Venomoth-2', 'Chansey-2', 'Seaking-2',
->   'Jumpluff-2', 'Piloswine-2', 'Golbat-2', 'Primeape-2', 'Hitmonlee-2', 'Hitmonchan-2',
->   'Girafarig-2', 'Hitmontop-2', 'Banette-2', 'Seviper-2', 'Zangoose-2', 'Camerupt-2', 'Sharpedo-2',
->   'Tropius-2', 'Magneton-2', 'Mantine-2', 'Stantler-2', 'Absol-2', 'Swalot-2', 'Crawdaunt-2',
->   'Pidgeot-2', 'Grumpig-2', 'Torkoal-2', 'Kingler-2', 'Cacturne-2', 'Bellossom-2', 'Octillery-2',
->   'Huntail-2', 'Gorebyss-2', 'Relicanth-2', 'Omastar-2', 'Kabutops-2', 'Poliwrath-2', 'Scyther-2',
->   'Pinsir-2', 'Politoed-2', 'Cloyster-2', 'Medicham-1', 'Misdreavus-1', 'Fearow-1', 'Granbull-1',
->   'Jynx-1', 'Dusclops-1', 'Dodrio-1', 'Mr. Mime-1', 'Lanturn-1', 'Breloom-1', 'Forretress-1',
->   'Whiscash-1', 'Xatu-1', 'Skarmory-1', 'Marowak-1', 'Quagsire-1', 'Clefable-1', 'Hariyama-1',
->   'Raichu-1', 'Dewgong-1', 'Manectric-1', 'Vileplume-1', 'Victreebel-1', 'Electrode-1', 'Exploud-1',
->   'Shiftry-1', 'Glalie-1', 'Ludicolo-1', 'Hypno-1', 'Golem-1', 'Rhydon-1', 'Alakazam-1',
->   'Weezing-1', 'Kangaskhan-1', 'Electabuzz-1', 'Tauros-1', 'Slowbro-1', 'Slowking-1', 'Miltank-1',
->   'Altaria-1', 'Nidoqueen-1', 'Nidoking-1', 'Magmar-1', 'Cradily-1', 'Armaldo-1', 'Golduck-1',
->   'Rapidash-1', 'Muk-1', 'Gengar-1', 'Ampharos-1', 'Scizor-1', 'Heracross-1', 'Ursaring-1',
->   'Houndoom-1', 'Donphan-1', 'Claydol-1', 'Wailord-1', 'Ninetales-1', 'Machamp-1', 'Shuckle-1',
->   'Steelix-1', 'Tentacruel-1', 'Porygon2-1', 'Gardevoir-1', 'Exeggutor-1', 'Starmie-1', 'Flygon-1',
->   'Venusaur-1', 'Vaporeon-1', 'Flareon-1', 'Meganium-1', 'Espeon-1', 'Umbreon-1', 'Blastoise-1',
->   'Feraligatr-1', 'Aggron-1', 'Blaziken-1', 'Walrein-1', 'Charizard-1', 'Typhlosion-1', 'Lapras-1',
->   'Crobat-1', 'Swampert-1', 'Gyarados-1', 'Snorlax-1', 'Kingdra-1', 'Blissey-1', 'Milotic-1',
->   'Arcanine-1', 'Salamence-1', 'Metagross-1', 'Slaking-1', 'Medicham-2', 'Marowak-2', 'Quagsire-2',
->   'Misdreavus-2', 'Fearow-2', 'Granbull-2', 'Jynx-2', 'Dusclops-2', 'Dodrio-2', 'Mr. Mime-2',
->   'Lanturn-2', 'Breloom-2', 'Forretress-2', 'Skarmory-2', 'Whiscash-2', 'Xatu-2', 'Clefable-2',
->   'Hariyama-2', 'Raichu-2', 'Dewgong-2', 'Manectric-2', 'Vileplume-2', 'Victreebel-2',
->   'Electrode-2', 'Exploud-2', 'Shiftry-2', 'Glalie-2', 'Ludicolo-2', 'Hypno-2', 'Golem-2',
->   'Rhydon-2', 'Alakazam-2', 'Weezing-2', 'Kangaskhan-2', 'Electabuzz-2', 'Tauros-2', 'Slowbro-2',
->   'Slowking-2', 'Miltank-2', 'Altaria-2', 'Nidoqueen-2', 'Nidoking-2', 'Magmar-2', 'Cradily-2',
->   'Armaldo-2', 'Golduck-2', 'Rapidash-2', 'Muk-2', 'Gengar-2', 'Ampharos-2', 'Scizor-2',
->   'Heracross-2', 'Ursaring-2', 'Houndoom-2', 'Donphan-2', 'Claydol-2', 'Wailord-2', 'Ninetales-2',
->   'Machamp-2', 'Shuckle-2', 'Steelix-2', 'Tentacruel-2', 'Porygon2-2', 'Gardevoir-2', 'Exeggutor-2',
->   'Starmie-2', 'Flygon-2', 'Venusaur-2', 'Vaporeon-2', 'Jolteon-2', 'Flareon-2', 'Meganium-2',
->   'Espeon-2', 'Umbreon-2', 'Blastoise-2', 'Feraligatr-2', 'Aggron-2', 'Blaziken-2', 'Walrein-2',
->   'Charizard-2', 'Typhlosion-2', 'Lapras-2', 'Crobat-2', 'Swampert-2', 'Gyarados-2', 'Snorlax-2',
->   'Kingdra-2', 'Blissey-2', 'Milotic-2', 'Arcanine-2', 'Salamence-2', 'Metagross-2', 'Slaking-2',
->   'Medicham-3', 'Misdreavus-3', 'Fearow-3', 'Granbull-3', 'Jynx-3', 'Dusclops-3', 'Dodrio-3',
->   'Mr. Mime-3', 'Lanturn-3', 'Breloom-3', 'Forretress-3', 'Whiscash-3', 'Xatu-3', 'Skarmory-3',
->   'Marowak-3', 'Quagsire-3', 'Clefable-3', 'Hariyama-3', 'Raichu-3', 'Dewgong-3', 'Manectric-3',
->   'Vileplume-3', 'Victreebel-3', 'Electrode-3', 'Exploud-3', 'Shiftry-3', 'Glalie-3', 'Ludicolo-3',
->   'Hypno-3', 'Golem-3', 'Rhydon-3', 'Alakazam-3', 'Weezing-3', 'Kangaskhan-3', 'Electabuzz-3',
->   'Tauros-3', 'Slowbro-3', 'Slowking-3', 'Miltank-3', 'Altaria-3', 'Nidoqueen-3', 'Nidoking-3',
->   'Magmar-3', 'Cradily-3', 'Armaldo-3', 'Golduck-3', 'Rapidash-3', 'Muk-3', 'Gengar-3',
->   'Ampharos-3', 'Scizor-3', 'Heracross-3', 'Ursaring-3', 'Houndoom-3', 'Donphan-3', 'Claydol-3',
->   'Wailord-3', 'Ninetales-3', 'Machamp-3', 'Shuckle-3', 'Steelix-3', 'Tentacruel-3', 'Aerodactyl-3',
->   'Porygon2-3', 'Gardevoir-3', 'Exeggutor-3', 'Flygon-3', 'Venusaur-3', 'Vaporeon-3', 'Jolteon-3',
->   'Flareon-3', 'Meganium-3', 'Espeon-3', 'Umbreon-3', 'Blastoise-3', 'Feraligatr-3', 'Aggron-3',
->   'Blaziken-3', 'Walrein-3', 'Sceptile-3', 'Charizard-3', 'Typhlosion-3', 'Lapras-3', 'Swampert-3',
->   'Gyarados-3', 'Snorlax-3', 'Kingdra-3', 'Blissey-3', 'Milotic-3', 'Arcanine-3', 'Salamence-3',
->   'Metagross-3', 'Slaking-3', 'Medicham-4', 'Misdreavus-4', 'Fearow-4', 'Granbull-4', 'Jynx-4',
->   'Dusclops-4', 'Dodrio-4', 'Mr. Mime-4', 'Lanturn-4', 'Breloom-4', 'Forretress-4', 'Whiscash-4',
->   'Xatu-4', 'Skarmory-4', 'Marowak-4', 'Quagsire-4', 'Clefable-4', 'Hariyama-4', 'Raichu-4',
->   'Dewgong-4', 'Manectric-4', 'Vileplume-4', 'Victreebel-4', 'Electrode-4', 'Exploud-4',
->   'Shiftry-4', 'Glalie-4', 'Ludicolo-4', 'Hypno-4', 'Golem-4', 'Rhydon-4', 'Alakazam-4',
->   'Weezing-4', 'Kangaskhan-4', 'Electabuzz-4', 'Tauros-4', 'Slowbro-4', 'Slowking-4', 'Miltank-4',
->   'Altaria-4', 'Nidoqueen-4', 'Nidoking-4', 'Magmar-4', 'Cradily-4', 'Armaldo-4', 'Golduck-4',
->   'Rapidash-4', 'Muk-4', 'Gengar-4', 'Ampharos-4', 'Scizor-4', 'Heracross-4', 'Ursaring-4',
->   'Houndoom-4', 'Donphan-4', 'Claydol-4', 'Wailord-4', 'Ninetales-4', 'Machamp-4', 'Shuckle-4',
->   'Steelix-4', 'Tentacruel-4', 'Aerodactyl-4', 'Porygon2-4', 'Gardevoir-4', 'Exeggutor-4',
->   'Flygon-4', 'Venusaur-4', 'Vaporeon-4', 'Flareon-4', 'Meganium-4', 'Espeon-4', 'Umbreon-4',
->   'Blastoise-4', 'Feraligatr-4', 'Aggron-4', 'Blaziken-4', 'Walrein-4', 'Charizard-4',
->   'Typhlosion-4', 'Lapras-4', 'Swampert-4', 'Gyarados-4', 'Snorlax-4', 'Kingdra-4', 'Blissey-4',
->   'Milotic-4', 'Arcanine-4', 'Salamence-4', 'Metagross-4', 'Slaking-4', 'Articuno-1', 'Zapdos-1',
->   'Moltres-1', 'Entei-1', 'Suicune-1', 'Regirock-1', 'Regice-1', 'Registeel-1', 'Latias-1',
->   'Latios-1', 'Articuno-2', 'Zapdos-2', 'Moltres-2', 'Entei-2', 'Suicune-2', 'Regirock-2',
->   'Regice-2', 'Registeel-2', 'Latias-2', 'Latios-2', 'Articuno-3', 'Zapdos-3', 'Moltres-3',
->   'Entei-3', 'Suicune-3', 'Regirock-3', 'Regice-3', 'Registeel-3', 'Latias-3', 'Latios-3',
->   'Articuno-4', 'Zapdos-4', 'Moltres-4', 'Entei-4', 'Suicune-4', 'Regirock-4', 'Regice-4',
->   'Registeel-4', 'Latias-4', 'Latios-4', 'Gengar-5', 'Gengar-6', 'Gengar-7', 'Gengar-8',
->   'Ursaring-5', 'Ursaring-6', 'Ursaring-7', 'Ursaring-8', 'Machamp-5', 'Machamp-6', 'Machamp-7',
->   'Machamp-8', 'Gardevoir-5', 'Gardevoir-6', 'Gardevoir-7', 'Gardevoir-8', 'Starmie-6', 'Lapras-5',
->   'Lapras-6', 'Lapras-7', 'Lapras-8', 'Snorlax-5', 'Snorlax-6',
->   ... and 90 more
+>   'Sunkern-1', 'Azurill-1', 'Caterpie-1', 'Weedle-1', 'Wurmple-1', 'Ralts-1', 'Magikarp-1', 'Feebas-1', 'Metapod-1',
+>   'Kakuna-1', 'Pichu-1', 'Silcoon-1', 'Cascoon-1', 'Igglybuff-1', 'Wooper-1', 'Tyrogue-1', 'Sentret-1', 'Cleffa-1',
+>   'Seedot-1', 'Lotad-1', 'Poochyena-1', 'Shedinja-1', 'Makuhita-1', 'Whismur-1', 'Zigzagoon-1', 'Zubat-1', 'Togepi-1',
+>   'Spinarak-1', 'Marill-1', 'Hoppip-1', 'Slugma-1', 'Swinub-1', 'Smeargle-1', 'Pidgey-1', 'Rattata-1', 'Wynaut-1',
+>   'Skitty-1', 'Spearow-1', 'Hoothoot-1', 'Diglett-1', 'Ledyba-1', 'Nincada-1', 'Surskit-1', 'Jigglypuff-1', 'Taillow-1',
+>   'Wingull-1', 'NidoranM-1', 'NidoranF-1', 'Kirlia-1', 'Mareep-1', 'Meditite-1', 'Slakoth-1', 'Paras-1', 'Ekans-1',
+>   'Ditto-1', 'Barboach-1', 'Meowth-1', 'Pineco-1', 'Trapinch-1', 'Spheal-1', 'Horsea-1', 'Shroomish-1', 'Shuppet-1',
+>   'Duskull-1', 'Electrike-1', 'Vulpix-1', 'Pikachu-1', 'Sandshrew-1', 'Poliwag-1', 'Bellsprout-1', 'Geodude-1',
+>   'Dratini-1', 'Snubbull-1', 'Remoraid-1', 'Larvitar-1', 'Baltoy-1', 'Snorunt-1', 'Bagon-1', 'Beldum-1', 'Gulpin-1',
+>   'Venonat-1', 'Mankey-1', 'Machop-1', 'Shellder-1', 'Smoochum-1', 'Numel-1', 'Carvanha-1', 'Corphish-1',
+>   'Charmander-1', 'Cyndaquil-1', 'Abra-1', 'Doduo-1', 'Gastly-1', 'Swablu-1', 'Treecko-1', 'Torchic-1', 'Mudkip-1',
+>   'Squirtle-1', 'Totodile-1', 'Slowpoke-1', 'Bulbasaur-1', 'Chikorita-1', 'Oddish-1', 'Psyduck-1', 'Cubone-1',
+>   'Goldeen-1', 'Natu-1', 'Clefairy-1', 'Magnemite-1', 'Seel-1', 'Grimer-1', 'Krabby-1', 'Exeggcute-1', 'Eevee-1',
+>   'Drowzee-1', 'Voltorb-1', 'Chinchou-1', 'Teddiursa-1', 'Delibird-1', 'Houndour-1', 'Phanpy-1', 'Spoink-1', 'Aron-1',
+>   'Luvdisc-1', 'Tentacool-1', 'Cacnea-1', 'Unown-1', 'Koffing-1', 'Staryu-1', 'Skiploom-1', 'Nuzleaf-1', 'Lombre-1',
+>   'Vibrava-1', 'Rhyhorn-1', 'Clamperl-1', 'Pidgeotto-1', 'Growlithe-1', "Farfetch'd-1", 'Omanyte-1', 'Kabuto-1',
+>   'Lileep-1', 'Anorith-1', 'Aipom-1', 'Elekid-1', 'Loudred-1', 'Spinda-1', 'Nidorina-1', 'Nidorino-1', 'Flaaffy-1',
+>   'Magby-1', 'Nosepass-1', 'Corsola-1', 'Mawile-1', 'Butterfree-1', 'Beedrill-1', 'Poliwhirl-1', 'Onix-1',
+>   'Beautifly-1', 'Dustox-1', 'Ledian-1', 'Ariados-1', 'Yanma-1', 'Delcatty-1', 'Sableye-1', 'Lickitung-1',
+>   'Weepinbell-1', 'Graveler-1', 'Gloom-1', 'Porygon-1', 'Kadabra-1', 'Wailmer-1', 'Roselia-1', 'Volbeat-1',
+>   'Illumise-1', 'Ivysaur-1', 'Charmeleon-1', 'Wartortle-1', 'Parasect-1', 'Machoke-1', 'Haunter-1', 'Bayleef-1',
+>   'Quilava-1', 'Croconaw-1', 'Togetic-1', 'Murkrow-1', 'Wobbuffet-1', 'Plusle-1', 'Minun-1', 'Grovyle-1', 'Combusken-1',
+>   'Marshtomp-1', 'Ponyta-1', 'Azumarill-1', 'Sudowoodo-1', 'Magcargo-1', 'Pupitar-1', 'Sealeo-1', 'Raticate-1',
+>   'Masquerain-1', 'Furret-1', 'Dunsparce-1', 'Dragonair-1', 'Mightyena-1', 'Linoone-1', 'Castform-1', 'Shelgon-1',
+>   'Metang-1', 'Wigglytuff-1', 'Sunflora-1', 'Chimecho-1', 'Gligar-1', 'Qwilfish-1', 'Sneasel-1', 'Pelipper-1',
+>   'Swellow-1', 'Lairon-1', 'Tangela-1', 'Arbok-1', 'Persian-1', 'Seadra-1', 'Kecleon-1', 'Vigoroth-1', 'Lunatone-1',
+>   'Solrock-1', 'Noctowl-1', 'Sandslash-1', 'Venomoth-1', 'Chansey-1', 'Seaking-1', 'Jumpluff-1', 'Piloswine-1',
+>   'Golbat-1', 'Primeape-1', 'Hitmonlee-1', 'Hitmonchan-1', 'Girafarig-1', 'Hitmontop-1', 'Banette-1', 'Seviper-1',
+>   'Zangoose-1', 'Camerupt-1', 'Sharpedo-1', 'Tropius-1', 'Magneton-1', 'Mantine-1', 'Stantler-1', 'Absol-1', 'Swalot-1',
+>   'Crawdaunt-1', 'Pidgeot-1', 'Grumpig-1', 'Torkoal-1', 'Kingler-1', 'Cacturne-1', 'Bellossom-1', 'Octillery-1',
+>   'Huntail-1', 'Gorebyss-1', 'Relicanth-1', 'Omastar-1', 'Kabutops-1', 'Poliwrath-1', 'Scyther-1', 'Pinsir-1',
+>   'Politoed-1', 'Cloyster-1', 'Delcatty-2', 'Sableye-2', 'Lickitung-2', 'Weepinbell-2', 'Graveler-2', 'Gloom-2',
+>   'Porygon-2', 'Kadabra-2', 'Wailmer-2', 'Roselia-2', 'Volbeat-2', 'Illumise-2', 'Ivysaur-2', 'Charmeleon-2',
+>   'Wartortle-2', 'Parasect-2', 'Machoke-2', 'Haunter-2', 'Bayleef-2', 'Quilava-2', 'Croconaw-2', 'Togetic-2',
+>   'Murkrow-2', 'Wobbuffet-2', 'Plusle-2', 'Minun-2', 'Grovyle-2', 'Combusken-2', 'Marshtomp-2', 'Ponyta-2',
+>   'Azumarill-2', 'Sudowoodo-2', 'Magcargo-2', 'Pupitar-2', 'Sealeo-2', 'Raticate-2', 'Masquerain-2', 'Furret-2',
+>   'Dunsparce-2', 'Dragonair-2', 'Mightyena-2', 'Castform-2', 'Shelgon-2', 'Metang-2', 'Wigglytuff-2', 'Sunflora-2',
+>   'Chimecho-2', 'Gligar-2', 'Qwilfish-2', 'Pelipper-2', 'Swellow-2', 'Lairon-2', 'Tangela-2', 'Arbok-2', 'Persian-2',
+>   'Seadra-2', 'Kecleon-2', 'Vigoroth-2', 'Lunatone-2', 'Solrock-2', 'Noctowl-2', 'Sandslash-2', 'Venomoth-2',
+>   'Chansey-2', 'Seaking-2', 'Jumpluff-2', 'Piloswine-2', 'Golbat-2', 'Primeape-2', 'Hitmonlee-2', 'Hitmonchan-2',
+>   'Girafarig-2', 'Hitmontop-2', 'Banette-2', 'Seviper-2', 'Zangoose-2', 'Camerupt-2', 'Sharpedo-2', 'Tropius-2',
+>   'Magneton-2', 'Mantine-2', 'Stantler-2', 'Absol-2', 'Swalot-2', 'Crawdaunt-2', 'Pidgeot-2', 'Grumpig-2', 'Torkoal-2',
+>   'Kingler-2', 'Cacturne-2', 'Bellossom-2', 'Octillery-2', 'Huntail-2', 'Gorebyss-2', 'Relicanth-2', 'Omastar-2',
+>   'Kabutops-2', 'Poliwrath-2', 'Scyther-2', 'Pinsir-2', 'Politoed-2', 'Cloyster-2', 'Medicham-1', 'Misdreavus-1',
+>   'Fearow-1', 'Granbull-1', 'Jynx-1', 'Dusclops-1', 'Dodrio-1', 'Mr. Mime-1', 'Lanturn-1', 'Breloom-1', 'Forretress-1',
+>   'Whiscash-1', 'Xatu-1', 'Skarmory-1', 'Marowak-1', 'Quagsire-1', 'Clefable-1', 'Hariyama-1', 'Raichu-1', 'Dewgong-1',
+>   'Manectric-1', 'Vileplume-1', 'Victreebel-1', 'Electrode-1', 'Exploud-1', 'Shiftry-1', 'Glalie-1', 'Ludicolo-1',
+>   'Hypno-1', 'Golem-1', 'Rhydon-1', 'Alakazam-1', 'Weezing-1', 'Kangaskhan-1', 'Electabuzz-1', 'Tauros-1', 'Slowbro-1',
+>   'Slowking-1', 'Miltank-1', 'Altaria-1', 'Nidoqueen-1', 'Nidoking-1', 'Magmar-1', 'Cradily-1', 'Armaldo-1',
+>   'Golduck-1', 'Rapidash-1', 'Muk-1', 'Gengar-1', 'Ampharos-1', 'Scizor-1', 'Heracross-1', 'Ursaring-1', 'Houndoom-1',
+>   'Donphan-1', 'Claydol-1', 'Wailord-1', 'Ninetales-1', 'Machamp-1', 'Shuckle-1', 'Steelix-1', 'Tentacruel-1',
+>   'Porygon2-1', 'Gardevoir-1', 'Exeggutor-1', 'Starmie-1', 'Flygon-1', 'Venusaur-1', 'Vaporeon-1', 'Flareon-1',
+>   'Meganium-1', 'Espeon-1', 'Umbreon-1', 'Blastoise-1', 'Feraligatr-1', 'Aggron-1', 'Blaziken-1', 'Walrein-1',
+>   'Charizard-1', 'Typhlosion-1', 'Lapras-1', 'Crobat-1', 'Swampert-1', 'Gyarados-1', 'Snorlax-1', 'Kingdra-1',
+>   'Blissey-1', 'Milotic-1', 'Arcanine-1', 'Salamence-1', 'Metagross-1', 'Slaking-1', 'Medicham-2', 'Marowak-2',
+>   'Quagsire-2', 'Misdreavus-2', 'Fearow-2', 'Granbull-2', 'Jynx-2', 'Dusclops-2', 'Dodrio-2', 'Mr. Mime-2', 'Lanturn-2',
+>   'Breloom-2', 'Forretress-2', 'Skarmory-2', 'Whiscash-2', 'Xatu-2', 'Clefable-2', 'Hariyama-2', 'Raichu-2',
+>   'Dewgong-2', 'Manectric-2', 'Vileplume-2', 'Victreebel-2', 'Electrode-2', 'Exploud-2', 'Shiftry-2', 'Glalie-2',
+>   'Ludicolo-2', 'Hypno-2', 'Golem-2', 'Rhydon-2', 'Alakazam-2', 'Weezing-2', 'Kangaskhan-2', 'Electabuzz-2', 'Tauros-2',
+>   'Slowbro-2', 'Slowking-2', 'Miltank-2', 'Altaria-2', 'Nidoqueen-2', 'Nidoking-2', 'Magmar-2', 'Cradily-2',
+>   'Armaldo-2', 'Golduck-2', 'Rapidash-2', 'Muk-2', 'Gengar-2', 'Ampharos-2', 'Scizor-2', 'Heracross-2', 'Ursaring-2',
+>   'Houndoom-2', 'Donphan-2', 'Claydol-2', 'Wailord-2', 'Ninetales-2', 'Machamp-2', 'Shuckle-2', 'Steelix-2',
+>   'Tentacruel-2', 'Porygon2-2', 'Gardevoir-2', 'Exeggutor-2', 'Starmie-2', 'Flygon-2', 'Venusaur-2', 'Vaporeon-2',
+>   'Jolteon-2', 'Flareon-2', 'Meganium-2', 'Espeon-2', 'Umbreon-2', 'Blastoise-2', 'Feraligatr-2', 'Aggron-2',
+>   'Blaziken-2', 'Walrein-2', 'Charizard-2', 'Typhlosion-2', 'Lapras-2', 'Crobat-2', 'Swampert-2', 'Gyarados-2',
+>   'Snorlax-2', 'Kingdra-2', 'Blissey-2', 'Milotic-2', 'Arcanine-2', 'Salamence-2', 'Metagross-2', 'Slaking-2',
+>   'Medicham-3', 'Misdreavus-3', 'Fearow-3', 'Granbull-3', 'Jynx-3', 'Dusclops-3', 'Dodrio-3', 'Mr. Mime-3', 'Lanturn-3',
+>   'Breloom-3', 'Forretress-3', 'Whiscash-3', 'Xatu-3', 'Skarmory-3', 'Marowak-3', 'Quagsire-3', 'Clefable-3',
+>   'Hariyama-3', 'Raichu-3', 'Dewgong-3', 'Manectric-3', 'Vileplume-3', 'Victreebel-3', 'Electrode-3', 'Exploud-3',
+>   'Shiftry-3', 'Glalie-3', 'Ludicolo-3', 'Hypno-3', 'Golem-3', 'Rhydon-3', 'Alakazam-3', 'Weezing-3', 'Kangaskhan-3',
+>   'Electabuzz-3', 'Tauros-3', 'Slowbro-3', 'Slowking-3', 'Miltank-3', 'Altaria-3', 'Nidoqueen-3', 'Nidoking-3',
+>   'Magmar-3', 'Cradily-3', 'Armaldo-3', 'Golduck-3', 'Rapidash-3', 'Muk-3', 'Gengar-3', 'Ampharos-3', 'Scizor-3',
+>   'Heracross-3', 'Ursaring-3', 'Houndoom-3', 'Donphan-3', 'Claydol-3', 'Wailord-3', 'Ninetales-3', 'Machamp-3',
+>   'Shuckle-3', 'Steelix-3', 'Tentacruel-3', 'Aerodactyl-3', 'Porygon2-3', 'Gardevoir-3', 'Exeggutor-3', 'Flygon-3',
+>   'Venusaur-3', 'Vaporeon-3', 'Jolteon-3', 'Flareon-3', 'Meganium-3', 'Espeon-3', 'Umbreon-3', 'Blastoise-3',
+>   'Feraligatr-3', 'Aggron-3', 'Blaziken-3', 'Walrein-3', 'Sceptile-3', 'Charizard-3', 'Typhlosion-3', 'Lapras-3',
+>   'Swampert-3', 'Gyarados-3', 'Snorlax-3', 'Kingdra-3', 'Blissey-3', 'Milotic-3', 'Arcanine-3', 'Salamence-3',
+>   'Metagross-3', 'Slaking-3', 'Medicham-4', 'Misdreavus-4', 'Fearow-4', 'Granbull-4', 'Jynx-4', 'Dusclops-4',
+>   'Dodrio-4', 'Mr. Mime-4', 'Lanturn-4', 'Breloom-4', 'Forretress-4', 'Whiscash-4', 'Xatu-4', 'Skarmory-4', 'Marowak-4',
+>   'Quagsire-4', 'Clefable-4', 'Hariyama-4', 'Raichu-4', 'Dewgong-4', 'Manectric-4', 'Vileplume-4', 'Victreebel-4',
+>   'Electrode-4', 'Exploud-4', 'Shiftry-4', 'Glalie-4', 'Ludicolo-4', 'Hypno-4', 'Golem-4', 'Rhydon-4', 'Alakazam-4',
+>   'Weezing-4', 'Kangaskhan-4', 'Electabuzz-4', 'Tauros-4', 'Slowbro-4', 'Slowking-4', 'Miltank-4', 'Altaria-4',
+>   'Nidoqueen-4', 'Nidoking-4', 'Magmar-4', 'Cradily-4', 'Armaldo-4', 'Golduck-4', 'Rapidash-4', 'Muk-4', 'Gengar-4',
+>   'Ampharos-4', 'Scizor-4', 'Heracross-4', 'Ursaring-4', 'Houndoom-4', 'Donphan-4', 'Claydol-4', 'Wailord-4',
+>   'Ninetales-4', 'Machamp-4', 'Shuckle-4', 'Steelix-4', 'Tentacruel-4', 'Aerodactyl-4', 'Porygon2-4', 'Gardevoir-4',
+>   'Exeggutor-4', 'Flygon-4', 'Venusaur-4', 'Vaporeon-4', 'Flareon-4', 'Meganium-4', 'Espeon-4', 'Umbreon-4',
+>   'Blastoise-4', 'Feraligatr-4', 'Aggron-4', 'Blaziken-4', 'Walrein-4', 'Charizard-4', 'Typhlosion-4', 'Lapras-4',
+>   'Swampert-4', 'Gyarados-4', 'Snorlax-4', 'Kingdra-4', 'Blissey-4', 'Milotic-4', 'Arcanine-4', 'Salamence-4',
+>   'Metagross-4', 'Slaking-4', 'Articuno-1', 'Zapdos-1', 'Moltres-1', 'Entei-1', 'Suicune-1', 'Regirock-1', 'Regice-1',
+>   'Registeel-1', 'Latias-1', 'Latios-1', 'Articuno-2', 'Zapdos-2', 'Moltres-2', 'Entei-2', 'Suicune-2', 'Regirock-2',
+>   'Regice-2', 'Registeel-2', 'Latias-2', 'Latios-2', 'Articuno-3', 'Zapdos-3', 'Moltres-3', 'Entei-3', 'Suicune-3',
+>   'Regirock-3', 'Regice-3', 'Registeel-3', 'Latias-3', 'Latios-3', 'Articuno-4', 'Zapdos-4', 'Moltres-4', 'Entei-4',
+>   'Suicune-4', 'Regirock-4', 'Regice-4', 'Registeel-4', 'Latias-4', 'Latios-4', 'Gengar-5', 'Gengar-6', 'Gengar-7',
+>   'Gengar-8', 'Ursaring-5', 'Ursaring-6', 'Ursaring-7', 'Ursaring-8', 'Machamp-5', 'Machamp-6', 'Machamp-7',
+>   'Machamp-8', 'Gardevoir-5', 'Gardevoir-6', 'Gardevoir-7', 'Gardevoir-8', 'Starmie-6', 'Lapras-5', 'Lapras-6',
+>   'Lapras-7', 'Lapras-8', 'Snorlax-5', 'Snorlax-6', 'Snorlax-7', 'Snorlax-8', 'Salamence-5', 'Salamence-6',
+>   'Salamence-7', 'Salamence-8', 'Metagross-5', 'Metagross-6', 'Metagross-7', 'Metagross-8', 'Regirock-5', 'Regirock-6',
+>   'Regice-5', 'Regice-6', 'Registeel-5', 'Registeel-6', 'Latias-5', 'Latias-6', 'Latias-7', 'Latias-8', 'Latios-5',
+>   'Latios-6', 'Latios-7', 'Latios-8', 'Dragonite-1', 'Dragonite-2', 'Dragonite-3', 'Dragonite-4', 'Dragonite-5',
+>   'Dragonite-6', 'Dragonite-7', 'Dragonite-8', 'Dragonite-9', 'Dragonite-10', 'Tyranitar-1', 'Tyranitar-2',
+>   'Tyranitar-3', 'Tyranitar-4', 'Tyranitar-5', 'Tyranitar-6', 'Tyranitar-7', 'Tyranitar-8', 'Tyranitar-9',
+>   'Tyranitar-10', 'Articuno-5', 'Articuno-6', 'Zapdos-5', 'Zapdos-6', 'Moltres-5', 'Moltres-6', 'Raikou-6', 'Entei-5',
+>   'Entei-6', 'Suicune-5', 'Suicune-6', 'Alakazam-AnabelSilver', 'Entei-AnabelSilver', 'Snorlax-AnabelSilver',
+>   'Raikou-AnabelGold', 'Latios-AnabelGold', 'Snorlax-AnabelGold', 'Swampert-TuckerSilver', 'Salamence-TuckerSilver',
+>   'Charizard-TuckerSilver', 'Swampert-TuckerGold', 'Metagross-TuckerGold', 'Latias-TuckerGold', 'Slaking-SpenserSilver',
+>   'Lapras-SpenserSilver', 'Arcanine-SpenserGold', 'Slaking-SpenserGold', 'Suicune-SpenserGold', 'Heracross-GretaSilver',
+>   'Umbreon-GretaSilver', 'Shedinja-GretaSilver', 'Umbreon-GretaGold', 'Gengar-GretaGold', 'Breloom-GretaGold',
+>   'Seviper-LucySilver', 'Shuckle-LucySilver', 'Milotic-LucySilver', 'Seviper-LucyGold', 'Steelix-LucyGold',
+>   'Gyarados-LucyGold', 'Regirock-BrandonSilver', 'Registeel-BrandonSilver', 'Regice-BrandonSilver',
+>   'Articuno-BrandonGold', 'Zapdos-BrandonGold', 'Moltres-BrandonGold'
 > ]
 > ```
 >
@@ -1501,16 +1450,15 @@ These run the full damage calculator for every set in the collection. The attack
 > ```
 > SetCollection(65 sets)
 > [
->   'Pineco-1', 'Sudowoodo-2', 'Furret-2', 'Banette-2', 'Absol-2', 'Granbull-1', 'Marowak-1',
->   'Heracross-1', 'Marowak-2', 'Glalie-2', 'Scizor-2', 'Heracross-2', 'Ursaring-2', 'Houndoom-2',
->   'Aerodactyl-2', 'Slaking-2', 'Granbull-3', 'Forretress-3', 'Marowak-3', 'Electrode-3',
->   'Shiftry-3', 'Golem-3', 'Rhydon-3', 'Weezing-3', 'Heracross-3', 'Steelix-3', 'Exeggutor-3',
->   'Slaking-3', 'Medicham-4', 'Granbull-4', 'Forretress-4', 'Marowak-4', 'Electrode-4', 'Shiftry-4',
->   'Golem-4', 'Rhydon-4', 'Weezing-4', 'Nidoking-4', 'Armaldo-4', 'Muk-4', 'Heracross-4',
->   'Ursaring-4', 'Houndoom-4', 'Claydol-4', 'Steelix-4', 'Exeggutor-4', 'Regirock-1', 'Moltres-2',
->   'Regirock-2', 'Regice-3', 'Registeel-3', 'Moltres-4', 'Ursaring-5', 'Ursaring-6', 'Metagross-5',
->   'Metagross-8', 'Regirock-6', 'Tyranitar-4', 'Moltres-5', 'Moltres-6', 'Slaking-SpenserGold',
->   'Heracross-GretaSilver', 'Shedinja-GretaSilver', 'Steelix-LucyGold', 'Regirock-BrandonSilver'
+>   'Pineco-1', 'Sudowoodo-2', 'Furret-2', 'Banette-2', 'Absol-2', 'Granbull-1', 'Marowak-1', 'Heracross-1', 'Marowak-2',
+>   'Glalie-2', 'Scizor-2', 'Heracross-2', 'Ursaring-2', 'Houndoom-2', 'Aerodactyl-2', 'Slaking-2', 'Granbull-3',
+>   'Forretress-3', 'Marowak-3', 'Electrode-3', 'Shiftry-3', 'Golem-3', 'Rhydon-3', 'Weezing-3', 'Heracross-3',
+>   'Steelix-3', 'Exeggutor-3', 'Slaking-3', 'Medicham-4', 'Granbull-4', 'Forretress-4', 'Marowak-4', 'Electrode-4',
+>   'Shiftry-4', 'Golem-4', 'Rhydon-4', 'Weezing-4', 'Nidoking-4', 'Armaldo-4', 'Muk-4', 'Heracross-4', 'Ursaring-4',
+>   'Houndoom-4', 'Claydol-4', 'Steelix-4', 'Exeggutor-4', 'Regirock-1', 'Moltres-2', 'Regirock-2', 'Regice-3',
+>   'Registeel-3', 'Moltres-4', 'Ursaring-5', 'Ursaring-6', 'Metagross-5', 'Metagross-8', 'Regirock-6', 'Tyranitar-4',
+>   'Moltres-5', 'Moltres-6', 'Slaking-SpenserGold', 'Heracross-GretaSilver', 'Shedinja-GretaSilver', 'Steelix-LucyGold',
+>   'Regirock-BrandonSilver'
 > ]
 > ```
 >
@@ -1529,10 +1477,9 @@ These run the full damage calculator for every set in the collection. The attack
 > ```
 > SetCollection(25 sets)
 > [
->   'Breloom-2', 'Glalie-2', 'Breloom-3', 'Forretress-3', 'Shiftry-3', 'Golem-3', 'Weezing-3',
->   'Steelix-3', 'Breloom-4', 'Forretress-4', 'Shiftry-4', 'Golem-4', 'Weezing-4', 'Muk-4',
->   'Claydol-4', 'Steelix-4', 'Exeggutor-4', 'Regirock-1', 'Regirock-2', 'Machamp-7', 'Metagross-5',
->   'Metagross-8', 'Regirock-6', 'Breloom-GretaGold', 'Regirock-BrandonSilver'
+>   'Breloom-2', 'Glalie-2', 'Breloom-3', 'Forretress-3', 'Shiftry-3', 'Golem-3', 'Weezing-3', 'Steelix-3', 'Breloom-4',
+>   'Forretress-4', 'Shiftry-4', 'Golem-4', 'Weezing-4', 'Muk-4', 'Claydol-4', 'Steelix-4', 'Exeggutor-4', 'Regirock-1',
+>   'Regirock-2', 'Machamp-7', 'Metagross-5', 'Metagross-8', 'Regirock-6', 'Breloom-GretaGold', 'Regirock-BrandonSilver'
 > ]
 > ```
 >
@@ -1551,10 +1498,9 @@ These run the full damage calculator for every set in the collection. The attack
 > ```
 > SetCollection(20 sets)
 > [
->   'Breloom-3', 'Shiftry-3', 'Golem-3', 'Weezing-3', 'Steelix-3', 'Breloom-4', 'Forretress-4',
->   'Shiftry-4', 'Golem-4', 'Weezing-4', 'Muk-4', 'Steelix-4', 'Exeggutor-4', 'Regirock-1',
->   'Regirock-2', 'Machamp-7', 'Metagross-5', 'Metagross-8', 'Breloom-GretaGold',
->   'Regirock-BrandonSilver'
+>   'Breloom-3', 'Shiftry-3', 'Golem-3', 'Weezing-3', 'Steelix-3', 'Breloom-4', 'Forretress-4', 'Shiftry-4', 'Golem-4',
+>   'Weezing-4', 'Muk-4', 'Steelix-4', 'Exeggutor-4', 'Regirock-1', 'Regirock-2', 'Machamp-7', 'Metagross-5',
+>   'Metagross-8', 'Breloom-GretaGold', 'Regirock-BrandonSilver'
 > ]
 > ```
 >
@@ -1590,7 +1536,7 @@ These run the full damage calculator for every set in the collection. The attack
 <br>
 
 > ```python
-> db.sets.hasType("Normal").diesTo(meta)
+> db.sets.hasType("Normal").willDieTo(meta)
 > ```
 >
 > <details>
@@ -1599,9 +1545,9 @@ These run the full damage calculator for every set in the collection. The attack
 > ```
 > SetCollection(18 sets)
 > [
->   'Azurill-1', 'Igglybuff-1', 'Sentret-1', 'Cleffa-1', 'Whismur-1', 'Zigzagoon-1', 'Smeargle-1',
->   'Pidgey-1', 'Rattata-1', 'Skitty-1', 'Spearow-1', 'Hoothoot-1', 'Taillow-1', 'Meowth-1',
->   'Doduo-1', 'Swablu-1', 'Clefairy-1', 'Raticate-2'
+>   'Azurill-1', 'Igglybuff-1', 'Sentret-1', 'Cleffa-1', 'Whismur-1', 'Zigzagoon-1', 'Smeargle-1', 'Pidgey-1',
+>   'Rattata-1', 'Skitty-1', 'Spearow-1', 'Hoothoot-1', 'Taillow-1', 'Meowth-1', 'Doduo-1', 'Swablu-1', 'Clefairy-1',
+>   'Raticate-2'
 > ]
 > ```
 >
@@ -1637,54 +1583,45 @@ These run the full damage calculator for every set in the collection. The attack
 > ```
 > SetCollection(325 sets)
 > [
->   'Sunkern-1', 'Azurill-1', 'Caterpie-1', 'Weedle-1', 'Wurmple-1', 'Ralts-1', 'Magikarp-1',
->   'Feebas-1', 'Kakuna-1', 'Pichu-1', 'Igglybuff-1', 'Wooper-1', 'Tyrogue-1', 'Sentret-1',
->   'Seedot-1', 'Poochyena-1', 'Makuhita-1', 'Whismur-1', 'Zigzagoon-1', 'Zubat-1', 'Spinarak-1',
->   'Hoppip-1', 'Slugma-1', 'Swinub-1', 'Pidgey-1', 'Rattata-1', 'Skitty-1', 'Spearow-1',
->   'Hoothoot-1', 'Diglett-1', 'Nincada-1', 'Surskit-1', 'Taillow-1', 'Wingull-1', 'NidoranM-1',
->   'NidoranF-1', 'Meditite-1', 'Slakoth-1', 'Paras-1', 'Ekans-1', 'Barboach-1', 'Meowth-1',
->   'Pineco-1', 'Trapinch-1', 'Spheal-1', 'Horsea-1', 'Shuppet-1', 'Electrike-1', 'Vulpix-1',
->   'Pikachu-1', 'Sandshrew-1', 'Poliwag-1', 'Bellsprout-1', 'Geodude-1', 'Dratini-1', 'Remoraid-1',
->   'Larvitar-1', 'Baltoy-1', 'Bagon-1', 'Gulpin-1', 'Venonat-1', 'Mankey-1', 'Machop-1',
->   'Shellder-1', 'Numel-1', 'Carvanha-1', 'Corphish-1', 'Charmander-1', 'Cyndaquil-1', 'Doduo-1',
->   'Gastly-1', 'Treecko-1', 'Torchic-1', 'Mudkip-1', 'Squirtle-1', 'Totodile-1', 'Slowpoke-1',
->   'Bulbasaur-1', 'Oddish-1', 'Psyduck-1', 'Cubone-1', 'Goldeen-1', 'Natu-1', 'Magnemite-1',
->   'Grimer-1', 'Krabby-1', 'Exeggcute-1', 'Delibird-1', 'Houndour-1', 'Phanpy-1', 'Aron-1',
->   'Luvdisc-1', 'Tentacool-1', 'Cacnea-1', 'Koffing-1', 'Staryu-1', 'Skiploom-1', 'Nuzleaf-1',
->   'Vibrava-1', 'Rhyhorn-1', 'Pidgeotto-1', 'Growlithe-1', 'Omanyte-1', 'Kabuto-1', 'Anorith-1',
->   'Nidorina-1', 'Nidorino-1', 'Magby-1', 'Beedrill-1', 'Poliwhirl-1', 'Onix-1', 'Beautifly-1',
->   'Ariados-1', 'Weepinbell-1', 'Graveler-1', 'Gloom-1', 'Roselia-1', 'Charmeleon-1', 'Haunter-1',
->   'Quilava-1', 'Croconaw-1', 'Combusken-1', 'Ponyta-1', 'Magcargo-1', 'Pupitar-1', 'Gligar-1',
->   'Qwilfish-1', 'Pelipper-1', 'Lairon-1', 'Arbok-1', 'Seadra-1', 'Lunatone-1', 'Venomoth-1',
->   'Jumpluff-1', 'Piloswine-1', 'Golbat-1', 'Primeape-1', 'Seviper-1', 'Camerupt-1', 'Tropius-1',
->   'Weepinbell-2', 'Graveler-2', 'Gloom-2', 'Roselia-2', 'Ivysaur-2', 'Charmeleon-2', 'Machoke-2',
->   'Haunter-2', 'Quilava-2', 'Grovyle-2', 'Combusken-2', 'Ponyta-2', 'Magcargo-2', 'Pupitar-2',
->   'Gligar-2', 'Pelipper-2', 'Lairon-2', 'Arbok-2', 'Lunatone-2', 'Venomoth-2', 'Jumpluff-2',
->   'Golbat-2', 'Primeape-2', 'Seviper-2', 'Camerupt-2', 'Sharpedo-2', 'Tropius-2', 'Dugtrio-1',
->   'Fearow-1', 'Dodrio-1', 'Breloom-1', 'Marowak-1', 'Victreebel-1', 'Golem-1', 'Rhydon-1',
->   'Weezing-1', 'Altaria-1', 'Nidoking-1', 'Magmar-1', 'Armaldo-1', 'Rapidash-1', 'Gengar-1',
->   'Heracross-1', 'Houndoom-1', 'Donphan-1', 'Ninetales-1', 'Steelix-1', 'Aerodactyl-1', 'Flygon-1',
->   'Flareon-1', 'Aggron-1', 'Blaziken-1', 'Charizard-1', 'Typhlosion-1', 'Arcanine-1', 'Salamence-1',
->   'Dugtrio-2', 'Marowak-2', 'Fearow-2', 'Dodrio-2', 'Breloom-2', 'Hariyama-2', 'Victreebel-2',
->   'Golem-2', 'Rhydon-2', 'Weezing-2', 'Altaria-2', 'Nidoking-2', 'Magmar-2', 'Armaldo-2',
->   'Rapidash-2', 'Gengar-2', 'Houndoom-2', 'Donphan-2', 'Ninetales-2', 'Steelix-2', 'Aerodactyl-2',
->   'Flygon-2', 'Aggron-2', 'Blaziken-2', 'Charizard-2', 'Typhlosion-2', 'Gyarados-2', 'Arcanine-2',
->   'Salamence-2', 'Dugtrio-3', 'Fearow-3', 'Dodrio-3', 'Breloom-3', 'Xatu-3', 'Marowak-3',
->   'Vileplume-3', 'Victreebel-3', 'Golem-3', 'Rhydon-3', 'Weezing-3', 'Altaria-3', 'Nidoking-3',
->   'Magmar-3', 'Armaldo-3', 'Rapidash-3', 'Gengar-3', 'Heracross-3', 'Houndoom-3', 'Donphan-3',
->   'Ninetales-3', 'Machamp-3', 'Steelix-3', 'Aerodactyl-3', 'Flygon-3', 'Flareon-3', 'Aggron-3',
->   'Blaziken-3', 'Charizard-3', 'Typhlosion-3', 'Crobat-3', 'Gyarados-3', 'Arcanine-3',
->   'Salamence-3', 'Dugtrio-4', 'Fearow-4', 'Dodrio-4', 'Breloom-4', 'Xatu-4', 'Marowak-4',
->   'Vileplume-4', 'Victreebel-4', 'Golem-4', 'Rhydon-4', 'Weezing-4', 'Altaria-4', 'Nidoking-4',
->   'Magmar-4', 'Armaldo-4', 'Rapidash-4', 'Gengar-4', 'Heracross-4', 'Houndoom-4', 'Donphan-4',
->   'Ninetales-4', 'Machamp-4', 'Steelix-4', 'Aerodactyl-4', 'Flygon-4', 'Flareon-4', 'Aggron-4',
->   'Blaziken-4', 'Charizard-4', 'Typhlosion-4', 'Crobat-4', 'Arcanine-4', 'Salamence-4', 'Moltres-1',
->   'Entei-1', 'Moltres-2', 'Entei-2', 'Moltres-3', 'Entei-3', 'Moltres-4', 'Entei-4', 'Gengar-5',
->   'Gengar-6', 'Gengar-7', 'Gengar-8', 'Salamence-5', 'Salamence-6', 'Salamence-7', 'Salamence-8',
->   'Dragonite-3', 'Dragonite-5', 'Dragonite-6', 'Dragonite-7', 'Dragonite-8', 'Dragonite-9',
->   'Dragonite-10', 'Moltres-5', 'Moltres-6', 'Salamence-TuckerSilver', 'Charizard-TuckerSilver',
->   'Arcanine-SpenserGold', 'Gengar-GretaGold', 'Breloom-GretaGold', 'Seviper-LucySilver',
->   'Seviper-LucyGold', 'Moltres-BrandonGold'
+>   'Sunkern-1', 'Azurill-1', 'Caterpie-1', 'Weedle-1', 'Wurmple-1', 'Ralts-1', 'Magikarp-1', 'Feebas-1', 'Kakuna-1',
+>   'Pichu-1', 'Igglybuff-1', 'Wooper-1', 'Tyrogue-1', 'Sentret-1', 'Seedot-1', 'Poochyena-1', 'Makuhita-1', 'Whismur-1',
+>   'Zigzagoon-1', 'Zubat-1', 'Spinarak-1', 'Hoppip-1', 'Slugma-1', 'Swinub-1', 'Pidgey-1', 'Rattata-1', 'Skitty-1',
+>   'Spearow-1', 'Hoothoot-1', 'Diglett-1', 'Nincada-1', 'Surskit-1', 'Taillow-1', 'Wingull-1', 'NidoranM-1',
+>   'NidoranF-1', 'Meditite-1', 'Slakoth-1', 'Paras-1', 'Ekans-1', 'Barboach-1', 'Meowth-1', 'Pineco-1', 'Trapinch-1',
+>   'Spheal-1', 'Horsea-1', 'Shuppet-1', 'Electrike-1', 'Vulpix-1', 'Pikachu-1', 'Sandshrew-1', 'Poliwag-1',
+>   'Bellsprout-1', 'Geodude-1', 'Dratini-1', 'Remoraid-1', 'Larvitar-1', 'Baltoy-1', 'Bagon-1', 'Gulpin-1', 'Venonat-1',
+>   'Mankey-1', 'Machop-1', 'Shellder-1', 'Numel-1', 'Carvanha-1', 'Corphish-1', 'Charmander-1', 'Cyndaquil-1', 'Doduo-1',
+>   'Gastly-1', 'Treecko-1', 'Torchic-1', 'Mudkip-1', 'Squirtle-1', 'Totodile-1', 'Slowpoke-1', 'Bulbasaur-1', 'Oddish-1',
+>   'Psyduck-1', 'Cubone-1', 'Goldeen-1', 'Natu-1', 'Magnemite-1', 'Grimer-1', 'Krabby-1', 'Exeggcute-1', 'Delibird-1',
+>   'Houndour-1', 'Phanpy-1', 'Aron-1', 'Luvdisc-1', 'Tentacool-1', 'Cacnea-1', 'Koffing-1', 'Staryu-1', 'Skiploom-1',
+>   'Nuzleaf-1', 'Vibrava-1', 'Rhyhorn-1', 'Pidgeotto-1', 'Growlithe-1', 'Omanyte-1', 'Kabuto-1', 'Anorith-1',
+>   'Nidorina-1', 'Nidorino-1', 'Magby-1', 'Beedrill-1', 'Poliwhirl-1', 'Onix-1', 'Beautifly-1', 'Ariados-1',
+>   'Weepinbell-1', 'Graveler-1', 'Gloom-1', 'Roselia-1', 'Charmeleon-1', 'Haunter-1', 'Quilava-1', 'Croconaw-1',
+>   'Combusken-1', 'Ponyta-1', 'Magcargo-1', 'Pupitar-1', 'Gligar-1', 'Qwilfish-1', 'Pelipper-1', 'Lairon-1', 'Arbok-1',
+>   'Seadra-1', 'Lunatone-1', 'Venomoth-1', 'Jumpluff-1', 'Piloswine-1', 'Golbat-1', 'Primeape-1', 'Seviper-1',
+>   'Camerupt-1', 'Tropius-1', 'Weepinbell-2', 'Graveler-2', 'Gloom-2', 'Roselia-2', 'Ivysaur-2', 'Charmeleon-2',
+>   'Machoke-2', 'Haunter-2', 'Quilava-2', 'Grovyle-2', 'Combusken-2', 'Ponyta-2', 'Magcargo-2', 'Pupitar-2', 'Gligar-2',
+>   'Pelipper-2', 'Lairon-2', 'Arbok-2', 'Lunatone-2', 'Venomoth-2', 'Jumpluff-2', 'Golbat-2', 'Primeape-2', 'Seviper-2',
+>   'Camerupt-2', 'Sharpedo-2', 'Tropius-2', 'Dugtrio-1', 'Fearow-1', 'Dodrio-1', 'Breloom-1', 'Marowak-1',
+>   'Victreebel-1', 'Golem-1', 'Rhydon-1', 'Weezing-1', 'Altaria-1', 'Nidoking-1', 'Magmar-1', 'Armaldo-1', 'Rapidash-1',
+>   'Gengar-1', 'Heracross-1', 'Houndoom-1', 'Donphan-1', 'Ninetales-1', 'Steelix-1', 'Aerodactyl-1', 'Flygon-1',
+>   'Flareon-1', 'Aggron-1', 'Blaziken-1', 'Charizard-1', 'Typhlosion-1', 'Arcanine-1', 'Salamence-1', 'Dugtrio-2',
+>   'Marowak-2', 'Fearow-2', 'Dodrio-2', 'Breloom-2', 'Hariyama-2', 'Victreebel-2', 'Golem-2', 'Rhydon-2', 'Weezing-2',
+>   'Altaria-2', 'Nidoking-2', 'Magmar-2', 'Armaldo-2', 'Rapidash-2', 'Gengar-2', 'Houndoom-2', 'Donphan-2',
+>   'Ninetales-2', 'Steelix-2', 'Aerodactyl-2', 'Flygon-2', 'Aggron-2', 'Blaziken-2', 'Charizard-2', 'Typhlosion-2',
+>   'Gyarados-2', 'Arcanine-2', 'Salamence-2', 'Dugtrio-3', 'Fearow-3', 'Dodrio-3', 'Breloom-3', 'Xatu-3', 'Marowak-3',
+>   'Vileplume-3', 'Victreebel-3', 'Golem-3', 'Rhydon-3', 'Weezing-3', 'Altaria-3', 'Nidoking-3', 'Magmar-3', 'Armaldo-3',
+>   'Rapidash-3', 'Gengar-3', 'Heracross-3', 'Houndoom-3', 'Donphan-3', 'Ninetales-3', 'Machamp-3', 'Steelix-3',
+>   'Aerodactyl-3', 'Flygon-3', 'Flareon-3', 'Aggron-3', 'Blaziken-3', 'Charizard-3', 'Typhlosion-3', 'Crobat-3',
+>   'Gyarados-3', 'Arcanine-3', 'Salamence-3', 'Dugtrio-4', 'Fearow-4', 'Dodrio-4', 'Breloom-4', 'Xatu-4', 'Marowak-4',
+>   'Vileplume-4', 'Victreebel-4', 'Golem-4', 'Rhydon-4', 'Weezing-4', 'Altaria-4', 'Nidoking-4', 'Magmar-4', 'Armaldo-4',
+>   'Rapidash-4', 'Gengar-4', 'Heracross-4', 'Houndoom-4', 'Donphan-4', 'Ninetales-4', 'Machamp-4', 'Steelix-4',
+>   'Aerodactyl-4', 'Flygon-4', 'Flareon-4', 'Aggron-4', 'Blaziken-4', 'Charizard-4', 'Typhlosion-4', 'Crobat-4',
+>   'Arcanine-4', 'Salamence-4', 'Moltres-1', 'Entei-1', 'Moltres-2', 'Entei-2', 'Moltres-3', 'Entei-3', 'Moltres-4',
+>   'Entei-4', 'Gengar-5', 'Gengar-6', 'Gengar-7', 'Gengar-8', 'Salamence-5', 'Salamence-6', 'Salamence-7', 'Salamence-8',
+>   'Dragonite-3', 'Dragonite-5', 'Dragonite-6', 'Dragonite-7', 'Dragonite-8', 'Dragonite-9', 'Dragonite-10', 'Moltres-5',
+>   'Moltres-6', 'Salamence-TuckerSilver', 'Charizard-TuckerSilver', 'Arcanine-SpenserGold', 'Gengar-GretaGold',
+>   'Breloom-GretaGold', 'Seviper-LucySilver', 'Seviper-LucyGold', 'Moltres-BrandonGold'
 > ]
 > ```
 >
@@ -1695,7 +1632,7 @@ Specify IVs for the attacker and defender independently, useful for analyzing pl
 
 
 > ```python
-> db.sets.diesTo(meta, atk_ivs=31, def_ivs=3)
+> db.sets.willDieTo(meta, atk_ivs=31, def_ivs=3)
 > ```
 >
 > <details>
@@ -1704,45 +1641,38 @@ Specify IVs for the attacker and defender independently, useful for analyzing pl
 > ```
 > SetCollection(264 sets)
 > [
->   'Sunkern-1', 'Azurill-1', 'Caterpie-1', 'Weedle-1', 'Wurmple-1', 'Ralts-1', 'Feebas-1',
->   'Metapod-1', 'Kakuna-1', 'Pichu-1', 'Silcoon-1', 'Cascoon-1', 'Igglybuff-1', 'Tyrogue-1',
->   'Sentret-1', 'Cleffa-1', 'Seedot-1', 'Lotad-1', 'Poochyena-1', 'Shedinja-1', 'Makuhita-1',
->   'Whismur-1', 'Zigzagoon-1', 'Zubat-1', 'Togepi-1', 'Spinarak-1', 'Hoppip-1', 'Swinub-1',
->   'Smeargle-1', 'Pidgey-1', 'Rattata-1', 'Skitty-1', 'Spearow-1', 'Hoothoot-1', 'Diglett-1',
->   'Ledyba-1', 'Surskit-1', 'Jigglypuff-1', 'Taillow-1', 'Wingull-1', 'NidoranM-1', 'NidoranF-1',
->   'Kirlia-1', 'Meditite-1', 'Slakoth-1', 'Paras-1', 'Ekans-1', 'Barboach-1', 'Meowth-1',
->   'Trapinch-1', 'Spheal-1', 'Shuppet-1', 'Duskull-1', 'Pikachu-1', 'Bellsprout-1', 'Geodude-1',
->   'Dratini-1', 'Snubbull-1', 'Remoraid-1', 'Larvitar-1', 'Baltoy-1', 'Snorunt-1', 'Bagon-1',
->   'Venonat-1', 'Mankey-1', 'Machop-1', 'Smoochum-1', 'Carvanha-1', 'Abra-1', 'Doduo-1', 'Gastly-1',
->   'Swablu-1', 'Treecko-1', 'Bulbasaur-1', 'Chikorita-1', 'Oddish-1', 'Psyduck-1', 'Natu-1',
->   'Clefairy-1', 'Eevee-1', 'Drowzee-1', 'Teddiursa-1', 'Delibird-1', 'Houndour-1', 'Spoink-1',
->   'Tentacool-1', 'Cacnea-1', 'Unown-1', 'Skiploom-1', 'Nuzleaf-1', 'Lombre-1', 'Vibrava-1',
->   'Rhyhorn-1', 'Pidgeotto-1', 'Kabuto-1', 'Lileep-1', 'Anorith-1', 'Aipom-1', 'Loudred-1',
->   'Nidorino-1', 'Nosepass-1', 'Butterfree-1', 'Beedrill-1', 'Beautifly-1', 'Ledian-1', 'Delcatty-1',
->   'Sableye-1', 'Weepinbell-1', 'Graveler-1', 'Kadabra-1', 'Volbeat-1', 'Illumise-1', 'Ivysaur-1',
->   'Parasect-1', 'Haunter-1', 'Murkrow-1', 'Grovyle-1', 'Combusken-1', 'Sudowoodo-1', 'Pupitar-1',
->   'Raticate-1', 'Dragonair-1', 'Mightyena-1', 'Sneasel-1', 'Swellow-1', 'Lunatone-1', 'Solrock-1',
->   'Venomoth-1', 'Piloswine-1', 'Ninjask-1', 'Stantler-1', 'Absol-1', 'Cacturne-1', 'Delcatty-2',
->   'Sableye-2', 'Graveler-2', 'Gloom-2', 'Porygon-2', 'Kadabra-2', 'Volbeat-2', 'Illumise-2',
->   'Ivysaur-2', 'Parasect-2', 'Haunter-2', 'Murkrow-2', 'Grovyle-2', 'Combusken-2', 'Sudowoodo-2',
->   'Pupitar-2', 'Raticate-2', 'Furret-2', 'Dragonair-2', 'Linoone-2', 'Sneasel-2', 'Swellow-2',
->   'Lunatone-2', 'Solrock-2', 'Venomoth-2', 'Piloswine-2', 'Ninjask-2', 'Zangoose-2', 'Stantler-2',
->   'Absol-2', 'Dugtrio-1', 'Medicham-1', 'Fearow-1', 'Jynx-1', 'Dodrio-1', 'Breloom-1', 'Glalie-1',
->   'Golem-1', 'Alakazam-1', 'Armaldo-1', 'Gengar-1', 'Heracross-1', 'Shuckle-1', 'Aerodactyl-1',
->   'Sceptile-1', 'Dugtrio-2', 'Medicham-2', 'Fearow-2', 'Jynx-2', 'Dodrio-2', 'Breloom-2',
->   'Victreebel-2', 'Glalie-2', 'Rhydon-2', 'Alakazam-2', 'Cradily-2', 'Armaldo-2', 'Gengar-2',
->   'Heracross-2', 'Shuckle-2', 'Aerodactyl-2', 'Espeon-2', 'Sceptile-2', 'Dugtrio-3', 'Medicham-3',
->   'Fearow-3', 'Jynx-3', 'Dodrio-3', 'Mr. Mime-3', 'Breloom-3', 'Xatu-3', 'Victreebel-3',
->   'Shiftry-3', 'Glalie-3', 'Golem-3', 'Alakazam-3', 'Cradily-3', 'Armaldo-3', 'Gengar-3',
->   'Heracross-3', 'Shuckle-3', 'Aerodactyl-3', 'Gardevoir-3', 'Espeon-3', 'Sceptile-3', 'Dugtrio-4',
->   'Medicham-4', 'Misdreavus-4', 'Fearow-4', 'Jynx-4', 'Dodrio-4', 'Mr. Mime-4', 'Breloom-4',
->   'Xatu-4', 'Victreebel-4', 'Shiftry-4', 'Glalie-4', 'Golem-4', 'Alakazam-4', 'Armaldo-4',
->   'Gengar-4', 'Heracross-4', 'Shuckle-4', 'Aerodactyl-4', 'Gardevoir-4', 'Espeon-4', 'Sceptile-4',
->   'Articuno-1', 'Regice-1', 'Regice-2', 'Articuno-3', 'Regice-3', 'Articuno-4', 'Gengar-5',
->   'Gengar-6', 'Gengar-7', 'Gengar-8', 'Gardevoir-8', 'Regice-5', 'Regice-6', 'Tyranitar-1',
->   'Tyranitar-2', 'Tyranitar-9', 'Articuno-5', 'Articuno-6', 'Alakazam-AnabelSilver',
->   'Heracross-GretaSilver', 'Shedinja-GretaSilver', 'Breloom-GretaGold', 'Regice-BrandonSilver',
->   'Articuno-BrandonGold'
+>   'Sunkern-1', 'Azurill-1', 'Caterpie-1', 'Weedle-1', 'Wurmple-1', 'Ralts-1', 'Feebas-1', 'Metapod-1', 'Kakuna-1',
+>   'Pichu-1', 'Silcoon-1', 'Cascoon-1', 'Igglybuff-1', 'Tyrogue-1', 'Sentret-1', 'Cleffa-1', 'Seedot-1', 'Lotad-1',
+>   'Poochyena-1', 'Shedinja-1', 'Makuhita-1', 'Whismur-1', 'Zigzagoon-1', 'Zubat-1', 'Togepi-1', 'Spinarak-1',
+>   'Hoppip-1', 'Swinub-1', 'Smeargle-1', 'Pidgey-1', 'Rattata-1', 'Skitty-1', 'Spearow-1', 'Hoothoot-1', 'Diglett-1',
+>   'Ledyba-1', 'Surskit-1', 'Jigglypuff-1', 'Taillow-1', 'Wingull-1', 'NidoranM-1', 'NidoranF-1', 'Kirlia-1',
+>   'Meditite-1', 'Slakoth-1', 'Paras-1', 'Ekans-1', 'Barboach-1', 'Meowth-1', 'Trapinch-1', 'Spheal-1', 'Shuppet-1',
+>   'Duskull-1', 'Pikachu-1', 'Bellsprout-1', 'Geodude-1', 'Dratini-1', 'Snubbull-1', 'Remoraid-1', 'Larvitar-1',
+>   'Baltoy-1', 'Snorunt-1', 'Bagon-1', 'Venonat-1', 'Mankey-1', 'Machop-1', 'Smoochum-1', 'Carvanha-1', 'Abra-1',
+>   'Doduo-1', 'Gastly-1', 'Swablu-1', 'Treecko-1', 'Bulbasaur-1', 'Chikorita-1', 'Oddish-1', 'Psyduck-1', 'Natu-1',
+>   'Clefairy-1', 'Eevee-1', 'Drowzee-1', 'Teddiursa-1', 'Delibird-1', 'Houndour-1', 'Spoink-1', 'Tentacool-1',
+>   'Cacnea-1', 'Unown-1', 'Skiploom-1', 'Nuzleaf-1', 'Lombre-1', 'Vibrava-1', 'Rhyhorn-1', 'Pidgeotto-1', 'Kabuto-1',
+>   'Lileep-1', 'Anorith-1', 'Aipom-1', 'Loudred-1', 'Nidorino-1', 'Nosepass-1', 'Butterfree-1', 'Beedrill-1',
+>   'Beautifly-1', 'Ledian-1', 'Delcatty-1', 'Sableye-1', 'Weepinbell-1', 'Graveler-1', 'Kadabra-1', 'Volbeat-1',
+>   'Illumise-1', 'Ivysaur-1', 'Parasect-1', 'Haunter-1', 'Murkrow-1', 'Grovyle-1', 'Combusken-1', 'Sudowoodo-1',
+>   'Pupitar-1', 'Raticate-1', 'Dragonair-1', 'Mightyena-1', 'Sneasel-1', 'Swellow-1', 'Lunatone-1', 'Solrock-1',
+>   'Venomoth-1', 'Piloswine-1', 'Ninjask-1', 'Stantler-1', 'Absol-1', 'Cacturne-1', 'Delcatty-2', 'Sableye-2',
+>   'Graveler-2', 'Gloom-2', 'Porygon-2', 'Kadabra-2', 'Volbeat-2', 'Illumise-2', 'Ivysaur-2', 'Parasect-2', 'Haunter-2',
+>   'Murkrow-2', 'Grovyle-2', 'Combusken-2', 'Sudowoodo-2', 'Pupitar-2', 'Raticate-2', 'Furret-2', 'Dragonair-2',
+>   'Linoone-2', 'Sneasel-2', 'Swellow-2', 'Lunatone-2', 'Solrock-2', 'Venomoth-2', 'Piloswine-2', 'Ninjask-2',
+>   'Zangoose-2', 'Stantler-2', 'Absol-2', 'Dugtrio-1', 'Medicham-1', 'Fearow-1', 'Jynx-1', 'Dodrio-1', 'Breloom-1',
+>   'Glalie-1', 'Golem-1', 'Alakazam-1', 'Armaldo-1', 'Gengar-1', 'Heracross-1', 'Shuckle-1', 'Aerodactyl-1',
+>   'Sceptile-1', 'Dugtrio-2', 'Medicham-2', 'Fearow-2', 'Jynx-2', 'Dodrio-2', 'Breloom-2', 'Victreebel-2', 'Glalie-2',
+>   'Rhydon-2', 'Alakazam-2', 'Cradily-2', 'Armaldo-2', 'Gengar-2', 'Heracross-2', 'Shuckle-2', 'Aerodactyl-2',
+>   'Espeon-2', 'Sceptile-2', 'Dugtrio-3', 'Medicham-3', 'Fearow-3', 'Jynx-3', 'Dodrio-3', 'Mr. Mime-3', 'Breloom-3',
+>   'Xatu-3', 'Victreebel-3', 'Shiftry-3', 'Glalie-3', 'Golem-3', 'Alakazam-3', 'Cradily-3', 'Armaldo-3', 'Gengar-3',
+>   'Heracross-3', 'Shuckle-3', 'Aerodactyl-3', 'Gardevoir-3', 'Espeon-3', 'Sceptile-3', 'Dugtrio-4', 'Medicham-4',
+>   'Misdreavus-4', 'Fearow-4', 'Jynx-4', 'Dodrio-4', 'Mr. Mime-4', 'Breloom-4', 'Xatu-4', 'Victreebel-4', 'Shiftry-4',
+>   'Glalie-4', 'Golem-4', 'Alakazam-4', 'Armaldo-4', 'Gengar-4', 'Heracross-4', 'Shuckle-4', 'Aerodactyl-4',
+>   'Gardevoir-4', 'Espeon-4', 'Sceptile-4', 'Articuno-1', 'Regice-1', 'Regice-2', 'Articuno-3', 'Regice-3', 'Articuno-4',
+>   'Gengar-5', 'Gengar-6', 'Gengar-7', 'Gengar-8', 'Gardevoir-8', 'Regice-5', 'Regice-6', 'Tyranitar-1', 'Tyranitar-2',
+>   'Tyranitar-9', 'Articuno-5', 'Articuno-6', 'Alakazam-AnabelSilver', 'Heracross-GretaSilver', 'Shedinja-GretaSilver',
+>   'Breloom-GretaGold', 'Regice-BrandonSilver', 'Articuno-BrandonGold'
 > ]
 > ```
 >
@@ -1761,33 +1691,29 @@ Specify IVs for the attacker and defender independently, useful for analyzing pl
 > ```
 > SetCollection(173 sets)
 > [
->   'Shedinja-1', 'Spinarak-1', 'Pineco-1', 'Geodude-1', 'Houndour-1', 'Rhyhorn-1', 'Ariados-1',
->   'Sableye-2', 'Plusle-2', 'Minun-2', 'Sudowoodo-2', 'Furret-2', 'Mightyena-2', 'Linoone-2',
->   'Kecleon-2', 'Seaking-2', 'Banette-2', 'Zangoose-2', 'Sharpedo-2', 'Stantler-2', 'Absol-2',
->   'Bellossom-2', 'Scyther-2', 'Granbull-1', 'Marowak-1', 'Manectric-1', 'Golem-1', 'Rhydon-1',
->   'Weezing-1', 'Golduck-1', 'Muk-1', 'Ampharos-1', 'Heracross-1', 'Ursaring-1', 'Donphan-1',
->   'Exeggutor-1', 'Flygon-1', 'Blastoise-1', 'Aggron-1', 'Charizard-1', 'Typhlosion-1', 'Snorlax-1',
->   'Kingdra-1', 'Milotic-1', 'Metagross-1', 'Marowak-2', 'Dodrio-2', 'Manectric-2', 'Glalie-2',
->   'Rhydon-2', 'Kangaskhan-2', 'Tauros-2', 'Nidoking-2', 'Magmar-2', 'Gengar-2', 'Scizor-2',
->   'Heracross-2', 'Ursaring-2', 'Houndoom-2', 'Donphan-2', 'Aerodactyl-2', 'Arcanine-2',
->   'Metagross-2', 'Slaking-2', 'Granbull-3', 'Dodrio-3', 'Forretress-3', 'Marowak-3', 'Electrode-3',
->   'Shiftry-3', 'Golem-3', 'Rhydon-3', 'Weezing-3', 'Tauros-3', 'Rapidash-3', 'Heracross-3',
->   'Houndoom-3', 'Donphan-3', 'Steelix-3', 'Exeggutor-3', 'Flareon-3', 'Blaziken-3', 'Crobat-3',
->   'Swampert-3', 'Snorlax-3', 'Arcanine-3', 'Metagross-3', 'Slaking-3', 'Medicham-4', 'Fearow-4',
->   'Granbull-4', 'Dusclops-4', 'Forretress-4', 'Marowak-4', 'Manectric-4', 'Vileplume-4',
->   'Electrode-4', 'Exploud-4', 'Shiftry-4', 'Golem-4', 'Rhydon-4', 'Weezing-4', 'Kangaskhan-4',
->   'Tauros-4', 'Miltank-4', 'Nidoking-4', 'Armaldo-4', 'Muk-4', 'Scizor-4', 'Heracross-4',
->   'Ursaring-4', 'Houndoom-4', 'Donphan-4', 'Claydol-4', 'Ninetales-4', 'Steelix-4', 'Exeggutor-4',
->   'Flareon-4', 'Blaziken-4', 'Sceptile-4', 'Charizard-4', 'Typhlosion-4', 'Crobat-4', 'Snorlax-4',
->   'Arcanine-4', 'Salamence-4', 'Metagross-4', 'Regirock-1', 'Moltres-2', 'Raikou-2', 'Entei-2',
->   'Regirock-2', 'Regice-2', 'Moltres-3', 'Regice-3', 'Registeel-3', 'Moltres-4', 'Ursaring-5',
->   'Ursaring-6', 'Lapras-6', 'Snorlax-5', 'Snorlax-6', 'Snorlax-7', 'Salamence-7', 'Salamence-8',
->   'Metagross-5', 'Metagross-6', 'Metagross-7', 'Metagross-8', 'Regirock-5', 'Regirock-6',
->   'Dragonite-3', 'Dragonite-4', 'Tyranitar-2', 'Tyranitar-4', 'Tyranitar-9', 'Zapdos-6',
->   'Moltres-5', 'Moltres-6', 'Snorlax-AnabelSilver', 'Snorlax-AnabelGold', 'Swampert-TuckerSilver',
->   'Charizard-TuckerSilver', 'Swampert-TuckerGold', 'Metagross-TuckerGold', 'Slaking-SpenserSilver',
->   'Slaking-SpenserGold', 'Heracross-GretaSilver', 'Shedinja-GretaSilver', 'Steelix-LucyGold',
->   'Regirock-BrandonSilver', 'Zapdos-BrandonGold', 'Moltres-BrandonGold'
+>   'Shedinja-1', 'Spinarak-1', 'Pineco-1', 'Geodude-1', 'Houndour-1', 'Rhyhorn-1', 'Ariados-1', 'Sableye-2', 'Plusle-2',
+>   'Minun-2', 'Sudowoodo-2', 'Furret-2', 'Mightyena-2', 'Linoone-2', 'Kecleon-2', 'Seaking-2', 'Banette-2', 'Zangoose-2',
+>   'Sharpedo-2', 'Stantler-2', 'Absol-2', 'Bellossom-2', 'Scyther-2', 'Granbull-1', 'Marowak-1', 'Manectric-1',
+>   'Golem-1', 'Rhydon-1', 'Weezing-1', 'Golduck-1', 'Muk-1', 'Ampharos-1', 'Heracross-1', 'Ursaring-1', 'Donphan-1',
+>   'Exeggutor-1', 'Flygon-1', 'Blastoise-1', 'Aggron-1', 'Charizard-1', 'Typhlosion-1', 'Snorlax-1', 'Kingdra-1',
+>   'Milotic-1', 'Metagross-1', 'Marowak-2', 'Dodrio-2', 'Manectric-2', 'Glalie-2', 'Rhydon-2', 'Kangaskhan-2',
+>   'Tauros-2', 'Nidoking-2', 'Magmar-2', 'Gengar-2', 'Scizor-2', 'Heracross-2', 'Ursaring-2', 'Houndoom-2', 'Donphan-2',
+>   'Aerodactyl-2', 'Arcanine-2', 'Metagross-2', 'Slaking-2', 'Granbull-3', 'Dodrio-3', 'Forretress-3', 'Marowak-3',
+>   'Electrode-3', 'Shiftry-3', 'Golem-3', 'Rhydon-3', 'Weezing-3', 'Tauros-3', 'Rapidash-3', 'Heracross-3', 'Houndoom-3',
+>   'Donphan-3', 'Steelix-3', 'Exeggutor-3', 'Flareon-3', 'Blaziken-3', 'Crobat-3', 'Swampert-3', 'Snorlax-3',
+>   'Arcanine-3', 'Metagross-3', 'Slaking-3', 'Medicham-4', 'Fearow-4', 'Granbull-4', 'Dusclops-4', 'Forretress-4',
+>   'Marowak-4', 'Manectric-4', 'Vileplume-4', 'Electrode-4', 'Exploud-4', 'Shiftry-4', 'Golem-4', 'Rhydon-4',
+>   'Weezing-4', 'Kangaskhan-4', 'Tauros-4', 'Miltank-4', 'Nidoking-4', 'Armaldo-4', 'Muk-4', 'Scizor-4', 'Heracross-4',
+>   'Ursaring-4', 'Houndoom-4', 'Donphan-4', 'Claydol-4', 'Ninetales-4', 'Steelix-4', 'Exeggutor-4', 'Flareon-4',
+>   'Blaziken-4', 'Sceptile-4', 'Charizard-4', 'Typhlosion-4', 'Crobat-4', 'Snorlax-4', 'Arcanine-4', 'Salamence-4',
+>   'Metagross-4', 'Regirock-1', 'Moltres-2', 'Raikou-2', 'Entei-2', 'Regirock-2', 'Regice-2', 'Moltres-3', 'Regice-3',
+>   'Registeel-3', 'Moltres-4', 'Ursaring-5', 'Ursaring-6', 'Lapras-6', 'Snorlax-5', 'Snorlax-6', 'Snorlax-7',
+>   'Salamence-7', 'Salamence-8', 'Metagross-5', 'Metagross-6', 'Metagross-7', 'Metagross-8', 'Regirock-5', 'Regirock-6',
+>   'Dragonite-3', 'Dragonite-4', 'Tyranitar-2', 'Tyranitar-4', 'Tyranitar-9', 'Zapdos-6', 'Moltres-5', 'Moltres-6',
+>   'Snorlax-AnabelSilver', 'Snorlax-AnabelGold', 'Swampert-TuckerSilver', 'Charizard-TuckerSilver',
+>   'Swampert-TuckerGold', 'Metagross-TuckerGold', 'Slaking-SpenserSilver', 'Slaking-SpenserGold',
+>   'Heracross-GretaSilver', 'Shedinja-GretaSilver', 'Steelix-LucyGold', 'Regirock-BrandonSilver', 'Zapdos-BrandonGold',
+>   'Moltres-BrandonGold'
 > ]
 > ```
 >
@@ -1799,7 +1725,7 @@ Other optional parameters are passed through to the damage calculator:
 
 > ```python
 > from frontierbrain3 import Field
-> db.sets.diesTo(meta, atk_boosts={"atk": 1})
+> db.sets.willDieTo(meta, atk_boosts={"atk": 1})
 > ```
 >
 > <details>
@@ -1808,54 +1734,45 @@ Other optional parameters are passed through to the damage calculator:
 > ```
 > SetCollection(335 sets)
 > [
->   'Sunkern-1', 'Azurill-1', 'Caterpie-1', 'Weedle-1', 'Wurmple-1', 'Ralts-1', 'Feebas-1',
->   'Metapod-1', 'Kakuna-1', 'Pichu-1', 'Silcoon-1', 'Cascoon-1', 'Igglybuff-1', 'Tyrogue-1',
->   'Sentret-1', 'Cleffa-1', 'Seedot-1', 'Lotad-1', 'Poochyena-1', 'Shedinja-1', 'Makuhita-1',
->   'Whismur-1', 'Zigzagoon-1', 'Zubat-1', 'Togepi-1', 'Spinarak-1', 'Hoppip-1', 'Swinub-1',
->   'Smeargle-1', 'Pidgey-1', 'Rattata-1', 'Skitty-1', 'Spearow-1', 'Hoothoot-1', 'Diglett-1',
->   'Ledyba-1', 'Nincada-1', 'Surskit-1', 'Jigglypuff-1', 'Taillow-1', 'Wingull-1', 'NidoranM-1',
->   'NidoranF-1', 'Kirlia-1', 'Meditite-1', 'Slakoth-1', 'Paras-1', 'Ekans-1', 'Barboach-1',
->   'Meowth-1', 'Trapinch-1', 'Spheal-1', 'Shroomish-1', 'Shuppet-1', 'Duskull-1', 'Pikachu-1',
->   'Bellsprout-1', 'Geodude-1', 'Dratini-1', 'Snubbull-1', 'Remoraid-1', 'Larvitar-1', 'Baltoy-1',
->   'Snorunt-1', 'Bagon-1', 'Gulpin-1', 'Venonat-1', 'Mankey-1', 'Machop-1', 'Smoochum-1',
->   'Carvanha-1', 'Abra-1', 'Doduo-1', 'Gastly-1', 'Swablu-1', 'Treecko-1', 'Torchic-1',
->   'Bulbasaur-1', 'Chikorita-1', 'Oddish-1', 'Psyduck-1', 'Natu-1', 'Clefairy-1', 'Grimer-1',
->   'Eevee-1', 'Drowzee-1', 'Teddiursa-1', 'Delibird-1', 'Houndour-1', 'Phanpy-1', 'Spoink-1',
->   'Tentacool-1', 'Cacnea-1', 'Unown-1', 'Skiploom-1', 'Nuzleaf-1', 'Lombre-1', 'Vibrava-1',
->   'Rhyhorn-1', 'Pidgeotto-1', "Farfetch'd-1", 'Omanyte-1', 'Kabuto-1', 'Lileep-1', 'Anorith-1',
->   'Aipom-1', 'Loudred-1', 'Spinda-1', 'Nidorina-1', 'Nidorino-1', 'Nosepass-1', 'Butterfree-1',
->   'Beedrill-1', 'Onix-1', 'Beautifly-1', 'Dustox-1', 'Ledian-1', 'Ariados-1', 'Yanma-1',
->   'Delcatty-1', 'Sableye-1', 'Weepinbell-1', 'Graveler-1', 'Gloom-1', 'Kadabra-1', 'Roselia-1',
->   'Volbeat-1', 'Illumise-1', 'Ivysaur-1', 'Parasect-1', 'Haunter-1', 'Murkrow-1', 'Grovyle-1',
->   'Combusken-1', 'Sudowoodo-1', 'Pupitar-1', 'Raticate-1', 'Dragonair-1', 'Mightyena-1',
->   'Linoone-1', 'Castform-1', 'Chimecho-1', 'Sneasel-1', 'Swellow-1', 'Arbok-1', 'Lunatone-1',
->   'Solrock-1', 'Venomoth-1', 'Piloswine-1', 'Girafarig-1', 'Ninjask-1', 'Seviper-1', 'Zangoose-1',
->   'Stantler-1', 'Absol-1', 'Cacturne-1', 'Delcatty-2', 'Sableye-2', 'Weepinbell-2', 'Graveler-2',
->   'Gloom-2', 'Porygon-2', 'Kadabra-2', 'Roselia-2', 'Volbeat-2', 'Illumise-2', 'Ivysaur-2',
->   'Parasect-2', 'Haunter-2', 'Murkrow-2', 'Plusle-2', 'Grovyle-2', 'Combusken-2', 'Sudowoodo-2',
->   'Pupitar-2', 'Raticate-2', 'Furret-2', 'Dragonair-2', 'Linoone-2', 'Castform-2', 'Sneasel-2',
->   'Swellow-2', 'Vigoroth-2', 'Lunatone-2', 'Solrock-2', 'Venomoth-2', 'Piloswine-2', 'Banette-2',
->   'Ninjask-2', 'Zangoose-2', 'Stantler-2', 'Absol-2', 'Pidgeot-2', 'Cacturne-2', 'Scyther-2',
->   'Dugtrio-1', 'Medicham-1', 'Fearow-1', 'Jynx-1', 'Dodrio-1', 'Breloom-1', 'Xatu-1', 'Glalie-1',
->   'Golem-1', 'Rhydon-1', 'Alakazam-1', 'Cradily-1', 'Armaldo-1', 'Gengar-1', 'Heracross-1',
->   'Shuckle-1', 'Aerodactyl-1', 'Flygon-1', 'Espeon-1', 'Sceptile-1', 'Dugtrio-2', 'Medicham-2',
->   'Fearow-2', 'Granbull-2', 'Jynx-2', 'Dodrio-2', 'Mr. Mime-2', 'Breloom-2', 'Victreebel-2',
->   'Exploud-2', 'Glalie-2', 'Golem-2', 'Rhydon-2', 'Alakazam-2', 'Cradily-2', 'Armaldo-2',
->   'Gengar-2', 'Heracross-2', 'Shuckle-2', 'Aerodactyl-2', 'Flygon-2', 'Espeon-2', 'Sceptile-2',
->   'Dugtrio-3', 'Medicham-3', 'Fearow-3', 'Jynx-3', 'Dodrio-3', 'Mr. Mime-3', 'Breloom-3', 'Xatu-3',
->   'Vileplume-3', 'Victreebel-3', 'Exploud-3', 'Shiftry-3', 'Glalie-3', 'Golem-3', 'Rhydon-3',
->   'Alakazam-3', 'Cradily-3', 'Armaldo-3', 'Gengar-3', 'Heracross-3', 'Shuckle-3', 'Aerodactyl-3',
->   'Gardevoir-3', 'Flygon-3', 'Espeon-3', 'Sceptile-3', 'Crobat-3', 'Dugtrio-4', 'Medicham-4',
->   'Misdreavus-4', 'Fearow-4', 'Granbull-4', 'Jynx-4', 'Dodrio-4', 'Mr. Mime-4', 'Breloom-4',
->   'Xatu-4', 'Vileplume-4', 'Victreebel-4', 'Exploud-4', 'Shiftry-4', 'Glalie-4', 'Golem-4',
->   'Rhydon-4', 'Alakazam-4', 'Nidoking-4', 'Cradily-4', 'Armaldo-4', 'Gengar-4', 'Heracross-4',
->   'Shuckle-4', 'Aerodactyl-4', 'Gardevoir-4', 'Flygon-4', 'Venusaur-4', 'Espeon-4', 'Sceptile-4',
->   'Crobat-4', 'Articuno-1', 'Regice-1', 'Articuno-2', 'Regice-2', 'Latios-2', 'Articuno-3',
->   'Regice-3', 'Latios-3', 'Articuno-4', 'Regice-4', 'Gengar-5', 'Gengar-6', 'Gengar-7', 'Gengar-8',
->   'Gardevoir-6', 'Gardevoir-8', 'Regice-5', 'Regice-6', 'Latios-6', 'Latios-8', 'Tyranitar-1',
->   'Tyranitar-2', 'Tyranitar-3', 'Tyranitar-4', 'Tyranitar-5', 'Tyranitar-6', 'Tyranitar-7',
->   'Tyranitar-8', 'Tyranitar-9', 'Tyranitar-10', 'Articuno-5', 'Articuno-6', 'Alakazam-AnabelSilver',
->   'Heracross-GretaSilver', 'Shedinja-GretaSilver', 'Breloom-GretaGold', 'Seviper-LucyGold',
+>   'Sunkern-1', 'Azurill-1', 'Caterpie-1', 'Weedle-1', 'Wurmple-1', 'Ralts-1', 'Feebas-1', 'Metapod-1', 'Kakuna-1',
+>   'Pichu-1', 'Silcoon-1', 'Cascoon-1', 'Igglybuff-1', 'Tyrogue-1', 'Sentret-1', 'Cleffa-1', 'Seedot-1', 'Lotad-1',
+>   'Poochyena-1', 'Shedinja-1', 'Makuhita-1', 'Whismur-1', 'Zigzagoon-1', 'Zubat-1', 'Togepi-1', 'Spinarak-1',
+>   'Hoppip-1', 'Swinub-1', 'Smeargle-1', 'Pidgey-1', 'Rattata-1', 'Skitty-1', 'Spearow-1', 'Hoothoot-1', 'Diglett-1',
+>   'Ledyba-1', 'Nincada-1', 'Surskit-1', 'Jigglypuff-1', 'Taillow-1', 'Wingull-1', 'NidoranM-1', 'NidoranF-1',
+>   'Kirlia-1', 'Meditite-1', 'Slakoth-1', 'Paras-1', 'Ekans-1', 'Barboach-1', 'Meowth-1', 'Trapinch-1', 'Spheal-1',
+>   'Shroomish-1', 'Shuppet-1', 'Duskull-1', 'Pikachu-1', 'Bellsprout-1', 'Geodude-1', 'Dratini-1', 'Snubbull-1',
+>   'Remoraid-1', 'Larvitar-1', 'Baltoy-1', 'Snorunt-1', 'Bagon-1', 'Gulpin-1', 'Venonat-1', 'Mankey-1', 'Machop-1',
+>   'Smoochum-1', 'Carvanha-1', 'Abra-1', 'Doduo-1', 'Gastly-1', 'Swablu-1', 'Treecko-1', 'Torchic-1', 'Bulbasaur-1',
+>   'Chikorita-1', 'Oddish-1', 'Psyduck-1', 'Natu-1', 'Clefairy-1', 'Grimer-1', 'Eevee-1', 'Drowzee-1', 'Teddiursa-1',
+>   'Delibird-1', 'Houndour-1', 'Phanpy-1', 'Spoink-1', 'Tentacool-1', 'Cacnea-1', 'Unown-1', 'Skiploom-1', 'Nuzleaf-1',
+>   'Lombre-1', 'Vibrava-1', 'Rhyhorn-1', 'Pidgeotto-1', "Farfetch'd-1", 'Omanyte-1', 'Kabuto-1', 'Lileep-1', 'Anorith-1',
+>   'Aipom-1', 'Loudred-1', 'Spinda-1', 'Nidorina-1', 'Nidorino-1', 'Nosepass-1', 'Butterfree-1', 'Beedrill-1', 'Onix-1',
+>   'Beautifly-1', 'Dustox-1', 'Ledian-1', 'Ariados-1', 'Yanma-1', 'Delcatty-1', 'Sableye-1', 'Weepinbell-1',
+>   'Graveler-1', 'Gloom-1', 'Kadabra-1', 'Roselia-1', 'Volbeat-1', 'Illumise-1', 'Ivysaur-1', 'Parasect-1', 'Haunter-1',
+>   'Murkrow-1', 'Grovyle-1', 'Combusken-1', 'Sudowoodo-1', 'Pupitar-1', 'Raticate-1', 'Dragonair-1', 'Mightyena-1',
+>   'Linoone-1', 'Castform-1', 'Chimecho-1', 'Sneasel-1', 'Swellow-1', 'Arbok-1', 'Lunatone-1', 'Solrock-1', 'Venomoth-1',
+>   'Piloswine-1', 'Girafarig-1', 'Ninjask-1', 'Seviper-1', 'Zangoose-1', 'Stantler-1', 'Absol-1', 'Cacturne-1',
+>   'Delcatty-2', 'Sableye-2', 'Weepinbell-2', 'Graveler-2', 'Gloom-2', 'Porygon-2', 'Kadabra-2', 'Roselia-2',
+>   'Volbeat-2', 'Illumise-2', 'Ivysaur-2', 'Parasect-2', 'Haunter-2', 'Murkrow-2', 'Plusle-2', 'Grovyle-2',
+>   'Combusken-2', 'Sudowoodo-2', 'Pupitar-2', 'Raticate-2', 'Furret-2', 'Dragonair-2', 'Linoone-2', 'Castform-2',
+>   'Sneasel-2', 'Swellow-2', 'Vigoroth-2', 'Lunatone-2', 'Solrock-2', 'Venomoth-2', 'Piloswine-2', 'Banette-2',
+>   'Ninjask-2', 'Zangoose-2', 'Stantler-2', 'Absol-2', 'Pidgeot-2', 'Cacturne-2', 'Scyther-2', 'Dugtrio-1', 'Medicham-1',
+>   'Fearow-1', 'Jynx-1', 'Dodrio-1', 'Breloom-1', 'Xatu-1', 'Glalie-1', 'Golem-1', 'Rhydon-1', 'Alakazam-1', 'Cradily-1',
+>   'Armaldo-1', 'Gengar-1', 'Heracross-1', 'Shuckle-1', 'Aerodactyl-1', 'Flygon-1', 'Espeon-1', 'Sceptile-1',
+>   'Dugtrio-2', 'Medicham-2', 'Fearow-2', 'Granbull-2', 'Jynx-2', 'Dodrio-2', 'Mr. Mime-2', 'Breloom-2', 'Victreebel-2',
+>   'Exploud-2', 'Glalie-2', 'Golem-2', 'Rhydon-2', 'Alakazam-2', 'Cradily-2', 'Armaldo-2', 'Gengar-2', 'Heracross-2',
+>   'Shuckle-2', 'Aerodactyl-2', 'Flygon-2', 'Espeon-2', 'Sceptile-2', 'Dugtrio-3', 'Medicham-3', 'Fearow-3', 'Jynx-3',
+>   'Dodrio-3', 'Mr. Mime-3', 'Breloom-3', 'Xatu-3', 'Vileplume-3', 'Victreebel-3', 'Exploud-3', 'Shiftry-3', 'Glalie-3',
+>   'Golem-3', 'Rhydon-3', 'Alakazam-3', 'Cradily-3', 'Armaldo-3', 'Gengar-3', 'Heracross-3', 'Shuckle-3', 'Aerodactyl-3',
+>   'Gardevoir-3', 'Flygon-3', 'Espeon-3', 'Sceptile-3', 'Crobat-3', 'Dugtrio-4', 'Medicham-4', 'Misdreavus-4',
+>   'Fearow-4', 'Granbull-4', 'Jynx-4', 'Dodrio-4', 'Mr. Mime-4', 'Breloom-4', 'Xatu-4', 'Vileplume-4', 'Victreebel-4',
+>   'Exploud-4', 'Shiftry-4', 'Glalie-4', 'Golem-4', 'Rhydon-4', 'Alakazam-4', 'Nidoking-4', 'Cradily-4', 'Armaldo-4',
+>   'Gengar-4', 'Heracross-4', 'Shuckle-4', 'Aerodactyl-4', 'Gardevoir-4', 'Flygon-4', 'Venusaur-4', 'Espeon-4',
+>   'Sceptile-4', 'Crobat-4', 'Articuno-1', 'Regice-1', 'Articuno-2', 'Regice-2', 'Latios-2', 'Articuno-3', 'Regice-3',
+>   'Latios-3', 'Articuno-4', 'Regice-4', 'Gengar-5', 'Gengar-6', 'Gengar-7', 'Gengar-8', 'Gardevoir-6', 'Gardevoir-8',
+>   'Regice-5', 'Regice-6', 'Latios-6', 'Latios-8', 'Tyranitar-1', 'Tyranitar-2', 'Tyranitar-3', 'Tyranitar-4',
+>   'Tyranitar-5', 'Tyranitar-6', 'Tyranitar-7', 'Tyranitar-8', 'Tyranitar-9', 'Tyranitar-10', 'Articuno-5', 'Articuno-6',
+>   'Alakazam-AnabelSilver', 'Heracross-GretaSilver', 'Shedinja-GretaSilver', 'Breloom-GretaGold', 'Seviper-LucyGold',
 >   'Regice-BrandonSilver', 'Articuno-BrandonGold'
 > ]
 > ```
@@ -1901,20 +1818,18 @@ Other optional parameters are passed through to the damage calculator:
 > ```
 > SetCollection(103 sets)
 > [
->   'Meditite-1', 'Hitmonlee-1', 'Hitmonchan-1', 'Poliwrath-1', 'Pinsir-1', 'Machoke-2',
->   'Combusken-2', 'Sealeo-2', 'Seadra-2', 'Primeape-2', 'Hitmonlee-2', 'Hitmonchan-2', 'Sharpedo-2',
->   'Gorebyss-2', 'Omastar-2', 'Poliwrath-2', 'Politoed-2', 'Medicham-1', 'Lanturn-1', 'Breloom-1',
->   'Marowak-1', 'Hariyama-1', 'Ludicolo-1', 'Golduck-1', 'Heracross-1', 'Machamp-1', 'Vaporeon-1',
->   'Blastoise-1', 'Blaziken-1', 'Kingdra-1', 'Milotic-1', 'Marowak-2', 'Breloom-2', 'Hariyama-2',
->   'Ludicolo-2', 'Golem-2', 'Electabuzz-2', 'Slowking-2', 'Miltank-2', 'Golduck-2', 'Muk-2',
->   'Ampharos-2', 'Machamp-2', 'Starmie-2', 'Blastoise-2', 'Aggron-2', 'Blaziken-2', 'Lapras-2',
->   'Gyarados-2', 'Milotic-2', 'Medicham-3', 'Lanturn-3', 'Breloom-3', 'Marowak-3', 'Hariyama-3',
->   'Slowbro-3', 'Slowking-3', 'Golduck-3', 'Heracross-3', 'Wailord-3', 'Machamp-3', 'Tentacruel-3',
->   'Starmie-3', 'Feraligatr-3', 'Swampert-3', 'Slaking-3', 'Lanturn-4', 'Breloom-4', 'Whiscash-4',
->   'Marowak-4', 'Hariyama-4', 'Slowbro-4', 'Slowking-4', 'Nidoqueen-4', 'Heracross-4', 'Machamp-4',
->   'Tentacruel-4', 'Vaporeon-4', 'Feraligatr-4', 'Walrein-4', 'Lapras-4', 'Swampert-4', 'Milotic-4',
->   'Suicune-1', 'Regirock-1', 'Suicune-3', 'Suicune-4', 'Ursaring-5', 'Machamp-5', 'Machamp-6',
->   'Machamp-7', 'Machamp-8', 'Starmie-5', 'Starmie-8', 'Lapras-6', 'Regirock-5', 'Registeel-5',
+>   'Meditite-1', 'Hitmonlee-1', 'Hitmonchan-1', 'Poliwrath-1', 'Pinsir-1', 'Machoke-2', 'Combusken-2', 'Sealeo-2',
+>   'Seadra-2', 'Primeape-2', 'Hitmonlee-2', 'Hitmonchan-2', 'Sharpedo-2', 'Gorebyss-2', 'Omastar-2', 'Poliwrath-2',
+>   'Politoed-2', 'Medicham-1', 'Lanturn-1', 'Breloom-1', 'Marowak-1', 'Hariyama-1', 'Ludicolo-1', 'Golduck-1',
+>   'Heracross-1', 'Machamp-1', 'Vaporeon-1', 'Blastoise-1', 'Blaziken-1', 'Kingdra-1', 'Milotic-1', 'Marowak-2',
+>   'Breloom-2', 'Hariyama-2', 'Ludicolo-2', 'Golem-2', 'Electabuzz-2', 'Slowking-2', 'Miltank-2', 'Golduck-2', 'Muk-2',
+>   'Ampharos-2', 'Machamp-2', 'Starmie-2', 'Blastoise-2', 'Aggron-2', 'Blaziken-2', 'Lapras-2', 'Gyarados-2',
+>   'Milotic-2', 'Medicham-3', 'Lanturn-3', 'Breloom-3', 'Marowak-3', 'Hariyama-3', 'Slowbro-3', 'Slowking-3',
+>   'Golduck-3', 'Heracross-3', 'Wailord-3', 'Machamp-3', 'Tentacruel-3', 'Starmie-3', 'Feraligatr-3', 'Swampert-3',
+>   'Slaking-3', 'Lanturn-4', 'Breloom-4', 'Whiscash-4', 'Marowak-4', 'Hariyama-4', 'Slowbro-4', 'Slowking-4',
+>   'Nidoqueen-4', 'Heracross-4', 'Machamp-4', 'Tentacruel-4', 'Vaporeon-4', 'Feraligatr-4', 'Walrein-4', 'Lapras-4',
+>   'Swampert-4', 'Milotic-4', 'Suicune-1', 'Regirock-1', 'Suicune-3', 'Suicune-4', 'Ursaring-5', 'Machamp-5',
+>   'Machamp-6', 'Machamp-7', 'Machamp-8', 'Starmie-5', 'Starmie-8', 'Lapras-6', 'Regirock-5', 'Registeel-5',
 >   'Tyranitar-7', 'Suicune-5', 'Metagross-TuckerGold', 'Breloom-GretaGold', 'Milotic-LucySilver',
 >   'Regirock-BrandonSilver'
 > ]
@@ -1935,14 +1850,12 @@ Other optional parameters are passed through to the damage calculator:
 > ```
 > SetCollection(50 sets)
 > [
->   'Gligar-2', 'Seaking-2', 'Crawdaunt-2', 'Kingler-2', 'Pinsir-2', 'Nidoking-1', 'Breloom-2',
->   'Glalie-2', 'Rhydon-2', 'Dugtrio-3', 'Breloom-3', 'Forretress-3', 'Whiscash-3', 'Dewgong-3',
->   'Shiftry-3', 'Golem-3', 'Rhydon-3', 'Weezing-3', 'Nidoking-3', 'Donphan-3', 'Wailord-3',
->   'Steelix-3', 'Walrein-3', 'Dugtrio-4', 'Breloom-4', 'Forretress-4', 'Whiscash-4', 'Dewgong-4',
->   'Shiftry-4', 'Golem-4', 'Rhydon-4', 'Weezing-4', 'Muk-4', 'Donphan-4', 'Claydol-4', 'Wailord-4',
->   'Steelix-4', 'Exeggutor-4', 'Walrein-4', 'Regirock-1', 'Regirock-2', 'Machamp-7', 'Lapras-7',
->   'Lapras-8', 'Metagross-5', 'Metagross-8', 'Regirock-6', 'Lapras-SpenserSilver',
->   'Breloom-GretaGold', 'Regirock-BrandonSilver'
+>   'Gligar-2', 'Seaking-2', 'Crawdaunt-2', 'Kingler-2', 'Pinsir-2', 'Nidoking-1', 'Breloom-2', 'Glalie-2', 'Rhydon-2',
+>   'Dugtrio-3', 'Breloom-3', 'Forretress-3', 'Whiscash-3', 'Dewgong-3', 'Shiftry-3', 'Golem-3', 'Rhydon-3', 'Weezing-3',
+>   'Nidoking-3', 'Donphan-3', 'Wailord-3', 'Steelix-3', 'Walrein-3', 'Dugtrio-4', 'Breloom-4', 'Forretress-4',
+>   'Whiscash-4', 'Dewgong-4', 'Shiftry-4', 'Golem-4', 'Rhydon-4', 'Weezing-4', 'Muk-4', 'Donphan-4', 'Claydol-4',
+>   'Wailord-4', 'Steelix-4', 'Exeggutor-4', 'Walrein-4', 'Regirock-1', 'Regirock-2', 'Machamp-7', 'Lapras-7', 'Lapras-8',
+>   'Metagross-5', 'Metagross-8', 'Regirock-6', 'Lapras-SpenserSilver', 'Breloom-GretaGold', 'Regirock-BrandonSilver'
 > ]
 > ```
 >
@@ -2024,28 +1937,24 @@ Every filter has a negated form via `.Not`:
 > ```
 > SetCollection(150 sets)
 > [
->   'Lickitung-2', 'Graveler-2', 'Wailmer-2', 'Marshtomp-2', 'Sudowoodo-2', 'Magcargo-2', 'Pupitar-2',
->   'Gligar-2', 'Lairon-2', 'Arbok-2', 'Solrock-2', 'Sandslash-2', 'Piloswine-2', 'Seviper-2',
->   'Camerupt-2', 'Relicanth-2', 'Dugtrio-1', 'Whiscash-1', 'Quagsire-1', 'Golem-1', 'Rhydon-1',
->   'Tauros-1', 'Donphan-1', 'Claydol-1', 'Steelix-1', 'Flygon-1', 'Aggron-1', 'Swampert-1',
->   'Dugtrio-2', 'Marowak-2', 'Forretress-2', 'Exploud-2', 'Rhydon-2', 'Tauros-2', 'Nidoqueen-2',
->   'Nidoking-2', 'Cradily-2', 'Heracross-2', 'Ursaring-2', 'Donphan-2', 'Claydol-2', 'Machamp-2',
->   'Steelix-2', 'Aerodactyl-2', 'Aggron-2', 'Walrein-2', 'Charizard-2', 'Snorlax-2', 'Metagross-2',
->   'Dugtrio-3', 'Granbull-3', 'Dusclops-3', 'Forretress-3', 'Marowak-3', 'Quagsire-3', 'Hariyama-3',
->   'Glalie-3', 'Golem-3', 'Rhydon-3', 'Kangaskhan-3', 'Tauros-3', 'Miltank-3', 'Altaria-3',
->   'Armaldo-3', 'Heracross-3', 'Donphan-3', 'Steelix-3', 'Flygon-3', 'Venusaur-3', 'Meganium-3',
->   'Feraligatr-3', 'Blaziken-3', 'Sceptile-3', 'Typhlosion-3', 'Salamence-3', 'Metagross-3',
->   'Slaking-3', 'Dugtrio-4', 'Granbull-4', 'Forretress-4', 'Marowak-4', 'Hariyama-4', 'Exploud-4',
->   'Glalie-4', 'Golem-4', 'Rhydon-4', 'Kangaskhan-4', 'Altaria-4', 'Nidoqueen-4', 'Nidoking-4',
->   'Armaldo-4', 'Heracross-4', 'Ursaring-4', 'Donphan-4', 'Claydol-4', 'Machamp-4', 'Steelix-4',
->   'Aerodactyl-4', 'Flygon-4', 'Venusaur-4', 'Meganium-4', 'Feraligatr-4', 'Aggron-4', 'Blaziken-4',
->   'Charizard-4', 'Typhlosion-4', 'Gyarados-4', 'Salamence-4', 'Metagross-4', 'Regirock-1',
->   'Regirock-2', 'Registeel-2', 'Latias-2', 'Latios-2', 'Regirock-3', 'Latias-3', 'Latios-3',
->   'Registeel-4', 'Ursaring-7', 'Ursaring-8', 'Machamp-5', 'Machamp-6', 'Snorlax-6', 'Snorlax-7',
->   'Salamence-5', 'Metagross-5', 'Metagross-7', 'Metagross-8', 'Regice-5', 'Latias-7', 'Latias-8',
->   'Latios-7', 'Latios-8', 'Dragonite-1', 'Dragonite-2', 'Dragonite-10', 'Tyranitar-2',
->   'Tyranitar-3', 'Tyranitar-5', 'Tyranitar-6', 'Tyranitar-9', 'Tyranitar-10',
->   'Salamence-TuckerSilver', 'Charizard-TuckerSilver', 'Metagross-TuckerGold',
+>   'Lickitung-2', 'Graveler-2', 'Wailmer-2', 'Marshtomp-2', 'Sudowoodo-2', 'Magcargo-2', 'Pupitar-2', 'Gligar-2',
+>   'Lairon-2', 'Arbok-2', 'Solrock-2', 'Sandslash-2', 'Piloswine-2', 'Seviper-2', 'Camerupt-2', 'Relicanth-2',
+>   'Dugtrio-1', 'Whiscash-1', 'Quagsire-1', 'Golem-1', 'Rhydon-1', 'Tauros-1', 'Donphan-1', 'Claydol-1', 'Steelix-1',
+>   'Flygon-1', 'Aggron-1', 'Swampert-1', 'Dugtrio-2', 'Marowak-2', 'Forretress-2', 'Exploud-2', 'Rhydon-2', 'Tauros-2',
+>   'Nidoqueen-2', 'Nidoking-2', 'Cradily-2', 'Heracross-2', 'Ursaring-2', 'Donphan-2', 'Claydol-2', 'Machamp-2',
+>   'Steelix-2', 'Aerodactyl-2', 'Aggron-2', 'Walrein-2', 'Charizard-2', 'Snorlax-2', 'Metagross-2', 'Dugtrio-3',
+>   'Granbull-3', 'Dusclops-3', 'Forretress-3', 'Marowak-3', 'Quagsire-3', 'Hariyama-3', 'Glalie-3', 'Golem-3',
+>   'Rhydon-3', 'Kangaskhan-3', 'Tauros-3', 'Miltank-3', 'Altaria-3', 'Armaldo-3', 'Heracross-3', 'Donphan-3',
+>   'Steelix-3', 'Flygon-3', 'Venusaur-3', 'Meganium-3', 'Feraligatr-3', 'Blaziken-3', 'Sceptile-3', 'Typhlosion-3',
+>   'Salamence-3', 'Metagross-3', 'Slaking-3', 'Dugtrio-4', 'Granbull-4', 'Forretress-4', 'Marowak-4', 'Hariyama-4',
+>   'Exploud-4', 'Glalie-4', 'Golem-4', 'Rhydon-4', 'Kangaskhan-4', 'Altaria-4', 'Nidoqueen-4', 'Nidoking-4', 'Armaldo-4',
+>   'Heracross-4', 'Ursaring-4', 'Donphan-4', 'Claydol-4', 'Machamp-4', 'Steelix-4', 'Aerodactyl-4', 'Flygon-4',
+>   'Venusaur-4', 'Meganium-4', 'Feraligatr-4', 'Aggron-4', 'Blaziken-4', 'Charizard-4', 'Typhlosion-4', 'Gyarados-4',
+>   'Salamence-4', 'Metagross-4', 'Regirock-1', 'Regirock-2', 'Registeel-2', 'Latias-2', 'Latios-2', 'Regirock-3',
+>   'Latias-3', 'Latios-3', 'Registeel-4', 'Ursaring-7', 'Ursaring-8', 'Machamp-5', 'Machamp-6', 'Snorlax-6', 'Snorlax-7',
+>   'Salamence-5', 'Metagross-5', 'Metagross-7', 'Metagross-8', 'Regice-5', 'Latias-7', 'Latias-8', 'Latios-7',
+>   'Latios-8', 'Dragonite-1', 'Dragonite-2', 'Dragonite-10', 'Tyranitar-2', 'Tyranitar-3', 'Tyranitar-5', 'Tyranitar-6',
+>   'Tyranitar-9', 'Tyranitar-10', 'Salamence-TuckerSilver', 'Charizard-TuckerSilver', 'Metagross-TuckerGold',
 >   'Slaking-SpenserSilver', 'Slaking-SpenserGold', 'Steelix-LucyGold', 'Regirock-BrandonSilver',
 >   'Registeel-BrandonSilver'
 > ]
@@ -2066,33 +1975,28 @@ Every filter has a negated form via `.Not`:
 > ```
 > SetCollection(173 sets)
 > [
->   'Duskull-1', 'Koffing-1', 'Machoke-1', 'Haunter-1', 'Togetic-1', 'Azumarill-1', 'Gligar-1',
->   'Pelipper-1', 'Noctowl-1', 'Sandslash-1', 'Primeape-1', 'Hitmonlee-1', 'Hitmonchan-1',
->   'Hitmontop-1', 'Banette-1', 'Torkoal-1', 'Relicanth-1', 'Poliwrath-1', 'Politoed-1', 'Cloyster-1',
->   'Machoke-2', 'Haunter-2', 'Togetic-2', 'Gligar-2', 'Pelipper-2', 'Sandslash-2', 'Primeape-2',
->   'Hitmonlee-2', 'Hitmonchan-2', 'Hitmontop-2', 'Banette-2', 'Mantine-2', 'Torkoal-2',
->   'Relicanth-2', 'Poliwrath-2', 'Cloyster-2', 'Misdreavus-1', 'Dusclops-1', 'Forretress-1',
->   'Skarmory-1', 'Hariyama-1', 'Weezing-1', 'Altaria-1', 'Gengar-1', 'Scizor-1', 'Heracross-1',
->   'Donphan-1', 'Wailord-1', 'Machamp-1', 'Shuckle-1', 'Steelix-1', 'Lapras-1', 'Swampert-1',
->   'Gyarados-1', 'Milotic-1', 'Slaking-1', 'Quagsire-2', 'Misdreavus-2', 'Dusclops-2',
->   'Forretress-2', 'Skarmory-2', 'Hariyama-2', 'Vileplume-2', 'Weezing-2', 'Altaria-2', 'Gengar-2',
->   'Scizor-2', 'Heracross-2', 'Donphan-2', 'Wailord-2', 'Machamp-2', 'Shuckle-2', 'Steelix-2',
->   'Venusaur-2', 'Vaporeon-2', 'Crobat-2', 'Swampert-2', 'Kingdra-2', 'Metagross-2', 'Slaking-2',
->   'Misdreavus-3', 'Dusclops-3', 'Forretress-3', 'Whiscash-3', 'Skarmory-3', 'Hariyama-3',
->   'Rhydon-3', 'Weezing-3', 'Altaria-3', 'Gengar-3', 'Scizor-3', 'Heracross-3', 'Donphan-3',
->   'Wailord-3', 'Machamp-3', 'Shuckle-3', 'Steelix-3', 'Vaporeon-3', 'Kingdra-3', 'Milotic-3',
->   'Metagross-3', 'Slaking-3', 'Dusclops-4', 'Forretress-4', 'Skarmory-4', 'Hariyama-4', 'Rhydon-4',
->   'Weezing-4', 'Gengar-4', 'Scizor-4', 'Heracross-4', 'Donphan-4', 'Wailord-4', 'Machamp-4',
->   'Shuckle-4', 'Steelix-4', 'Gyarados-4', 'Kingdra-4', 'Salamence-4', 'Suicune-1', 'Regirock-1',
->   'Registeel-1', 'Suicune-2', 'Regirock-2', 'Registeel-2', 'Suicune-3', 'Regirock-3', 'Registeel-3',
->   'Suicune-4', 'Regirock-4', 'Regice-4', 'Registeel-4', 'Gengar-5', 'Gengar-6', 'Gengar-7',
->   'Gengar-8', 'Machamp-5', 'Machamp-6', 'Machamp-7', 'Machamp-8', 'Salamence-5', 'Salamence-6',
->   'Metagross-5', 'Metagross-8', 'Regirock-5', 'Regirock-6', 'Registeel-5', 'Registeel-6',
->   'Dragonite-1', 'Dragonite-2', 'Dragonite-3', 'Dragonite-4', 'Dragonite-9', 'Dragonite-10',
->   'Entei-5', 'Entei-6', 'Suicune-5', 'Suicune-6', 'Swampert-TuckerSilver', 'Salamence-TuckerSilver',
->   'Swampert-TuckerGold', 'Metagross-TuckerGold', 'Slaking-SpenserSilver', 'Lapras-SpenserSilver',
->   'Suicune-SpenserGold', 'Heracross-GretaSilver', 'Gengar-GretaGold', 'Shuckle-LucySilver',
->   'Steelix-LucyGold', 'Gyarados-LucyGold', 'Regirock-BrandonSilver', 'Registeel-BrandonSilver',
+>   'Duskull-1', 'Koffing-1', 'Machoke-1', 'Haunter-1', 'Togetic-1', 'Azumarill-1', 'Gligar-1', 'Pelipper-1', 'Noctowl-1',
+>   'Sandslash-1', 'Primeape-1', 'Hitmonlee-1', 'Hitmonchan-1', 'Hitmontop-1', 'Banette-1', 'Torkoal-1', 'Relicanth-1',
+>   'Poliwrath-1', 'Politoed-1', 'Cloyster-1', 'Machoke-2', 'Haunter-2', 'Togetic-2', 'Gligar-2', 'Pelipper-2',
+>   'Sandslash-2', 'Primeape-2', 'Hitmonlee-2', 'Hitmonchan-2', 'Hitmontop-2', 'Banette-2', 'Mantine-2', 'Torkoal-2',
+>   'Relicanth-2', 'Poliwrath-2', 'Cloyster-2', 'Misdreavus-1', 'Dusclops-1', 'Forretress-1', 'Skarmory-1', 'Hariyama-1',
+>   'Weezing-1', 'Altaria-1', 'Gengar-1', 'Scizor-1', 'Heracross-1', 'Donphan-1', 'Wailord-1', 'Machamp-1', 'Shuckle-1',
+>   'Steelix-1', 'Lapras-1', 'Swampert-1', 'Gyarados-1', 'Milotic-1', 'Slaking-1', 'Quagsire-2', 'Misdreavus-2',
+>   'Dusclops-2', 'Forretress-2', 'Skarmory-2', 'Hariyama-2', 'Vileplume-2', 'Weezing-2', 'Altaria-2', 'Gengar-2',
+>   'Scizor-2', 'Heracross-2', 'Donphan-2', 'Wailord-2', 'Machamp-2', 'Shuckle-2', 'Steelix-2', 'Venusaur-2',
+>   'Vaporeon-2', 'Crobat-2', 'Swampert-2', 'Kingdra-2', 'Metagross-2', 'Slaking-2', 'Misdreavus-3', 'Dusclops-3',
+>   'Forretress-3', 'Whiscash-3', 'Skarmory-3', 'Hariyama-3', 'Rhydon-3', 'Weezing-3', 'Altaria-3', 'Gengar-3',
+>   'Scizor-3', 'Heracross-3', 'Donphan-3', 'Wailord-3', 'Machamp-3', 'Shuckle-3', 'Steelix-3', 'Vaporeon-3', 'Kingdra-3',
+>   'Milotic-3', 'Metagross-3', 'Slaking-3', 'Dusclops-4', 'Forretress-4', 'Skarmory-4', 'Hariyama-4', 'Rhydon-4',
+>   'Weezing-4', 'Gengar-4', 'Scizor-4', 'Heracross-4', 'Donphan-4', 'Wailord-4', 'Machamp-4', 'Shuckle-4', 'Steelix-4',
+>   'Gyarados-4', 'Kingdra-4', 'Salamence-4', 'Suicune-1', 'Regirock-1', 'Registeel-1', 'Suicune-2', 'Regirock-2',
+>   'Registeel-2', 'Suicune-3', 'Regirock-3', 'Registeel-3', 'Suicune-4', 'Regirock-4', 'Regice-4', 'Registeel-4',
+>   'Gengar-5', 'Gengar-6', 'Gengar-7', 'Gengar-8', 'Machamp-5', 'Machamp-6', 'Machamp-7', 'Machamp-8', 'Salamence-5',
+>   'Salamence-6', 'Metagross-5', 'Metagross-8', 'Regirock-5', 'Regirock-6', 'Registeel-5', 'Registeel-6', 'Dragonite-1',
+>   'Dragonite-2', 'Dragonite-3', 'Dragonite-4', 'Dragonite-9', 'Dragonite-10', 'Entei-5', 'Entei-6', 'Suicune-5',
+>   'Suicune-6', 'Swampert-TuckerSilver', 'Salamence-TuckerSilver', 'Swampert-TuckerGold', 'Metagross-TuckerGold',
+>   'Slaking-SpenserSilver', 'Lapras-SpenserSilver', 'Suicune-SpenserGold', 'Heracross-GretaSilver', 'Gengar-GretaGold',
+>   'Shuckle-LucySilver', 'Steelix-LucyGold', 'Gyarados-LucyGold', 'Regirock-BrandonSilver', 'Registeel-BrandonSilver',
 >   'Zapdos-BrandonGold'
 > ]
 > ```
@@ -2112,29 +2016,25 @@ Every filter has a negated form via `.Not`:
 > ```
 > SetCollection(151 sets)
 > [
->   'Lickitung-2', 'Graveler-2', 'Wailmer-2', 'Marshtomp-2', 'Sudowoodo-2', 'Magcargo-2', 'Pupitar-2',
->   'Gligar-2', 'Lairon-2', 'Arbok-2', 'Solrock-2', 'Sandslash-2', 'Piloswine-2', 'Seviper-2',
->   'Camerupt-2', 'Sharpedo-2', 'Relicanth-2', 'Dugtrio-1', 'Whiscash-1', 'Quagsire-1', 'Golem-1',
->   'Rhydon-1', 'Tauros-1', 'Donphan-1', 'Claydol-1', 'Steelix-1', 'Flygon-1', 'Aggron-1',
->   'Swampert-1', 'Dugtrio-2', 'Forretress-2', 'Whiscash-2', 'Exploud-2', 'Rhydon-2', 'Tauros-2',
->   'Nidoqueen-2', 'Nidoking-2', 'Cradily-2', 'Heracross-2', 'Ursaring-2', 'Donphan-2', 'Claydol-2',
->   'Steelix-2', 'Aerodactyl-2', 'Walrein-2', 'Charizard-2', 'Swampert-2', 'Snorlax-2', 'Metagross-2',
->   'Dugtrio-3', 'Granbull-3', 'Dusclops-3', 'Forretress-3', 'Quagsire-3', 'Glalie-3', 'Golem-3',
->   'Rhydon-3', 'Kangaskhan-3', 'Tauros-3', 'Slowking-3', 'Miltank-3', 'Altaria-3', 'Armaldo-3',
->   'Donphan-3', 'Steelix-3', 'Flygon-3', 'Venusaur-3', 'Meganium-3', 'Blastoise-3', 'Feraligatr-3',
->   'Blaziken-3', 'Sceptile-3', 'Typhlosion-3', 'Swampert-3', 'Gyarados-3', 'Salamence-3',
->   'Metagross-3', 'Dugtrio-4', 'Granbull-4', 'Forretress-4', 'Whiscash-4', 'Quagsire-4', 'Exploud-4',
->   'Glalie-4', 'Golem-4', 'Rhydon-4', 'Kangaskhan-4', 'Slowbro-4', 'Altaria-4', 'Nidoking-4',
->   'Armaldo-4', 'Ursaring-4', 'Donphan-4', 'Claydol-4', 'Wailord-4', 'Steelix-4', 'Aerodactyl-4',
->   'Flygon-4', 'Venusaur-4', 'Meganium-4', 'Blastoise-4', 'Feraligatr-4', 'Aggron-4', 'Blaziken-4',
->   'Walrein-4', 'Charizard-4', 'Typhlosion-4', 'Swampert-4', 'Gyarados-4', 'Salamence-4',
->   'Metagross-4', 'Regirock-2', 'Registeel-2', 'Latias-2', 'Latios-2', 'Regirock-3', 'Latias-3',
->   'Latios-3', 'Registeel-4', 'Ursaring-7', 'Ursaring-8', 'Snorlax-6', 'Snorlax-7', 'Salamence-5',
->   'Metagross-5', 'Metagross-7', 'Metagross-8', 'Regice-5', 'Latias-7', 'Latias-8', 'Latios-7',
->   'Latios-8', 'Dragonite-1', 'Dragonite-2', 'Dragonite-9', 'Dragonite-10', 'Tyranitar-1',
->   'Tyranitar-2', 'Tyranitar-3', 'Tyranitar-5', 'Tyranitar-6', 'Tyranitar-9', 'Tyranitar-10',
->   'Swampert-TuckerSilver', 'Salamence-TuckerSilver', 'Charizard-TuckerSilver',
->   'Swampert-TuckerGold', 'Slaking-SpenserSilver', 'Slaking-SpenserGold', 'Steelix-LucyGold',
+>   'Lickitung-2', 'Graveler-2', 'Wailmer-2', 'Marshtomp-2', 'Sudowoodo-2', 'Magcargo-2', 'Pupitar-2', 'Gligar-2',
+>   'Lairon-2', 'Arbok-2', 'Solrock-2', 'Sandslash-2', 'Piloswine-2', 'Seviper-2', 'Camerupt-2', 'Sharpedo-2',
+>   'Relicanth-2', 'Dugtrio-1', 'Whiscash-1', 'Quagsire-1', 'Golem-1', 'Rhydon-1', 'Tauros-1', 'Donphan-1', 'Claydol-1',
+>   'Steelix-1', 'Flygon-1', 'Aggron-1', 'Swampert-1', 'Dugtrio-2', 'Forretress-2', 'Whiscash-2', 'Exploud-2', 'Rhydon-2',
+>   'Tauros-2', 'Nidoqueen-2', 'Nidoking-2', 'Cradily-2', 'Heracross-2', 'Ursaring-2', 'Donphan-2', 'Claydol-2',
+>   'Steelix-2', 'Aerodactyl-2', 'Walrein-2', 'Charizard-2', 'Swampert-2', 'Snorlax-2', 'Metagross-2', 'Dugtrio-3',
+>   'Granbull-3', 'Dusclops-3', 'Forretress-3', 'Quagsire-3', 'Glalie-3', 'Golem-3', 'Rhydon-3', 'Kangaskhan-3',
+>   'Tauros-3', 'Slowking-3', 'Miltank-3', 'Altaria-3', 'Armaldo-3', 'Donphan-3', 'Steelix-3', 'Flygon-3', 'Venusaur-3',
+>   'Meganium-3', 'Blastoise-3', 'Feraligatr-3', 'Blaziken-3', 'Sceptile-3', 'Typhlosion-3', 'Swampert-3', 'Gyarados-3',
+>   'Salamence-3', 'Metagross-3', 'Dugtrio-4', 'Granbull-4', 'Forretress-4', 'Whiscash-4', 'Quagsire-4', 'Exploud-4',
+>   'Glalie-4', 'Golem-4', 'Rhydon-4', 'Kangaskhan-4', 'Slowbro-4', 'Altaria-4', 'Nidoking-4', 'Armaldo-4', 'Ursaring-4',
+>   'Donphan-4', 'Claydol-4', 'Wailord-4', 'Steelix-4', 'Aerodactyl-4', 'Flygon-4', 'Venusaur-4', 'Meganium-4',
+>   'Blastoise-4', 'Feraligatr-4', 'Aggron-4', 'Blaziken-4', 'Walrein-4', 'Charizard-4', 'Typhlosion-4', 'Swampert-4',
+>   'Gyarados-4', 'Salamence-4', 'Metagross-4', 'Regirock-2', 'Registeel-2', 'Latias-2', 'Latios-2', 'Regirock-3',
+>   'Latias-3', 'Latios-3', 'Registeel-4', 'Ursaring-7', 'Ursaring-8', 'Snorlax-6', 'Snorlax-7', 'Salamence-5',
+>   'Metagross-5', 'Metagross-7', 'Metagross-8', 'Regice-5', 'Latias-7', 'Latias-8', 'Latios-7', 'Latios-8',
+>   'Dragonite-1', 'Dragonite-2', 'Dragonite-9', 'Dragonite-10', 'Tyranitar-1', 'Tyranitar-2', 'Tyranitar-3',
+>   'Tyranitar-5', 'Tyranitar-6', 'Tyranitar-9', 'Tyranitar-10', 'Swampert-TuckerSilver', 'Salamence-TuckerSilver',
+>   'Charizard-TuckerSilver', 'Swampert-TuckerGold', 'Slaking-SpenserSilver', 'Slaking-SpenserGold', 'Steelix-LucyGold',
 >   'Registeel-BrandonSilver'
 > ]
 > ```
@@ -2155,47 +2055,40 @@ Every filter has a negated form via `.Not`:
 > ```
 > TrainerCollection(158 trainers)
 > [
->   'PSYCHIC (M) NORTON', 'PSYCHIC (M) LUKAS', 'PSYCHIC (M) ZACH', 'PSYCHIC (F) KAITLYN',
->   'PSYCHIC (F) BREANNA', 'PSYCHIC (F) KENDRA', 'HEX MANIAC MOLLY', 'HEX MANIAC JAZMIN',
->   'HEX MANIAC KELSEY', 'POKÉMANIAC JALEN', 'POKÉMANIAC GRIFFEN', 'POKÉMANIAC XANDER',
->   'GENTLEMAN MARVIN', 'GENTLEMAN BRENNAN', 'COLLECTOR GABRIEL', 'PARASOL LADY EMILY',
->   'COOLTRAINER (M) BRADEN', 'COOLTRAINER (M) KAYDEN', 'COOLTRAINER (M) COOPER',
+>   'PSYCHIC (M) NORTON', 'PSYCHIC (M) LUKAS', 'PSYCHIC (M) ZACH', 'PSYCHIC (F) KAITLYN', 'PSYCHIC (F) BREANNA',
+>   'PSYCHIC (F) KENDRA', 'HEX MANIAC MOLLY', 'HEX MANIAC JAZMIN', 'HEX MANIAC KELSEY', 'POKÉMANIAC JALEN',
+>   'POKÉMANIAC GRIFFEN', 'POKÉMANIAC XANDER', 'GENTLEMAN MARVIN', 'GENTLEMAN BRENNAN', 'COLLECTOR GABRIEL',
+>   'PARASOL LADY EMILY', 'COOLTRAINER (M) BRADEN', 'COOLTRAINER (M) KAYDEN', 'COOLTRAINER (M) COOPER',
 >   'COOLTRAINER (F) JULIA', 'COOLTRAINER (F) AMARA', 'COOLTRAINER (F) LYNN', 'PKMN RANGER (M) JOVAN',
->   'PKMN RANGER (M) DOMINIC', 'PKMN RANGER (M) NIKOLAS', 'PKMN RANGER (F) VALERIA',
->   'PKMN RANGER (F) DELANEY', 'PKMN RANGER (F) MEGHAN', 'DRAGON TAMER ROBERTO',
->   'DRAGON TAMER DAMIAN', 'DRAGON TAMER BRODY', 'DRAGON TAMER GRAHAM', 'POKÉFAN (M) TYLOR',
->   'POKÉFAN (F) JAREN', 'PKMN BREEDER (M) CORDELL', 'PKMN BREEDER (F) JAZLYN', 'YOUNGSTER ZACHERY',
+>   'PKMN RANGER (M) DOMINIC', 'PKMN RANGER (M) NIKOLAS', 'PKMN RANGER (F) VALERIA', 'PKMN RANGER (F) DELANEY',
+>   'PKMN RANGER (F) MEGHAN', 'DRAGON TAMER ROBERTO', 'DRAGON TAMER DAMIAN', 'DRAGON TAMER BRODY', 'DRAGON TAMER GRAHAM',
+>   'POKÉFAN (M) TYLOR', 'POKÉFAN (F) JAREN', 'PKMN BREEDER (M) CORDELL', 'PKMN BREEDER (F) JAZLYN', 'YOUNGSTER ZACHERY',
 >   'YOUNGSTER JOHAN', 'LASS SHEA', 'LASS KAILA', 'SCHOOL KID (M) ISIAH', 'SCHOOL KID (M) GARRETT',
->   'SCHOOL KID (F) HAYLIE', 'SCHOOL KID (F) MEGAN', 'RICH BOY ISSAC', 'RICH BOY QUINTON',
->   'LADY SALMA', 'LADY ANSLEY', 'BUG CATCHER HOLDEN', 'BUG CATCHER LUCA', 'NINJA BOY JAMISON',
->   'NINJA BOY GUNNAR', 'TUBER (M) CRAIG', 'TUBER (M) PIERCE', 'TUBER (F) REGINA', 'TUBER (F) ALISON',
->   'FISHERMAN RAMIRO', 'FISHERMAN HUNTER', 'RUIN MANIAC AIDEN', 'RUIN MANIAC XAVIER',
->   'COLLECTOR CLINTON', 'COLLECTOR JESSE', 'BIRD KEEPER GAGE', 'BIRD KEEPER ARNOLD',
->   'SAILOR JARRETT', 'SAILOR GARETT', 'GENTLEMAN RUBEN', 'GENTLEMAN LAMAR', 'YOUNGSTER JAXON',
->   'YOUNGSTER LOGAN', 'LASS EMILEE', 'LASS JOSIE', 'CAMPER ARMANDO', 'CAMPER SKYLER',
->   'PICNICKER RUTH', 'PICNICKER MELODY', 'SWIMMER? PEDRO', 'SWIMMER? ERICK', 'SWIMMER? ELAINE',
->   'SWIMMER? JOYCE', 'POKÉFAN (M) TODD', 'POKÉFAN (M) GAVIN', 'POKÉFAN (F) MALORY',
->   'POKÉFAN (F) ESTHER', 'PKMN BREEDER (M) OSCAR', 'PKMN BREEDER (M) WILSON',
->   'PKMN BREEDER (F) CLARE', 'PKMN BREEDER (F) TESS', 'COOLTRAINER (M) LEON',
->   'COOLTRAINER (M) ALONZO', 'COOLTRAINER (M) VINCE', 'COOLTRAINER (M) BRYON', 'COOLTRAINER (F) AVA',
->   'COOLTRAINER (F) MIRIAM', 'COOLTRAINER (F) CARRIE', 'COOLTRAINER (F) GILLIAN',
->   'PKMN RANGER (M) TYLER', 'PKMN RANGER (M) CHAZ', 'PKMN RANGER (M) NELSON',
->   'PKMN RANGER (F) SHANIA', 'PKMN RANGER (F) STELLA', 'PKMN RANGER (F) DORINE',
->   'DRAGON TAMER MADDOX', 'DRAGON TAMER DAVIN', 'DRAGON TAMER TREVON', 'EXPERT (M) ALEXAS',
->   'EXPERT (M) WESTON', 'EXPERT (M) JASPER', 'EXPERT (F) NADIA', 'EXPERT (F) MIRANDA',
->   'EXPERT (F) EMMA', 'PSYCHIC (M) ROLANDO', 'PSYCHIC (M) STANLY', 'PSYCHIC (M) DARIO',
->   'PSYCHIC (F) KARLEE', 'PSYCHIC (F) JAYLIN', 'PSYCHIC (F) INGRID', 'HEX MANIAC DELILAH',
->   'HEX MANIAC CARLY', 'HEX MANIAC LEXIE', 'POKÉMANIAC MILLER', 'POKÉMANIAC MARV',
->   'POKÉMANIAC LAYTON', 'GENTLEMAN BROOKS', 'GENTLEMAN GREGORY', 'GENTLEMAN REESE',
->   'TRIATHLETE (M RUNNER) MASON', 'TRIATHLETE (M RUNNER) TOBY', 'TRIATHLETE (F RUNNER) DOROTHY',
->   'TRIATHLETE (F RUNNER) PIPER', 'TRIATHLETE (M SWIMMER) FINN', 'TRIATHLETE (M SWIMMER) SAMIR',
->   'TRIATHLETE (F SWIMMER) FIONA', 'TRIATHLETE (F SWIMMER) GLORIA', 'TRIATHLETE (M BIKER) NICO',
->   'TRIATHLETE (M BIKER) JEREMY', 'TRIATHLETE (F BIKER) CAITLIN', 'TRIATHLETE (F BIKER) REENA',
->   'FISHERMAN THEO', 'FISHERMAN BAILEY', 'COLLECTOR GIDEON', 'COLLECTOR TRISTON',
->   'GUITARIST CHARLES', 'GUITARIST RAYMOND', 'BIRD KEEPER DIRK', 'BIRD KEEPER HAROLD', 'SAILOR OMAR',
->   'SAILOR PETER', 'PARASOL LADY ALIVIA', 'PARASOL LADY PAIGE', 'BEAUTY ANYA', 'BEAUTY DAWN',
->   'AROMA LADY ABBY', 'AROMA LADY GRETEL', 'DOME ACE TUCKER', 'DOME ACE TUCKER',
->   'PALACE MAVEN SPENSER', 'PIKE QUEEN LUCY'
+>   'SCHOOL KID (F) HAYLIE', 'SCHOOL KID (F) MEGAN', 'RICH BOY ISSAC', 'RICH BOY QUINTON', 'LADY SALMA', 'LADY ANSLEY',
+>   'BUG CATCHER HOLDEN', 'BUG CATCHER LUCA', 'NINJA BOY JAMISON', 'NINJA BOY GUNNAR', 'TUBER (M) CRAIG',
+>   'TUBER (M) PIERCE', 'TUBER (F) REGINA', 'TUBER (F) ALISON', 'FISHERMAN RAMIRO', 'FISHERMAN HUNTER',
+>   'RUIN MANIAC AIDEN', 'RUIN MANIAC XAVIER', 'COLLECTOR CLINTON', 'COLLECTOR JESSE', 'BIRD KEEPER GAGE',
+>   'BIRD KEEPER ARNOLD', 'SAILOR JARRETT', 'SAILOR GARETT', 'GENTLEMAN RUBEN', 'GENTLEMAN LAMAR', 'YOUNGSTER JAXON',
+>   'YOUNGSTER LOGAN', 'LASS EMILEE', 'LASS JOSIE', 'CAMPER ARMANDO', 'CAMPER SKYLER', 'PICNICKER RUTH',
+>   'PICNICKER MELODY', 'SWIMMER? PEDRO', 'SWIMMER? ERICK', 'SWIMMER? ELAINE', 'SWIMMER? JOYCE', 'POKÉFAN (M) TODD',
+>   'POKÉFAN (M) GAVIN', 'POKÉFAN (F) MALORY', 'POKÉFAN (F) ESTHER', 'PKMN BREEDER (M) OSCAR', 'PKMN BREEDER (M) WILSON',
+>   'PKMN BREEDER (F) CLARE', 'PKMN BREEDER (F) TESS', 'COOLTRAINER (M) LEON', 'COOLTRAINER (M) ALONZO',
+>   'COOLTRAINER (M) VINCE', 'COOLTRAINER (M) BRYON', 'COOLTRAINER (F) AVA', 'COOLTRAINER (F) MIRIAM',
+>   'COOLTRAINER (F) CARRIE', 'COOLTRAINER (F) GILLIAN', 'PKMN RANGER (M) TYLER', 'PKMN RANGER (M) CHAZ',
+>   'PKMN RANGER (M) NELSON', 'PKMN RANGER (F) SHANIA', 'PKMN RANGER (F) STELLA', 'PKMN RANGER (F) DORINE',
+>   'DRAGON TAMER MADDOX', 'DRAGON TAMER DAVIN', 'DRAGON TAMER TREVON', 'EXPERT (M) ALEXAS', 'EXPERT (M) WESTON',
+>   'EXPERT (M) JASPER', 'EXPERT (F) NADIA', 'EXPERT (F) MIRANDA', 'EXPERT (F) EMMA', 'PSYCHIC (M) ROLANDO',
+>   'PSYCHIC (M) STANLY', 'PSYCHIC (M) DARIO', 'PSYCHIC (F) KARLEE', 'PSYCHIC (F) JAYLIN', 'PSYCHIC (F) INGRID',
+>   'HEX MANIAC DELILAH', 'HEX MANIAC CARLY', 'HEX MANIAC LEXIE', 'POKÉMANIAC MILLER', 'POKÉMANIAC MARV',
+>   'POKÉMANIAC LAYTON', 'GENTLEMAN BROOKS', 'GENTLEMAN GREGORY', 'GENTLEMAN REESE', 'TRIATHLETE (M RUNNER) MASON',
+>   'TRIATHLETE (M RUNNER) TOBY', 'TRIATHLETE (F RUNNER) DOROTHY', 'TRIATHLETE (F RUNNER) PIPER',
+>   'TRIATHLETE (M SWIMMER) FINN', 'TRIATHLETE (M SWIMMER) SAMIR', 'TRIATHLETE (F SWIMMER) FIONA',
+>   'TRIATHLETE (F SWIMMER) GLORIA', 'TRIATHLETE (M BIKER) NICO', 'TRIATHLETE (M BIKER) JEREMY',
+>   'TRIATHLETE (F BIKER) CAITLIN', 'TRIATHLETE (F BIKER) REENA', 'FISHERMAN THEO', 'FISHERMAN BAILEY',
+>   'COLLECTOR GIDEON', 'COLLECTOR TRISTON', 'GUITARIST CHARLES', 'GUITARIST RAYMOND', 'BIRD KEEPER DIRK',
+>   'BIRD KEEPER HAROLD', 'SAILOR OMAR', 'SAILOR PETER', 'PARASOL LADY ALIVIA', 'PARASOL LADY PAIGE', 'BEAUTY ANYA',
+>   'BEAUTY DAWN', 'AROMA LADY ABBY', 'AROMA LADY GRETEL', 'DOME ACE TUCKER', 'DOME ACE TUCKER', 'PALACE MAVEN SPENSER',
+>   'PIKE QUEEN LUCY'
 > ]
 > ```
 >
@@ -2217,20 +2110,17 @@ Supports `len()`, iteration, `.names()` (returns `["CLASS Name", ...]`), and `.N
 > ```
 > TrainerCollection(50 trainers)
 > [
->   'COOLTRAINER (M) COOPER', 'COOLTRAINER (F) LYNN', 'DRAGON TAMER ROBERTO', 'DRAGON TAMER DAMIAN',
->   'DRAGON TAMER BRODY', 'DRAGON TAMER GRAHAM', 'PKMN BREEDER (M) CORDELL', 'RICH BOY ISSAC',
->   'RICH BOY QUINTON', 'LADY SALMA', 'LADY ANSLEY', 'KINDLER KAMERON', 'KINDLER ALFREDO',
->   'GENTLEMAN RUBEN', 'GENTLEMAN LAMAR', 'PKMN BREEDER (M) OSCAR', 'PKMN BREEDER (M) WILSON',
->   'PKMN BREEDER (F) CLARE', 'PKMN BREEDER (F) TESS', 'COOLTRAINER (M) ALONZO',
->   'PKMN RANGER (M) TYLER', 'PKMN RANGER (M) CHAZ', 'PKMN RANGER (F) SHANIA',
->   'PKMN RANGER (F) STELLA', 'DRAGON TAMER MADDOX', 'DRAGON TAMER DAVIN', 'DRAGON TAMER TREVON',
->   'BLACK BELT BRET', 'BATTLE GIRL ELENA', 'POKÉMANIAC MILLER', 'POKÉMANIAC MARV',
->   'POKÉMANIAC LAYTON', 'GENTLEMAN BROOKS', 'TRIATHLETE (M RUNNER) MASON',
+>   'COOLTRAINER (M) COOPER', 'COOLTRAINER (F) LYNN', 'DRAGON TAMER ROBERTO', 'DRAGON TAMER DAMIAN', 'DRAGON TAMER BRODY',
+>   'DRAGON TAMER GRAHAM', 'PKMN BREEDER (M) CORDELL', 'RICH BOY ISSAC', 'RICH BOY QUINTON', 'LADY SALMA', 'LADY ANSLEY',
+>   'KINDLER KAMERON', 'KINDLER ALFREDO', 'GENTLEMAN RUBEN', 'GENTLEMAN LAMAR', 'PKMN BREEDER (M) OSCAR',
+>   'PKMN BREEDER (M) WILSON', 'PKMN BREEDER (F) CLARE', 'PKMN BREEDER (F) TESS', 'COOLTRAINER (M) ALONZO',
+>   'PKMN RANGER (M) TYLER', 'PKMN RANGER (M) CHAZ', 'PKMN RANGER (F) SHANIA', 'PKMN RANGER (F) STELLA',
+>   'DRAGON TAMER MADDOX', 'DRAGON TAMER DAVIN', 'DRAGON TAMER TREVON', 'BLACK BELT BRET', 'BATTLE GIRL ELENA',
+>   'POKÉMANIAC MILLER', 'POKÉMANIAC MARV', 'POKÉMANIAC LAYTON', 'GENTLEMAN BROOKS', 'TRIATHLETE (M RUNNER) MASON',
 >   'TRIATHLETE (M RUNNER) TOBY', 'TRIATHLETE (F RUNNER) DOROTHY', 'TRIATHLETE (F RUNNER) PIPER',
 >   'TRIATHLETE (M BIKER) NICO', 'TRIATHLETE (M BIKER) JEREMY', 'TRIATHLETE (F BIKER) CAITLIN',
->   'TRIATHLETE (F BIKER) REENA', 'COLLECTOR GIDEON', 'COLLECTOR TRISTON', 'BIRD KEEPER DIRK',
->   'BIRD KEEPER HAROLD', 'KINDLER ANDRE', 'KINDLER FERRIS', 'PARASOL LADY ALIVIA',
->   'PARASOL LADY PAIGE', 'DOME ACE TUCKER'
+>   'TRIATHLETE (F BIKER) REENA', 'COLLECTOR GIDEON', 'COLLECTOR TRISTON', 'BIRD KEEPER DIRK', 'BIRD KEEPER HAROLD',
+>   'KINDLER ANDRE', 'KINDLER FERRIS', 'PARASOL LADY ALIVIA', 'PARASOL LADY PAIGE', 'DOME ACE TUCKER'
 > ]
 > ```
 >
@@ -2249,10 +2139,10 @@ Supports `len()`, iteration, `.names()` (returns `["CLASS Name", ...]`), and `.N
 > ```
 > TrainerCollection(17 trainers)
 > [
->   'DRAGON TAMER ROBERTO', 'DRAGON TAMER DAMIAN', 'DRAGON TAMER BRODY', 'DRAGON TAMER GRAHAM',
->   'KINDLER KAMERON', 'KINDLER ALFREDO', 'DRAGON TAMER MADDOX', 'DRAGON TAMER DAVIN',
->   'DRAGON TAMER TREVON', 'BLACK BELT BRET', 'BATTLE GIRL ELENA', 'POKÉMANIAC LAYTON',
->   'BIRD KEEPER DIRK', 'BIRD KEEPER HAROLD', 'KINDLER ANDRE', 'KINDLER FERRIS', 'DOME ACE TUCKER'
+>   'DRAGON TAMER ROBERTO', 'DRAGON TAMER DAMIAN', 'DRAGON TAMER BRODY', 'DRAGON TAMER GRAHAM', 'KINDLER KAMERON',
+>   'KINDLER ALFREDO', 'DRAGON TAMER MADDOX', 'DRAGON TAMER DAVIN', 'DRAGON TAMER TREVON', 'BLACK BELT BRET',
+>   'BATTLE GIRL ELENA', 'POKÉMANIAC LAYTON', 'BIRD KEEPER DIRK', 'BIRD KEEPER HAROLD', 'KINDLER ANDRE', 'KINDLER FERRIS',
+>   'DOME ACE TUCKER'
 > ]
 > ```
 >
@@ -2271,14 +2161,12 @@ Supports `len()`, iteration, `.names()` (returns `["CLASS Name", ...]`), and `.N
 > ```
 > TrainerCollection(28 trainers)
 > [
->   'PKMN BREEDER (M) OSCAR', 'PKMN BREEDER (M) WILSON', 'PKMN BREEDER (F) CLARE',
->   'PKMN BREEDER (F) TESS', 'COOLTRAINER (M) ALONZO', 'COOLTRAINER (M) VINCE',
->   'COOLTRAINER (F) CARRIE', 'PKMN RANGER (M) TYLER', 'BLACK BELT RAUL', 'BATTLE GIRL ALANA',
->   'EXPERT (M) ALEXAS', 'EXPERT (F) NADIA', 'PSYCHIC (M) ROLANDO', 'PSYCHIC (M) STANLY',
->   'PSYCHIC (M) DARIO', 'PSYCHIC (F) KARLEE', 'PSYCHIC (F) JAYLIN', 'PSYCHIC (F) INGRID',
->   'POKÉMANIAC MARV', 'POKÉMANIAC LAYTON', 'GENTLEMAN BROOKS', 'GENTLEMAN GREGORY',
->   'TRIATHLETE (M RUNNER) MASON', 'TRIATHLETE (M BIKER) NICO', 'RUIN MANIAC HUGO',
->   'RUIN MANIAC BRYCE', 'HIKER DEV', 'HIKER COREY'
+>   'PKMN BREEDER (M) OSCAR', 'PKMN BREEDER (M) WILSON', 'PKMN BREEDER (F) CLARE', 'PKMN BREEDER (F) TESS',
+>   'COOLTRAINER (M) ALONZO', 'COOLTRAINER (M) VINCE', 'COOLTRAINER (F) CARRIE', 'PKMN RANGER (M) TYLER',
+>   'BLACK BELT RAUL', 'BATTLE GIRL ALANA', 'EXPERT (M) ALEXAS', 'EXPERT (F) NADIA', 'PSYCHIC (M) ROLANDO',
+>   'PSYCHIC (M) STANLY', 'PSYCHIC (M) DARIO', 'PSYCHIC (F) KARLEE', 'PSYCHIC (F) JAYLIN', 'PSYCHIC (F) INGRID',
+>   'POKÉMANIAC MARV', 'POKÉMANIAC LAYTON', 'GENTLEMAN BROOKS', 'GENTLEMAN GREGORY', 'TRIATHLETE (M RUNNER) MASON',
+>   'TRIATHLETE (M BIKER) NICO', 'RUIN MANIAC HUGO', 'RUIN MANIAC BRYCE', 'HIKER DEV', 'HIKER COREY'
 > ]
 > ```
 >
@@ -3356,20 +3244,18 @@ The calculator handles multi-hit moves automatically:
 >
 > ```
 > total_rolls = [
->   196, 197, 197, 198, 198, 198, 199, 199, 200, 200, 200, 201, 201, 201, 201, 202, 202, 202, 202,
->   202, 202, 203, 203, 203, 203, 203, 203, 204, 204, 204, 204, 204, 204, 204, 205, 205, 205, 205,
->   205, 205, 205, 205, 206, 206, 206, 206, 206, 206, 206, 207, 207, 207, 207, 207, 207, 207, 207,
->   208, 208, 208, 208, 208, 208, 208, 208, 208, 209, 209, 209, 209, 209, 209, 209, 209, 209, 209,
->   209, 209, 210, 210, 210, 210, 210, 210, 210, 210, 210, 210, 210, 211, 211, 211, 211, 211, 211,
->   211, 211, 211, 211, 211, 211, 212, 212, 212, 212, 212, 212, 212, 212, 212, 212, 212, 212, 212,
->   213, 213, 213, 213, 213, 213, 213, 213, 213, 213, 213, 213, 214, 214, 214, 214, 214, 214, 214,
->   214, 214, 214, 214, 214, 214, 215, 215, 215, 215, 215, 215, 215, 215, 215, 215, 215, 215, 216,
->   216, 216, 216, 216, 216, 216, 216, 216, 216, 216, 216, 216, 216, 217, 217, 217, 217, 217, 217,
->   217, 217, 217, 217, 218, 218, 218, 218, 218, 218, 218, 218, 218, 218, 218, 219, 219, 219, 219,
->   219, 219, 219, 219, 219, 219, 220, 220, 220, 220, 220, 220, 220, 220, 220, 221, 221, 221, 221,
->   221, 221, 221, 221, 222, 222, 222, 222, 222, 222, 222, 223, 223, 223, 223, 223, 223, 223, 223,
->   224, 224, 224, 224, 224, 225, 225, 225, 225, 225, 225, 226, 226, 226, 226, 226, 227, 227, 227,
->   227, 228, 228, 228, 229, 229, 230, 230, 232
+>   196, 197, 197, 198, 198, 198, 199, 199, 200, 200, 200, 201, 201, 201, 201, 202, 202, 202, 202, 202, 202, 203, 203,
+>   203, 203, 203, 203, 204, 204, 204, 204, 204, 204, 204, 205, 205, 205, 205, 205, 205, 205, 205, 206, 206, 206, 206,
+>   206, 206, 206, 207, 207, 207, 207, 207, 207, 207, 207, 208, 208, 208, 208, 208, 208, 208, 208, 208, 209, 209, 209,
+>   209, 209, 209, 209, 209, 209, 209, 209, 209, 210, 210, 210, 210, 210, 210, 210, 210, 210, 210, 210, 211, 211, 211,
+>   211, 211, 211, 211, 211, 211, 211, 211, 211, 212, 212, 212, 212, 212, 212, 212, 212, 212, 212, 212, 212, 212, 213,
+>   213, 213, 213, 213, 213, 213, 213, 213, 213, 213, 213, 214, 214, 214, 214, 214, 214, 214, 214, 214, 214, 214, 214,
+>   214, 215, 215, 215, 215, 215, 215, 215, 215, 215, 215, 215, 215, 216, 216, 216, 216, 216, 216, 216, 216, 216, 216,
+>   216, 216, 216, 216, 217, 217, 217, 217, 217, 217, 217, 217, 217, 217, 218, 218, 218, 218, 218, 218, 218, 218, 218,
+>   218, 218, 219, 219, 219, 219, 219, 219, 219, 219, 219, 219, 220, 220, 220, 220, 220, 220, 220, 220, 220, 221, 221,
+>   221, 221, 221, 221, 221, 221, 222, 222, 222, 222, 222, 222, 222, 223, 223, 223, 223, 223, 223, 223, 223, 224, 224,
+>   224, 224, 224, 225, 225, 225, 225, 225, 225, 226, 226, 226, 226, 226, 227, 227, 227, 227, 228, 228, 228, 229, 229,
+>   230, 230, 232
 > ]
 > ```
 >
@@ -3520,7 +3406,7 @@ Extends `Database` with tower-specific trainer filtering:
 > <summary>Output</summary>
 >
 > ```
-> tower = <frontierbrain3.facilities.tower.TowerDatabase object at 0x00000222A1951940>
+> tower = <frontierbrain3.facilities.tower.TowerDatabase object at 0x0000015945E5D7F0>
 > ```
 >
 > </details>
@@ -3538,32 +3424,27 @@ Extends `Database` with tower-specific trainer filtering:
 > ```
 > TrainerCollection(100 trainers)
 > [
->   'YOUNGSTER JAXON', 'YOUNGSTER LOGAN', 'LASS EMILEE', 'LASS JOSIE', 'CAMPER ARMANDO',
->   'CAMPER SKYLER', 'PICNICKER RUTH', 'PICNICKER MELODY', 'SWIMMER? PEDRO', 'SWIMMER? ERICK',
->   'SWIMMER? ELAINE', 'SWIMMER? JOYCE', 'POKÉFAN (M) TODD', 'POKÉFAN (M) GAVIN',
->   'POKÉFAN (F) MALORY', 'POKÉFAN (F) ESTHER', 'PKMN BREEDER (M) OSCAR', 'PKMN BREEDER (M) WILSON',
->   'PKMN BREEDER (F) CLARE', 'PKMN BREEDER (F) TESS', 'COOLTRAINER (M) LEON',
+>   'YOUNGSTER JAXON', 'YOUNGSTER LOGAN', 'LASS EMILEE', 'LASS JOSIE', 'CAMPER ARMANDO', 'CAMPER SKYLER',
+>   'PICNICKER RUTH', 'PICNICKER MELODY', 'SWIMMER? PEDRO', 'SWIMMER? ERICK', 'SWIMMER? ELAINE', 'SWIMMER? JOYCE',
+>   'POKÉFAN (M) TODD', 'POKÉFAN (M) GAVIN', 'POKÉFAN (F) MALORY', 'POKÉFAN (F) ESTHER', 'PKMN BREEDER (M) OSCAR',
+>   'PKMN BREEDER (M) WILSON', 'PKMN BREEDER (F) CLARE', 'PKMN BREEDER (F) TESS', 'COOLTRAINER (M) LEON',
 >   'COOLTRAINER (M) ALONZO', 'COOLTRAINER (M) VINCE', 'COOLTRAINER (M) BRYON', 'COOLTRAINER (F) AVA',
->   'COOLTRAINER (F) MIRIAM', 'COOLTRAINER (F) CARRIE', 'COOLTRAINER (F) GILLIAN',
->   'PKMN RANGER (M) TYLER', 'PKMN RANGER (M) CHAZ', 'PKMN RANGER (M) NELSON',
->   'PKMN RANGER (F) SHANIA', 'PKMN RANGER (F) STELLA', 'PKMN RANGER (F) DORINE',
->   'DRAGON TAMER MADDOX', 'DRAGON TAMER DAVIN', 'DRAGON TAMER TREVON', 'BLACK BELT MATEO',
+>   'COOLTRAINER (F) MIRIAM', 'COOLTRAINER (F) CARRIE', 'COOLTRAINER (F) GILLIAN', 'PKMN RANGER (M) TYLER',
+>   'PKMN RANGER (M) CHAZ', 'PKMN RANGER (M) NELSON', 'PKMN RANGER (F) SHANIA', 'PKMN RANGER (F) STELLA',
+>   'PKMN RANGER (F) DORINE', 'DRAGON TAMER MADDOX', 'DRAGON TAMER DAVIN', 'DRAGON TAMER TREVON', 'BLACK BELT MATEO',
 >   'BLACK BELT BRET', 'BLACK BELT RAUL', 'BATTLE GIRL KAY', 'BATTLE GIRL ELENA', 'BATTLE GIRL ALANA',
->   'EXPERT (M) ALEXAS', 'EXPERT (M) WESTON', 'EXPERT (M) JASPER', 'EXPERT (F) NADIA',
->   'EXPERT (F) MIRANDA', 'EXPERT (F) EMMA', 'PSYCHIC (M) ROLANDO', 'PSYCHIC (M) STANLY',
->   'PSYCHIC (M) DARIO', 'PSYCHIC (F) KARLEE', 'PSYCHIC (F) JAYLIN', 'PSYCHIC (F) INGRID',
->   'HEX MANIAC DELILAH', 'HEX MANIAC CARLY', 'HEX MANIAC LEXIE', 'POKÉMANIAC MILLER',
->   'POKÉMANIAC MARV', 'POKÉMANIAC LAYTON', 'GENTLEMAN BROOKS', 'GENTLEMAN GREGORY',
->   'GENTLEMAN REESE', 'TRIATHLETE (M RUNNER) MASON', 'TRIATHLETE (M RUNNER) TOBY',
->   'TRIATHLETE (F RUNNER) DOROTHY', 'TRIATHLETE (F RUNNER) PIPER', 'TRIATHLETE (M SWIMMER) FINN',
->   'TRIATHLETE (M SWIMMER) SAMIR', 'TRIATHLETE (F SWIMMER) FIONA', 'TRIATHLETE (F SWIMMER) GLORIA',
->   'TRIATHLETE (M BIKER) NICO', 'TRIATHLETE (M BIKER) JEREMY', 'TRIATHLETE (F BIKER) CAITLIN',
->   'TRIATHLETE (F BIKER) REENA', 'BUG MANIAC AVERY', 'BUG MANIAC LIAM', 'FISHERMAN THEO',
->   'FISHERMAN BAILEY', 'RUIN MANIAC HUGO', 'RUIN MANIAC BRYCE', 'COLLECTOR GIDEON',
->   'COLLECTOR TRISTON', 'GUITARIST CHARLES', 'GUITARIST RAYMOND', 'BIRD KEEPER DIRK',
->   'BIRD KEEPER HAROLD', 'SAILOR OMAR', 'SAILOR PETER', 'HIKER DEV', 'HIKER COREY', 'KINDLER ANDRE',
->   'KINDLER FERRIS', 'PARASOL LADY ALIVIA', 'PARASOL LADY PAIGE', 'BEAUTY ANYA', 'BEAUTY DAWN',
->   'AROMA LADY ABBY', 'AROMA LADY GRETEL'
+>   'EXPERT (M) ALEXAS', 'EXPERT (M) WESTON', 'EXPERT (M) JASPER', 'EXPERT (F) NADIA', 'EXPERT (F) MIRANDA',
+>   'EXPERT (F) EMMA', 'PSYCHIC (M) ROLANDO', 'PSYCHIC (M) STANLY', 'PSYCHIC (M) DARIO', 'PSYCHIC (F) KARLEE',
+>   'PSYCHIC (F) JAYLIN', 'PSYCHIC (F) INGRID', 'HEX MANIAC DELILAH', 'HEX MANIAC CARLY', 'HEX MANIAC LEXIE',
+>   'POKÉMANIAC MILLER', 'POKÉMANIAC MARV', 'POKÉMANIAC LAYTON', 'GENTLEMAN BROOKS', 'GENTLEMAN GREGORY',
+>   'GENTLEMAN REESE', 'TRIATHLETE (M RUNNER) MASON', 'TRIATHLETE (M RUNNER) TOBY', 'TRIATHLETE (F RUNNER) DOROTHY',
+>   'TRIATHLETE (F RUNNER) PIPER', 'TRIATHLETE (M SWIMMER) FINN', 'TRIATHLETE (M SWIMMER) SAMIR',
+>   'TRIATHLETE (F SWIMMER) FIONA', 'TRIATHLETE (F SWIMMER) GLORIA', 'TRIATHLETE (M BIKER) NICO',
+>   'TRIATHLETE (M BIKER) JEREMY', 'TRIATHLETE (F BIKER) CAITLIN', 'TRIATHLETE (F BIKER) REENA', 'BUG MANIAC AVERY',
+>   'BUG MANIAC LIAM', 'FISHERMAN THEO', 'FISHERMAN BAILEY', 'RUIN MANIAC HUGO', 'RUIN MANIAC BRYCE', 'COLLECTOR GIDEON',
+>   'COLLECTOR TRISTON', 'GUITARIST CHARLES', 'GUITARIST RAYMOND', 'BIRD KEEPER DIRK', 'BIRD KEEPER HAROLD',
+>   'SAILOR OMAR', 'SAILOR PETER', 'HIKER DEV', 'HIKER COREY', 'KINDLER ANDRE', 'KINDLER FERRIS', 'PARASOL LADY ALIVIA',
+>   'PARASOL LADY PAIGE', 'BEAUTY ANYA', 'BEAUTY DAWN', 'AROMA LADY ABBY', 'AROMA LADY GRETEL'
 > ]
 > ```
 >
@@ -3582,27 +3463,24 @@ Extends `Database` with tower-specific trainer filtering:
 > ```
 > TrainerCollection(80 trainers)
 > [
->   'COOLTRAINER (M) LEON', 'COOLTRAINER (M) ALONZO', 'COOLTRAINER (M) VINCE',
->   'COOLTRAINER (M) BRYON', 'COOLTRAINER (F) AVA', 'COOLTRAINER (F) MIRIAM',
->   'COOLTRAINER (F) CARRIE', 'COOLTRAINER (F) GILLIAN', 'PKMN RANGER (M) TYLER',
->   'PKMN RANGER (M) CHAZ', 'PKMN RANGER (M) NELSON', 'PKMN RANGER (F) SHANIA',
+>   'COOLTRAINER (M) LEON', 'COOLTRAINER (M) ALONZO', 'COOLTRAINER (M) VINCE', 'COOLTRAINER (M) BRYON',
+>   'COOLTRAINER (F) AVA', 'COOLTRAINER (F) MIRIAM', 'COOLTRAINER (F) CARRIE', 'COOLTRAINER (F) GILLIAN',
+>   'PKMN RANGER (M) TYLER', 'PKMN RANGER (M) CHAZ', 'PKMN RANGER (M) NELSON', 'PKMN RANGER (F) SHANIA',
 >   'PKMN RANGER (F) STELLA', 'PKMN RANGER (F) DORINE', 'DRAGON TAMER MADDOX', 'DRAGON TAMER DAVIN',
->   'DRAGON TAMER TREVON', 'BLACK BELT MATEO', 'BLACK BELT BRET', 'BLACK BELT RAUL',
->   'BATTLE GIRL KAY', 'BATTLE GIRL ELENA', 'BATTLE GIRL ALANA', 'EXPERT (M) ALEXAS',
->   'EXPERT (M) WESTON', 'EXPERT (M) JASPER', 'EXPERT (F) NADIA', 'EXPERT (F) MIRANDA',
->   'EXPERT (F) EMMA', 'PSYCHIC (M) ROLANDO', 'PSYCHIC (M) STANLY', 'PSYCHIC (M) DARIO',
->   'PSYCHIC (F) KARLEE', 'PSYCHIC (F) JAYLIN', 'PSYCHIC (F) INGRID', 'HEX MANIAC DELILAH',
->   'HEX MANIAC CARLY', 'HEX MANIAC LEXIE', 'POKÉMANIAC MILLER', 'POKÉMANIAC MARV',
->   'POKÉMANIAC LAYTON', 'GENTLEMAN BROOKS', 'GENTLEMAN GREGORY', 'GENTLEMAN REESE',
->   'TRIATHLETE (M RUNNER) MASON', 'TRIATHLETE (M RUNNER) TOBY', 'TRIATHLETE (F RUNNER) DOROTHY',
->   'TRIATHLETE (F RUNNER) PIPER', 'TRIATHLETE (M SWIMMER) FINN', 'TRIATHLETE (M SWIMMER) SAMIR',
->   'TRIATHLETE (F SWIMMER) FIONA', 'TRIATHLETE (F SWIMMER) GLORIA', 'TRIATHLETE (M BIKER) NICO',
->   'TRIATHLETE (M BIKER) JEREMY', 'TRIATHLETE (F BIKER) CAITLIN', 'TRIATHLETE (F BIKER) REENA',
->   'BUG MANIAC AVERY', 'BUG MANIAC LIAM', 'FISHERMAN THEO', 'FISHERMAN BAILEY', 'RUIN MANIAC HUGO',
->   'RUIN MANIAC BRYCE', 'COLLECTOR GIDEON', 'COLLECTOR TRISTON', 'GUITARIST CHARLES',
->   'GUITARIST RAYMOND', 'BIRD KEEPER DIRK', 'BIRD KEEPER HAROLD', 'SAILOR OMAR', 'SAILOR PETER',
->   'HIKER DEV', 'HIKER COREY', 'KINDLER ANDRE', 'KINDLER FERRIS', 'PARASOL LADY ALIVIA',
->   'PARASOL LADY PAIGE', 'BEAUTY ANYA', 'BEAUTY DAWN', 'AROMA LADY ABBY', 'AROMA LADY GRETEL'
+>   'DRAGON TAMER TREVON', 'BLACK BELT MATEO', 'BLACK BELT BRET', 'BLACK BELT RAUL', 'BATTLE GIRL KAY',
+>   'BATTLE GIRL ELENA', 'BATTLE GIRL ALANA', 'EXPERT (M) ALEXAS', 'EXPERT (M) WESTON', 'EXPERT (M) JASPER',
+>   'EXPERT (F) NADIA', 'EXPERT (F) MIRANDA', 'EXPERT (F) EMMA', 'PSYCHIC (M) ROLANDO', 'PSYCHIC (M) STANLY',
+>   'PSYCHIC (M) DARIO', 'PSYCHIC (F) KARLEE', 'PSYCHIC (F) JAYLIN', 'PSYCHIC (F) INGRID', 'HEX MANIAC DELILAH',
+>   'HEX MANIAC CARLY', 'HEX MANIAC LEXIE', 'POKÉMANIAC MILLER', 'POKÉMANIAC MARV', 'POKÉMANIAC LAYTON',
+>   'GENTLEMAN BROOKS', 'GENTLEMAN GREGORY', 'GENTLEMAN REESE', 'TRIATHLETE (M RUNNER) MASON',
+>   'TRIATHLETE (M RUNNER) TOBY', 'TRIATHLETE (F RUNNER) DOROTHY', 'TRIATHLETE (F RUNNER) PIPER',
+>   'TRIATHLETE (M SWIMMER) FINN', 'TRIATHLETE (M SWIMMER) SAMIR', 'TRIATHLETE (F SWIMMER) FIONA',
+>   'TRIATHLETE (F SWIMMER) GLORIA', 'TRIATHLETE (M BIKER) NICO', 'TRIATHLETE (M BIKER) JEREMY',
+>   'TRIATHLETE (F BIKER) CAITLIN', 'TRIATHLETE (F BIKER) REENA', 'BUG MANIAC AVERY', 'BUG MANIAC LIAM', 'FISHERMAN THEO',
+>   'FISHERMAN BAILEY', 'RUIN MANIAC HUGO', 'RUIN MANIAC BRYCE', 'COLLECTOR GIDEON', 'COLLECTOR TRISTON',
+>   'GUITARIST CHARLES', 'GUITARIST RAYMOND', 'BIRD KEEPER DIRK', 'BIRD KEEPER HAROLD', 'SAILOR OMAR', 'SAILOR PETER',
+>   'HIKER DEV', 'HIKER COREY', 'KINDLER ANDRE', 'KINDLER FERRIS', 'PARASOL LADY ALIVIA', 'PARASOL LADY PAIGE',
+>   'BEAUTY ANYA', 'BEAUTY DAWN', 'AROMA LADY ABBY', 'AROMA LADY GRETEL'
 > ]
 > ```
 >
@@ -3621,17 +3499,15 @@ Extends `Database` with tower-specific trainer filtering:
 > ```
 > TrainerCollection(38 trainers)
 > [
->   'PKMN BREEDER (M) OSCAR', 'PKMN BREEDER (M) WILSON', 'PKMN BREEDER (F) CLARE',
->   'PKMN BREEDER (F) TESS', 'COOLTRAINER (M) ALONZO', 'COOLTRAINER (M) VINCE',
->   'COOLTRAINER (F) CARRIE', 'PKMN RANGER (M) TYLER', 'PKMN RANGER (M) CHAZ',
->   'PKMN RANGER (F) SHANIA', 'PKMN RANGER (F) STELLA', 'BLACK BELT RAUL', 'BATTLE GIRL ALANA',
->   'EXPERT (M) ALEXAS', 'EXPERT (F) NADIA', 'PSYCHIC (M) ROLANDO', 'PSYCHIC (M) STANLY',
->   'PSYCHIC (M) DARIO', 'PSYCHIC (F) KARLEE', 'PSYCHIC (F) JAYLIN', 'PSYCHIC (F) INGRID',
->   'POKÉMANIAC MILLER', 'POKÉMANIAC MARV', 'POKÉMANIAC LAYTON', 'GENTLEMAN BROOKS',
->   'GENTLEMAN GREGORY', 'TRIATHLETE (M RUNNER) MASON', 'TRIATHLETE (M RUNNER) TOBY',
->   'TRIATHLETE (F RUNNER) DOROTHY', 'TRIATHLETE (F RUNNER) PIPER', 'TRIATHLETE (M BIKER) NICO',
->   'TRIATHLETE (M BIKER) JEREMY', 'TRIATHLETE (F BIKER) CAITLIN', 'TRIATHLETE (F BIKER) REENA',
->   'RUIN MANIAC HUGO', 'RUIN MANIAC BRYCE', 'HIKER DEV', 'HIKER COREY'
+>   'PKMN BREEDER (M) OSCAR', 'PKMN BREEDER (M) WILSON', 'PKMN BREEDER (F) CLARE', 'PKMN BREEDER (F) TESS',
+>   'COOLTRAINER (M) ALONZO', 'COOLTRAINER (M) VINCE', 'COOLTRAINER (F) CARRIE', 'PKMN RANGER (M) TYLER',
+>   'PKMN RANGER (M) CHAZ', 'PKMN RANGER (F) SHANIA', 'PKMN RANGER (F) STELLA', 'BLACK BELT RAUL', 'BATTLE GIRL ALANA',
+>   'EXPERT (M) ALEXAS', 'EXPERT (F) NADIA', 'PSYCHIC (M) ROLANDO', 'PSYCHIC (M) STANLY', 'PSYCHIC (M) DARIO',
+>   'PSYCHIC (F) KARLEE', 'PSYCHIC (F) JAYLIN', 'PSYCHIC (F) INGRID', 'POKÉMANIAC MILLER', 'POKÉMANIAC MARV',
+>   'POKÉMANIAC LAYTON', 'GENTLEMAN BROOKS', 'GENTLEMAN GREGORY', 'TRIATHLETE (M RUNNER) MASON',
+>   'TRIATHLETE (M RUNNER) TOBY', 'TRIATHLETE (F RUNNER) DOROTHY', 'TRIATHLETE (F RUNNER) PIPER',
+>   'TRIATHLETE (M BIKER) NICO', 'TRIATHLETE (M BIKER) JEREMY', 'TRIATHLETE (F BIKER) CAITLIN',
+>   'TRIATHLETE (F BIKER) REENA', 'RUIN MANIAC HUGO', 'RUIN MANIAC BRYCE', 'HIKER DEV', 'HIKER COREY'
 > ]
 > ```
 >
@@ -3650,19 +3526,17 @@ Extends `Database` with tower-specific trainer filtering:
 > ```
 > TrainerCollection(56 trainers)
 > [
->   'YOUNGSTER JAXON', 'YOUNGSTER LOGAN', 'LASS EMILEE', 'LASS JOSIE', 'CAMPER ARMANDO',
->   'CAMPER SKYLER', 'PICNICKER RUTH', 'PICNICKER MELODY', 'POKÉFAN (M) TODD', 'POKÉFAN (M) GAVIN',
->   'POKÉFAN (F) MALORY', 'POKÉFAN (F) ESTHER', 'COOLTRAINER (M) ALONZO', 'COOLTRAINER (M) BRYON',
->   'COOLTRAINER (F) AVA', 'COOLTRAINER (F) MIRIAM', 'COOLTRAINER (F) GILLIAN',
->   'PKMN RANGER (M) NELSON', 'PKMN RANGER (F) DORINE', 'DRAGON TAMER MADDOX', 'DRAGON TAMER DAVIN',
->   'DRAGON TAMER TREVON', 'BLACK BELT MATEO', 'BLACK BELT BRET', 'BLACK BELT RAUL',
->   'BATTLE GIRL KAY', 'BATTLE GIRL ELENA', 'BATTLE GIRL ALANA', 'EXPERT (M) ALEXAS',
->   'EXPERT (M) JASPER', 'EXPERT (F) NADIA', 'EXPERT (F) EMMA', 'HEX MANIAC DELILAH',
->   'HEX MANIAC CARLY', 'HEX MANIAC LEXIE', 'POKÉMANIAC MILLER', 'POKÉMANIAC MARV',
->   'POKÉMANIAC LAYTON', 'GENTLEMAN REESE', 'BUG MANIAC AVERY', 'BUG MANIAC LIAM', 'RUIN MANIAC HUGO',
->   'RUIN MANIAC BRYCE', 'COLLECTOR GIDEON', 'COLLECTOR TRISTON', 'GUITARIST CHARLES',
->   'BIRD KEEPER DIRK', 'BIRD KEEPER HAROLD', 'SAILOR OMAR', 'SAILOR PETER', 'HIKER DEV',
->   'HIKER COREY', 'KINDLER ANDRE', 'KINDLER FERRIS', 'BEAUTY ANYA', 'BEAUTY DAWN'
+>   'YOUNGSTER JAXON', 'YOUNGSTER LOGAN', 'LASS EMILEE', 'LASS JOSIE', 'CAMPER ARMANDO', 'CAMPER SKYLER',
+>   'PICNICKER RUTH', 'PICNICKER MELODY', 'POKÉFAN (M) TODD', 'POKÉFAN (M) GAVIN', 'POKÉFAN (F) MALORY',
+>   'POKÉFAN (F) ESTHER', 'COOLTRAINER (M) ALONZO', 'COOLTRAINER (M) BRYON', 'COOLTRAINER (F) AVA',
+>   'COOLTRAINER (F) MIRIAM', 'COOLTRAINER (F) GILLIAN', 'PKMN RANGER (M) NELSON', 'PKMN RANGER (F) DORINE',
+>   'DRAGON TAMER MADDOX', 'DRAGON TAMER DAVIN', 'DRAGON TAMER TREVON', 'BLACK BELT MATEO', 'BLACK BELT BRET',
+>   'BLACK BELT RAUL', 'BATTLE GIRL KAY', 'BATTLE GIRL ELENA', 'BATTLE GIRL ALANA', 'EXPERT (M) ALEXAS',
+>   'EXPERT (M) JASPER', 'EXPERT (F) NADIA', 'EXPERT (F) EMMA', 'HEX MANIAC DELILAH', 'HEX MANIAC CARLY',
+>   'HEX MANIAC LEXIE', 'POKÉMANIAC MILLER', 'POKÉMANIAC MARV', 'POKÉMANIAC LAYTON', 'GENTLEMAN REESE',
+>   'BUG MANIAC AVERY', 'BUG MANIAC LIAM', 'RUIN MANIAC HUGO', 'RUIN MANIAC BRYCE', 'COLLECTOR GIDEON',
+>   'COLLECTOR TRISTON', 'GUITARIST CHARLES', 'BIRD KEEPER DIRK', 'BIRD KEEPER HAROLD', 'SAILOR OMAR', 'SAILOR PETER',
+>   'HIKER DEV', 'HIKER COREY', 'KINDLER ANDRE', 'KINDLER FERRIS', 'BEAUTY ANYA', 'BEAUTY DAWN'
 > ]
 > ```
 >
@@ -3682,7 +3556,7 @@ Generates a random trainer + 3-set team respecting species and item clause:
 > <summary>Output</summary>
 >
 > ```
-> 'Picnicker RUTH: Shuckle-4, Nidoqueen-4, Machamp-4'
+> 'Cooltrainer (F) CARRIE: Gengar-7, Snorlax-7, Starmie-8'
 > ```
 >
 > </details>
@@ -3698,7 +3572,7 @@ Generates a random trainer + 3-set team respecting species and item clause:
 > <summary>Output</summary>
 >
 > ```
-> 'Dragon Tamer TREVON: Latias-3, Salamence-6, Gyarados-2'
+> 'Dragon Tamer DAVIN: Dragonite-2, Kingdra-2, Tyranitar-9'
 > ```
 >
 > </details>
@@ -3714,7 +3588,7 @@ Generates a random trainer + 3-set team respecting species and item clause:
 > <summary>Output</summary>
 >
 > ```
-> 'Youngster BRADY: Sentret-1, Skitty-1, Slakoth-1'
+> 'Youngster BRADY: Pidgey-1, Swinub-1, Shroomish-1'
 > ```
 >
 > </details>
@@ -3756,7 +3630,7 @@ Factory sets are divided into 9 groups by index. Each round draws from specific 
 > <summary>Output</summary>
 >
 > ```
-> fac = <frontierbrain3.facilities.factory.FactoryDatabase object at 0x00000222A1952BA0>
+> fac = <frontierbrain3.facilities.factory.FactoryDatabase object at 0x0000015945E5EA50>
 > ```
 >
 > </details>
@@ -4271,7 +4145,7 @@ Every Factory team gets a "type" (most common Pokemon type) and a "phrase" (batt
 > <summary>Output</summary>
 >
 > ```
-> fac = <frontierbrain3.facilities.factory.FactoryDatabase object at 0x00000222A26FF250>
+> fac = <frontierbrain3.facilities.factory.FactoryDatabase object at 0x000001594681F110>
 > ```
 >
 > </details>
@@ -4342,7 +4216,7 @@ Generate teams with optional type/phrase constraints:
 > <summary>Output</summary>
 >
 > ```
-> fac = <frontierbrain3.facilities.factory.FactoryDatabase object at 0x00000222A23291D0>
+> fac = <frontierbrain3.facilities.factory.FactoryDatabase object at 0x00000159464C1090>
 > ```
 >
 > </details>
@@ -4358,9 +4232,9 @@ Generate teams with optional type/phrase constraints:
 > <summary>Output</summary>
 >
 > ```
-> ids = ['Jynx-1', 'Raikou-4', 'Glalie-1']
-> typ = 'Ice'
-> phrase = 'appears to be slow and steady'
+> ids = ['Regirock-6', 'Typhlosion-1', 'Umbreon-2']
+> typ = 'No Type'
+> phrase = 'appears to be weakening the foe to start'
 > ```
 >
 > </details>
@@ -4376,9 +4250,9 @@ Generate teams with optional type/phrase constraints:
 > <summary>Output</summary>
 >
 > ```
-> ids = ['Feraligatr-2', 'Dewgong-3', 'Dragonite-1']
+> ids = ['Golduck-2', 'Zapdos-3', 'Dewgong-2']
 > typ = 'Water'
-> phrase = 'appears to be free-spirited and unrestrained'
+> phrase = 'appears to be slow and steady'
 > ```
 >
 > </details>
@@ -4394,8 +4268,8 @@ Generate teams with optional type/phrase constraints:
 > <summary>Output</summary>
 >
 > ```
-> ids = ['Crobat-4', 'Rhydon-4', 'Lapras-5']
-> typ = 'No Type'
+> ids = ['Miltank-3', 'Slaking-4', 'Donphan-2']
+> typ = 'Normal'
 > phrase = 'appears to be high risk, high return'
 > ```
 >
@@ -4412,7 +4286,7 @@ Generate teams with optional type/phrase constraints:
 > <summary>Output</summary>
 >
 > ```
-> ids = ['Growlithe-1', 'Magby-1', 'Grimer-1']
+> ids = ['Growlithe-1', 'Magby-1', 'Clamperl-1']
 > typ = 'Fire'
 > phrase = 'appears to be one based on total preparation'
 > ```
@@ -4615,7 +4489,7 @@ The enemy seeding bugs massively favor the player, but it's useful to know how h
 > <summary>Output</summary>
 >
 > ```
-> tower = <frontierbrain3.facilities.tower.TowerDatabase object at 0x00000222A2202D50>
+> tower = <frontierbrain3.facilities.tower.TowerDatabase object at 0x000001594632AC10>
 > ```
 >
 > </details>
@@ -4743,7 +4617,7 @@ The enemy seeding bugs massively favor the player, but it's useful to know how h
 > <summary>Output</summary>
 >
 > ```
-> Highest enemy seed: 4192
+> Highest enemy seed: 4201
 > ```
 >
 > </details>
@@ -4759,7 +4633,7 @@ The enemy seeding bugs massively favor the player, but it's useful to know how h
 > <summary>Output</summary>
 >
 > ```
-> Team: Swimmer? JOYCE: Walrein-4, Lapras-4, Kingdra-4
+> Team: PKMN Breeder (M) WILSON: Slaking-4, Typhlosion-4, Kingdra-4
 > ```
 >
 > </details>
@@ -5073,11 +4947,10 @@ Analyze probabilities over multiple turns, either by category or by specific mov
 >   ('Sassy', 0.9), ('Impish', 0.7733333333333333), ('Brave', 0.75), ('Hardy', 0.7166666666666667),
 >   ('Timid', 0.7133333333333334), ('Docile', 0.6333333333333334), ('Naive', 0.6333333333333334),
 >   ('Quiet', 0.6333333333333334), ('Quirky', 0.6333333333333334), ('Hasty', 0.5966666666666667),
->   ('Jolly', 0.5499999999999999), ('Lax', 0.5333333333333333), ('Serious', 0.5233333333333334),
->   ('Rash', 0.49), ('Adamant', 0.48333333333333334), ('Bold', 0.4666666666666667), ('Mild', 0.46),
->   ('Relaxed', 0.44999999999999996), ('Careful', 0.44666666666666666), ('Calm', 0.43333333333333335),
->   ('Modest', 0.41666666666666663), ('Lonely', 0.38333333333333336),
->   ('Bashful', 0.33999999999999997), ('Naughty', 0.23333333333333334),
+>   ('Jolly', 0.5499999999999999), ('Lax', 0.5333333333333333), ('Serious', 0.5233333333333334), ('Rash', 0.49),
+>   ('Adamant', 0.48333333333333334), ('Bold', 0.4666666666666667), ('Mild', 0.46), ('Relaxed', 0.44999999999999996),
+>   ('Careful', 0.44666666666666666), ('Calm', 0.43333333333333335), ('Modest', 0.41666666666666663),
+>   ('Lonely', 0.38333333333333336), ('Bashful', 0.33999999999999997), ('Naughty', 0.23333333333333334),
 >   ('Gentle', 0.21999999999999997)
 > ]
 > ```
@@ -5634,11 +5507,9 @@ Encounter data includes species, ability, level ranges, and moves. Rounds cycle 
 >
 > ```
 > [
->   {'item': 'Hyper Potion', 'rate': 15}, {'item': 'Fluffy Tail', 'rate': 15},
->   {'item': 'Cheri Berry', 'rate': 31}, {'item': 'Ether', 'rate': 10},
->   {'item': 'Lum Berry', 'rate': 10}, {'item': 'Revive', 'rate': 10},
->   {'item': 'Bright Powder', 'rate': 3}, {'item': 'Shell Bell', 'rate': 3},
->   {'item': 'Max Revive', 'rate': 3}
+>   {'item': 'Hyper Potion', 'rate': 15}, {'item': 'Fluffy Tail', 'rate': 15}, {'item': 'Cheri Berry', 'rate': 31},
+>   {'item': 'Ether', 'rate': 10}, {'item': 'Lum Berry', 'rate': 10}, {'item': 'Revive', 'rate': 10},
+>   {'item': 'Bright Powder', 'rate': 3}, {'item': 'Shell Bell', 'rate': 3}, {'item': 'Max Revive', 'rate': 3}
 > ]
 > ```
 >
@@ -5656,11 +5527,10 @@ Encounter data includes species, ability, level ranges, and moves. Rounds cycle 
 >
 > ```
 > [
->   {'item': 'Hyper Potion', 'rate': 30}, {'item': 'Fluffy Tail', 'rate': 10},
->   {'item': 'Cheri Berry', 'rate': 10}, {'item': 'Ether', 'rate': 10},
->   {'item': 'Lum Berry', 'rate': 10}, {'item': 'Revive', 'rate': 10},
->   {'item': 'Bright Powder', 'rate': 5}, {'item': 'Shell Bell', 'rate': 5},
->   {'item': 'Max Revive', 'rate': 5}, {'item': 'Sacred Ash', 'rate': 5}
+>   {'item': 'Hyper Potion', 'rate': 30}, {'item': 'Fluffy Tail', 'rate': 10}, {'item': 'Cheri Berry', 'rate': 10},
+>   {'item': 'Ether', 'rate': 10}, {'item': 'Lum Berry', 'rate': 10}, {'item': 'Revive', 'rate': 10},
+>   {'item': 'Bright Powder', 'rate': 5}, {'item': 'Shell Bell', 'rate': 5}, {'item': 'Max Revive', 'rate': 5},
+>   {'item': 'Sacred Ash', 'rate': 5}
 > ]
 > ```
 >

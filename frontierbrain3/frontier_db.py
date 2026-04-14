@@ -295,11 +295,11 @@ class SetCollection:
             ) >= min_chance
         )
 
-    def diesTo(self, attacker, *,
+    def willDieTo(self, attacker, *,
                include_ohko=False, include_acc=False, **kwargs) -> "SetCollection":
         """
         Filter to sets that the attacker GUARANTEES to OHKO.
-        (Reverse of willOHKO — each set in the collection is the defender.)
+        (Reverse of willOHKO; each set in the collection is the defender.)
         """
         smap = self._db._species_map
         return self._filter(
@@ -442,7 +442,7 @@ class _NegatedSetCollection:
             negate=True
         )
 
-    def diesTo(self, attacker, *,
+    def willDieTo(self, attacker, *,
                include_ohko=False, include_acc=False, **kwargs) -> SetCollection:
         smap = self._col._db._species_map
         return self._col._filter(
