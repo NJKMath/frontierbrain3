@@ -41,124 +41,6 @@ frontierbrain3/
     └── arena.py         # Placeholder (no mechanics to model)
 ```
 
-## Quick Start
-
-
-> ```python
-> from frontierbrain3 import Database, CustomSet, calc_matchup, format_result
-> db = Database()
-> water_surfers = db.sets.hasType("Water").hasMove("surf")
-> ```
->
-> <details>
-> <summary>Output</summary>
->
-> ```
-> water_surfers = SetCollection(65 sets)
-> [
->   'Wartortle-2', 'Sealeo-2', 'Pelipper-2', 'Sharpedo-2', 'Mantine-2', 'Huntail-2', 'Gorebyss-2', 'Politoed-2',
->   'Lanturn-1', 'Ludicolo-1', 'Slowbro-1', 'Wailord-1', 'Vaporeon-1', 'Feraligatr-1', 'Lapras-1', 'Lanturn-2',
->   'Whiscash-2', 'Ludicolo-2', 'Slowbro-2', 'Slowking-2', 'Golduck-2', 'Tentacruel-2', 'Vaporeon-2', 'Feraligatr-2',
->   'Lapras-2', 'Swampert-2', 'Kingdra-2', 'Milotic-2', 'Whiscash-3', 'Slowbro-3', 'Slowking-3', 'Tentacruel-3',
->   'Starmie-3', 'Vaporeon-3', 'Blastoise-3', 'Walrein-3', 'Swampert-3', 'Gyarados-3', 'Milotic-3', 'Lanturn-4',
->   'Whiscash-4', 'Quagsire-4', 'Dewgong-4', 'Slowbro-4', 'Slowking-4', 'Golduck-4', 'Wailord-4', 'Vaporeon-4',
->   'Blastoise-4', 'Walrein-4', 'Lapras-4', 'Swampert-4', 'Milotic-4', 'Suicune-1', 'Suicune-3', 'Suicune-4', 'Starmie-5',
->   'Starmie-6', 'Starmie-8', 'Suicune-5', 'Suicune-6', 'Swampert-TuckerSilver', 'Swampert-TuckerGold',
->   'Suicune-SpenserGold', 'Milotic-LucySilver'
-> ]
-> ```
->
-> </details>
-
-
-<br>
-
-> ```python
-> starmie = CustomSet("Starmie", nature="Timid", evs=[0,0,0,252,4,252],
->                     moves=["Surf", "Thunderbolt", "Ice Beam", "Psychic"])
-> ```
->
-> <details>
-> <summary>Output</summary>
->
-> ```
-> starmie = CustomSet(Starmie, nature=Timid, evs=[0, 0, 0, 252, 4, 252], ivs=[31, 31, 31, 31, 31, 31], level=100, ability=illuminate, moves=['surf', 'thunderbolt', 'icebeam', 'psychic'])
-> ```
->
-> </details>
-
-
-<br>
-
-> ```python
-> ttar = db.allSets("Tyranitar")._sets[0]
-> ```
->
-> <details>
-> <summary>Output</summary>
->
-> ```
-> ttar = {
->   'Pokemon': 'Tyranitar',
->   'SetNum': 1,
->   'Nature': 'Hardy',
->   'Item': 'BrightPowder',
->   'Abilities': ['Sand Stream'],
->   'Moves': ['earthquake', 'aerialace', 'thunderbolt', 'surf'],
->   'EVs': [0, 255, 0, 255, 0, 0],
->   'Index': 861,
->   'DexNum': 248,
-> }
-> ```
->
-> </details>
-
-
-<br>
-
-> ```python
-> result = calc_matchup(starmie, ttar, "Surf")
-> ```
->
-> <details>
-> <summary>Output</summary>
->
-> ```
-> result = {
->   'rolls': [261, 264, 267, 271, 274, 277, 280, 283, 286, 289, 292, 295, 298, 301, 304, 308],
->   'attack_rolls': None,
->   'hit_info': {'type': 'single'},
->   'min': 261,
->   'max': 308,
->   'min_pct': 76.50,
->   'max_pct': 90.30,
->   'defender_hp': 341,
->   'defender_max_hp': 341,
->   'ko_chances': {1: 0.0, 2: 1.0},
-> }
-> ```
->
-> </details>
-
-
-<br>
-
-> ```python
-> print(format_result(result, "Surf"))
-> ```
->
-> <details>
-> <summary>Output</summary>
->
-> ```
-> Surf: 261-308 (76.5% - 90.3%) [HP: 341]
->   Per-hit rolls: (261, 264, 267, 271, 274, 277, 280, 283, 286, 289, 292, 295, 298, 301, 304, 308)
->   guaranteed 2HKO
-> ```
->
-> </details>
-
-
 ---
 
 ## Core Concepts
@@ -208,10 +90,24 @@ The trainer list is shared across all Battle Frontier facilities, though details
 
 ```json
 {
-    "Class": "Bug Catcher",
-    "Name": "Garret",
     "Index": 1,
-    "Sets": ["Butterfree-1", "Beautifly-1", "Dustox-1", "Volbeat-1", "Illumise-1", "Masquerain-1"]
+    "Name": "BRADY",
+    "Class": "Youngster",
+    "Sets": [
+        "Sunkern-1", "Azurill-1", "Caterpie-1", "Weedle-1", "Wurmple-1",
+        "Ralts-1", "Magikarp-1", "Feebas-1", "Pichu-1", "Igglybuff-1",
+        "Wooper-1", "Tyrogue-1", "Sentret-1", "Cleffa-1", "Seedot-1",
+        "Lotad-1", "Poochyena-1", "Shedinja-1", "Makuhita-1", "Whismur-1",
+        "Zigzagoon-1", "Zubat-1", "Togepi-1", "Spinarak-1", "Marill-1",
+        "Hoppip-1", "Slugma-1", "Swinub-1", "Smeargle-1", "Pidgey-1",
+        "Rattata-1", "Wynaut-1", "Skitty-1", "Spearow-1", "Hoothoot-1",
+        "Diglett-1", "Ledyba-1", "Nincada-1", "Surskit-1", "Jigglypuff-1",
+        "Taillow-1", "Wingull-1", "NidoranM-1", "NidoranF-1", "Kirlia-1",
+        "Mareep-1", "Meditite-1", "Slakoth-1", "Paras-1", "Ekans-1",
+        "Ditto-1", "Barboach-1", "Meowth-1", "Pineco-1", "Trapinch-1",
+        "Spheal-1", "Horsea-1", "Shroomish-1", "Shuppet-1", "Duskull-1",
+        "Electrike-1", "Vulpix-1"
+    ]
 }
 ```
 
@@ -332,7 +228,7 @@ Import teams from [Pokepaste](https://pokepast.es/) format:
 
 > ```python
 > from frontierbrain3 import from_paste
-> team = from_paste("""
+> skarm = from_paste("""
 > Skarmory (M) @ Leftovers
 > Ability: Sturdy
 > EVs: 252 HP / 252 Def / 4 SpD
@@ -348,7 +244,7 @@ Import teams from [Pokepaste](https://pokepast.es/) format:
 > <summary>Output</summary>
 >
 > ```
-> team = {
+> skarm = {
 >   'CustomSkarmory': CustomSet(Skarmory, nature=Bold, evs=[252, 0, 252, 0, 4, 0], ivs=[31, 31, 31, 31, 31, 31], level=100, item=Leftovers, ability=Sturdy, moves=['spikes', 'whirlwind', 'protect', 'rest']),
 > }
 > ```
@@ -359,7 +255,7 @@ Import teams from [Pokepaste](https://pokepast.es/) format:
 <br>
 
 > ```python
-> team
+> skarm
 > ```
 >
 > <details>
@@ -384,23 +280,23 @@ Import teams from [Pokepaste](https://pokepast.es/) format:
 > ```python
 > from frontierbrain3 import calc_stats, Database
 > db = Database()
-> alakazam = db.allSets("Alakazam")._sets[0]
+> snorlax = db.allSets("Snorlax")._sets[0]
 > ```
 >
 > <details>
 > <summary>Output</summary>
 >
 > ```
-> alakazam = {
->   'Pokemon': 'Alakazam',
+> snorlax = {
+>   'Pokemon': 'Snorlax',
 >   'SetNum': 1,
->   'Nature': 'Modest',
->   'Item': 'Focus Band',
->   'Abilities': ['Synchronize', 'Inner Focus'],
->   'Moves': ['thunderpunch', 'firepunch', 'icepunch', 'thunderwave'],
->   'EVs': [0, 0, 255, 255, 0, 0],
->   'Index': 405,
->   'DexNum': 65,
+>   'Nature': 'Adamant',
+>   'Item': 'Leftovers',
+>   'Abilities': ['Immunity', 'Thick Fat'],
+>   'Moves': ['facade', 'shadowball', 'attract', 'doubleteam'],
+>   'EVs': [0, 255, 255, 0, 0, 0],
+>   'Index': 461,
+>   'DexNum': 143,
 > }
 > ```
 >
@@ -410,7 +306,7 @@ Import teams from [Pokepaste](https://pokepast.es/) format:
 <br>
 
 > ```python
-> calc_stats(alakazam)
+> calc_stats(snorlax)
 > ```
 >
 > <details>
@@ -418,12 +314,12 @@ Import teams from [Pokepaste](https://pokepast.es/) format:
 >
 > ```
 > {
->   'hp': 251,
->   'atk': 122,
->   'def': 189,
->   'spa': 405,
->   'spd': 206,
->   'spe': 276,
+>   'hp': 461,
+>   'atk': 350,
+>   'def': 229,
+>   'spa': 149,
+>   'spd': 256,
+>   'spe': 96,
 > }
 > ```
 >
@@ -433,7 +329,7 @@ Import teams from [Pokepaste](https://pokepast.es/) format:
 <br>
 
 > ```python
-> calc_stats(alakazam, ivs=15)
+> calc_stats(snorlax, ivs=15)
 > ```
 >
 > <details>
@@ -441,12 +337,12 @@ Import teams from [Pokepaste](https://pokepast.es/) format:
 >
 > ```
 > {
->   'hp': 235,
->   'atk': 108,
->   'def': 173,
->   'spa': 388,
->   'spd': 190,
->   'spe': 260,
+>   'hp': 445,
+>   'atk': 333,
+>   'def': 213,
+>   'spa': 135,
+>   'spd': 240,
+>   'spe': 80,
 > }
 > ```
 >
@@ -456,7 +352,7 @@ Import teams from [Pokepaste](https://pokepast.es/) format:
 <br>
 
 > ```python
-> calc_stats(alakazam, ivs=15, level=50)
+> calc_stats(snorlax, ivs=15, level=50)
 > ```
 >
 > <details>
@@ -464,12 +360,12 @@ Import teams from [Pokepaste](https://pokepast.es/) format:
 >
 > ```
 > {
->   'hp': 122,
->   'atk': 55,
->   'def': 89,
->   'spa': 196,
->   'spd': 97,
->   'spe': 132,
+>   'hp': 227,
+>   'atk': 169,
+>   'def': 109,
+>   'spa': 69,
+>   'spd': 122,
+>   'spe': 42,
 > }
 > ```
 >
@@ -479,7 +375,7 @@ Import teams from [Pokepaste](https://pokepast.es/) format:
 <br>
 
 > ```python
-> calc_stats(alakazam, ivs=[31,31,31,0,31,31])
+> calc_stats(snorlax, ivs=[31,31,31,0,31,31])
 > ```
 >
 > <details>
@@ -487,12 +383,12 @@ Import teams from [Pokepaste](https://pokepast.es/) format:
 >
 > ```
 > {
->   'hp': 251,
->   'atk': 122,
->   'def': 189,
->   'spa': 371,
->   'spd': 206,
->   'spe': 276,
+>   'hp': 461,
+>   'atk': 350,
+>   'def': 229,
+>   'spa': 121,
+>   'spd': 256,
+>   'spe': 96,
 > }
 > ```
 >
@@ -1486,24 +1382,30 @@ Specify IVs for the attacker and defender independently, useful for analyzing pl
 
 
 > ```python
-> meta = db.allSets("Metagross")._sets[0]
+> db.sets.willDieTo(lax, atk_ivs=31, def_ivs=3)
 > ```
 >
 > <details>
 > <summary>Output</summary>
 >
 > ```
-> meta = {
->   'Pokemon': 'Metagross',
->   'SetNum': 1,
->   'Nature': 'Adamant',
->   'Item': 'Leftovers',
->   'Abilities': ['Clear Body'],
->   'Moves': ['meteormash', 'aerialace', 'facade', 'lightscreen'],
->   'EVs': [0, 170, 0, 0, 170, 170],
->   'Index': 467,
->   'DexNum': 376,
-> }
+> SetCollection(117 sets)
+> [
+>   'Sunkern-1', 'Azurill-1', 'Caterpie-1', 'Weedle-1', 'Wurmple-1', 'Ralts-1', 'Magikarp-1', 'Feebas-1', 'Pichu-1',
+>   'Igglybuff-1', 'Tyrogue-1', 'Sentret-1', 'Cleffa-1', 'Lotad-1', 'Poochyena-1', 'Shedinja-1', 'Makuhita-1',
+>   'Whismur-1', 'Zigzagoon-1', 'Zubat-1', 'Spinarak-1', 'Swinub-1', 'Smeargle-1', 'Pidgey-1', 'Rattata-1', 'Spearow-1',
+>   'Hoothoot-1', 'Diglett-1', 'Ledyba-1', 'Surskit-1', 'Taillow-1', 'Wingull-1', 'NidoranM-1', 'Kirlia-1', 'Meditite-1',
+>   'Ekans-1', 'Barboach-1', 'Meowth-1', 'Trapinch-1', 'Shuppet-1', 'Electrike-1', 'Vulpix-1', 'Pikachu-1', 'Poliwag-1',
+>   'Dratini-1', 'Remoraid-1', 'Baltoy-1', 'Mankey-1', 'Smoochum-1', 'Numel-1', 'Carvanha-1', 'Charmander-1',
+>   'Cyndaquil-1', 'Abra-1', 'Doduo-1', 'Gastly-1', 'Treecko-1', 'Torchic-1', 'Psyduck-1', 'Natu-1', 'Drowzee-1',
+>   'Chinchou-1', 'Delibird-1', 'Houndour-1', 'Spoink-1', 'Tentacool-1', 'Cacnea-1', 'Unown-1', 'Elekid-1', 'Magby-1',
+>   'Beedrill-1', 'Ledian-1', 'Kadabra-1', 'Haunter-1', 'Sharpedo-1', 'Kadabra-2', 'Haunter-2', 'Plusle-2', 'Minun-2',
+>   'Grovyle-2', 'Ponyta-2', 'Sharpedo-2', 'Dugtrio-1', 'Medicham-1', 'Jynx-1', 'Alakazam-1', 'Gengar-1', 'Dugtrio-2',
+>   'Medicham-2', 'Alakazam-2', 'Gengar-2', 'Espeon-2', 'Dugtrio-3', 'Medicham-3', 'Mr. Mime-3', 'Xatu-3', 'Alakazam-3',
+>   'Gengar-3', 'Gardevoir-3', 'Espeon-3', 'Dugtrio-4', 'Medicham-4', 'Misdreavus-4', 'Jynx-4', 'Mr. Mime-4', 'Xatu-4',
+>   'Alakazam-4', 'Gengar-4', 'Gardevoir-4', 'Espeon-4', 'Gengar-5', 'Gengar-6', 'Gengar-7', 'Gengar-8', 'Gardevoir-8',
+>   'Alakazam-AnabelSilver', 'Shedinja-GretaSilver'
+> ]
 > ```
 >
 > </details>
@@ -1512,47 +1414,17 @@ Specify IVs for the attacker and defender independently, useful for analyzing pl
 <br>
 
 > ```python
-> db.sets.willDieTo(meta, atk_ivs=31, def_ivs=3)
+> db.sets.hasType("Normal").canDieTo(lax)
 > ```
 >
 > <details>
 > <summary>Output</summary>
 >
 > ```
-> SetCollection(264 sets)
+> SetCollection(11 sets)
 > [
->   'Sunkern-1', 'Azurill-1', 'Caterpie-1', 'Weedle-1', 'Wurmple-1', 'Ralts-1', 'Feebas-1', 'Metapod-1', 'Kakuna-1',
->   'Pichu-1', 'Silcoon-1', 'Cascoon-1', 'Igglybuff-1', 'Tyrogue-1', 'Sentret-1', 'Cleffa-1', 'Seedot-1', 'Lotad-1',
->   'Poochyena-1', 'Shedinja-1', 'Makuhita-1', 'Whismur-1', 'Zigzagoon-1', 'Zubat-1', 'Togepi-1', 'Spinarak-1',
->   'Hoppip-1', 'Swinub-1', 'Smeargle-1', 'Pidgey-1', 'Rattata-1', 'Skitty-1', 'Spearow-1', 'Hoothoot-1', 'Diglett-1',
->   'Ledyba-1', 'Surskit-1', 'Jigglypuff-1', 'Taillow-1', 'Wingull-1', 'NidoranM-1', 'NidoranF-1', 'Kirlia-1',
->   'Meditite-1', 'Slakoth-1', 'Paras-1', 'Ekans-1', 'Barboach-1', 'Meowth-1', 'Trapinch-1', 'Spheal-1', 'Shuppet-1',
->   'Duskull-1', 'Pikachu-1', 'Bellsprout-1', 'Geodude-1', 'Dratini-1', 'Snubbull-1', 'Remoraid-1', 'Larvitar-1',
->   'Baltoy-1', 'Snorunt-1', 'Bagon-1', 'Venonat-1', 'Mankey-1', 'Machop-1', 'Smoochum-1', 'Carvanha-1', 'Abra-1',
->   'Doduo-1', 'Gastly-1', 'Swablu-1', 'Treecko-1', 'Bulbasaur-1', 'Chikorita-1', 'Oddish-1', 'Psyduck-1', 'Natu-1',
->   'Clefairy-1', 'Eevee-1', 'Drowzee-1', 'Teddiursa-1', 'Delibird-1', 'Houndour-1', 'Spoink-1', 'Tentacool-1',
->   'Cacnea-1', 'Unown-1', 'Skiploom-1', 'Nuzleaf-1', 'Lombre-1', 'Vibrava-1', 'Rhyhorn-1', 'Pidgeotto-1', 'Kabuto-1',
->   'Lileep-1', 'Anorith-1', 'Aipom-1', 'Loudred-1', 'Nidorino-1', 'Nosepass-1', 'Butterfree-1', 'Beedrill-1',
->   'Beautifly-1', 'Ledian-1', 'Delcatty-1', 'Sableye-1', 'Weepinbell-1', 'Graveler-1', 'Kadabra-1', 'Volbeat-1',
->   'Illumise-1', 'Ivysaur-1', 'Parasect-1', 'Haunter-1', 'Murkrow-1', 'Grovyle-1', 'Combusken-1', 'Sudowoodo-1',
->   'Pupitar-1', 'Raticate-1', 'Dragonair-1', 'Mightyena-1', 'Sneasel-1', 'Swellow-1', 'Lunatone-1', 'Solrock-1',
->   'Venomoth-1', 'Piloswine-1', 'Ninjask-1', 'Stantler-1', 'Absol-1', 'Cacturne-1', 'Delcatty-2', 'Sableye-2',
->   'Graveler-2', 'Gloom-2', 'Porygon-2', 'Kadabra-2', 'Volbeat-2', 'Illumise-2', 'Ivysaur-2', 'Parasect-2', 'Haunter-2',
->   'Murkrow-2', 'Grovyle-2', 'Combusken-2', 'Sudowoodo-2', 'Pupitar-2', 'Raticate-2', 'Furret-2', 'Dragonair-2',
->   'Linoone-2', 'Sneasel-2', 'Swellow-2', 'Lunatone-2', 'Solrock-2', 'Venomoth-2', 'Piloswine-2', 'Ninjask-2',
->   'Zangoose-2', 'Stantler-2', 'Absol-2', 'Dugtrio-1', 'Medicham-1', 'Fearow-1', 'Jynx-1', 'Dodrio-1', 'Breloom-1',
->   'Glalie-1', 'Golem-1', 'Alakazam-1', 'Armaldo-1', 'Gengar-1', 'Heracross-1', 'Shuckle-1', 'Aerodactyl-1',
->   'Sceptile-1', 'Dugtrio-2', 'Medicham-2', 'Fearow-2', 'Jynx-2', 'Dodrio-2', 'Breloom-2', 'Victreebel-2', 'Glalie-2',
->   'Rhydon-2', 'Alakazam-2', 'Cradily-2', 'Armaldo-2', 'Gengar-2', 'Heracross-2', 'Shuckle-2', 'Aerodactyl-2',
->   'Espeon-2', 'Sceptile-2', 'Dugtrio-3', 'Medicham-3', 'Fearow-3', 'Jynx-3', 'Dodrio-3', 'Mr. Mime-3', 'Breloom-3',
->   'Xatu-3', 'Victreebel-3', 'Shiftry-3', 'Glalie-3', 'Golem-3', 'Alakazam-3', 'Cradily-3', 'Armaldo-3', 'Gengar-3',
->   'Heracross-3', 'Shuckle-3', 'Aerodactyl-3', 'Gardevoir-3', 'Espeon-3', 'Sceptile-3', 'Dugtrio-4', 'Medicham-4',
->   'Misdreavus-4', 'Fearow-4', 'Jynx-4', 'Dodrio-4', 'Mr. Mime-4', 'Breloom-4', 'Xatu-4', 'Victreebel-4', 'Shiftry-4',
->   'Glalie-4', 'Golem-4', 'Alakazam-4', 'Armaldo-4', 'Gengar-4', 'Heracross-4', 'Shuckle-4', 'Aerodactyl-4',
->   'Gardevoir-4', 'Espeon-4', 'Sceptile-4', 'Articuno-1', 'Regice-1', 'Regice-2', 'Articuno-3', 'Regice-3', 'Articuno-4',
->   'Gengar-5', 'Gengar-6', 'Gengar-7', 'Gengar-8', 'Gardevoir-8', 'Regice-5', 'Regice-6', 'Tyranitar-1', 'Tyranitar-2',
->   'Tyranitar-9', 'Articuno-5', 'Articuno-6', 'Alakazam-AnabelSilver', 'Heracross-GretaSilver', 'Shedinja-GretaSilver',
->   'Breloom-GretaGold', 'Regice-BrandonSilver', 'Articuno-BrandonGold'
+>   'Igglybuff-1', 'Sentret-1', 'Cleffa-1', 'Whismur-1', 'Pidgey-1', 'Rattata-1', 'Spearow-1', 'Hoothoot-1', 'Taillow-1',
+>   'Meowth-1', 'Doduo-1'
 > ]
 > ```
 >
@@ -1590,55 +1462,49 @@ Other optional parameters are passed through to the damage calculator:
 <br>
 
 > ```python
-> db.sets.willDieTo(meta, atk_boosts={"atk": 1})
+> db.sets.willDieTo(ttar, atk_boosts={"atk": 1})
 > ```
 >
 > <details>
 > <summary>Output</summary>
 >
 > ```
-> SetCollection(335 sets)
+> SetCollection(278 sets)
 > [
->   'Sunkern-1', 'Azurill-1', 'Caterpie-1', 'Weedle-1', 'Wurmple-1', 'Ralts-1', 'Feebas-1', 'Metapod-1', 'Kakuna-1',
->   'Pichu-1', 'Silcoon-1', 'Cascoon-1', 'Igglybuff-1', 'Tyrogue-1', 'Sentret-1', 'Cleffa-1', 'Seedot-1', 'Lotad-1',
->   'Poochyena-1', 'Shedinja-1', 'Makuhita-1', 'Whismur-1', 'Zigzagoon-1', 'Zubat-1', 'Togepi-1', 'Spinarak-1',
->   'Hoppip-1', 'Swinub-1', 'Smeargle-1', 'Pidgey-1', 'Rattata-1', 'Skitty-1', 'Spearow-1', 'Hoothoot-1', 'Diglett-1',
->   'Ledyba-1', 'Nincada-1', 'Surskit-1', 'Jigglypuff-1', 'Taillow-1', 'Wingull-1', 'NidoranM-1', 'NidoranF-1',
->   'Kirlia-1', 'Meditite-1', 'Slakoth-1', 'Paras-1', 'Ekans-1', 'Barboach-1', 'Meowth-1', 'Trapinch-1', 'Spheal-1',
->   'Shroomish-1', 'Shuppet-1', 'Duskull-1', 'Pikachu-1', 'Bellsprout-1', 'Geodude-1', 'Dratini-1', 'Snubbull-1',
->   'Remoraid-1', 'Larvitar-1', 'Baltoy-1', 'Snorunt-1', 'Bagon-1', 'Gulpin-1', 'Venonat-1', 'Mankey-1', 'Machop-1',
->   'Smoochum-1', 'Carvanha-1', 'Abra-1', 'Doduo-1', 'Gastly-1', 'Swablu-1', 'Treecko-1', 'Torchic-1', 'Bulbasaur-1',
->   'Chikorita-1', 'Oddish-1', 'Psyduck-1', 'Natu-1', 'Clefairy-1', 'Grimer-1', 'Eevee-1', 'Drowzee-1', 'Teddiursa-1',
->   'Delibird-1', 'Houndour-1', 'Phanpy-1', 'Spoink-1', 'Tentacool-1', 'Cacnea-1', 'Unown-1', 'Skiploom-1', 'Nuzleaf-1',
->   'Lombre-1', 'Vibrava-1', 'Rhyhorn-1', 'Pidgeotto-1', "Farfetch'd-1", 'Omanyte-1', 'Kabuto-1', 'Lileep-1', 'Anorith-1',
->   'Aipom-1', 'Loudred-1', 'Spinda-1', 'Nidorina-1', 'Nidorino-1', 'Nosepass-1', 'Butterfree-1', 'Beedrill-1', 'Onix-1',
->   'Beautifly-1', 'Dustox-1', 'Ledian-1', 'Ariados-1', 'Yanma-1', 'Delcatty-1', 'Sableye-1', 'Weepinbell-1',
->   'Graveler-1', 'Gloom-1', 'Kadabra-1', 'Roselia-1', 'Volbeat-1', 'Illumise-1', 'Ivysaur-1', 'Parasect-1', 'Haunter-1',
->   'Murkrow-1', 'Grovyle-1', 'Combusken-1', 'Sudowoodo-1', 'Pupitar-1', 'Raticate-1', 'Dragonair-1', 'Mightyena-1',
->   'Linoone-1', 'Castform-1', 'Chimecho-1', 'Sneasel-1', 'Swellow-1', 'Arbok-1', 'Lunatone-1', 'Solrock-1', 'Venomoth-1',
->   'Piloswine-1', 'Girafarig-1', 'Ninjask-1', 'Seviper-1', 'Zangoose-1', 'Stantler-1', 'Absol-1', 'Cacturne-1',
->   'Delcatty-2', 'Sableye-2', 'Weepinbell-2', 'Graveler-2', 'Gloom-2', 'Porygon-2', 'Kadabra-2', 'Roselia-2',
->   'Volbeat-2', 'Illumise-2', 'Ivysaur-2', 'Parasect-2', 'Haunter-2', 'Murkrow-2', 'Plusle-2', 'Grovyle-2',
->   'Combusken-2', 'Sudowoodo-2', 'Pupitar-2', 'Raticate-2', 'Furret-2', 'Dragonair-2', 'Linoone-2', 'Castform-2',
->   'Sneasel-2', 'Swellow-2', 'Vigoroth-2', 'Lunatone-2', 'Solrock-2', 'Venomoth-2', 'Piloswine-2', 'Banette-2',
->   'Ninjask-2', 'Zangoose-2', 'Stantler-2', 'Absol-2', 'Pidgeot-2', 'Cacturne-2', 'Scyther-2', 'Dugtrio-1', 'Medicham-1',
->   'Fearow-1', 'Jynx-1', 'Dodrio-1', 'Breloom-1', 'Xatu-1', 'Glalie-1', 'Golem-1', 'Rhydon-1', 'Alakazam-1', 'Cradily-1',
->   'Armaldo-1', 'Gengar-1', 'Heracross-1', 'Shuckle-1', 'Aerodactyl-1', 'Flygon-1', 'Espeon-1', 'Sceptile-1',
->   'Dugtrio-2', 'Medicham-2', 'Fearow-2', 'Granbull-2', 'Jynx-2', 'Dodrio-2', 'Mr. Mime-2', 'Breloom-2', 'Victreebel-2',
->   'Exploud-2', 'Glalie-2', 'Golem-2', 'Rhydon-2', 'Alakazam-2', 'Cradily-2', 'Armaldo-2', 'Gengar-2', 'Heracross-2',
->   'Shuckle-2', 'Aerodactyl-2', 'Flygon-2', 'Espeon-2', 'Sceptile-2', 'Dugtrio-3', 'Medicham-3', 'Fearow-3', 'Jynx-3',
->   'Dodrio-3', 'Mr. Mime-3', 'Breloom-3', 'Xatu-3', 'Vileplume-3', 'Victreebel-3', 'Exploud-3', 'Shiftry-3', 'Glalie-3',
->   'Golem-3', 'Rhydon-3', 'Alakazam-3', 'Cradily-3', 'Armaldo-3', 'Gengar-3', 'Heracross-3', 'Shuckle-3', 'Aerodactyl-3',
->   'Gardevoir-3', 'Flygon-3', 'Espeon-3', 'Sceptile-3', 'Crobat-3', 'Dugtrio-4', 'Medicham-4', 'Misdreavus-4',
->   'Fearow-4', 'Granbull-4', 'Jynx-4', 'Dodrio-4', 'Mr. Mime-4', 'Breloom-4', 'Xatu-4', 'Vileplume-4', 'Victreebel-4',
->   'Exploud-4', 'Shiftry-4', 'Glalie-4', 'Golem-4', 'Rhydon-4', 'Alakazam-4', 'Nidoking-4', 'Cradily-4', 'Armaldo-4',
->   'Gengar-4', 'Heracross-4', 'Shuckle-4', 'Aerodactyl-4', 'Gardevoir-4', 'Flygon-4', 'Venusaur-4', 'Espeon-4',
->   'Sceptile-4', 'Crobat-4', 'Articuno-1', 'Regice-1', 'Articuno-2', 'Regice-2', 'Latios-2', 'Articuno-3', 'Regice-3',
->   'Latios-3', 'Articuno-4', 'Regice-4', 'Gengar-5', 'Gengar-6', 'Gengar-7', 'Gengar-8', 'Gardevoir-6', 'Gardevoir-8',
->   'Regice-5', 'Regice-6', 'Latios-6', 'Latios-8', 'Tyranitar-1', 'Tyranitar-2', 'Tyranitar-3', 'Tyranitar-4',
->   'Tyranitar-5', 'Tyranitar-6', 'Tyranitar-7', 'Tyranitar-8', 'Tyranitar-9', 'Tyranitar-10', 'Articuno-5', 'Articuno-6',
->   'Alakazam-AnabelSilver', 'Heracross-GretaSilver', 'Shedinja-GretaSilver', 'Breloom-GretaGold', 'Seviper-LucyGold',
->   'Regice-BrandonSilver', 'Articuno-BrandonGold'
+>   'Sunkern-1', 'Azurill-1', 'Caterpie-1', 'Weedle-1', 'Wurmple-1', 'Ralts-1', 'Magikarp-1', 'Feebas-1', 'Metapod-1',
+>   'Kakuna-1', 'Pichu-1', 'Silcoon-1', 'Cascoon-1', 'Igglybuff-1', 'Tyrogue-1', 'Sentret-1', 'Cleffa-1', 'Seedot-1',
+>   'Lotad-1', 'Poochyena-1', 'Shedinja-1', 'Makuhita-1', 'Whismur-1', 'Zigzagoon-1', 'Zubat-1', 'Spinarak-1', 'Hoppip-1',
+>   'Slugma-1', 'Swinub-1', 'Smeargle-1', 'Pidgey-1', 'Rattata-1', 'Skitty-1', 'Spearow-1', 'Diglett-1', 'Ledyba-1',
+>   'Nincada-1', 'Surskit-1', 'Taillow-1', 'Wingull-1', 'NidoranM-1', 'NidoranF-1', 'Kirlia-1', 'Mareep-1', 'Meditite-1',
+>   'Paras-1', 'Ekans-1', 'Barboach-1', 'Meowth-1', 'Trapinch-1', 'Horsea-1', 'Shuppet-1', 'Electrike-1', 'Vulpix-1',
+>   'Pikachu-1', 'Sandshrew-1', 'Poliwag-1', 'Bellsprout-1', 'Geodude-1', 'Dratini-1', 'Remoraid-1', 'Larvitar-1',
+>   'Baltoy-1', 'Beldum-1', 'Gulpin-1', 'Mankey-1', 'Machop-1', 'Shellder-1', 'Smoochum-1', 'Numel-1', 'Carvanha-1',
+>   'Corphish-1', 'Charmander-1', 'Cyndaquil-1', 'Abra-1', 'Doduo-1', 'Gastly-1', 'Treecko-1', 'Torchic-1', 'Bulbasaur-1',
+>   'Oddish-1', 'Psyduck-1', 'Natu-1', 'Magnemite-1', 'Grimer-1', 'Krabby-1', 'Drowzee-1', 'Voltorb-1', 'Chinchou-1',
+>   'Delibird-1', 'Houndour-1', 'Spoink-1', 'Aron-1', 'Tentacool-1', 'Cacnea-1', 'Staryu-1', 'Skiploom-1', 'Nuzleaf-1',
+>   'Lombre-1', 'Rhyhorn-1', 'Growlithe-1', 'Omanyte-1', 'Kabuto-1', 'Elekid-1', 'Nidorina-1', 'Nidorino-1', 'Flaaffy-1',
+>   'Magby-1', 'Mawile-1', 'Butterfree-1', 'Beedrill-1', 'Onix-1', 'Beautifly-1', 'Ledian-1', 'Weepinbell-1',
+>   'Graveler-1', 'Volbeat-1', 'Ivysaur-1', 'Charmeleon-1', 'Parasect-1', 'Quilava-1', 'Plusle-1', 'Minun-1', 'Grovyle-1',
+>   'Combusken-1', 'Ponyta-1', 'Magcargo-1', 'Pupitar-1', 'Metang-1', 'Qwilfish-1', 'Pelipper-1', 'Lairon-1', 'Arbok-1',
+>   'Ninjask-1', 'Seviper-1', 'Camerupt-1', 'Sharpedo-1', 'Magneton-1', 'Graveler-2', 'Gloom-2', 'Volbeat-2',
+>   'Illumise-2', 'Ivysaur-2', 'Charmeleon-2', 'Parasect-2', 'Quilava-2', 'Plusle-2', 'Minun-2', 'Grovyle-2',
+>   'Combusken-2', 'Ponyta-2', 'Magcargo-2', 'Pupitar-2', 'Raticate-2', 'Metang-2', 'Qwilfish-2', 'Pelipper-2',
+>   'Lairon-2', 'Arbok-2', 'Seviper-2', 'Camerupt-2', 'Sharpedo-2', 'Magneton-2', 'Kabutops-2', 'Dugtrio-1', 'Jynx-1',
+>   'Breloom-1', 'Raichu-1', 'Manectric-1', 'Electrode-1', 'Golem-1', 'Rhydon-1', 'Electabuzz-1', 'Nidoking-1',
+>   'Magmar-1', 'Rapidash-1', 'Muk-1', 'Ampharos-1', 'Heracross-1', 'Houndoom-1', 'Ninetales-1', 'Tentacruel-1',
+>   'Jolteon-1', 'Flareon-1', 'Aggron-1', 'Blaziken-1', 'Sceptile-1', 'Typhlosion-1', 'Arcanine-1', 'Dugtrio-2',
+>   'Lanturn-2', 'Breloom-2', 'Raichu-2', 'Manectric-2', 'Electrode-2', 'Golem-2', 'Rhydon-2', 'Electabuzz-2',
+>   'Nidoking-2', 'Magmar-2', 'Rapidash-2', 'Ampharos-2', 'Heracross-2', 'Houndoom-2', 'Ninetales-2', 'Tentacruel-2',
+>   'Jolteon-2', 'Flareon-2', 'Aggron-2', 'Blaziken-2', 'Sceptile-2', 'Typhlosion-2', 'Gyarados-2', 'Arcanine-2',
+>   'Dugtrio-3', 'Lanturn-3', 'Breloom-3', 'Raichu-3', 'Manectric-3', 'Electrode-3', 'Golem-3', 'Rhydon-3',
+>   'Electabuzz-3', 'Nidoking-3', 'Magmar-3', 'Rapidash-3', 'Ampharos-3', 'Heracross-3', 'Houndoom-3', 'Ninetales-3',
+>   'Tentacruel-3', 'Jolteon-3', 'Flareon-3', 'Aggron-3', 'Blaziken-3', 'Sceptile-3', 'Typhlosion-3', 'Gyarados-3',
+>   'Arcanine-3', 'Dugtrio-4', 'Jynx-4', 'Lanturn-4', 'Breloom-4', 'Raichu-4', 'Manectric-4', 'Electrode-4', 'Golem-4',
+>   'Rhydon-4', 'Electabuzz-4', 'Nidoking-4', 'Magmar-4', 'Rapidash-4', 'Heracross-4', 'Houndoom-4', 'Ninetales-4',
+>   'Tentacruel-4', 'Jolteon-4', 'Flareon-4', 'Aggron-4', 'Blaziken-4', 'Sceptile-4', 'Typhlosion-4', 'Arcanine-4',
+>   'Raikou-1', 'Entei-1', 'Raikou-2', 'Entei-2', 'Raikou-3', 'Entei-3', 'Raikou-4', 'Entei-4', 'Raikou-5',
+>   'Arcanine-SpenserGold', 'Heracross-GretaSilver', 'Shedinja-GretaSilver', 'Breloom-GretaGold', 'Seviper-LucySilver',
+>   'Seviper-LucyGold'
 > ]
 > ```
 >
@@ -2157,7 +2023,7 @@ Moves can be passed as a string name (looked up from `data/moves.json`):
 
 
 > ```python
-> result = calc_matchup(meta, ttar, "Earthquake")
+> result = calc_matchup(meta, ttar, "Meteor Mash")
 > ```
 >
 > <details>
@@ -2165,16 +2031,16 @@ Moves can be passed as a string name (looked up from `data/moves.json`):
 >
 > ```
 > result = {
->   'rolls': [215, 218, 220, 223, 226, 228, 231, 233, 236, 238, 241, 243, 246, 248, 251, 254],
+>   'rolls': [323, 326, 330, 334, 338, 342, 345, 349, 353, 357, 361, 364, 368, 372, 376, 380],
 >   'attack_rolls': None,
 >   'hit_info': {'type': 'single'},
->   'min': 215,
->   'max': 254,
->   'min_pct': 63.00,
->   'max_pct': 74.50,
+>   'min': 323,
+>   'max': 380,
+>   'min_pct': 94.70,
+>   'max_pct': 111.40,
 >   'defender_hp': 341,
 >   'defender_max_hp': 341,
->   'ko_chances': {1: 0.0, 2: 1.0},
+>   'ko_chances': {1: 0.68, 2: 1.0},
 > }
 > ```
 >
@@ -2383,11 +2249,11 @@ With Leftovers recovery between hits:
 
 ### Attacker and Defender
 
-Both can be either a frontier set dict (from the database) or a `CustomSet`:
+Both can be either a frontier set dict (from the database) or a `CustomSet`. Frontier sets at non-default IVs/level:
 
 
 > ```python
-> calc_matchup(meta, ttar, "Meteor Mash")
+> calc_matchup(meta, ttar, "Meteor Mash", atk_ivs=15, def_ivs=15, atk_level=50, def_level=50)
 > ```
 >
 > <details>
@@ -2395,97 +2261,16 @@ Both can be either a frontier set dict (from the database) or a `CustomSet`:
 >
 > ```
 > {
->   'rolls': [323, 326, 330, 334, 338, 342, 345, 349, 353, 357, 361, 364, 368, 372, 376, 380],
+>   'rolls': [173, 175, 177, 179, 181, 183, 185, 187, 189, 191, 193, 195, 197, 199, 201, 204],
 >   'attack_rolls': None,
 >   'hit_info': {'type': 'single'},
->   'min': 323,
->   'max': 380,
->   'min_pct': 94.70,
->   'max_pct': 111.40,
->   'defender_hp': 341,
->   'defender_max_hp': 341,
->   'ko_chances': {1: 0.68, 2: 1.0},
-> }
-> ```
->
-> </details>
-
-
-<br>
-
-> ```python
-> calc_matchup(starmie, ttar, "Surf")
-> ```
->
-> <details>
-> <summary>Output</summary>
->
-> ```
-> {
->   'rolls': [261, 264, 267, 271, 274, 277, 280, 283, 286, 289, 292, 295, 298, 301, 304, 308],
->   'attack_rolls': None,
->   'hit_info': {'type': 'single'},
->   'min': 261,
->   'max': 308,
->   'min_pct': 76.50,
->   'max_pct': 90.30,
->   'defender_hp': 341,
->   'defender_max_hp': 341,
->   'ko_chances': {1: 0.0, 2: 1.0},
-> }
-> ```
->
-> </details>
-
-
-Frontier sets at non-default IVs/level:
-
-
-> ```python
-> swam = db.allSets("Swampert")._sets[0]
-> ```
->
-> <details>
-> <summary>Output</summary>
->
-> ```
-> swam = {
->   'Pokemon': 'Swampert',
->   'SetNum': 1,
->   'Nature': 'Adamant',
->   'Item': 'Lum Berry',
->   'Abilities': ['Torrent'],
->   'Moves': ['earthquake', 'counter', 'rest', 'curse'],
->   'EVs': [170, 0, 170, 0, 170, 0],
->   'Index': 459,
->   'DexNum': 260,
-> }
-> ```
->
-> </details>
-
-
-<br>
-
-> ```python
-> calc_matchup(meta, swam, "Meteor Mash", atk_ivs=15, def_ivs=15, atk_level=50, def_level=50)
-> ```
->
-> <details>
-> <summary>Output</summary>
->
-> ```
-> {
->   'rolls': [42, 43, 43, 44, 44, 45, 45, 46, 46, 47, 47, 48, 48, 49, 49, 50],
->   'attack_rolls': None,
->   'hit_info': {'type': 'single'},
->   'min': 42,
->   'max': 50,
->   'min_pct': 22.30,
->   'max_pct': 26.60,
->   'defender_hp': 188,
->   'defender_max_hp': 188,
->   'ko_chances': {1: 0.0, 2: 0.0, 3: 0.0, 4: 0.23, 5: 1.0},
+>   'min': 173,
+>   'max': 204,
+>   'min_pct': 103.60,
+>   'max_pct': 122.20,
+>   'defender_hp': 167,
+>   'defender_max_hp': 167,
+>   'ko_chances': {1: 1.0},
 > }
 > ```
 >
@@ -2574,55 +2359,13 @@ Frontier sets at non-default IVs/level:
 > </details>
 
 
-<br>
-
-> ```python
-> Field(weather="rain", light_screen=True, is_doubles=True)
-> ```
->
-> <details>
-> <summary>Output</summary>
->
-> ```
-> Field(weather='rain', reflect=False, light_screen=True, is_doubles=True, helping_hand=False, cloud_nine=False)
-> ```
->
-> </details>
-
-
-Other fields: `helping_hand` (1.5x), `cloud_nine` (suppresses weather).
+Other fields: `helping_hand` (1.5x), `cloud_nine` (suppresses weather), `reflect` (physical screen). All can be combined freely.
 
 ### Stat Boosts
 
 
 > ```python
-> sala = db.allSets("Salamence")._sets[3]
-> ```
->
-> <details>
-> <summary>Output</summary>
->
-> ```
-> sala = {
->   'Pokemon': 'Salamence',
->   'SetNum': 4,
->   'Nature': 'Adamant',
->   'Item': 'BrightPowder',
->   'Abilities': ['Intimidate'],
->   'Moves': ['doubleedge', 'earthquake', 'aerialace', 'dragondance'],
->   'EVs': [255, 255, 0, 0, 0, 0],
->   'Index': 754,
->   'DexNum': 373,
-> }
-> ```
->
-> </details>
-
-
-<br>
-
-> ```python
-> calc_matchup(sala, ttar, "Earthquake", atk_boosts={"atk": 1})
+> calc_matchup(meta, ttar, "Meteor Mash", atk_boosts={"atk": 1})
 > ```
 >
 > <details>
@@ -2630,13 +2373,13 @@ Other fields: `helping_hand` (1.5x), `cloud_nine` (suppresses weather).
 >
 > ```
 > {
->   'rolls': [341, 345, 349, 353, 357, 361, 365, 369, 373, 377, 381, 385, 389, 393, 397, 402],
+>   'rolls': [484, 490, 495, 501, 507, 513, 518, 524, 530, 535, 541, 547, 552, 558, 564, 570],
 >   'attack_rolls': None,
 >   'hit_info': {'type': 'single'},
->   'min': 341,
->   'max': 402,
->   'min_pct': 100.00,
->   'max_pct': 117.90,
+>   'min': 484,
+>   'max': 570,
+>   'min_pct': 141.90,
+>   'max_pct': 167.20,
 >   'defender_hp': 341,
 >   'defender_max_hp': 341,
 >   'ko_chances': {1: 1.0},
@@ -2676,7 +2419,7 @@ Other fields: `helping_hand` (1.5x), `cloud_nine` (suppresses weather).
 <br>
 
 > ```python
-> calc_matchup(sala, ttar, "Earthquake", def_boosts={"def": 2}, critical=True)
+> calc_matchup(meta, ttar, "Meteor Mash", def_boosts={"def": 2}, critical=True)
 > ```
 >
 > <details>
@@ -2684,13 +2427,13 @@ Other fields: `helping_hand` (1.5x), `cloud_nine` (suppresses weather).
 >
 > ```
 > {
->   'rolls': [455, 460, 466, 471, 477, 482, 487, 493, 498, 503, 509, 514, 519, 525, 530, 536],
+>   'rolls': [647, 655, 662, 670, 678, 685, 693, 701, 708, 716, 723, 731, 739, 746, 754, 762],
 >   'attack_rolls': None,
 >   'hit_info': {'type': 'single'},
->   'min': 455,
->   'max': 536,
->   'min_pct': 133.40,
->   'max_pct': 157.20,
+>   'min': 647,
+>   'max': 762,
+>   'min_pct': 189.70,
+>   'max_pct': 223.50,
 >   'defender_hp': 341,
 >   'defender_max_hp': 341,
 >   'ko_chances': {1: 1.0},
@@ -2784,7 +2527,7 @@ Other fields: `helping_hand` (1.5x), `cloud_nine` (suppresses weather).
 <br>
 
 > ```python
-> calc_matchup(meta, milotic, "Earthquake", def_status="burn")
+> calc_matchup(meta, milotic, "Meteor Mash", def_status="burn")
 > ```
 >
 > <details>
@@ -2792,16 +2535,16 @@ Other fields: `helping_hand` (1.5x), `cloud_nine` (suppresses weather).
 >
 > ```
 > {
->   'rolls': [78, 79, 80, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92],
+>   'rolls': [58, 59, 60, 60, 61, 62, 62, 63, 64, 64, 65, 66, 66, 67, 68, 69],
 >   'attack_rolls': None,
 >   'hit_info': {'type': 'single'},
->   'min': 78,
->   'max': 92,
->   'min_pct': 20.90,
->   'max_pct': 24.70,
+>   'min': 58,
+>   'max': 69,
+>   'min_pct': 15.50,
+>   'max_pct': 18.50,
 >   'defender_hp': 373,
 >   'defender_max_hp': 373,
->   'ko_chances': {1: 0.0, 2: 0.0, 3: 0.0, 4: 0.0, 5: 1.0},
+>   'ko_chances': {1: 0.0, 2: 0.0, 3: 0.0, 4: 0.0, 5: 0.0, 6: 0.83, 7: 1.0},
 > }
 > ```
 >
@@ -3195,7 +2938,7 @@ Extends `Database` with tower-specific trainer filtering:
 > <summary>Output</summary>
 >
 > ```
-> tower = <frontierbrain3.facilities.tower.TowerDatabase object at 0x0000022BD4C71940>
+> tower = <frontierbrain3.facilities.tower.TowerDatabase object at 0x0000019E1A851940>
 > ```
 >
 > </details>
@@ -3345,7 +3088,7 @@ Generates a random trainer + 3-set team respecting species and item clause:
 > <summary>Output</summary>
 >
 > ```
-> 'PKMN Breeder (F) CLARE: Slaking-4, Typhlosion-4, Meganium-4'
+> 'Youngster LOGAN: Fearow-4, Skarmory-4, Shiftry-4'
 > ```
 >
 > </details>
@@ -3361,7 +3104,7 @@ Generates a random trainer + 3-set team respecting species and item clause:
 > <summary>Output</summary>
 >
 > ```
-> 'Dragon Tamer DAVIN: Nidoking-1, Nidoqueen-2, Flygon-2'
+> 'Dragon Tamer TREVON: Aerodactyl-4, Milotic-2, Aggron-2'
 > ```
 >
 > </details>
@@ -3377,7 +3120,7 @@ Generates a random trainer + 3-set team respecting species and item clause:
 > <summary>Output</summary>
 >
 > ```
-> 'Youngster BRADY: Duskull-1, NidoranF-1, Tyrogue-1'
+> 'Youngster BRADY: Hoppip-1, Ralts-1, Shuppet-1'
 > ```
 >
 > </details>
@@ -3419,7 +3162,7 @@ Factory sets are divided into 9 groups by index. Each round draws from specific 
 > <summary>Output</summary>
 >
 > ```
-> fac = <frontierbrain3.facilities.factory.FactoryDatabase object at 0x0000022BD4C72CF0>
+> fac = <frontierbrain3.facilities.factory.FactoryDatabase object at 0x0000019E1A852CF0>
 > ```
 >
 > </details>
@@ -3934,7 +3677,7 @@ Every Factory team gets a "type" (most common Pokemon type) and a "phrase" (batt
 > <summary>Output</summary>
 >
 > ```
-> fac = <frontierbrain3.facilities.factory.FactoryDatabase object at 0x0000022BD5A1B110>
+> fac = <frontierbrain3.facilities.factory.FactoryDatabase object at 0x0000019E1AFE4F50>
 > ```
 >
 > </details>
@@ -4005,7 +3748,7 @@ Generate teams with optional type/phrase constraints:
 > <summary>Output</summary>
 >
 > ```
-> fac = <frontierbrain3.facilities.factory.FactoryDatabase object at 0x0000022BD56A9090>
+> fac = <frontierbrain3.facilities.factory.FactoryDatabase object at 0x0000019E1A9DAFD0>
 > ```
 >
 > </details>
@@ -4021,8 +3764,8 @@ Generate teams with optional type/phrase constraints:
 > <summary>Output</summary>
 >
 > ```
-> ids = ['Latias-2', 'Slowbro-2', 'Porygon2-3']
-> typ = 'Psychic'
+> ids = ['Blissey-3', 'Latios-8', 'Flareon-2']
+> typ = 'No Type'
 > phrase = 'appears to be free-spirited and unrestrained'
 > ```
 >
@@ -4039,7 +3782,7 @@ Generate teams with optional type/phrase constraints:
 > <summary>Output</summary>
 >
 > ```
-> ids = ['Quagsire-3', 'Shiftry-1', 'Dewgong-1']
+> ids = ['Alakazam-2', 'Milotic-3', 'Gyarados-3']
 > typ = 'Water'
 > phrase = 'appears to be free-spirited and unrestrained'
 > ```
@@ -4057,7 +3800,7 @@ Generate teams with optional type/phrase constraints:
 > <summary>Output</summary>
 >
 > ```
-> ids = ['Tyranitar-7', 'Kingdra-4', 'Machamp-5']
+> ids = ['Donphan-1', 'Aggron-2', 'Dodrio-4']
 > typ = 'No Type'
 > phrase = 'appears to be high risk, high return'
 > ```
@@ -4075,7 +3818,7 @@ Generate teams with optional type/phrase constraints:
 > <summary>Output</summary>
 >
 > ```
-> ids = ['Growlithe-1', 'Ledian-1', 'Houndour-1']
+> ids = ['Growlithe-1', 'Clamperl-1', 'Houndour-1']
 > typ = 'Fire'
 > phrase = 'appears to be one based on total preparation'
 > ```
@@ -4280,7 +4023,7 @@ The enemy seeding bugs massively favor the player, but it's useful to know how h
 > <summary>Output</summary>
 >
 > ```
-> tower = <frontierbrain3.facilities.tower.TowerDatabase object at 0x0000022BD5522C10>
+> tower = <frontierbrain3.facilities.tower.TowerDatabase object at 0x0000019E1AAB4910>
 > ```
 >
 > </details>
@@ -4408,7 +4151,7 @@ The enemy seeding bugs massively favor the player, but it's useful to know how h
 > <summary>Output</summary>
 >
 > ```
-> Highest enemy seed: 4227
+> Highest enemy seed: 4200
 > ```
 >
 > </details>
@@ -4424,7 +4167,7 @@ The enemy seeding bugs massively favor the player, but it's useful to know how h
 > <summary>Output</summary>
 >
 > ```
-> Team: Cooltrainer (M) ALONZO: Lapras-1, Kingdra-4, Slaking-1
+> Team: Cooltrainer (M) ALONZO: Lapras-4, Kingdra-4, Typhlosion-2
 > ```
 >
 > </details>

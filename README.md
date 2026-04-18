@@ -41,22 +41,6 @@ frontierbrain3/
     └── arena.py         # Placeholder (no mechanics to model)
 ```
 
-## Quick Start
-
-```python
-from frontierbrain3 import Database, CustomSet, calc_matchup, format_result
-
-db = Database()
-water_surfers = db.sets.hasType("Water").hasMove("surf")
-
-starmie = CustomSet("Starmie", nature="Timid", evs=[0,0,0,252,4,252],
-                    moves=["Surf", "Thunderbolt", "Ice Beam", "Psychic"])
-ttar = db.allSets("Tyranitar")._sets[0]
-
-result = calc_matchup(starmie, ttar, "Surf")
-print(format_result(result, "Surf"))
-```
-
 ---
 
 ## Core Concepts
@@ -97,10 +81,24 @@ The trainer list is shared across all Battle Frontier facilities, though details
 
 ```json
 {
-    "Class": "Bug Catcher",
-    "Name": "Garret",
     "Index": 1,
-    "Sets": ["Butterfree-1", "Beautifly-1", "Dustox-1", "Volbeat-1", "Illumise-1", "Masquerain-1"]
+    "Name": "BRADY",
+    "Class": "Youngster",
+    "Sets": [
+        "Sunkern-1", "Azurill-1", "Caterpie-1", "Weedle-1", "Wurmple-1",
+        "Ralts-1", "Magikarp-1", "Feebas-1", "Pichu-1", "Igglybuff-1",
+        "Wooper-1", "Tyrogue-1", "Sentret-1", "Cleffa-1", "Seedot-1",
+        "Lotad-1", "Poochyena-1", "Shedinja-1", "Makuhita-1", "Whismur-1",
+        "Zigzagoon-1", "Zubat-1", "Togepi-1", "Spinarak-1", "Marill-1",
+        "Hoppip-1", "Slugma-1", "Swinub-1", "Smeargle-1", "Pidgey-1",
+        "Rattata-1", "Wynaut-1", "Skitty-1", "Spearow-1", "Hoothoot-1",
+        "Diglett-1", "Ledyba-1", "Nincada-1", "Surskit-1", "Jigglypuff-1",
+        "Taillow-1", "Wingull-1", "NidoranM-1", "NidoranF-1", "Kirlia-1",
+        "Mareep-1", "Meditite-1", "Slakoth-1", "Paras-1", "Ekans-1",
+        "Ditto-1", "Barboach-1", "Meowth-1", "Pineco-1", "Trapinch-1",
+        "Spheal-1", "Horsea-1", "Shroomish-1", "Shuppet-1", "Duskull-1",
+        "Electrike-1", "Vulpix-1"
+    ]
 }
 ```
 
@@ -142,7 +140,7 @@ Import teams from [Pokepaste](https://pokepast.es/) format:
 ```python
 from frontierbrain3 import from_paste
 
-team = from_paste("""
+skarm = from_paste("""
 Skarmory (M) @ Leftovers
 Ability: Sturdy
 EVs: 252 HP / 252 Def / 4 SpD
@@ -152,7 +150,7 @@ Bold Nature
 - Protect
 - Rest
 """)
-team
+skarm
 ```
 
 ---
@@ -165,12 +163,12 @@ team
 from frontierbrain3 import calc_stats, Database
 
 db = Database()
-alakazam = db.allSets("Alakazam")._sets[0]
+snorlax = db.allSets("Snorlax")._sets[0]
 
-calc_stats(alakazam)
-calc_stats(alakazam, ivs=15)
-calc_stats(alakazam, ivs=15, level=50)
-calc_stats(alakazam, ivs=[31,31,31,0,31,31])
+calc_stats(snorlax)
+calc_stats(snorlax, ivs=15)
+calc_stats(snorlax, ivs=15, level=50)
+calc_stats(snorlax, ivs=[31,31,31,0,31,31])
 ```
 
 ---
@@ -263,10 +261,11 @@ db.sets.canOHKO(lax, min_chance=0.5)
 Specify IVs for the attacker and defender independently, useful for analyzing player sets (31 IVs) against frontier enemies (3-31 IVs depending on tier):
 
 ```python
-meta = db.allSets("Metagross")._sets[0]
+# Frontier sets at 3 IVs that guaranteed die to Snorlax-1 at 31 IVs
+db.sets.willDieTo(lax, atk_ivs=31, def_ivs=3)
 
-# Frontier sets at 3 IVs that a 31 IV Metagross-1 guaranteed OHKOs
-db.sets.willDieTo(meta, atk_ivs=31, def_ivs=3)
+# Normal-types that Snorlax-1 can OHKO on max roll
+db.sets.hasType("Normal").canDieTo(lax)
 ```
 
 Other optional parameters are passed through to the damage calculator:
@@ -277,7 +276,7 @@ from frontierbrain3 import Field
 ttar = db.allSets("Tyranitar")._sets[0]
 
 # With stat boosts
-db.sets.willDieTo(meta, atk_boosts={"atk": 1})
+db.sets.willDieTo(ttar, atk_boosts={"atk": 1})
 
 # With weather
 db.sets.willOHKO(ttar, field=Field(weather="rain"))
@@ -345,7 +344,7 @@ starmie = CustomSet("Starmie", nature="Timid", evs=[0,0,0,252,4,252],
 Moves can be passed as a string name (looked up from `data/moves.json`):
 
 ```python
-result = calc_matchup(meta, ttar, "Earthquake")
+result = calc_matchup(meta, ttar, "Meteor Mash")
 result = calc_matchup(starmie, ttar, "Surf")
 ```
 
@@ -361,7 +360,6 @@ result = calc_matchup(starmie, ttar, hp_grass)
 ### Basic Usage
 
 ```python
-# calc_matchup: full summary with KO chances
 result = calc_matchup(meta, ttar, "Meteor Mash")
 print(format_result(result, "Meteor Mash"))
 ```
@@ -386,21 +384,10 @@ kos = ko_chance(rolls, ttar_hp, recovery=ttar_hp // 16)
 
 ### Attacker and Defender
 
-Both can be either a frontier set dict (from the database) or a `CustomSet`:
+Both can be either a frontier set dict (from the database) or a `CustomSet`. Frontier sets at non-default IVs/level:
 
 ```python
-# Frontier set vs frontier set
-calc_matchup(meta, ttar, "Meteor Mash")
-
-# CustomSet vs frontier set
-calc_matchup(starmie, ttar, "Surf")
-```
-
-Frontier sets at non-default IVs/level:
-
-```python
-swam = db.allSets("Swampert")._sets[0]
-calc_matchup(meta, swam, "Meteor Mash", atk_ivs=15, def_ivs=15, atk_level=50, def_level=50)
+calc_matchup(meta, ttar, "Meteor Mash", atk_ivs=15, def_ivs=15, atk_level=50, def_level=50)
 ```
 
 ### Field Conditions
@@ -414,25 +401,21 @@ calc_matchup(starmie, ttar, "Surf", field=Field(light_screen=True))
 
 # Doubles (spread moves halved, screens use 2/3 instead of 1/2)
 calc_matchup(starmie, ttar, "Surf", field=Field(is_doubles=True))
-
-# Combine freely
-Field(weather="rain", light_screen=True, is_doubles=True)
 ```
 
-Other fields: `helping_hand` (1.5x), `cloud_nine` (suppresses weather).
+Other fields: `helping_hand` (1.5x), `cloud_nine` (suppresses weather), `reflect` (physical screen). All can be combined freely.
 
 ### Stat Boosts
 
 ```python
-# Dragon Dance (+1 Atk, +1 Spe; only Atk affects damage)
-sala = db.allSets("Salamence")._sets[3]
-calc_matchup(sala, ttar, "Earthquake", atk_boosts={"atk": 1})
+# Dragon Dance (+1 Atk)
+calc_matchup(meta, ttar, "Meteor Mash", atk_boosts={"atk": 1})
 
-# Intimidate on attacker
+# Intimidate on attacker (-1 Atk)
 calc_matchup(meta, ttar, "Meteor Mash", atk_boosts={"atk": -1})
 
 # Critical hits ignore negative atk stages and positive def stages
-calc_matchup(sala, ttar, "Earthquake", def_boosts={"def": 2}, critical=True)
+calc_matchup(meta, ttar, "Meteor Mash", def_boosts={"def": 2}, critical=True)
 ```
 
 ### Status Conditions
@@ -446,7 +429,7 @@ calc_matchup(meta, ttar, "Facade", atk_status="burn")
 
 # Marvel Scale: defender's status boosts their Defense
 milotic = db.allSets("Milotic")._sets[0]
-calc_matchup(meta, milotic, "Earthquake", def_status="burn")
+calc_matchup(meta, milotic, "Meteor Mash", def_status="burn")
 ```
 
 ### Special Parameters
