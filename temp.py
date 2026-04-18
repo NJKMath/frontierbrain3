@@ -35,6 +35,10 @@ _SUPPRESS_TYPES = set()
 try:
     from frontierbrain3.frontier_db import Database, SetCollection, TrainerCollection
     _SUPPRESS_TYPES.add(Database)
+    from frontierbrain3.facilities.tower import TowerDatabase
+    _SUPPRESS_TYPES.add(TowerDatabase)
+    from frontierbrain3.facilities.factory import FactoryDatabase
+    _SUPPRESS_TYPES.add(FactoryDatabase)
 except ImportError:
     SetCollection = None
     TrainerCollection = None

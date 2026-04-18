@@ -228,7 +228,7 @@ Import teams from [Pokepaste](https://pokepast.es/) format:
 
 > ```python
 > from frontierbrain3 import from_paste
-> skarm = from_paste("""
+> from_paste("""
 > Skarmory (M) @ Leftovers
 > Ability: Sturdy
 > EVs: 252 HP / 252 Def / 4 SpD
@@ -238,24 +238,6 @@ Import teams from [Pokepaste](https://pokepast.es/) format:
 > - Protect
 > - Rest
 > """)
-> ```
->
-> <details>
-> <summary>Output</summary>
->
-> ```
-> skarm = {
->   'CustomSkarmory': CustomSet(Skarmory, nature=Bold, evs=[252, 0, 252, 0, 4, 0], ivs=[31, 31, 31, 31, 31, 31], level=100, item=Leftovers, ability=Sturdy, moves=['spikes', 'whirlwind', 'protect', 'rest']),
-> }
-> ```
->
-> </details>
-
-
-<br>
-
-> ```python
-> skarm
 > ```
 >
 > <details>
@@ -1436,23 +1418,23 @@ Other optional parameters are passed through to the damage calculator:
 
 > ```python
 > from frontierbrain3 import Field
-> ttar = db.allSets("Tyranitar")._sets[0]
+> meta = db.allSets("Metagross")._sets[0]
 > ```
 >
 > <details>
 > <summary>Output</summary>
 >
 > ```
-> ttar = {
->   'Pokemon': 'Tyranitar',
+> meta = {
+>   'Pokemon': 'Metagross',
 >   'SetNum': 1,
->   'Nature': 'Hardy',
->   'Item': 'BrightPowder',
->   'Abilities': ['Sand Stream'],
->   'Moves': ['earthquake', 'aerialace', 'thunderbolt', 'surf'],
->   'EVs': [0, 255, 0, 255, 0, 0],
->   'Index': 861,
->   'DexNum': 248,
+>   'Nature': 'Adamant',
+>   'Item': 'Leftovers',
+>   'Abilities': ['Clear Body'],
+>   'Moves': ['meteormash', 'aerialace', 'facade', 'lightscreen'],
+>   'EVs': [0, 170, 0, 0, 170, 170],
+>   'Index': 467,
+>   'DexNum': 376,
 > }
 > ```
 >
@@ -1462,49 +1444,55 @@ Other optional parameters are passed through to the damage calculator:
 <br>
 
 > ```python
-> db.sets.willDieTo(ttar, atk_boosts={"atk": 1})
+> db.sets.willDieTo(meta, atk_boosts={"atk": 1})
 > ```
 >
 > <details>
 > <summary>Output</summary>
 >
 > ```
-> SetCollection(278 sets)
+> SetCollection(335 sets)
 > [
->   'Sunkern-1', 'Azurill-1', 'Caterpie-1', 'Weedle-1', 'Wurmple-1', 'Ralts-1', 'Magikarp-1', 'Feebas-1', 'Metapod-1',
->   'Kakuna-1', 'Pichu-1', 'Silcoon-1', 'Cascoon-1', 'Igglybuff-1', 'Tyrogue-1', 'Sentret-1', 'Cleffa-1', 'Seedot-1',
->   'Lotad-1', 'Poochyena-1', 'Shedinja-1', 'Makuhita-1', 'Whismur-1', 'Zigzagoon-1', 'Zubat-1', 'Spinarak-1', 'Hoppip-1',
->   'Slugma-1', 'Swinub-1', 'Smeargle-1', 'Pidgey-1', 'Rattata-1', 'Skitty-1', 'Spearow-1', 'Diglett-1', 'Ledyba-1',
->   'Nincada-1', 'Surskit-1', 'Taillow-1', 'Wingull-1', 'NidoranM-1', 'NidoranF-1', 'Kirlia-1', 'Mareep-1', 'Meditite-1',
->   'Paras-1', 'Ekans-1', 'Barboach-1', 'Meowth-1', 'Trapinch-1', 'Horsea-1', 'Shuppet-1', 'Electrike-1', 'Vulpix-1',
->   'Pikachu-1', 'Sandshrew-1', 'Poliwag-1', 'Bellsprout-1', 'Geodude-1', 'Dratini-1', 'Remoraid-1', 'Larvitar-1',
->   'Baltoy-1', 'Beldum-1', 'Gulpin-1', 'Mankey-1', 'Machop-1', 'Shellder-1', 'Smoochum-1', 'Numel-1', 'Carvanha-1',
->   'Corphish-1', 'Charmander-1', 'Cyndaquil-1', 'Abra-1', 'Doduo-1', 'Gastly-1', 'Treecko-1', 'Torchic-1', 'Bulbasaur-1',
->   'Oddish-1', 'Psyduck-1', 'Natu-1', 'Magnemite-1', 'Grimer-1', 'Krabby-1', 'Drowzee-1', 'Voltorb-1', 'Chinchou-1',
->   'Delibird-1', 'Houndour-1', 'Spoink-1', 'Aron-1', 'Tentacool-1', 'Cacnea-1', 'Staryu-1', 'Skiploom-1', 'Nuzleaf-1',
->   'Lombre-1', 'Rhyhorn-1', 'Growlithe-1', 'Omanyte-1', 'Kabuto-1', 'Elekid-1', 'Nidorina-1', 'Nidorino-1', 'Flaaffy-1',
->   'Magby-1', 'Mawile-1', 'Butterfree-1', 'Beedrill-1', 'Onix-1', 'Beautifly-1', 'Ledian-1', 'Weepinbell-1',
->   'Graveler-1', 'Volbeat-1', 'Ivysaur-1', 'Charmeleon-1', 'Parasect-1', 'Quilava-1', 'Plusle-1', 'Minun-1', 'Grovyle-1',
->   'Combusken-1', 'Ponyta-1', 'Magcargo-1', 'Pupitar-1', 'Metang-1', 'Qwilfish-1', 'Pelipper-1', 'Lairon-1', 'Arbok-1',
->   'Ninjask-1', 'Seviper-1', 'Camerupt-1', 'Sharpedo-1', 'Magneton-1', 'Graveler-2', 'Gloom-2', 'Volbeat-2',
->   'Illumise-2', 'Ivysaur-2', 'Charmeleon-2', 'Parasect-2', 'Quilava-2', 'Plusle-2', 'Minun-2', 'Grovyle-2',
->   'Combusken-2', 'Ponyta-2', 'Magcargo-2', 'Pupitar-2', 'Raticate-2', 'Metang-2', 'Qwilfish-2', 'Pelipper-2',
->   'Lairon-2', 'Arbok-2', 'Seviper-2', 'Camerupt-2', 'Sharpedo-2', 'Magneton-2', 'Kabutops-2', 'Dugtrio-1', 'Jynx-1',
->   'Breloom-1', 'Raichu-1', 'Manectric-1', 'Electrode-1', 'Golem-1', 'Rhydon-1', 'Electabuzz-1', 'Nidoking-1',
->   'Magmar-1', 'Rapidash-1', 'Muk-1', 'Ampharos-1', 'Heracross-1', 'Houndoom-1', 'Ninetales-1', 'Tentacruel-1',
->   'Jolteon-1', 'Flareon-1', 'Aggron-1', 'Blaziken-1', 'Sceptile-1', 'Typhlosion-1', 'Arcanine-1', 'Dugtrio-2',
->   'Lanturn-2', 'Breloom-2', 'Raichu-2', 'Manectric-2', 'Electrode-2', 'Golem-2', 'Rhydon-2', 'Electabuzz-2',
->   'Nidoking-2', 'Magmar-2', 'Rapidash-2', 'Ampharos-2', 'Heracross-2', 'Houndoom-2', 'Ninetales-2', 'Tentacruel-2',
->   'Jolteon-2', 'Flareon-2', 'Aggron-2', 'Blaziken-2', 'Sceptile-2', 'Typhlosion-2', 'Gyarados-2', 'Arcanine-2',
->   'Dugtrio-3', 'Lanturn-3', 'Breloom-3', 'Raichu-3', 'Manectric-3', 'Electrode-3', 'Golem-3', 'Rhydon-3',
->   'Electabuzz-3', 'Nidoking-3', 'Magmar-3', 'Rapidash-3', 'Ampharos-3', 'Heracross-3', 'Houndoom-3', 'Ninetales-3',
->   'Tentacruel-3', 'Jolteon-3', 'Flareon-3', 'Aggron-3', 'Blaziken-3', 'Sceptile-3', 'Typhlosion-3', 'Gyarados-3',
->   'Arcanine-3', 'Dugtrio-4', 'Jynx-4', 'Lanturn-4', 'Breloom-4', 'Raichu-4', 'Manectric-4', 'Electrode-4', 'Golem-4',
->   'Rhydon-4', 'Electabuzz-4', 'Nidoking-4', 'Magmar-4', 'Rapidash-4', 'Heracross-4', 'Houndoom-4', 'Ninetales-4',
->   'Tentacruel-4', 'Jolteon-4', 'Flareon-4', 'Aggron-4', 'Blaziken-4', 'Sceptile-4', 'Typhlosion-4', 'Arcanine-4',
->   'Raikou-1', 'Entei-1', 'Raikou-2', 'Entei-2', 'Raikou-3', 'Entei-3', 'Raikou-4', 'Entei-4', 'Raikou-5',
->   'Arcanine-SpenserGold', 'Heracross-GretaSilver', 'Shedinja-GretaSilver', 'Breloom-GretaGold', 'Seviper-LucySilver',
->   'Seviper-LucyGold'
+>   'Sunkern-1', 'Azurill-1', 'Caterpie-1', 'Weedle-1', 'Wurmple-1', 'Ralts-1', 'Feebas-1', 'Metapod-1', 'Kakuna-1',
+>   'Pichu-1', 'Silcoon-1', 'Cascoon-1', 'Igglybuff-1', 'Tyrogue-1', 'Sentret-1', 'Cleffa-1', 'Seedot-1', 'Lotad-1',
+>   'Poochyena-1', 'Shedinja-1', 'Makuhita-1', 'Whismur-1', 'Zigzagoon-1', 'Zubat-1', 'Togepi-1', 'Spinarak-1',
+>   'Hoppip-1', 'Swinub-1', 'Smeargle-1', 'Pidgey-1', 'Rattata-1', 'Skitty-1', 'Spearow-1', 'Hoothoot-1', 'Diglett-1',
+>   'Ledyba-1', 'Nincada-1', 'Surskit-1', 'Jigglypuff-1', 'Taillow-1', 'Wingull-1', 'NidoranM-1', 'NidoranF-1',
+>   'Kirlia-1', 'Meditite-1', 'Slakoth-1', 'Paras-1', 'Ekans-1', 'Barboach-1', 'Meowth-1', 'Trapinch-1', 'Spheal-1',
+>   'Shroomish-1', 'Shuppet-1', 'Duskull-1', 'Pikachu-1', 'Bellsprout-1', 'Geodude-1', 'Dratini-1', 'Snubbull-1',
+>   'Remoraid-1', 'Larvitar-1', 'Baltoy-1', 'Snorunt-1', 'Bagon-1', 'Gulpin-1', 'Venonat-1', 'Mankey-1', 'Machop-1',
+>   'Smoochum-1', 'Carvanha-1', 'Abra-1', 'Doduo-1', 'Gastly-1', 'Swablu-1', 'Treecko-1', 'Torchic-1', 'Bulbasaur-1',
+>   'Chikorita-1', 'Oddish-1', 'Psyduck-1', 'Natu-1', 'Clefairy-1', 'Grimer-1', 'Eevee-1', 'Drowzee-1', 'Teddiursa-1',
+>   'Delibird-1', 'Houndour-1', 'Phanpy-1', 'Spoink-1', 'Tentacool-1', 'Cacnea-1', 'Unown-1', 'Skiploom-1', 'Nuzleaf-1',
+>   'Lombre-1', 'Vibrava-1', 'Rhyhorn-1', 'Pidgeotto-1', "Farfetch'd-1", 'Omanyte-1', 'Kabuto-1', 'Lileep-1', 'Anorith-1',
+>   'Aipom-1', 'Loudred-1', 'Spinda-1', 'Nidorina-1', 'Nidorino-1', 'Nosepass-1', 'Butterfree-1', 'Beedrill-1', 'Onix-1',
+>   'Beautifly-1', 'Dustox-1', 'Ledian-1', 'Ariados-1', 'Yanma-1', 'Delcatty-1', 'Sableye-1', 'Weepinbell-1',
+>   'Graveler-1', 'Gloom-1', 'Kadabra-1', 'Roselia-1', 'Volbeat-1', 'Illumise-1', 'Ivysaur-1', 'Parasect-1', 'Haunter-1',
+>   'Murkrow-1', 'Grovyle-1', 'Combusken-1', 'Sudowoodo-1', 'Pupitar-1', 'Raticate-1', 'Dragonair-1', 'Mightyena-1',
+>   'Linoone-1', 'Castform-1', 'Chimecho-1', 'Sneasel-1', 'Swellow-1', 'Arbok-1', 'Lunatone-1', 'Solrock-1', 'Venomoth-1',
+>   'Piloswine-1', 'Girafarig-1', 'Ninjask-1', 'Seviper-1', 'Zangoose-1', 'Stantler-1', 'Absol-1', 'Cacturne-1',
+>   'Delcatty-2', 'Sableye-2', 'Weepinbell-2', 'Graveler-2', 'Gloom-2', 'Porygon-2', 'Kadabra-2', 'Roselia-2',
+>   'Volbeat-2', 'Illumise-2', 'Ivysaur-2', 'Parasect-2', 'Haunter-2', 'Murkrow-2', 'Plusle-2', 'Grovyle-2',
+>   'Combusken-2', 'Sudowoodo-2', 'Pupitar-2', 'Raticate-2', 'Furret-2', 'Dragonair-2', 'Linoone-2', 'Castform-2',
+>   'Sneasel-2', 'Swellow-2', 'Vigoroth-2', 'Lunatone-2', 'Solrock-2', 'Venomoth-2', 'Piloswine-2', 'Banette-2',
+>   'Ninjask-2', 'Zangoose-2', 'Stantler-2', 'Absol-2', 'Pidgeot-2', 'Cacturne-2', 'Scyther-2', 'Dugtrio-1', 'Medicham-1',
+>   'Fearow-1', 'Jynx-1', 'Dodrio-1', 'Breloom-1', 'Xatu-1', 'Glalie-1', 'Golem-1', 'Rhydon-1', 'Alakazam-1', 'Cradily-1',
+>   'Armaldo-1', 'Gengar-1', 'Heracross-1', 'Shuckle-1', 'Aerodactyl-1', 'Flygon-1', 'Espeon-1', 'Sceptile-1',
+>   'Dugtrio-2', 'Medicham-2', 'Fearow-2', 'Granbull-2', 'Jynx-2', 'Dodrio-2', 'Mr. Mime-2', 'Breloom-2', 'Victreebel-2',
+>   'Exploud-2', 'Glalie-2', 'Golem-2', 'Rhydon-2', 'Alakazam-2', 'Cradily-2', 'Armaldo-2', 'Gengar-2', 'Heracross-2',
+>   'Shuckle-2', 'Aerodactyl-2', 'Flygon-2', 'Espeon-2', 'Sceptile-2', 'Dugtrio-3', 'Medicham-3', 'Fearow-3', 'Jynx-3',
+>   'Dodrio-3', 'Mr. Mime-3', 'Breloom-3', 'Xatu-3', 'Vileplume-3', 'Victreebel-3', 'Exploud-3', 'Shiftry-3', 'Glalie-3',
+>   'Golem-3', 'Rhydon-3', 'Alakazam-3', 'Cradily-3', 'Armaldo-3', 'Gengar-3', 'Heracross-3', 'Shuckle-3', 'Aerodactyl-3',
+>   'Gardevoir-3', 'Flygon-3', 'Espeon-3', 'Sceptile-3', 'Crobat-3', 'Dugtrio-4', 'Medicham-4', 'Misdreavus-4',
+>   'Fearow-4', 'Granbull-4', 'Jynx-4', 'Dodrio-4', 'Mr. Mime-4', 'Breloom-4', 'Xatu-4', 'Vileplume-4', 'Victreebel-4',
+>   'Exploud-4', 'Shiftry-4', 'Glalie-4', 'Golem-4', 'Rhydon-4', 'Alakazam-4', 'Nidoking-4', 'Cradily-4', 'Armaldo-4',
+>   'Gengar-4', 'Heracross-4', 'Shuckle-4', 'Aerodactyl-4', 'Gardevoir-4', 'Flygon-4', 'Venusaur-4', 'Espeon-4',
+>   'Sceptile-4', 'Crobat-4', 'Articuno-1', 'Regice-1', 'Articuno-2', 'Regice-2', 'Latios-2', 'Articuno-3', 'Regice-3',
+>   'Latios-3', 'Articuno-4', 'Regice-4', 'Gengar-5', 'Gengar-6', 'Gengar-7', 'Gengar-8', 'Gardevoir-6', 'Gardevoir-8',
+>   'Regice-5', 'Regice-6', 'Latios-6', 'Latios-8', 'Tyranitar-1', 'Tyranitar-2', 'Tyranitar-3', 'Tyranitar-4',
+>   'Tyranitar-5', 'Tyranitar-6', 'Tyranitar-7', 'Tyranitar-8', 'Tyranitar-9', 'Tyranitar-10', 'Articuno-5', 'Articuno-6',
+>   'Alakazam-AnabelSilver', 'Heracross-GretaSilver', 'Shedinja-GretaSilver', 'Breloom-GretaGold', 'Seviper-LucyGold',
+>   'Regice-BrandonSilver', 'Articuno-BrandonGold'
 > ]
 > ```
 >
@@ -1514,29 +1502,16 @@ Other optional parameters are passed through to the damage calculator:
 <br>
 
 > ```python
-> db.sets.willOHKO(ttar, field=Field(weather="rain"))
+> db.sets.willOHKO(meta, field=Field(weather="rain"))
 > ```
 >
 > <details>
 > <summary>Output</summary>
 >
 > ```
-> SetCollection(103 sets)
+> SetCollection(4 sets)
 > [
->   'Meditite-1', 'Hitmonlee-1', 'Hitmonchan-1', 'Poliwrath-1', 'Pinsir-1', 'Machoke-2', 'Combusken-2', 'Sealeo-2',
->   'Seadra-2', 'Primeape-2', 'Hitmonlee-2', 'Hitmonchan-2', 'Sharpedo-2', 'Gorebyss-2', 'Omastar-2', 'Poliwrath-2',
->   'Politoed-2', 'Medicham-1', 'Lanturn-1', 'Breloom-1', 'Marowak-1', 'Hariyama-1', 'Ludicolo-1', 'Golduck-1',
->   'Heracross-1', 'Machamp-1', 'Vaporeon-1', 'Blastoise-1', 'Blaziken-1', 'Kingdra-1', 'Milotic-1', 'Marowak-2',
->   'Breloom-2', 'Hariyama-2', 'Ludicolo-2', 'Golem-2', 'Electabuzz-2', 'Slowking-2', 'Miltank-2', 'Golduck-2', 'Muk-2',
->   'Ampharos-2', 'Machamp-2', 'Starmie-2', 'Blastoise-2', 'Aggron-2', 'Blaziken-2', 'Lapras-2', 'Gyarados-2',
->   'Milotic-2', 'Medicham-3', 'Lanturn-3', 'Breloom-3', 'Marowak-3', 'Hariyama-3', 'Slowbro-3', 'Slowking-3',
->   'Golduck-3', 'Heracross-3', 'Wailord-3', 'Machamp-3', 'Tentacruel-3', 'Starmie-3', 'Feraligatr-3', 'Swampert-3',
->   'Slaking-3', 'Lanturn-4', 'Breloom-4', 'Whiscash-4', 'Marowak-4', 'Hariyama-4', 'Slowbro-4', 'Slowking-4',
->   'Nidoqueen-4', 'Heracross-4', 'Machamp-4', 'Tentacruel-4', 'Vaporeon-4', 'Feraligatr-4', 'Walrein-4', 'Lapras-4',
->   'Swampert-4', 'Milotic-4', 'Suicune-1', 'Regirock-1', 'Suicune-3', 'Suicune-4', 'Ursaring-5', 'Machamp-5',
->   'Machamp-6', 'Machamp-7', 'Machamp-8', 'Starmie-5', 'Starmie-8', 'Lapras-6', 'Regirock-5', 'Registeel-5',
->   'Tyranitar-7', 'Suicune-5', 'Metagross-TuckerGold', 'Breloom-GretaGold', 'Milotic-LucySilver',
->   'Regirock-BrandonSilver'
+>   'Marowak-1', 'Marowak-2', 'Marowak-3', 'Marowak-4'
 > ]
 > ```
 >
@@ -1546,32 +1521,24 @@ Other optional parameters are passed through to the damage calculator:
 <br>
 
 > ```python
-> db.sets.canOHKO(ttar, include_ohko=True)
+> db.sets.canOHKO(meta, include_ohko=True)
 > ```
 >
 > <details>
 > <summary>Output</summary>
 >
 > ```
-> SetCollection(129 sets)
+> SetCollection(69 sets)
 > [
->   'Meditite-1', 'Hitmonlee-1', 'Hitmonchan-1', 'Hitmontop-1', 'Poliwrath-1', 'Pinsir-1', 'Gloom-2', 'Machoke-2',
->   'Combusken-2', 'Gligar-2', 'Seaking-2', 'Primeape-2', 'Hitmonlee-2', 'Hitmonchan-2', 'Zangoose-2', 'Tropius-2',
->   'Absol-2', 'Crawdaunt-2', 'Kingler-2', 'Bellossom-2', 'Omastar-2', 'Poliwrath-2', 'Pinsir-2', 'Medicham-1',
->   'Breloom-1', 'Marowak-1', 'Hariyama-1', 'Golem-1', 'Rhydon-1', 'Nidoking-1', 'Golduck-1', 'Heracross-1', 'Donphan-1',
->   'Machamp-1', 'Exeggutor-1', 'Vaporeon-1', 'Meganium-1', 'Blastoise-1', 'Aggron-1', 'Blaziken-1', 'Kingdra-1',
->   'Milotic-1', 'Metagross-1', 'Marowak-2', 'Breloom-2', 'Hariyama-2', 'Golem-2', 'Rhydon-2', 'Electabuzz-2',
->   'Miltank-2', 'Armaldo-2', 'Muk-2', 'Ampharos-2', 'Heracross-2', 'Ursaring-2', 'Machamp-2', 'Aggron-2', 'Blaziken-2',
->   'Dugtrio-3', 'Medicham-3', 'Lanturn-3', 'Breloom-3', 'Whiscash-3', 'Marowak-3', 'Hariyama-3', 'Dewgong-3',
->   'Shiftry-3', 'Golem-3', 'Rhydon-3', 'Nidoking-3', 'Magmar-3', 'Cradily-3', 'Armaldo-3', 'Golduck-3', 'Heracross-3',
->   'Donphan-3', 'Wailord-3', 'Machamp-3', 'Walrein-3', 'Swampert-3', 'Metagross-3', 'Slaking-3', 'Dugtrio-4',
->   'Granbull-4', 'Breloom-4', 'Whiscash-4', 'Marowak-4', 'Hariyama-4', 'Dewgong-4', 'Vileplume-4', 'Golem-4', 'Rhydon-4',
->   'Electabuzz-4', 'Nidoqueen-4', 'Armaldo-4', 'Golduck-4', 'Heracross-4', 'Donphan-4', 'Wailord-4', 'Machamp-4',
->   'Venusaur-4', 'Walrein-4', 'Snorlax-4', 'Metagross-4', 'Regirock-1', 'Ursaring-5', 'Machamp-5', 'Machamp-6',
->   'Machamp-7', 'Machamp-8', 'Lapras-6', 'Lapras-7', 'Lapras-8', 'Snorlax-5', 'Snorlax-6', 'Metagross-5', 'Metagross-6',
->   'Metagross-8', 'Regirock-5', 'Registeel-5', 'Tyranitar-7', 'Salamence-TuckerSilver', 'Swampert-TuckerGold',
->   'Metagross-TuckerGold', 'Slaking-SpenserSilver', 'Lapras-SpenserSilver', 'Heracross-GretaSilver', 'Breloom-GretaGold',
->   'Regirock-BrandonSilver'
+>   'Gligar-2', 'Seaking-2', 'Crawdaunt-2', 'Kingler-2', 'Pinsir-2', 'Marowak-1', 'Golem-1', 'Rhydon-1', 'Nidoking-1',
+>   'Donphan-1', 'Charizard-1', 'Typhlosion-1', 'Marowak-2', 'Rhydon-2', 'Magmar-2', 'Houndoom-2', 'Arcanine-2',
+>   'Dugtrio-3', 'Whiscash-3', 'Marowak-3', 'Dewgong-3', 'Golem-3', 'Rhydon-3', 'Nidoking-3', 'Rapidash-3', 'Houndoom-3',
+>   'Donphan-3', 'Wailord-3', 'Ninetales-3', 'Blaziken-3', 'Walrein-3', 'Charizard-3', 'Typhlosion-3', 'Swampert-3',
+>   'Arcanine-3', 'Slaking-3', 'Dugtrio-4', 'Granbull-4', 'Whiscash-4', 'Marowak-4', 'Dewgong-4', 'Golem-4', 'Rhydon-4',
+>   'Armaldo-4', 'Rapidash-4', 'Houndoom-4', 'Donphan-4', 'Wailord-4', 'Ninetales-4', 'Flareon-4', 'Blaziken-4',
+>   'Walrein-4', 'Charizard-4', 'Typhlosion-4', 'Arcanine-4', 'Moltres-1', 'Moltres-2', 'Entei-2', 'Moltres-3',
+>   'Moltres-4', 'Lapras-7', 'Lapras-8', 'Moltres-5', 'Moltres-6', 'Charizard-TuckerSilver', 'Swampert-TuckerGold',
+>   'Lapras-SpenserSilver', 'Arcanine-SpenserGold', 'Moltres-BrandonGold'
 > ]
 > ```
 >
@@ -1581,23 +1548,19 @@ Other optional parameters are passed through to the damage calculator:
 <br>
 
 > ```python
-> db.sets.willOHKO(ttar)
+> db.sets.willOHKO(meta)
 > ```
 >
 > <details>
 > <summary>Output</summary>
 >
 > ```
-> SetCollection(58 sets)
+> SetCollection(25 sets)
 > [
->   'Meditite-1', 'Hitmonlee-1', 'Hitmonchan-1', 'Poliwrath-1', 'Pinsir-1', 'Machoke-2', 'Combusken-2', 'Primeape-2',
->   'Hitmonlee-2', 'Hitmonchan-2', 'Poliwrath-2', 'Medicham-1', 'Breloom-1', 'Marowak-1', 'Hariyama-1', 'Golduck-1',
->   'Heracross-1', 'Machamp-1', 'Exeggutor-1', 'Blaziken-1', 'Kingdra-1', 'Marowak-2', 'Breloom-2', 'Hariyama-2',
->   'Golem-2', 'Electabuzz-2', 'Miltank-2', 'Muk-2', 'Ampharos-2', 'Machamp-2', 'Aggron-2', 'Blaziken-2', 'Medicham-3',
->   'Breloom-3', 'Marowak-3', 'Hariyama-3', 'Heracross-3', 'Machamp-3', 'Slaking-3', 'Breloom-4', 'Marowak-4',
->   'Hariyama-4', 'Vileplume-4', 'Nidoqueen-4', 'Heracross-4', 'Machamp-4', 'Regirock-1', 'Ursaring-5', 'Machamp-5',
->   'Machamp-6', 'Machamp-7', 'Machamp-8', 'Regirock-5', 'Registeel-5', 'Tyranitar-7', 'Metagross-TuckerGold',
->   'Breloom-GretaGold', 'Regirock-BrandonSilver'
+>   'Marowak-1', 'Charizard-1', 'Typhlosion-1', 'Marowak-2', 'Magmar-2', 'Houndoom-2', 'Marowak-3', 'Rapidash-3',
+>   'Arcanine-3', 'Marowak-4', 'Houndoom-4', 'Ninetales-4', 'Flareon-4', 'Blaziken-4', 'Charizard-4', 'Typhlosion-4',
+>   'Arcanine-4', 'Moltres-2', 'Entei-2', 'Moltres-3', 'Moltres-4', 'Moltres-5', 'Moltres-6', 'Charizard-TuckerSilver',
+>   'Moltres-BrandonGold'
 > ]
 > ```
 >
@@ -1607,15 +1570,17 @@ Other optional parameters are passed through to the damage calculator:
 <br>
 
 > ```python
-> db.sets.willOHKO(ttar, include_acc=True)
+> db.sets.willOHKO(meta, include_acc=True)
 > ```
 >
 > <details>
 > <summary>Output</summary>
 >
 > ```
-> SetCollection(0 sets)
-> []
+> SetCollection(3 sets)
+> [
+>   'Marowak-2', 'Marowak-3', 'Marowak-4'
+> ]
 > ```
 >
 > </details>
@@ -1665,35 +1630,36 @@ Every filter has a negated form via `.Not`:
 <br>
 
 > ```python
-> db.sets.hasMove("earthquake").Not.willOHKO(ttar)       # EQ users that don't guaranteed OHKO Ttar
+> db.sets.Not.willOHKO(meta).hasMove("earthquake")      # EQ users that don't guaranteed OHKO Meta
 > ```
 >
 > <details>
 > <summary>Output</summary>
 >
 > ```
-> SetCollection(151 sets)
+> SetCollection(161 sets)
 > [
 >   'Lickitung-2', 'Graveler-2', 'Wailmer-2', 'Marshtomp-2', 'Sudowoodo-2', 'Magcargo-2', 'Pupitar-2', 'Gligar-2',
 >   'Lairon-2', 'Arbok-2', 'Solrock-2', 'Sandslash-2', 'Piloswine-2', 'Seviper-2', 'Camerupt-2', 'Sharpedo-2',
 >   'Relicanth-2', 'Dugtrio-1', 'Whiscash-1', 'Quagsire-1', 'Golem-1', 'Rhydon-1', 'Tauros-1', 'Donphan-1', 'Claydol-1',
 >   'Steelix-1', 'Flygon-1', 'Aggron-1', 'Swampert-1', 'Dugtrio-2', 'Forretress-2', 'Whiscash-2', 'Exploud-2', 'Rhydon-2',
 >   'Tauros-2', 'Nidoqueen-2', 'Nidoking-2', 'Cradily-2', 'Heracross-2', 'Ursaring-2', 'Donphan-2', 'Claydol-2',
->   'Steelix-2', 'Aerodactyl-2', 'Walrein-2', 'Charizard-2', 'Swampert-2', 'Snorlax-2', 'Metagross-2', 'Dugtrio-3',
->   'Granbull-3', 'Dusclops-3', 'Forretress-3', 'Quagsire-3', 'Glalie-3', 'Golem-3', 'Rhydon-3', 'Kangaskhan-3',
->   'Tauros-3', 'Slowking-3', 'Miltank-3', 'Altaria-3', 'Armaldo-3', 'Donphan-3', 'Steelix-3', 'Flygon-3', 'Venusaur-3',
->   'Meganium-3', 'Blastoise-3', 'Feraligatr-3', 'Blaziken-3', 'Sceptile-3', 'Typhlosion-3', 'Swampert-3', 'Gyarados-3',
->   'Salamence-3', 'Metagross-3', 'Dugtrio-4', 'Granbull-4', 'Forretress-4', 'Whiscash-4', 'Quagsire-4', 'Exploud-4',
->   'Glalie-4', 'Golem-4', 'Rhydon-4', 'Kangaskhan-4', 'Slowbro-4', 'Altaria-4', 'Nidoking-4', 'Armaldo-4', 'Ursaring-4',
->   'Donphan-4', 'Claydol-4', 'Wailord-4', 'Steelix-4', 'Aerodactyl-4', 'Flygon-4', 'Venusaur-4', 'Meganium-4',
->   'Blastoise-4', 'Feraligatr-4', 'Aggron-4', 'Blaziken-4', 'Walrein-4', 'Charizard-4', 'Typhlosion-4', 'Swampert-4',
->   'Gyarados-4', 'Salamence-4', 'Metagross-4', 'Regirock-2', 'Registeel-2', 'Latias-2', 'Latios-2', 'Regirock-3',
->   'Latias-3', 'Latios-3', 'Registeel-4', 'Ursaring-7', 'Ursaring-8', 'Snorlax-6', 'Snorlax-7', 'Salamence-5',
->   'Metagross-5', 'Metagross-7', 'Metagross-8', 'Regice-5', 'Latias-7', 'Latias-8', 'Latios-7', 'Latios-8',
->   'Dragonite-1', 'Dragonite-2', 'Dragonite-9', 'Dragonite-10', 'Tyranitar-1', 'Tyranitar-2', 'Tyranitar-3',
+>   'Machamp-2', 'Steelix-2', 'Aerodactyl-2', 'Aggron-2', 'Walrein-2', 'Charizard-2', 'Swampert-2', 'Snorlax-2',
+>   'Metagross-2', 'Dugtrio-3', 'Granbull-3', 'Dusclops-3', 'Forretress-3', 'Quagsire-3', 'Hariyama-3', 'Glalie-3',
+>   'Golem-3', 'Rhydon-3', 'Kangaskhan-3', 'Tauros-3', 'Slowking-3', 'Miltank-3', 'Altaria-3', 'Armaldo-3', 'Heracross-3',
+>   'Donphan-3', 'Steelix-3', 'Flygon-3', 'Venusaur-3', 'Meganium-3', 'Blastoise-3', 'Feraligatr-3', 'Blaziken-3',
+>   'Sceptile-3', 'Typhlosion-3', 'Swampert-3', 'Gyarados-3', 'Salamence-3', 'Metagross-3', 'Slaking-3', 'Dugtrio-4',
+>   'Granbull-4', 'Forretress-4', 'Whiscash-4', 'Quagsire-4', 'Hariyama-4', 'Exploud-4', 'Glalie-4', 'Golem-4',
+>   'Rhydon-4', 'Kangaskhan-4', 'Slowbro-4', 'Altaria-4', 'Nidoqueen-4', 'Nidoking-4', 'Armaldo-4', 'Heracross-4',
+>   'Ursaring-4', 'Donphan-4', 'Claydol-4', 'Wailord-4', 'Machamp-4', 'Steelix-4', 'Aerodactyl-4', 'Flygon-4',
+>   'Venusaur-4', 'Meganium-4', 'Blastoise-4', 'Feraligatr-4', 'Aggron-4', 'Walrein-4', 'Swampert-4', 'Gyarados-4',
+>   'Salamence-4', 'Metagross-4', 'Regirock-1', 'Regirock-2', 'Registeel-2', 'Latias-2', 'Latios-2', 'Regirock-3',
+>   'Latias-3', 'Latios-3', 'Registeel-4', 'Ursaring-7', 'Ursaring-8', 'Machamp-5', 'Machamp-6', 'Snorlax-6', 'Snorlax-7',
+>   'Salamence-5', 'Metagross-5', 'Metagross-7', 'Metagross-8', 'Regice-5', 'Latias-7', 'Latias-8', 'Latios-7',
+>   'Latios-8', 'Dragonite-1', 'Dragonite-2', 'Dragonite-9', 'Dragonite-10', 'Tyranitar-1', 'Tyranitar-2', 'Tyranitar-3',
 >   'Tyranitar-5', 'Tyranitar-6', 'Tyranitar-9', 'Tyranitar-10', 'Swampert-TuckerSilver', 'Salamence-TuckerSilver',
->   'Charizard-TuckerSilver', 'Swampert-TuckerGold', 'Slaking-SpenserSilver', 'Slaking-SpenserGold', 'Steelix-LucyGold',
->   'Registeel-BrandonSilver'
+>   'Swampert-TuckerGold', 'Metagross-TuckerGold', 'Slaking-SpenserSilver', 'Slaking-SpenserGold', 'Steelix-LucyGold',
+>   'Regirock-BrandonSilver', 'Registeel-BrandonSilver'
 > ]
 > ```
 >
@@ -1703,102 +1669,102 @@ Every filter has a negated form via `.Not`:
 <br>
 
 > ```python
-> db.sets.Not.canDieTo(ttar)                             # survives Tyranitar even on max roll
+> db.sets.Not.canDieTo(meta)                             # survives Metagross even on max roll
 > ```
 >
 > <details>
 > <summary>Output</summary>
 >
 > ```
-> SetCollection(698 sets)
+> SetCollection(699 sets)
 > [
->   'Azurill-1', 'Metapod-1', 'Kakuna-1', 'Silcoon-1', 'Cascoon-1', 'Wooper-1', 'Seedot-1', 'Poochyena-1', 'Zigzagoon-1',
->   'Togepi-1', 'Marill-1', 'Hoppip-1', 'Smeargle-1', 'Wynaut-1', 'Skitty-1', 'Hoothoot-1', 'Jigglypuff-1', 'Meditite-1',
->   'Slakoth-1', 'Ditto-1', 'Pineco-1', 'Spheal-1', 'Shroomish-1', 'Duskull-1', 'Bellsprout-1', 'Dratini-1', 'Snubbull-1',
->   'Snorunt-1', 'Bagon-1', 'Venonat-1', 'Machop-1', 'Gastly-1', 'Swablu-1', 'Squirtle-1', 'Bulbasaur-1', 'Chikorita-1',
->   'Oddish-1', 'Clefairy-1', 'Seel-1', 'Exeggcute-1', 'Eevee-1', 'Drowzee-1', 'Teddiursa-1', 'Spoink-1', 'Luvdisc-1',
->   'Unown-1', 'Koffing-1', 'Skiploom-1', 'Nuzleaf-1', 'Lombre-1', 'Vibrava-1', 'Clamperl-1', "Farfetch'd-1", 'Lileep-1',
->   'Aipom-1', 'Loudred-1', 'Spinda-1', 'Nosepass-1', 'Corsola-1', 'Mawile-1', 'Butterfree-1', 'Dustox-1', 'Ariados-1',
->   'Yanma-1', 'Delcatty-1', 'Sableye-1', 'Lickitung-1', 'Weepinbell-1', 'Gloom-1', 'Porygon-1', 'Kadabra-1', 'Wailmer-1',
->   'Roselia-1', 'Volbeat-1', 'Illumise-1', 'Ivysaur-1', 'Wartortle-1', 'Machoke-1', 'Haunter-1', 'Bayleef-1',
->   'Togetic-1', 'Murkrow-1', 'Wobbuffet-1', 'Minun-1', 'Grovyle-1', 'Marshtomp-1', 'Azumarill-1', 'Sudowoodo-1',
->   'Sealeo-1', 'Raticate-1', 'Masquerain-1', 'Furret-1', 'Dunsparce-1', 'Dragonair-1', 'Mightyena-1', 'Linoone-1',
->   'Castform-1', 'Shelgon-1', 'Wigglytuff-1', 'Sunflora-1', 'Chimecho-1', 'Gligar-1', 'Sneasel-1', 'Swellow-1',
->   'Tangela-1', 'Persian-1', 'Kecleon-1', 'Vigoroth-1', 'Lunatone-1', 'Solrock-1', 'Noctowl-1', 'Sandslash-1',
->   'Venomoth-1', 'Chansey-1', 'Seaking-1', 'Jumpluff-1', 'Piloswine-1', 'Golbat-1', 'Primeape-1', 'Hitmonlee-1',
->   'Hitmonchan-1', 'Girafarig-1', 'Hitmontop-1', 'Banette-1', 'Ninjask-1', 'Zangoose-1', 'Sharpedo-1', 'Tropius-1',
->   'Mantine-1', 'Stantler-1', 'Absol-1', 'Swalot-1', 'Crawdaunt-1', 'Pidgeot-1', 'Grumpig-1', 'Torkoal-1', 'Kingler-1',
->   'Cacturne-1', 'Bellossom-1', 'Octillery-1', 'Huntail-1', 'Gorebyss-1', 'Relicanth-1', 'Omastar-1', 'Kabutops-1',
->   'Poliwrath-1', 'Scyther-1', 'Pinsir-1', 'Politoed-1', 'Cloyster-1', 'Delcatty-2', 'Sableye-2', 'Lickitung-2',
->   'Weepinbell-2', 'Gloom-2', 'Porygon-2', 'Kadabra-2', 'Wailmer-2', 'Roselia-2', 'Volbeat-2', 'Illumise-2', 'Ivysaur-2',
->   'Wartortle-2', 'Machoke-2', 'Haunter-2', 'Bayleef-2', 'Croconaw-2', 'Togetic-2', 'Murkrow-2', 'Wobbuffet-2',
->   'Marshtomp-2', 'Azumarill-2', 'Sudowoodo-2', 'Sealeo-2', 'Raticate-2', 'Masquerain-2', 'Furret-2', 'Dunsparce-2',
->   'Dragonair-2', 'Mightyena-2', 'Linoone-2', 'Castform-2', 'Shelgon-2', 'Metang-2', 'Wigglytuff-2', 'Sunflora-2',
->   'Chimecho-2', 'Gligar-2', 'Sneasel-2', 'Swellow-2', 'Tangela-2', 'Arbok-2', 'Persian-2', 'Seadra-2', 'Kecleon-2',
->   'Vigoroth-2', 'Lunatone-2', 'Solrock-2', 'Noctowl-2', 'Sandslash-2', 'Venomoth-2', 'Chansey-2', 'Seaking-2',
->   'Jumpluff-2', 'Piloswine-2', 'Golbat-2', 'Primeape-2', 'Hitmonlee-2', 'Hitmonchan-2', 'Girafarig-2', 'Hitmontop-2',
->   'Banette-2', 'Ninjask-2', 'Seviper-2', 'Zangoose-2', 'Tropius-2', 'Mantine-2', 'Stantler-2', 'Absol-2', 'Swalot-2',
+>   'Magikarp-1', 'Wooper-1', 'Togepi-1', 'Marill-1', 'Slugma-1', 'Wynaut-1', 'Nincada-1', 'Jigglypuff-1', 'Wingull-1',
+>   'Mareep-1', 'Slakoth-1', 'Ditto-1', 'Barboach-1', 'Pineco-1', 'Horsea-1', 'Shroomish-1', 'Duskull-1', 'Electrike-1',
+>   'Vulpix-1', 'Pikachu-1', 'Sandshrew-1', 'Poliwag-1', 'Beldum-1', 'Gulpin-1', 'Shellder-1', 'Numel-1', 'Corphish-1',
+>   'Charmander-1', 'Cyndaquil-1', 'Torchic-1', 'Mudkip-1', 'Squirtle-1', 'Totodile-1', 'Slowpoke-1', 'Chikorita-1',
+>   'Psyduck-1', 'Cubone-1', 'Goldeen-1', 'Magnemite-1', 'Seel-1', 'Grimer-1', 'Krabby-1', 'Exeggcute-1', 'Voltorb-1',
+>   'Chinchou-1', 'Houndour-1', 'Phanpy-1', 'Aron-1', 'Luvdisc-1', 'Tentacool-1', 'Koffing-1', 'Staryu-1', 'Lombre-1',
+>   'Clamperl-1', 'Growlithe-1', "Farfetch'd-1", 'Omanyte-1', 'Aipom-1', 'Elekid-1', 'Loudred-1', 'Spinda-1',
+>   'Nidorina-1', 'Nidorino-1', 'Flaaffy-1', 'Magby-1', 'Corsola-1', 'Mawile-1', 'Poliwhirl-1', 'Onix-1', 'Dustox-1',
+>   'Ariados-1', 'Yanma-1', 'Delcatty-1', 'Sableye-1', 'Lickitung-1', 'Gloom-1', 'Porygon-1', 'Kadabra-1', 'Wailmer-1',
+>   'Roselia-1', 'Illumise-1', 'Charmeleon-1', 'Wartortle-1', 'Machoke-1', 'Bayleef-1', 'Quilava-1', 'Croconaw-1',
+>   'Togetic-1', 'Murkrow-1', 'Wobbuffet-1', 'Plusle-1', 'Minun-1', 'Combusken-1', 'Marshtomp-1', 'Ponyta-1',
+>   'Azumarill-1', 'Magcargo-1', 'Sealeo-1', 'Masquerain-1', 'Furret-1', 'Dunsparce-1', 'Dragonair-1', 'Mightyena-1',
+>   'Linoone-1', 'Castform-1', 'Shelgon-1', 'Metang-1', 'Wigglytuff-1', 'Sunflora-1', 'Chimecho-1', 'Gligar-1',
+>   'Qwilfish-1', 'Pelipper-1', 'Swellow-1', 'Lairon-1', 'Tangela-1', 'Arbok-1', 'Persian-1', 'Seadra-1', 'Kecleon-1',
+>   'Vigoroth-1', 'Noctowl-1', 'Sandslash-1', 'Venomoth-1', 'Chansey-1', 'Seaking-1', 'Jumpluff-1', 'Golbat-1',
+>   'Primeape-1', 'Hitmonlee-1', 'Hitmonchan-1', 'Girafarig-1', 'Hitmontop-1', 'Banette-1', 'Seviper-1', 'Zangoose-1',
+>   'Camerupt-1', 'Sharpedo-1', 'Tropius-1', 'Magneton-1', 'Mantine-1', 'Stantler-1', 'Absol-1', 'Swalot-1',
+>   'Crawdaunt-1', 'Pidgeot-1', 'Grumpig-1', 'Torkoal-1', 'Kingler-1', 'Bellossom-1', 'Octillery-1', 'Huntail-1',
+>   'Gorebyss-1', 'Relicanth-1', 'Omastar-1', 'Kabutops-1', 'Poliwrath-1', 'Scyther-1', 'Pinsir-1', 'Politoed-1',
+>   'Cloyster-1', 'Sableye-2', 'Lickitung-2', 'Weepinbell-2', 'Wailmer-2', 'Roselia-2', 'Charmeleon-2', 'Wartortle-2',
+>   'Machoke-2', 'Haunter-2', 'Bayleef-2', 'Quilava-2', 'Croconaw-2', 'Togetic-2', 'Murkrow-2', 'Wobbuffet-2', 'Plusle-2',
+>   'Minun-2', 'Combusken-2', 'Marshtomp-2', 'Ponyta-2', 'Azumarill-2', 'Magcargo-2', 'Sealeo-2', 'Masquerain-2',
+>   'Furret-2', 'Dunsparce-2', 'Dragonair-2', 'Mightyena-2', 'Castform-2', 'Shelgon-2', 'Metang-2', 'Wigglytuff-2',
+>   'Sunflora-2', 'Chimecho-2', 'Gligar-2', 'Qwilfish-2', 'Pelipper-2', 'Swellow-2', 'Lairon-2', 'Tangela-2', 'Arbok-2',
+>   'Persian-2', 'Seadra-2', 'Kecleon-2', 'Vigoroth-2', 'Noctowl-2', 'Sandslash-2', 'Venomoth-2', 'Chansey-2',
+>   'Seaking-2', 'Jumpluff-2', 'Golbat-2', 'Primeape-2', 'Hitmonlee-2', 'Hitmonchan-2', 'Girafarig-2', 'Hitmontop-2',
+>   'Banette-2', 'Ninjask-2', 'Seviper-2', 'Camerupt-2', 'Sharpedo-2', 'Tropius-2', 'Magneton-2', 'Mantine-2', 'Swalot-2',
 >   'Crawdaunt-2', 'Pidgeot-2', 'Grumpig-2', 'Torkoal-2', 'Kingler-2', 'Cacturne-2', 'Bellossom-2', 'Octillery-2',
 >   'Huntail-2', 'Gorebyss-2', 'Relicanth-2', 'Omastar-2', 'Kabutops-2', 'Poliwrath-2', 'Scyther-2', 'Pinsir-2',
->   'Politoed-2', 'Cloyster-2', 'Medicham-1', 'Misdreavus-1', 'Granbull-1', 'Jynx-1', 'Dusclops-1', 'Mr. Mime-1',
->   'Lanturn-1', 'Forretress-1', 'Whiscash-1', 'Xatu-1', 'Skarmory-1', 'Marowak-1', 'Quagsire-1', 'Clefable-1',
->   'Hariyama-1', 'Dewgong-1', 'Vileplume-1', 'Victreebel-1', 'Exploud-1', 'Shiftry-1', 'Glalie-1', 'Ludicolo-1',
->   'Hypno-1', 'Alakazam-1', 'Weezing-1', 'Kangaskhan-1', 'Electabuzz-1', 'Tauros-1', 'Slowbro-1', 'Slowking-1',
->   'Miltank-1', 'Altaria-1', 'Nidoqueen-1', 'Nidoking-1', 'Magmar-1', 'Cradily-1', 'Armaldo-1', 'Golduck-1', 'Muk-1',
->   'Gengar-1', 'Ampharos-1', 'Scizor-1', 'Ursaring-1', 'Donphan-1', 'Claydol-1', 'Wailord-1', 'Machamp-1', 'Shuckle-1',
->   'Steelix-1', 'Tentacruel-1', 'Aerodactyl-1', 'Porygon2-1', 'Gardevoir-1', 'Exeggutor-1', 'Starmie-1', 'Flygon-1',
->   'Venusaur-1', 'Vaporeon-1', 'Meganium-1', 'Espeon-1', 'Umbreon-1', 'Blastoise-1', 'Feraligatr-1', 'Aggron-1',
->   'Walrein-1', 'Sceptile-1', 'Charizard-1', 'Lapras-1', 'Crobat-1', 'Swampert-1', 'Gyarados-1', 'Snorlax-1',
->   'Kingdra-1', 'Blissey-1', 'Milotic-1', 'Arcanine-1', 'Salamence-1', 'Metagross-1', 'Slaking-1', 'Medicham-2',
->   'Marowak-2', 'Quagsire-2', 'Misdreavus-2', 'Granbull-2', 'Jynx-2', 'Dusclops-2', 'Mr. Mime-2', 'Forretress-2',
->   'Skarmory-2', 'Whiscash-2', 'Xatu-2', 'Clefable-2', 'Hariyama-2', 'Dewgong-2', 'Vileplume-2', 'Victreebel-2',
->   'Electrode-2', 'Exploud-2', 'Shiftry-2', 'Glalie-2', 'Ludicolo-2', 'Hypno-2', 'Alakazam-2', 'Weezing-2',
->   'Kangaskhan-2', 'Tauros-2', 'Slowbro-2', 'Slowking-2', 'Miltank-2', 'Altaria-2', 'Nidoqueen-2', 'Nidoking-2',
->   'Cradily-2', 'Armaldo-2', 'Golduck-2', 'Muk-2', 'Gengar-2', 'Scizor-2', 'Ursaring-2', 'Donphan-2', 'Claydol-2',
->   'Wailord-2', 'Machamp-2', 'Shuckle-2', 'Steelix-2', 'Tentacruel-2', 'Aerodactyl-2', 'Porygon2-2', 'Gardevoir-2',
->   'Exeggutor-2', 'Starmie-2', 'Flygon-2', 'Venusaur-2', 'Vaporeon-2', 'Flareon-2', 'Meganium-2', 'Espeon-2',
->   'Umbreon-2', 'Blastoise-2', 'Feraligatr-2', 'Aggron-2', 'Walrein-2', 'Sceptile-2', 'Charizard-2', 'Lapras-2',
->   'Crobat-2', 'Swampert-2', 'Snorlax-2', 'Kingdra-2', 'Blissey-2', 'Milotic-2', 'Arcanine-2', 'Salamence-2',
->   'Metagross-2', 'Slaking-2', 'Medicham-3', 'Misdreavus-3', 'Granbull-3', 'Jynx-3', 'Dusclops-3', 'Mr. Mime-3',
->   'Forretress-3', 'Whiscash-3', 'Xatu-3', 'Skarmory-3', 'Marowak-3', 'Quagsire-3', 'Clefable-3', 'Hariyama-3',
->   'Dewgong-3', 'Vileplume-3', 'Victreebel-3', 'Exploud-3', 'Shiftry-3', 'Glalie-3', 'Ludicolo-3', 'Hypno-3',
->   'Alakazam-3', 'Weezing-3', 'Kangaskhan-3', 'Tauros-3', 'Slowbro-3', 'Slowking-3', 'Miltank-3', 'Altaria-3',
->   'Nidoqueen-3', 'Nidoking-3', 'Magmar-3', 'Cradily-3', 'Armaldo-3', 'Golduck-3', 'Muk-3', 'Gengar-3', 'Scizor-3',
->   'Ursaring-3', 'Donphan-3', 'Claydol-3', 'Wailord-3', 'Machamp-3', 'Shuckle-3', 'Steelix-3', 'Tentacruel-3',
->   'Aerodactyl-3', 'Porygon2-3', 'Gardevoir-3', 'Exeggutor-3', 'Starmie-3', 'Flygon-3', 'Venusaur-3', 'Vaporeon-3',
->   'Jolteon-3', 'Meganium-3', 'Espeon-3', 'Umbreon-3', 'Blastoise-3', 'Feraligatr-3', 'Aggron-3', 'Walrein-3',
->   'Sceptile-3', 'Charizard-3', 'Lapras-3', 'Crobat-3', 'Swampert-3', 'Snorlax-3', 'Kingdra-3', 'Blissey-3', 'Milotic-3',
->   'Arcanine-3', 'Salamence-3', 'Metagross-3', 'Slaking-3', 'Medicham-4', 'Misdreavus-4', 'Granbull-4', 'Jynx-4',
->   'Dusclops-4', 'Mr. Mime-4', 'Forretress-4', 'Whiscash-4', 'Xatu-4', 'Skarmory-4', 'Marowak-4', 'Quagsire-4',
->   'Clefable-4', 'Hariyama-4', 'Dewgong-4', 'Vileplume-4', 'Victreebel-4', 'Exploud-4', 'Shiftry-4', 'Glalie-4',
->   'Ludicolo-4', 'Hypno-4', 'Alakazam-4', 'Weezing-4', 'Kangaskhan-4', 'Tauros-4', 'Slowbro-4', 'Slowking-4',
->   'Miltank-4', 'Altaria-4', 'Nidoqueen-4', 'Magmar-4', 'Cradily-4', 'Armaldo-4', 'Golduck-4', 'Muk-4', 'Gengar-4',
->   'Ampharos-4', 'Scizor-4', 'Ursaring-4', 'Donphan-4', 'Claydol-4', 'Wailord-4', 'Machamp-4', 'Shuckle-4', 'Steelix-4',
->   'Tentacruel-4', 'Aerodactyl-4', 'Porygon2-4', 'Gardevoir-4', 'Exeggutor-4', 'Starmie-4', 'Flygon-4', 'Venusaur-4',
->   'Vaporeon-4', 'Meganium-4', 'Espeon-4', 'Umbreon-4', 'Blastoise-4', 'Feraligatr-4', 'Aggron-4', 'Walrein-4',
->   'Sceptile-4', 'Charizard-4', 'Lapras-4', 'Crobat-4', 'Swampert-4', 'Gyarados-4', 'Snorlax-4', 'Kingdra-4',
->   'Blissey-4', 'Milotic-4', 'Arcanine-4', 'Salamence-4', 'Metagross-4', 'Slaking-4', 'Articuno-1', 'Zapdos-1',
->   'Moltres-1', 'Entei-1', 'Suicune-1', 'Regirock-1', 'Regice-1', 'Registeel-1', 'Latias-1', 'Latios-1', 'Articuno-2',
->   'Zapdos-2', 'Moltres-2', 'Entei-2', 'Suicune-2', 'Regirock-2', 'Regice-2', 'Registeel-2', 'Latias-2', 'Latios-2',
->   'Articuno-3', 'Zapdos-3', 'Moltres-3', 'Entei-3', 'Suicune-3', 'Regirock-3', 'Regice-3', 'Registeel-3', 'Latias-3',
->   'Latios-3', 'Articuno-4', 'Zapdos-4', 'Moltres-4', 'Entei-4', 'Suicune-4', 'Regirock-4', 'Regice-4', 'Registeel-4',
->   'Latias-4', 'Latios-4', 'Gengar-5', 'Gengar-6', 'Gengar-7', 'Gengar-8', 'Ursaring-5', 'Ursaring-6', 'Ursaring-7',
->   'Ursaring-8', 'Machamp-5', 'Machamp-6', 'Machamp-7', 'Machamp-8', 'Gardevoir-5', 'Gardevoir-6', 'Gardevoir-7',
->   'Gardevoir-8', 'Starmie-5', 'Starmie-6', 'Starmie-7', 'Starmie-8', 'Lapras-5', 'Lapras-6', 'Lapras-7', 'Lapras-8',
->   'Snorlax-5', 'Snorlax-6', 'Snorlax-7', 'Snorlax-8', 'Salamence-5', 'Salamence-6', 'Salamence-7', 'Salamence-8',
->   'Metagross-5', 'Metagross-6', 'Metagross-7', 'Metagross-8', 'Regirock-5', 'Regirock-6', 'Regice-5', 'Regice-6',
->   'Registeel-5', 'Registeel-6', 'Latias-5', 'Latias-6', 'Latias-7', 'Latias-8', 'Latios-5', 'Latios-6', 'Latios-7',
->   'Latios-8', 'Dragonite-1', 'Dragonite-2', 'Dragonite-3', 'Dragonite-4', 'Dragonite-5', 'Dragonite-6', 'Dragonite-7',
->   'Dragonite-8', 'Dragonite-9', 'Dragonite-10', 'Tyranitar-1', 'Tyranitar-2', 'Tyranitar-3', 'Tyranitar-4',
->   'Tyranitar-5', 'Tyranitar-6', 'Tyranitar-7', 'Tyranitar-8', 'Tyranitar-9', 'Tyranitar-10', 'Articuno-5', 'Articuno-6',
->   'Zapdos-5', 'Zapdos-6', 'Moltres-5', 'Moltres-6', 'Raikou-6', 'Entei-5', 'Entei-6', 'Suicune-5', 'Suicune-6',
->   'Alakazam-AnabelSilver', 'Entei-AnabelSilver', 'Snorlax-AnabelSilver', 'Raikou-AnabelGold', 'Latios-AnabelGold',
->   'Snorlax-AnabelGold', 'Swampert-TuckerSilver', 'Salamence-TuckerSilver', 'Charizard-TuckerSilver',
->   'Swampert-TuckerGold', 'Metagross-TuckerGold', 'Latias-TuckerGold', 'Crobat-SpenserSilver', 'Slaking-SpenserSilver',
->   'Lapras-SpenserSilver', 'Arcanine-SpenserGold', 'Slaking-SpenserGold', 'Suicune-SpenserGold', 'Umbreon-GretaSilver',
->   'Umbreon-GretaGold', 'Gengar-GretaGold', 'Seviper-LucySilver', 'Shuckle-LucySilver', 'Milotic-LucySilver',
->   'Steelix-LucyGold', 'Gyarados-LucyGold', 'Regirock-BrandonSilver', 'Registeel-BrandonSilver', 'Regice-BrandonSilver',
->   'Articuno-BrandonGold', 'Zapdos-BrandonGold', 'Moltres-BrandonGold'
+>   'Politoed-2', 'Cloyster-2', 'Misdreavus-1', 'Granbull-1', 'Dusclops-1', 'Mr. Mime-1', 'Lanturn-1', 'Forretress-1',
+>   'Whiscash-1', 'Xatu-1', 'Skarmory-1', 'Marowak-1', 'Quagsire-1', 'Clefable-1', 'Hariyama-1', 'Raichu-1', 'Dewgong-1',
+>   'Manectric-1', 'Vileplume-1', 'Victreebel-1', 'Electrode-1', 'Exploud-1', 'Shiftry-1', 'Ludicolo-1', 'Hypno-1',
+>   'Rhydon-1', 'Weezing-1', 'Kangaskhan-1', 'Electabuzz-1', 'Tauros-1', 'Slowbro-1', 'Slowking-1', 'Miltank-1',
+>   'Altaria-1', 'Nidoqueen-1', 'Nidoking-1', 'Magmar-1', 'Cradily-1', 'Golduck-1', 'Rapidash-1', 'Muk-1', 'Ampharos-1',
+>   'Scizor-1', 'Ursaring-1', 'Houndoom-1', 'Donphan-1', 'Claydol-1', 'Wailord-1', 'Ninetales-1', 'Machamp-1',
+>   'Shuckle-1', 'Steelix-1', 'Tentacruel-1', 'Porygon2-1', 'Gardevoir-1', 'Exeggutor-1', 'Starmie-1', 'Flygon-1',
+>   'Venusaur-1', 'Vaporeon-1', 'Jolteon-1', 'Flareon-1', 'Meganium-1', 'Espeon-1', 'Umbreon-1', 'Blastoise-1',
+>   'Feraligatr-1', 'Aggron-1', 'Blaziken-1', 'Walrein-1', 'Charizard-1', 'Typhlosion-1', 'Lapras-1', 'Crobat-1',
+>   'Swampert-1', 'Gyarados-1', 'Snorlax-1', 'Kingdra-1', 'Blissey-1', 'Milotic-1', 'Arcanine-1', 'Salamence-1',
+>   'Metagross-1', 'Slaking-1', 'Marowak-2', 'Quagsire-2', 'Misdreavus-2', 'Granbull-2', 'Dusclops-2', 'Mr. Mime-2',
+>   'Lanturn-2', 'Forretress-2', 'Skarmory-2', 'Whiscash-2', 'Xatu-2', 'Clefable-2', 'Hariyama-2', 'Raichu-2',
+>   'Dewgong-2', 'Manectric-2', 'Vileplume-2', 'Victreebel-2', 'Electrode-2', 'Exploud-2', 'Shiftry-2', 'Ludicolo-2',
+>   'Hypno-2', 'Golem-2', 'Weezing-2', 'Kangaskhan-2', 'Electabuzz-2', 'Tauros-2', 'Slowbro-2', 'Slowking-2', 'Miltank-2',
+>   'Altaria-2', 'Nidoqueen-2', 'Nidoking-2', 'Magmar-2', 'Golduck-2', 'Rapidash-2', 'Muk-2', 'Ampharos-2', 'Scizor-2',
+>   'Ursaring-2', 'Houndoom-2', 'Donphan-2', 'Claydol-2', 'Wailord-2', 'Ninetales-2', 'Machamp-2', 'Shuckle-2',
+>   'Steelix-2', 'Tentacruel-2', 'Porygon2-2', 'Gardevoir-2', 'Exeggutor-2', 'Starmie-2', 'Flygon-2', 'Venusaur-2',
+>   'Vaporeon-2', 'Jolteon-2', 'Flareon-2', 'Meganium-2', 'Umbreon-2', 'Blastoise-2', 'Feraligatr-2', 'Aggron-2',
+>   'Blaziken-2', 'Walrein-2', 'Charizard-2', 'Typhlosion-2', 'Lapras-2', 'Crobat-2', 'Swampert-2', 'Gyarados-2',
+>   'Snorlax-2', 'Kingdra-2', 'Blissey-2', 'Milotic-2', 'Arcanine-2', 'Salamence-2', 'Metagross-2', 'Slaking-2',
+>   'Misdreavus-3', 'Granbull-3', 'Dusclops-3', 'Lanturn-3', 'Forretress-3', 'Whiscash-3', 'Skarmory-3', 'Marowak-3',
+>   'Quagsire-3', 'Clefable-3', 'Hariyama-3', 'Raichu-3', 'Dewgong-3', 'Manectric-3', 'Vileplume-3', 'Victreebel-3',
+>   'Electrode-3', 'Exploud-3', 'Shiftry-3', 'Ludicolo-3', 'Hypno-3', 'Rhydon-3', 'Weezing-3', 'Kangaskhan-3',
+>   'Electabuzz-3', 'Tauros-3', 'Slowbro-3', 'Slowking-3', 'Miltank-3', 'Altaria-3', 'Nidoqueen-3', 'Nidoking-3',
+>   'Magmar-3', 'Golduck-3', 'Rapidash-3', 'Muk-3', 'Ampharos-3', 'Scizor-3', 'Ursaring-3', 'Houndoom-3', 'Donphan-3',
+>   'Claydol-3', 'Wailord-3', 'Ninetales-3', 'Machamp-3', 'Shuckle-3', 'Steelix-3', 'Tentacruel-3', 'Porygon2-3',
+>   'Exeggutor-3', 'Starmie-3', 'Flygon-3', 'Venusaur-3', 'Vaporeon-3', 'Jolteon-3', 'Flareon-3', 'Meganium-3',
+>   'Umbreon-3', 'Blastoise-3', 'Feraligatr-3', 'Aggron-3', 'Blaziken-3', 'Walrein-3', 'Charizard-3', 'Typhlosion-3',
+>   'Lapras-3', 'Crobat-3', 'Swampert-3', 'Gyarados-3', 'Snorlax-3', 'Kingdra-3', 'Blissey-3', 'Milotic-3', 'Arcanine-3',
+>   'Salamence-3', 'Metagross-3', 'Slaking-3', 'Granbull-4', 'Dusclops-4', 'Lanturn-4', 'Forretress-4', 'Whiscash-4',
+>   'Skarmory-4', 'Marowak-4', 'Quagsire-4', 'Clefable-4', 'Hariyama-4', 'Raichu-4', 'Dewgong-4', 'Manectric-4',
+>   'Vileplume-4', 'Victreebel-4', 'Electrode-4', 'Exploud-4', 'Shiftry-4', 'Ludicolo-4', 'Hypno-4', 'Rhydon-4',
+>   'Weezing-4', 'Kangaskhan-4', 'Electabuzz-4', 'Tauros-4', 'Slowbro-4', 'Slowking-4', 'Miltank-4', 'Altaria-4',
+>   'Nidoqueen-4', 'Nidoking-4', 'Magmar-4', 'Cradily-4', 'Golduck-4', 'Rapidash-4', 'Muk-4', 'Ampharos-4', 'Scizor-4',
+>   'Ursaring-4', 'Houndoom-4', 'Donphan-4', 'Claydol-4', 'Wailord-4', 'Ninetales-4', 'Machamp-4', 'Shuckle-4',
+>   'Steelix-4', 'Tentacruel-4', 'Porygon2-4', 'Exeggutor-4', 'Starmie-4', 'Flygon-4', 'Venusaur-4', 'Vaporeon-4',
+>   'Jolteon-4', 'Flareon-4', 'Meganium-4', 'Umbreon-4', 'Blastoise-4', 'Feraligatr-4', 'Aggron-4', 'Blaziken-4',
+>   'Walrein-4', 'Charizard-4', 'Typhlosion-4', 'Lapras-4', 'Crobat-4', 'Swampert-4', 'Gyarados-4', 'Snorlax-4',
+>   'Kingdra-4', 'Blissey-4', 'Milotic-4', 'Arcanine-4', 'Salamence-4', 'Metagross-4', 'Slaking-4', 'Zapdos-1',
+>   'Moltres-1', 'Raikou-1', 'Entei-1', 'Suicune-1', 'Regirock-1', 'Registeel-1', 'Latias-1', 'Latios-1', 'Articuno-2',
+>   'Zapdos-2', 'Moltres-2', 'Raikou-2', 'Entei-2', 'Suicune-2', 'Regirock-2', 'Registeel-2', 'Latias-2', 'Latios-2',
+>   'Zapdos-3', 'Moltres-3', 'Raikou-3', 'Entei-3', 'Suicune-3', 'Regirock-3', 'Registeel-3', 'Latias-3', 'Latios-3',
+>   'Zapdos-4', 'Moltres-4', 'Raikou-4', 'Entei-4', 'Suicune-4', 'Regirock-4', 'Regice-4', 'Registeel-4', 'Latias-4',
+>   'Latios-4', 'Ursaring-5', 'Ursaring-6', 'Ursaring-7', 'Ursaring-8', 'Machamp-5', 'Machamp-6', 'Machamp-7',
+>   'Machamp-8', 'Gardevoir-5', 'Gardevoir-6', 'Gardevoir-7', 'Starmie-5', 'Starmie-6', 'Starmie-7', 'Starmie-8',
+>   'Lapras-5', 'Lapras-6', 'Lapras-7', 'Lapras-8', 'Snorlax-5', 'Snorlax-6', 'Snorlax-7', 'Snorlax-8', 'Salamence-5',
+>   'Salamence-6', 'Salamence-7', 'Salamence-8', 'Metagross-5', 'Metagross-6', 'Metagross-7', 'Metagross-8', 'Regirock-5',
+>   'Regirock-6', 'Registeel-5', 'Registeel-6', 'Latias-5', 'Latias-6', 'Latias-7', 'Latias-8', 'Latios-5', 'Latios-6',
+>   'Latios-7', 'Latios-8', 'Dragonite-1', 'Dragonite-2', 'Dragonite-3', 'Dragonite-4', 'Dragonite-5', 'Dragonite-6',
+>   'Dragonite-7', 'Dragonite-8', 'Dragonite-9', 'Dragonite-10', 'Tyranitar-3', 'Tyranitar-4', 'Tyranitar-5',
+>   'Tyranitar-6', 'Tyranitar-7', 'Tyranitar-8', 'Tyranitar-10', 'Zapdos-5', 'Zapdos-6', 'Moltres-5', 'Moltres-6',
+>   'Raikou-5', 'Raikou-6', 'Entei-5', 'Entei-6', 'Suicune-5', 'Suicune-6', 'Entei-AnabelSilver', 'Snorlax-AnabelSilver',
+>   'Raikou-AnabelGold', 'Latios-AnabelGold', 'Snorlax-AnabelGold', 'Swampert-TuckerSilver', 'Salamence-TuckerSilver',
+>   'Charizard-TuckerSilver', 'Swampert-TuckerGold', 'Metagross-TuckerGold', 'Latias-TuckerGold', 'Crobat-SpenserSilver',
+>   'Slaking-SpenserSilver', 'Lapras-SpenserSilver', 'Arcanine-SpenserGold', 'Slaking-SpenserGold', 'Suicune-SpenserGold',
+>   'Umbreon-GretaSilver', 'Umbreon-GretaGold', 'Gengar-GretaGold', 'Seviper-LucySilver', 'Shuckle-LucySilver',
+>   'Milotic-LucySilver', 'Seviper-LucyGold', 'Steelix-LucyGold', 'Gyarados-LucyGold', 'Regirock-BrandonSilver',
+>   'Registeel-BrandonSilver', 'Zapdos-BrandonGold', 'Moltres-BrandonGold'
 > ]
 > ```
 >
@@ -2227,26 +2193,6 @@ For fine-grained control, use `damage_rolls` + `ko_chance` directly:
 > </details>
 
 
-With Leftovers recovery between hits:
-
-
-> ```python
-> kos = ko_chance(rolls, ttar_hp, recovery=ttar_hp // 16)
-> ```
->
-> <details>
-> <summary>Output</summary>
->
-> ```
-> kos = {
->   1: 0.69,
->   2: 1.00,
-> }
-> ```
->
-> </details>
-
-
 ### Attacker and Defender
 
 Both can be either a frontier set dict (from the database) or a `CustomSet`. Frontier sets at non-default IVs/level:
@@ -2471,86 +2417,6 @@ Other fields: `helping_hand` (1.5x), `cloud_nine` (suppresses weather), `reflect
 > </details>
 
 
-<br>
-
-> ```python
-> calc_matchup(meta, ttar, "Facade", atk_status="burn")
-> ```
->
-> <details>
-> <summary>Output</summary>
->
-> ```
-> {
->   'rolls': [37, 37, 38, 38, 39, 39, 40, 40, 40, 41, 41, 42, 42, 43, 43, 44],
->   'attack_rolls': None,
->   'hit_info': {'type': 'single'},
->   'min': 37,
->   'max': 44,
->   'min_pct': 10.90,
->   'max_pct': 12.90,
->   'defender_hp': 341,
->   'defender_max_hp': 341,
->   'ko_chances': {1: 0.0, 2: 0.0, 3: 0.0, 4: 0.0, 5: 0.0, 6: 0.0, 7: 0.0, 8: 0.00},
-> }
-> ```
->
-> </details>
-
-
-<br>
-
-> ```python
-> milotic = db.allSets("Milotic")._sets[0]
-> ```
->
-> <details>
-> <summary>Output</summary>
->
-> ```
-> milotic = {
->   'Pokemon': 'Milotic',
->   'SetNum': 1,
->   'Nature': 'Modest',
->   'Item': 'Lum Berry',
->   'Abilities': ['Marvel Scale'],
->   'Moves': ['hydropump', 'icywind', 'recover', 'mirrorcoat'],
->   'EVs': [170, 0, 170, 170, 0, 0],
->   'Index': 464,
->   'DexNum': 350,
-> }
-> ```
->
-> </details>
-
-
-<br>
-
-> ```python
-> calc_matchup(meta, milotic, "Meteor Mash", def_status="burn")
-> ```
->
-> <details>
-> <summary>Output</summary>
->
-> ```
-> {
->   'rolls': [58, 59, 60, 60, 61, 62, 62, 63, 64, 64, 65, 66, 66, 67, 68, 69],
->   'attack_rolls': None,
->   'hit_info': {'type': 'single'},
->   'min': 58,
->   'max': 69,
->   'min_pct': 15.50,
->   'max_pct': 18.50,
->   'defender_hp': 373,
->   'defender_max_hp': 373,
->   'ko_chances': {1: 0.0, 2: 0.0, 3: 0.0, 4: 0.0, 5: 0.0, 6: 0.83, 7: 1.0},
-> }
-> ```
->
-> </details>
-
-
 ### Special Parameters
 
 | Parameter | Effect |
@@ -2680,7 +2546,7 @@ The calculator handles multi-hit moves automatically:
 
 
 > ```python
-> from frontierbrain3.damagecalc import combine_multi_hit_rolls, multi_hit_ohko_prob
+> from frontierbrain3.damagecalc import combine_multi_hit_rolls
 > blaziken = db.allSets("Blaziken")._sets[0]
 > ```
 >
@@ -2797,14 +2663,18 @@ The calculator handles multi-hit moves automatically:
 <br>
 
 > ```python
-> ohko_prob = multi_hit_ohko_prob(per_hit, calc_stats(lax)["hp"], hit_info)
+> ko_chance(total_rolls, calc_stats(lax)["hp"])
 > ```
 >
 > <details>
 > <summary>Output</summary>
 >
 > ```
-> ohko_prob = 0.00
+> {
+>   1: 0.00,
+>   2: 0.0001,
+>   3: 1.00,
+> }
 > ```
 >
 > </details>
@@ -2864,7 +2734,7 @@ Not applied in the damage formula (they don't affect the hit), but provided as c
 
 ### Trainer Tiers
 
-Tower trainers are grouped into tiers by index, each with fixed IVs and round eligibility. The Ruby/Sapphire Battle Tower uses a different trainer list that is not currently supported.
+Tower trainers are grouped into tiers by index, each with fixed IVs and round eligibility. Trainer data is based on the [Bulbapedia Battle Frontier trainer list](https://bulbapedia.bulbagarden.net/wiki/List_of_Battle_Frontier_Trainers_in_Generation_III). The Ruby/Sapphire Battle Tower uses a different trainer list that is not currently supported.
 
 
 > ```python
@@ -2932,21 +2802,6 @@ Extends `Database` with tower-specific trainer filtering:
 
 > ```python
 > tower = TowerDatabase()
-> ```
->
-> <details>
-> <summary>Output</summary>
->
-> ```
-> tower = <frontierbrain3.facilities.tower.TowerDatabase object at 0x0000019E1A851940>
-> ```
->
-> </details>
-
-
-<br>
-
-> ```python
 > tower.trainers.appearsInRound(8)
 > ```
 >
@@ -3088,7 +2943,7 @@ Generates a random trainer + 3-set team respecting species and item clause:
 > <summary>Output</summary>
 >
 > ```
-> 'Youngster LOGAN: Fearow-4, Skarmory-4, Shiftry-4'
+> 'PKMN Breeder (M) OSCAR: Starmie-4, Blastoise-4, Flygon-4'
 > ```
 >
 > </details>
@@ -3104,7 +2959,7 @@ Generates a random trainer + 3-set team respecting species and item clause:
 > <summary>Output</summary>
 >
 > ```
-> 'Dragon Tamer TREVON: Aerodactyl-4, Milotic-2, Aggron-2'
+> 'Dragon Tamer MADDOX: Tyranitar-6, Latias-4, Lapras-4'
 > ```
 >
 > </details>
@@ -3120,7 +2975,7 @@ Generates a random trainer + 3-set team respecting species and item clause:
 > <summary>Output</summary>
 >
 > ```
-> 'Youngster BRADY: Hoppip-1, Ralts-1, Shuppet-1'
+> 'Youngster BRADY: Rattata-1, Ralts-1, Lotad-1'
 > ```
 >
 > </details>
@@ -3156,21 +3011,6 @@ Factory sets are divided into 9 groups by index. Each round draws from specific 
 
 > ```python
 > fac = FactoryDatabase()
-> ```
->
-> <details>
-> <summary>Output</summary>
->
-> ```
-> fac = <frontierbrain3.facilities.factory.FactoryDatabase object at 0x0000019E1A852CF0>
-> ```
->
-> </details>
-
-
-<br>
-
-> ```python
 > pool = fac.sets_in_groups([4, 5, 6, 7, 8])
 > ```
 >
@@ -3671,21 +3511,6 @@ Every Factory team gets a "type" (most common Pokemon type) and a "phrase" (batt
 > ```python
 > from frontierbrain3.facilities.factory import FactoryDatabase, team_type, team_phrase
 > fac = FactoryDatabase()
-> ```
->
-> <details>
-> <summary>Output</summary>
->
-> ```
-> fac = <frontierbrain3.facilities.factory.FactoryDatabase object at 0x0000019E1AFE4F50>
-> ```
->
-> </details>
-
-
-<br>
-
-> ```python
 > sample_team = fac.sets_in_groups([7, 8])[:3]
 > ```
 >
@@ -3742,21 +3567,6 @@ Generate teams with optional type/phrase constraints:
 
 > ```python
 > fac = FactoryDatabase()
-> ```
->
-> <details>
-> <summary>Output</summary>
->
-> ```
-> fac = <frontierbrain3.facilities.factory.FactoryDatabase object at 0x0000019E1A9DAFD0>
-> ```
->
-> </details>
-
-
-<br>
-
-> ```python
 > ids, typ, phrase = fac.random_team("open", 5)
 > ```
 >
@@ -3764,9 +3574,9 @@ Generate teams with optional type/phrase constraints:
 > <summary>Output</summary>
 >
 > ```
-> ids = ['Blissey-3', 'Latios-8', 'Flareon-2']
+> ids = ['Vileplume-4', 'Houndoom-2', 'Shiftry-3']
 > typ = 'No Type'
-> phrase = 'appears to be free-spirited and unrestrained'
+> phrase = "appears to depend on the battle's flow"
 > ```
 >
 > </details>
@@ -3782,7 +3592,7 @@ Generate teams with optional type/phrase constraints:
 > <summary>Output</summary>
 >
 > ```
-> ids = ['Alakazam-2', 'Milotic-3', 'Gyarados-3']
+> ids = ['Slowking-3', 'Tentacruel-4', 'Raikou-2']
 > typ = 'Water'
 > phrase = 'appears to be free-spirited and unrestrained'
 > ```
@@ -3800,7 +3610,7 @@ Generate teams with optional type/phrase constraints:
 > <summary>Output</summary>
 >
 > ```
-> ids = ['Donphan-1', 'Aggron-2', 'Dodrio-4']
+> ids = ['Gardevoir-1', 'Wailord-4', 'Rapidash-3']
 > typ = 'No Type'
 > phrase = 'appears to be high risk, high return'
 > ```
@@ -3818,7 +3628,7 @@ Generate teams with optional type/phrase constraints:
 > <summary>Output</summary>
 >
 > ```
-> ids = ['Growlithe-1', 'Clamperl-1', 'Houndour-1']
+> ids = ['Clamperl-1', 'Houndour-1', 'Growlithe-1']
 > typ = 'Fire'
 > phrase = 'appears to be one based on total preparation'
 > ```
@@ -4017,21 +3827,6 @@ The enemy seeding bugs massively favor the player, but it's useful to know how h
 > from frontierbrain3.facilities.tower import TowerDatabase
 > from frontierbrain3.facilities.dome import calc_seed
 > tower = TowerDatabase()
-> ```
->
-> <details>
-> <summary>Output</summary>
->
-> ```
-> tower = <frontierbrain3.facilities.tower.TowerDatabase object at 0x0000019E1AAB4910>
-> ```
->
-> </details>
-
-
-<br>
-
-> ```python
 > set_lookup = {f"{s['Pokemon']}-{s['SetNum']}": s for s in tower._sets}
 > ```
 >
@@ -4151,7 +3946,7 @@ The enemy seeding bugs massively favor the player, but it's useful to know how h
 > <summary>Output</summary>
 >
 > ```
-> Highest enemy seed: 4200
+> Highest enemy seed: 4198
 > ```
 >
 > </details>
@@ -4167,7 +3962,7 @@ The enemy seeding bugs massively favor the player, but it's useful to know how h
 > <summary>Output</summary>
 >
 > ```
-> Team: Cooltrainer (M) ALONZO: Lapras-4, Kingdra-4, Typhlosion-2
+> Team: Swimmer? ERICK: Slaking-4, Walrein-4, Kingdra-4
 > ```
 >
 > </details>

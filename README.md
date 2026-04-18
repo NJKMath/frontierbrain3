@@ -140,7 +140,7 @@ Import teams from [Pokepaste](https://pokepast.es/) format:
 ```python
 from frontierbrain3 import from_paste
 
-skarm = from_paste("""
+from_paste("""
 Skarmory (M) @ Leftovers
 Ability: Sturdy
 EVs: 252 HP / 252 Def / 4 SpD
@@ -150,7 +150,6 @@ Bold Nature
 - Protect
 - Rest
 """)
-skarm
 ```
 
 ---
@@ -273,20 +272,20 @@ Other optional parameters are passed through to the damage calculator:
 ```python
 from frontierbrain3 import Field
 
-ttar = db.allSets("Tyranitar")._sets[0]
+meta = db.allSets("Metagross")._sets[0]
 
 # With stat boosts
-db.sets.willDieTo(ttar, atk_boosts={"atk": 1})
+db.sets.willDieTo(meta, atk_boosts={"atk": 1})
 
 # With weather
-db.sets.willOHKO(ttar, field=Field(weather="rain"))
+db.sets.willOHKO(meta, field=Field(weather="rain"))
 
 # Include OHKO moves (Guillotine, Fissure, etc.)
-db.sets.canOHKO(ttar, include_ohko=True)
+db.sets.canOHKO(meta, include_ohko=True)
 
 # Factor accuracy into guaranteed OHKOs (excludes imperfect-accuracy moves like Cross Chop)
-db.sets.willOHKO(ttar)
-db.sets.willOHKO(ttar, include_acc=True)
+db.sets.willOHKO(meta)
+db.sets.willOHKO(meta, include_acc=True)
 ```
 
 #### Negation
@@ -295,8 +294,8 @@ Every filter has a negated form via `.Not`:
 
 ```python
 db.sets.hasMove("earthquake").Not.hasMove("surf")     # has EQ but not Surf
-db.sets.hasMove("earthquake").Not.willOHKO(ttar)       # EQ users that don't guaranteed OHKO Ttar
-db.sets.Not.canDieTo(ttar)                             # survives Tyranitar even on max roll
+db.sets.Not.willOHKO(meta).hasMove("earthquake")      # EQ users that don't guaranteed OHKO Meta
+db.sets.Not.canDieTo(meta)                             # survives Metagross even on max roll
 ```
 
 #### Trainer Lookup
@@ -376,12 +375,6 @@ ttar_hp = calc_stats(ttar)["hp"]
 kos = ko_chance(rolls, ttar_hp)
 ```
 
-With Leftovers recovery between hits:
-
-```python
-kos = ko_chance(rolls, ttar_hp, recovery=ttar_hp // 16)
-```
-
 ### Attacker and Defender
 
 Both can be either a frontier set dict (from the database) or a `CustomSet`. Frontier sets at non-default IVs/level:
@@ -423,13 +416,6 @@ calc_matchup(meta, ttar, "Meteor Mash", def_boosts={"def": 2}, critical=True)
 ```python
 # Burn halves physical damage (unless Guts)
 calc_matchup(meta, ttar, "Meteor Mash", atk_status="burn")
-
-# Facade doubles power when statused
-calc_matchup(meta, ttar, "Facade", atk_status="burn")
-
-# Marvel Scale: defender's status boosts their Defense
-milotic = db.allSets("Milotic")._sets[0]
-calc_matchup(meta, milotic, "Meteor Mash", def_status="burn")
 ```
 
 ### Special Parameters
@@ -493,14 +479,14 @@ get_hit_info("Earthquake")
 `calc_matchup` and the OHKO filters handle multi-hit convolution automatically. For manual use:
 
 ```python
-from frontierbrain3.damagecalc import combine_multi_hit_rolls, multi_hit_ohko_prob
+from frontierbrain3.damagecalc import combine_multi_hit_rolls
 
 blaziken = db.allSets("Blaziken")._sets[0]
 lax = db.allSets("Snorlax")._sets[0]
 per_hit = damage_rolls(blaziken, lax, "Double Kick")
 hit_info = get_hit_info("Double Kick")
 total_rolls = combine_multi_hit_rolls(per_hit, hit_info)
-ohko_prob = multi_hit_ohko_prob(per_hit, calc_stats(lax)["hp"], hit_info)
+ko_chance(total_rolls, calc_stats(lax)["hp"])
 ```
 
 ### Recoil and Drain Reference
@@ -520,7 +506,7 @@ DRAIN_MOVES
 
 ### Trainer Tiers
 
-Tower trainers are grouped into tiers by index, each with fixed IVs and round eligibility. The Ruby/Sapphire Battle Tower uses a different trainer list that is not currently supported.
+Tower trainers are grouped into tiers by index, each with fixed IVs and round eligibility. Trainer data is based on the [Bulbapedia Battle Frontier trainer list](https://bulbapedia.bulbagarden.net/wiki/List_of_Battle_Frontier_Trainers_in_Generation_III). The Ruby/Sapphire Battle Tower uses a different trainer list that is not currently supported.
 
 ```python
 from frontierbrain3.facilities.tower import TowerDatabase, get_tier, TIERS, BRAIN_IVS
