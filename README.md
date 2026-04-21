@@ -665,7 +665,7 @@ print(f"Team: {best_team}")
 
 ## Battle Palace (`facilities.palace`)
 
-In the Palace, Pokemon choose moves autonomously. Each turn, the game first selects a move **category** (Attack, Defense, or Support) based on the Pokemon's nature. Then it picks one of the Pokemon's moves in that category uniformly at random (1/N chance if the category has N moves). If the selected category has no move in the set, there is a 50% chance the Pokemon picks a random move from all its moves and a 50% chance it wastes its turn.
+In the Palace, Pokemon choose their own moves. Each turn, the game first selects a move **category** (Attack, Defense, or Support) based on the Pokemon's nature. Then it picks one of the Pokemon's moves in that category uniformly at random (1/N chance if the category has N moves). If the Pokemon has no move in the selected category, it has a 50% chance to randomly use any move, and a 50% chance to do nothing for that turn.
 
 ### Move Categories
 
@@ -674,9 +674,7 @@ Palace classifies every move as attack, defense, or support:
 ```python
 from frontierbrain3.facilities.palace import get_move_category, categorize_moveset
 
-get_move_category("Earthquake")
-get_move_category("Swords Dance")
-get_move_category("Thunder Wave")
+get_move_category("Earthquake"), get_move_category("Swords Dance"), get_move_category("Thunder Wave")
 
 categorize_moveset(["Earthquake", "Rock Slide", "Swords Dance", "Thunder Wave"])
 ```
@@ -699,14 +697,18 @@ Accounts for empty categories and the random-move fallback:
 ```python
 from frontierbrain3.facilities.palace import get_action_probabilities, get_move_probabilities
 
-get_action_probabilities("Adamant", ["Earthquake", "Rock Slide", "Swords Dance", "Protect"])
+moves = ["Earthquake", "Rock Slide", "Swords Dance", "Protect"]
 
-get_move_probabilities("Adamant", ["Earthquake", "Rock Slide", "Protect"])
+# Per-category probabilities (including "nothing")
+get_action_probabilities("Adamant", moves)
+
+# Per-move probabilities
+get_move_probabilities("Adamant", moves)
 ```
 
 ### Multi-Turn Analysis
 
-Analyze probabilities over multiple turns, either by category or by specific move:
+Analyze probabilities over multiple turns, either by category or by specific move. Category defaults to "attack" but can be set to "defense" or "support":
 
 ```python
 from frontierbrain3.facilities.palace import (
@@ -716,23 +718,33 @@ from frontierbrain3.facilities.palace import (
 
 moves = ["Earthquake", "Rock Slide", "Swords Dance", "Protect"]
 
+# P(exactly k attack-category moves in 5 turns)
 multi_turn_probabilities("Adamant", moves, 5)
 
+# P(exactly k uses of Earthquake specifically in 5 turns)
 move_turn_probabilities("Adamant", moves, 5, "Earthquake")
 
+# P(at least 3 attack-category moves in 5 turns)
 cumulative_attack_prob("Adamant", moves, 5, 3)
 
+# Expected number of attack-category moves in 5 turns
 expected_attacks("Adamant", moves, 5)
 
+# Mixed HP: 3 turns at high HP, then 2 turns at low HP
 multi_turn_mixed_hp("Adamant", moves, 3, 2)
 ```
 
 ### Nature Rankings and Utilities
 
+Rank all 25 natures by how likely they are to use a given category (defaults to "attack"):
+
 ```python
 from frontierbrain3.facilities.palace import rank_natures, low_hp_message, DOUBLES_TARGETING
 
-rank_natures(["Earthquake", "Rock Slide", "Protect"])
+rank_natures(["Earthquake", "Rock Slide", "Swords Dance", "Protect"])
+
+# Can also rank by other categories
+rank_natures(["Earthquake", "Rock Slide", "Swords Dance", "Protect"], category="defense")
 
 low_hp_message("Adamant", "Metagross")
 

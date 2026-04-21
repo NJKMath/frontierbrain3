@@ -2047,25 +2047,6 @@ Alternatively, pass a dict with `name`, `type`, and `power` keys. This is useful
 
 > ```python
 > hp_grass = {"name": "HP Grass", "type": "grass", "power": 70}
-> ```
->
-> <details>
-> <summary>Output</summary>
->
-> ```
-> hp_grass = {
->   'name': 'HP Grass',
->   'type': 'grass',
->   'power': 70,
-> }
-> ```
->
-> </details>
-
-
-<br>
-
-> ```python
 > result = calc_matchup(starmie, ttar, hp_grass)
 > ```
 >
@@ -2943,7 +2924,7 @@ Generates a random trainer + 3-set team respecting species and item clause:
 > <summary>Output</summary>
 >
 > ```
-> 'PKMN Breeder (M) OSCAR: Starmie-4, Blastoise-4, Flygon-4'
+> 'Dragon Tamer DAVIN: Rhydon-3, Lapras-1, Latias-1'
 > ```
 >
 > </details>
@@ -2959,7 +2940,7 @@ Generates a random trainer + 3-set team respecting species and item clause:
 > <summary>Output</summary>
 >
 > ```
-> 'Dragon Tamer MADDOX: Tyranitar-6, Latias-4, Lapras-4'
+> 'Dragon Tamer TREVON: Altaria-1, Lapras-4, Dragonite-3'
 > ```
 >
 > </details>
@@ -2975,7 +2956,7 @@ Generates a random trainer + 3-set team respecting species and item clause:
 > <summary>Output</summary>
 >
 > ```
-> 'Youngster BRADY: Rattata-1, Ralts-1, Lotad-1'
+> 'Youngster BRADY: Ekans-1, Meowth-1, Ledyba-1'
 > ```
 >
 > </details>
@@ -3574,9 +3555,9 @@ Generate teams with optional type/phrase constraints:
 > <summary>Output</summary>
 >
 > ```
-> ids = ['Vileplume-4', 'Houndoom-2', 'Shiftry-3']
-> typ = 'No Type'
-> phrase = "appears to depend on the battle's flow"
+> ids = ['Latias-2', 'Magmar-3', 'Salamence-4']
+> typ = 'Dragon'
+> phrase = 'appears to be high risk, high return'
 > ```
 >
 > </details>
@@ -3592,9 +3573,9 @@ Generate teams with optional type/phrase constraints:
 > <summary>Output</summary>
 >
 > ```
-> ids = ['Slowking-3', 'Tentacruel-4', 'Raikou-2']
+> ids = ['Entei-3', 'Swampert-3', 'Vaporeon-3']
 > typ = 'Water'
-> phrase = 'appears to be free-spirited and unrestrained'
+> phrase = 'appears to be high risk, high return'
 > ```
 >
 > </details>
@@ -3610,7 +3591,7 @@ Generate teams with optional type/phrase constraints:
 > <summary>Output</summary>
 >
 > ```
-> ids = ['Gardevoir-1', 'Wailord-4', 'Rapidash-3']
+> ids = ['Swampert-4', 'Zapdos-5', 'Alakazam-1']
 > typ = 'No Type'
 > phrase = 'appears to be high risk, high return'
 > ```
@@ -3628,7 +3609,7 @@ Generate teams with optional type/phrase constraints:
 > <summary>Output</summary>
 >
 > ```
-> ids = ['Clamperl-1', 'Houndour-1', 'Growlithe-1']
+> ids = ['Growlithe-1', 'Clamperl-1', 'Houndour-1']
 > typ = 'Fire'
 > phrase = 'appears to be one based on total preparation'
 > ```
@@ -3730,25 +3711,6 @@ The Dome ranks teams by a seeding value. Higher seed = higher bracket position. 
 
 > ```python
 > team = [meta, lax, ttar]
-> ```
->
-> <details>
-> <summary>Output</summary>
->
-> ```
-> team = [
->   {'Pokemon': 'Metagross', 'SetNum': 1, 'Nature': 'Adamant', 'Item': 'Leftovers', 'Abilities': ['Clear Body'], 'Moves': ['meteormash', 'aerialace', 'facade', 'lightscreen'], 'EVs': [0, 170, 0, 0, 170, 170], 'Index': 467, 'DexNum': 376},
->   {'Pokemon': 'Snorlax', 'SetNum': 1, 'Nature': 'Adamant', 'Item': 'Leftovers', 'Abilities': ['Immunity', 'Thick Fat'], 'Moves': ['facade', 'shadowball', 'attract', 'doubleteam'], 'EVs': [0, 255, 255, 0, 0, 0], 'Index': 461, 'DexNum': 143},
->   {'Pokemon': 'Tyranitar', 'SetNum': 1, 'Nature': 'Hardy', 'Item': 'BrightPowder', 'Abilities': ['Sand Stream'], 'Moves': ['earthquake', 'aerialace', 'thunderbolt', 'surf'], 'EVs': [0, 255, 0, 255, 0, 0], 'Index': 861, 'DexNum': 248}
-> ]
-> ```
->
-> </details>
-
-
-<br>
-
-> ```python
 > calc_seed(team)
 > ```
 >
@@ -3896,37 +3858,7 @@ The enemy seeding bugs massively favor the player, but it's useful to know how h
 
 > ```python
 > best_seed = 0
-> ```
->
-> <details>
-> <summary>Output</summary>
->
-> ```
-> best_seed = 0
-> ```
->
-> </details>
-
-
-<br>
-
-> ```python
 > best_team = ""
-> ```
->
-> <details>
-> <summary>Output</summary>
->
-> ```
-> best_team = ''
-> ```
->
-> </details>
-
-
-<br>
-
-> ```python
 > for _ in range(1000):
 >     result = tower.random_team(8)
 >     if result.startswith("Error"):
@@ -3946,7 +3878,7 @@ The enemy seeding bugs massively favor the player, but it's useful to know how h
 > <summary>Output</summary>
 >
 > ```
-> Highest enemy seed: 4198
+> Highest enemy seed: 4188
 > ```
 >
 > </details>
@@ -3962,7 +3894,7 @@ The enemy seeding bugs massively favor the player, but it's useful to know how h
 > <summary>Output</summary>
 >
 > ```
-> Team: Swimmer? ERICK: Slaking-4, Walrein-4, Kingdra-4
+> Team: Swimmer? ERICK: Kingdra-4, Blastoise-4, Slaking-4
 > ```
 >
 > </details>
@@ -3972,7 +3904,7 @@ The enemy seeding bugs massively favor the player, but it's useful to know how h
 
 ## Battle Palace (`facilities.palace`)
 
-In the Palace, Pokemon choose moves autonomously. Each turn, the game first selects a move **category** (Attack, Defense, or Support) based on the Pokemon's nature. Then it picks one of the Pokemon's moves in that category uniformly at random (1/N chance if the category has N moves). If the selected category has no move in the set, there is a 50% chance the Pokemon picks a random move from all its moves and a 50% chance it wastes its turn.
+In the Palace, Pokemon choose their own moves. Each turn, the game first selects a move **category** (Attack, Defense, or Support) based on the Pokemon's nature. Then it picks one of the Pokemon's moves in that category uniformly at random (1/N chance if the category has N moves). If the Pokemon has no move in the selected category, it has a 50% chance to randomly use any move, and a 50% chance to do nothing for that turn.
 
 ### Move Categories
 
@@ -3981,46 +3913,14 @@ Palace classifies every move as attack, defense, or support:
 
 > ```python
 > from frontierbrain3.facilities.palace import get_move_category, categorize_moveset
-> get_move_category("Earthquake")
+> get_move_category("Earthquake"), get_move_category("Swords Dance"), get_move_category("Thunder Wave")
 > ```
 >
 > <details>
 > <summary>Output</summary>
 >
 > ```
-> 'attack'
-> ```
->
-> </details>
-
-
-<br>
-
-> ```python
-> get_move_category("Swords Dance")
-> ```
->
-> <details>
-> <summary>Output</summary>
->
-> ```
-> 'defense'
-> ```
->
-> </details>
-
-
-<br>
-
-> ```python
-> get_move_category("Thunder Wave")
-> ```
->
-> <details>
-> <summary>Output</summary>
->
-> ```
-> 'support'
+> ('attack', 'defense', 'support')
 > ```
 >
 > </details>
@@ -4097,7 +3997,8 @@ Accounts for empty categories and the random-move fallback:
 
 > ```python
 > from frontierbrain3.facilities.palace import get_action_probabilities, get_move_probabilities
-> get_action_probabilities("Adamant", ["Earthquake", "Rock Slide", "Swords Dance", "Protect"])
+> moves = ["Earthquake", "Rock Slide", "Swords Dance", "Protect"]
+> get_action_probabilities("Adamant", moves)
 > ```
 >
 > <details>
@@ -4118,7 +4019,7 @@ Accounts for empty categories and the random-move fallback:
 <br>
 
 > ```python
-> get_move_probabilities("Adamant", ["Earthquake", "Rock Slide", "Protect"])
+> get_move_probabilities("Adamant", moves)
 > ```
 >
 > <details>
@@ -4126,9 +4027,10 @@ Accounts for empty categories and the random-move fallback:
 >
 > ```
 > {
->   'Earthquake': 0.24,
->   'Rock Slide': 0.24,
->   'Protect': 0.36,
+>   'Earthquake': 0.23,
+>   'Rock Slide': 0.23,
+>   'Swords Dance': 0.19,
+>   'Protect': 0.19,
 >   'nothing': 0.15,
 > }
 > ```
@@ -4138,7 +4040,7 @@ Accounts for empty categories and the random-move fallback:
 
 ### Multi-Turn Analysis
 
-Analyze probabilities over multiple turns, either by category or by specific move:
+Analyze probabilities over multiple turns, either by category or by specific move. Category defaults to "attack" but can be set to "defense" or "support":
 
 
 > ```python
@@ -4147,21 +4049,6 @@ Analyze probabilities over multiple turns, either by category or by specific mov
 >     cumulative_attack_prob, expected_attacks, multi_turn_mixed_hp,
 > )
 > moves = ["Earthquake", "Rock Slide", "Swords Dance", "Protect"]
-> ```
->
-> <details>
-> <summary>Output</summary>
->
-> ```
-> moves = ['Earthquake', 'Rock Slide', 'Swords Dance', 'Protect']
-> ```
->
-> </details>
-
-
-<br>
-
-> ```python
 > multi_turn_probabilities("Adamant", moves, 5)
 > ```
 >
@@ -4262,10 +4149,12 @@ Analyze probabilities over multiple turns, either by category or by specific mov
 
 ### Nature Rankings and Utilities
 
+Rank all 25 natures by how likely they are to use a given category (defaults to "attack"):
+
 
 > ```python
 > from frontierbrain3.facilities.palace import rank_natures, low_hp_message, DOUBLES_TARGETING
-> rank_natures(["Earthquake", "Rock Slide", "Protect"])
+> rank_natures(["Earthquake", "Rock Slide", "Swords Dance", "Protect"])
 > ```
 >
 > <details>
@@ -4273,14 +4162,34 @@ Analyze probabilities over multiple turns, either by category or by specific mov
 >
 > ```
 > [
->   ('Sassy', 0.9), ('Impish', 0.7733333333333333), ('Brave', 0.75), ('Hardy', 0.7166666666666667),
->   ('Timid', 0.7133333333333334), ('Docile', 0.6333333333333334), ('Naive', 0.6333333333333334),
->   ('Quiet', 0.6333333333333334), ('Quirky', 0.6333333333333334), ('Hasty', 0.5966666666666667),
->   ('Jolly', 0.5499999999999999), ('Lax', 0.5333333333333333), ('Serious', 0.5233333333333334), ('Rash', 0.49),
->   ('Adamant', 0.48333333333333334), ('Bold', 0.4666666666666667), ('Mild', 0.46), ('Relaxed', 0.44999999999999996),
->   ('Careful', 0.44666666666666666), ('Calm', 0.43333333333333335), ('Modest', 0.41666666666666663),
->   ('Lonely', 0.38333333333333336), ('Bashful', 0.33999999999999997), ('Naughty', 0.23333333333333334),
->   ('Gentle', 0.21999999999999997)
+>   ('Sassy', 0.895), ('Impish', 0.7525), ('Brave', 0.7374999999999999), ('Hardy', 0.69), ('Timid', 0.69),
+>   ('Docile', 0.6150000000000001), ('Naive', 0.6150000000000001), ('Quiet', 0.6150000000000001),
+>   ('Quirky', 0.6150000000000001), ('Hasty', 0.5924999999999999), ('Jolly', 0.5), ('Lax', 0.4875),
+>   ('Serious', 0.47750000000000004), ('Adamant', 0.4575), ('Mild', 0.455), ('Rash', 0.4425), ('Careful', 0.44),
+>   ('Calm', 0.42500000000000004), ('Bold', 0.425), ('Relaxed', 0.4), ('Modest', 0.39999999999999997), ('Lonely', 0.3375),
+>   ('Bashful', 0.32999999999999996), ('Naughty', 0.225), ('Gentle', 0.21)
+> ]
+> ```
+>
+> </details>
+
+
+<br>
+
+> ```python
+> rank_natures(["Earthquake", "Rock Slide", "Swords Dance", "Protect"], category="defense")
+> ```
+>
+> <details>
+> <summary>Output</summary>
+>
+> ```
+> [
+>   ('Gentle', 0.73), ('Naughty', 0.725), ('Bashful', 0.61), ('Calm', 0.525), ('Careful', 0.52), ('Mild', 0.515),
+>   ('Modest', 0.5), ('Lonely', 0.3875), ('Adamant', 0.3875), ('Hasty', 0.3825), ('Bold', 0.325), ('Relaxed', 0.3),
+>   ('Docile', 0.275), ('Naive', 0.275), ('Quiet', 0.275), ('Quirky', 0.275), ('Rash', 0.27249999999999996),
+>   ('Serious', 0.2475), ('Lax', 0.23750000000000002), ('Jolly', 0.2), ('Brave', 0.1875), ('Timid', 0.17),
+>   ('Hardy', 0.15000000000000002), ('Impish', 0.1225), ('Sassy', 0.075)
 > ]
 > ```
 >

@@ -152,6 +152,15 @@ def _assign_targets(node: ast.Assign) -> list[str]:
     return names
 
 
+def _is_literal_assign(node: ast.AST) -> bool:
+    """Return True if this is an assignment of a literal value (list, dict, str, number)."""
+    if not isinstance(node, ast.Assign):
+        return False
+    val = node.value
+    return isinstance(val, (ast.List, ast.Dict, ast.Constant, ast.Tuple,
+                            ast.JoinedStr, ast.Set))
+
+
 # -- Single statement execution ------------------------------------------------
 
 def _exec_node(node: ast.AST, namespace: dict) -> str | None:
@@ -181,12 +190,13 @@ def _exec_node(node: ast.AST, namespace: dict) -> str | None:
         stdout = captured.getvalue()
         if stdout.strip():
             output_parts.append(stdout.rstrip())
-        names = _assign_targets(node)
-        for n in names:
-            if n in namespace and not n.startswith("_"):
-                val = namespace[n]
-                if not _should_suppress(val):
-                    output_parts.append(f"{n} = {_format_result(val)}")
+        if not _is_literal_assign(node):
+            names = _assign_targets(node)
+            for n in names:
+                if n in namespace and not n.startswith("_"):
+                    val = namespace[n]
+                    if not _should_suppress(val):
+                        output_parts.append(f"{n} = {_format_result(val)}")
 
     else:
         mod = ast.Module(body=[node], type_ignores=[])
