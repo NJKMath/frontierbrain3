@@ -4,12 +4,14 @@ pyramid.py -- Battle Pyramid wild Pokemon and encounter data.
 Data sourced from Smogon's Emerald Battle Pyramid Wild Pokemon Guide.
 
 Provides:
-    ROUNDS          - dict of all 20 rounds of wild Pokemon data
-    FLOOR_TABLE     - which Pokemon IDs (1-8) appear on each floor
-    SLOT_RATES      - encounter rate per slot (12 slots per floor)
-    FLOOR_RATES     - base encounter rate per floor
-    get_encounters()  - Pokemon + rates for a given round and floor
-    get_round_pokemon() - all 8 Pokemon for a given round
+    ROUNDS              - dict of all 20 rounds of wild Pokemon data
+    FLOOR_TABLE         - which Pokemon IDs (1-8) appear on each floor
+    SLOT_RATES          - encounter rate per slot (12 slots per floor)
+    FLOOR_RATES         - base encounter rate per floor
+    pyramid_wild_pokemon() - Pokemon + rates for a given round and optional floor
+    get_floor_encounter_rate() - base encounter rate per step
+    get_items()         - items available on a given floor
+    get_pickup_items()  - items available via Pickup ability
 """
 
 # -- Floor encounter tables ----------------------------------------------------
@@ -334,8 +336,6 @@ ROUNDS = {
 
 
 # -- Item data -----------------------------------------------------------------
-# Probability of each item slot (1-10) appearing, by floor.
-# Each list is 10 values summing to 100.
 
 ITEM_FLOOR_RATES = {
     1: [31, 15, 15, 10, 10, 10, 3, 3, 3, 0],
@@ -349,8 +349,6 @@ ITEM_FLOOR_RATES = {
 
 ITEM_PICKUP_RATES = [30, 10, 10, 10, 10, 10, 5, 5, 5, 5]
 
-# Item pool per round (1-20, cycles after 20). Each list has 10 items
-# corresponding to item slots 1-10.
 ITEM_POOLS = {
     1:  ["Hyper Potion","Fluffy Tail", "Cheri Berry", "Ether","Lum Berry",  "Revive","Bright Powder","Shell Bell",  "Max Revive",   "Sacred Ash"],
     2:  ["Hyper Potion","Dire Hit",    "Pecha Berry", "Ether","Leppa Berry", "Revive","Leftovers",    "Choice Band", "Full Restore", "Max Elixir"],
@@ -377,31 +375,40 @@ ITEM_POOLS = {
 
 # -- Helper functions ----------------------------------------------------------
 
-def get_round_pokemon(round_num: int) -> list[dict]:
-    """Return the list of 8 Pokemon entries for a given round (1-20)."""
+def pyramid_wild_pokemon(round_num: int, floor: int = None) -> list[dict]:
+    """
+    Return wild Pokemon data for a given round, optionally filtered by floor.
+
+    Parameters
+    ----------
+    round_num : int
+        Round number (1-20, cycles after 20).
+    floor : int, optional
+        Floor number (1-7). If provided, returns encounter data with rates.
+        If omitted, returns the full list of 8 Pokemon for that round.
+
+    Returns
+    -------
+    list[dict]
+        If floor is None: list of 8 Pokemon dicts with species, ability,
+        level ranges, and moves.
+        If floor is given: list of {pokemon, rate} dicts where pokemon is
+        one of the 8 dicts and rate is the encounter probability (sums to 100).
+    """
     rnd = round_num
-    # Rounds cycle: 21 -> 1, 22 -> 2, etc.
     if rnd > 20:
         rnd = ((rnd - 1) % 20) + 1
     if rnd not in ROUNDS:
         raise ValueError(f"Round must be 1-20 (or higher to cycle), got {round_num}")
-    return ROUNDS[rnd]["pokemon"]
 
+    pokemon_list = ROUNDS[rnd]["pokemon"]
 
-def get_encounters(round_num: int, floor: int) -> list[dict]:
-    """
-    Return a list of {pokemon, rate} dicts for a given round and floor.
+    if floor is None:
+        return pokemon_list
 
-    Each entry has:
-        pokemon - the Pokemon data dict from ROUNDS
-        rate    - encounter probability (0-100, sums to 100)
-
-    Floor must be 1-7.
-    """
     if floor not in FLOOR_TABLE:
         raise ValueError(f"Floor must be 1-7, got {floor}")
 
-    pokemon_list = get_round_pokemon(round_num)
     slots = FLOOR_TABLE[floor]
 
     # Aggregate rates by Pokemon ID (1-indexed)
@@ -412,10 +419,21 @@ def get_encounters(round_num: int, floor: int) -> list[dict]:
     result = []
     for poke_id, rate in sorted(rate_by_id.items()):
         result.append({
-            "pokemon": pokemon_list[poke_id - 1],  # 0-indexed
+            "pokemon": pokemon_list[poke_id - 1],
             "rate": rate,
         })
     return result
+
+
+# Backward compatibility
+def get_round_pokemon(round_num: int) -> list[dict]:
+    """Return the list of 8 Pokemon entries for a given round (1-20)."""
+    return pyramid_wild_pokemon(round_num)
+
+
+def get_encounters(round_num: int, floor: int) -> list[dict]:
+    """Return encounter data with rates for a given round and floor."""
+    return pyramid_wild_pokemon(round_num, floor)
 
 
 def get_floor_encounter_rate(floor: int) -> int:
@@ -428,11 +446,6 @@ def get_floor_encounter_rate(floor: int) -> int:
 def get_items(round_num: int, floor: int) -> list[dict]:
     """
     Return a list of {item, rate} dicts for a given round and floor.
-
-    Each entry has:
-        item - item name string
-        rate - probability (0-100)
-
     Items with 0% rate on that floor are excluded.
     """
     if floor not in ITEM_FLOOR_RATES:

@@ -18,7 +18,7 @@ pip install -e .
 
 ---
 
-## Core Concepts
+## Database
 
 ### Frontier Sets
 
@@ -39,16 +39,6 @@ The package includes data for all 918 Battle Frontier Pokemon sets (882 regular 
 ```
 
 EVs are ordered `[HP, Atk, Def, SpA, SpD, Spe]`. The `Index` field determines which facility tiers/groups the set belongs to (see Tower and Factory sections). Sets are referenced by ID strings like `"Sunkern-1"`, `"Metagross-4"`, etc.
-
-You can access sets directly through the database:
-
-```python
-from frontierbrain3 import Database
-
-db = Database()
-
-db.allSets("Charizard").ids()
-```
 
 ### Frontier Trainers
 
@@ -79,7 +69,22 @@ The trainer list is shared across all Battle Frontier facilities, though details
 
 The `Sets` list contains all set IDs the trainer can draw from. In battle, they pick 3 (or fewer, depending on the facility) respecting species and item clause.
 
-### CustomSet
+### Loading
+
+```python
+from frontierbrain3 import Database
+
+db = Database()
+
+db.sets       # SetCollection of all 918 frontier sets (882 regular + 36 Frontier Brain)
+db.trainers   # TrainerCollection of all trainers (300 regular + Frontier Brains)
+
+db.allSets("Charizard").ids()
+```
+
+---
+
+## CustomSet
 
 Represents a player-defined Pokemon with full control over species, nature, EVs, IVs, level, item, ability, and moves.
 
@@ -127,10 +132,6 @@ Bold Nature
 """)
 ```
 
----
-
-## Core Utilities (`frontierutils`)
-
 ### Stat Calculations
 
 ```python
@@ -147,18 +148,7 @@ calc_stats(snorlax, ivs=[31,31,31,0,31,31])
 
 ---
 
-## Database (`frontier_db`)
-
-### Loading
-
-```python
-from frontierbrain3 import Database
-
-db = Database()
-
-db.sets       # SetCollection of all 918 frontier sets (882 regular + 36 Frontier Brain)
-db.trainers   # TrainerCollection of all trainers (300 regular + Frontier Brains)
-```
+## Filtering
 
 ### SetCollection
 
@@ -221,10 +211,10 @@ These run the full damage calculator for every set in the collection. The attack
 
 - `willOHKO(target)`: sets whose best move guarantees the KO (even the minimum damage roll kills)
 - `canOHKO(target)`: sets whose best move has any chance to KO (the maximum damage roll kills)
-- `canOHKO(target, min_chance=X)`: at least X probability (0.0-1.0) that a random roll KOs
 - `willDieTo(attacker)`: sets that the attacker guarantees to KO (each set is the defender)
 - `canDieTo(attacker)`: sets that the attacker can KO on at least one roll
-- `include_acc=True`: factors move accuracy into all probability calcs (also accounts for Brightpowder/Lax Incense on the defender)
+- `min_chance=X`: minimum probability (0.0-1.0) that a random roll KOs. Only applies to `canOHKO` and `canDieTo`. Setting `min_chance=0` has no effect (equivalent to omitting it), and `min_chance=1.0` is equivalent to `willOHKO`/`willDieTo`.
+- `include_acc=True`: factors move accuracy into all probability calcs, including Brightpowder/Lax Incense on the defender. When combined with `min_chance`, both accuracy and damage roll probability are multiplied together (e.g. a 50% OHKO chance on an 80% accuracy move gives 40% total).
 - `include_ohko=True`: allows one-hit KO moves (Guillotine, Fissure, Horn Drill, Sheer Cold) to count
 
 ```python
@@ -367,8 +357,6 @@ calc_matchup(starmie, ttar, "Surf", field=Field(light_screen=True))
 # Doubles (spread moves like Surf, Blizzard, Rock Slide are halved; screens use 2/3 instead of 1/2)
 calc_matchup(starmie, ttar, "Surf", field=Field(is_doubles=True))
 ```
-
-Other fields: `helping_hand` (1.5x), `cloud_nine` (suppresses weather), `reflect` (physical screen). All can be combined freely.
 
 ### Stat Boosts
 
@@ -571,7 +559,7 @@ Phrase numbers: 0=none, 1=preparation, 2=slow/steady, 3=endurance, 4=high-risk, 
 
 ### Seeding
 
-The Dome ranks teams by a seeding value. Higher seed = higher bracket position. Notably, the higher seed wins in case of a tie, unlike every other facility where a tie counts as a loss for the player.
+The Dome gives each team a seed using a formula based on the Pokemon's stats, types, and levels. The seed affects where the players and opponents are placed in the bracket, and having the highest seed possible is advantageous to the player. The higher seed wins in case of a tie (except for Dome Ace Tucker, who will always win ties), unlike every other facility where a tie counts as a loss for the player.
 
 ```python
 from frontierbrain3 import Database, CustomSet
@@ -632,6 +620,8 @@ for _ in range(1000):
 print(f"Highest enemy seed: {best_seed}")
 print(f"Team: {best_team}")
 ```
+
+After simulating 1000 random enemy teams, the highest seed found gives a rough upper bound on what the player needs to beat. This is an easy way to estimate how high your team's seed should be to guarantee the #1 position.
 
 ---
 
@@ -765,11 +755,11 @@ get_status_chances(
 ### Wild Pokemon
 
 ```python
-from frontierbrain3.facilities.pike import get_wild_pokemon
+from frontierbrain3.facilities.pike import pike_wild_pokemon
 
-get_wild_pokemon(100, lv50=True)
-get_wild_pokemon(300, lv50=True)
-get_wild_pokemon(900, lv50=False)
+pike_wild_pokemon(100, lv50=True)
+pike_wild_pokemon(300, lv50=True)
+pike_wild_pokemon(900, lv50=False)
 ```
 
 ### Hints
@@ -784,20 +774,22 @@ HINTS
 
 ## Battle Pyramid (`facilities.pyramid`)
 
+For more details, see the [Bulbapedia Battle Pyramid page](https://bulbapedia.bulbagarden.net/wiki/Battle_Pyramid).
+
 ### Round Themes and Wild Pokemon
 
 20 rounds, each with a theme and 8 wild Pokemon:
 
 ```python
-from frontierbrain3.facilities.pyramid import (
-    ROUNDS, ROUND_THEMES, get_round_pokemon, get_encounters,
-)
+from frontierbrain3.facilities.pyramid import pyramid_wild_pokemon, ROUND_THEMES
 
 ROUND_THEMES
 
-get_round_pokemon(1)
+# All 8 Pokemon for round 1
+pyramid_wild_pokemon(1)
 
-get_encounters(1, 3)
+# Encounters with rates for round 1, floor 3
+pyramid_wild_pokemon(1, floor=3)
 ```
 
 Encounter data includes species, ability, level ranges, and moves. Rounds cycle after 20 (round 21 = round 1, etc.).

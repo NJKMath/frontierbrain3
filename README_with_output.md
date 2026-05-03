@@ -18,7 +18,7 @@ pip install -e .
 
 ---
 
-## Core Concepts
+## Database
 
 ### Frontier Sets
 
@@ -39,25 +39,6 @@ The package includes data for all 918 Battle Frontier Pokemon sets (882 regular 
 ```
 
 EVs are ordered `[HP, Atk, Def, SpA, SpD, Spe]`. The `Index` field determines which facility tiers/groups the set belongs to (see Tower and Factory sections). Sets are referenced by ID strings like `"Sunkern-1"`, `"Metagross-4"`, etc.
-
-You can access sets directly through the database:
-
-
-> ```python
-> from frontierbrain3 import Database
-> db = Database()
-> db.allSets("Charizard").ids()
-> ```
->
-> <details>
-> <summary>Output</summary>
->
-> ```
-> ['Charizard-1', 'Charizard-2', 'Charizard-3', 'Charizard-4', 'Charizard-TuckerSilver']
-> ```
->
-> </details>
-
 
 ### Frontier Trainers
 
@@ -87,274 +68,6 @@ The trainer list is shared across all Battle Frontier facilities, though details
 ```
 
 The `Sets` list contains all set IDs the trainer can draw from. In battle, they pick 3 (or fewer, depending on the facility) respecting species and item clause.
-
-### CustomSet
-
-Represents a player-defined Pokemon with full control over species, nature, EVs, IVs, level, item, ability, and moves.
-
-
-> ```python
-> from frontierbrain3 import CustomSet
-> flygon = CustomSet(
->     "Flygon",
->     nature="Jolly",
->     evs=[4, 252, 0, 0, 0, 252],
->     ivs=31,            # int (all same) or list of 6
->     level=100,
->     item="Choice Band",
->     ability="Levitate",
->     moves=["Earthquake", "Rock Slide", "Fire Blast", "Return"],
-> )
-> ```
->
-> <details>
-> <summary>Output</summary>
->
-> ```
-> flygon = CustomSet(Flygon, nature=Jolly, evs=[4, 252, 0, 0, 0, 252], ivs=[31, 31, 31, 31, 31, 31], level=100, item=Choice Band, ability=Levitate, moves=['earthquake', 'rockslide', 'fireblast', 'return'])
-> ```
->
-> </details>
-
-
-<br>
-
-> ```python
-> flygon.get_stats()
-> ```
->
-> <details>
-> <summary>Output</summary>
->
-> ```
-> {
->   'hp': 302,
->   'atk': 299,
->   'def': 196,
->   'spa': 176,
->   'spd': 196,
->   'spe': 328,
-> }
-> ```
->
-> </details>
-
-
-<br>
-
-> ```python
-> flygon.speed()
-> ```
->
-> <details>
-> <summary>Output</summary>
->
-> ```
-> 328
-> ```
->
-> </details>
-
-
-The `stats` parameter lets you directly declare stat values rather than calculating them from nature/EVs/IVs:
-
-
-> ```python
-> custom = CustomSet("Flygon", stats={"hp": 302, "atk": 299, "def": 196, "spa": 176, "spd": 196, "spe": 328})
-> ```
->
-> <details>
-> <summary>Output</summary>
->
-> ```
-> custom = CustomSet(Flygon, stats={'hp': 302, 'atk': 299, 'def': 196, 'spa': 176, 'spd': 196, 'spe': 328}, level=100, ability=levitate)
-> ```
->
-> </details>
-
-
-<br>
-
-> ```python
-> custom.get_stats()
-> ```
->
-> <details>
-> <summary>Output</summary>
->
-> ```
-> {
->   'hp': 302,
->   'atk': 299,
->   'def': 196,
->   'spa': 176,
->   'spd': 196,
->   'spe': 328,
-> }
-> ```
->
-> </details>
-
-
-### Pokepaste Import
-
-Import teams from [Pokepaste](https://pokepast.es/) format:
-
-
-> ```python
-> from frontierbrain3 import from_paste
-> from_paste("""
-> Skarmory (M) @ Leftovers
-> Ability: Sturdy
-> EVs: 252 HP / 252 Def / 4 SpD
-> Bold Nature
-> - Spikes
-> - Whirlwind
-> - Protect
-> - Rest
-> """)
-> ```
->
-> <details>
-> <summary>Output</summary>
->
-> ```
-> {
->   'CustomSkarmory': CustomSet(Skarmory, nature=Bold, evs=[252, 0, 252, 0, 4, 0], ivs=[31, 31, 31, 31, 31, 31], level=100, item=Leftovers, ability=Sturdy, moves=['spikes', 'whirlwind', 'protect', 'rest']),
-> }
-> ```
->
-> </details>
-
-
----
-
-## Core Utilities (`frontierutils`)
-
-### Stat Calculations
-
-
-> ```python
-> from frontierbrain3 import calc_stats, Database
-> db = Database()
-> snorlax = db.allSets("Snorlax")._sets[0]
-> ```
->
-> <details>
-> <summary>Output</summary>
->
-> ```
-> snorlax = {
->   'Pokemon': 'Snorlax',
->   'SetNum': 1,
->   'Nature': 'Adamant',
->   'Item': 'Leftovers',
->   'Abilities': ['Immunity', 'Thick Fat'],
->   'Moves': ['facade', 'shadowball', 'attract', 'doubleteam'],
->   'EVs': [0, 255, 255, 0, 0, 0],
->   'Index': 461,
->   'DexNum': 143,
-> }
-> ```
->
-> </details>
-
-
-<br>
-
-> ```python
-> calc_stats(snorlax)
-> ```
->
-> <details>
-> <summary>Output</summary>
->
-> ```
-> {
->   'hp': 461,
->   'atk': 350,
->   'def': 229,
->   'spa': 149,
->   'spd': 256,
->   'spe': 96,
-> }
-> ```
->
-> </details>
-
-
-<br>
-
-> ```python
-> calc_stats(snorlax, ivs=15)
-> ```
->
-> <details>
-> <summary>Output</summary>
->
-> ```
-> {
->   'hp': 445,
->   'atk': 333,
->   'def': 213,
->   'spa': 135,
->   'spd': 240,
->   'spe': 80,
-> }
-> ```
->
-> </details>
-
-
-<br>
-
-> ```python
-> calc_stats(snorlax, ivs=15, level=50)
-> ```
->
-> <details>
-> <summary>Output</summary>
->
-> ```
-> {
->   'hp': 227,
->   'atk': 169,
->   'def': 109,
->   'spa': 69,
->   'spd': 122,
->   'spe': 42,
-> }
-> ```
->
-> </details>
-
-
-<br>
-
-> ```python
-> calc_stats(snorlax, ivs=[31,31,31,0,31,31])
-> ```
->
-> <details>
-> <summary>Output</summary>
->
-> ```
-> {
->   'hp': 461,
->   'atk': 350,
->   'def': 229,
->   'spa': 121,
->   'spd': 256,
->   'spe': 96,
-> }
-> ```
->
-> </details>
-
-
----
-
-## Database (`frontier_db`)
 
 ### Loading
 
@@ -507,9 +220,9 @@ Import teams from [Pokepaste](https://pokepast.es/) format:
 >   'SCHOOL KID (F) ELISE', 'SCHOOL KID (F) ZOEY', 'RICH BOY MANUEL', 'RICH BOY RUSS', 'RICH BOY DUSTIN', 'LADY TINA',
 >   'LADY GILLIAN', 'LADY ZOE', 'CAMPER CHEN', 'CAMPER AL', 'CAMPER MITCH', 'PICNICKER ANNE', 'PICNICKER ALIZE',
 >   'PICNICKER LAUREN', 'TUBER (M) KIPP', 'TUBER (M) JASON', 'TUBER (M) JOHN', 'TUBER (F) ANN', 'TUBER (F) EILEEN',
->   'TUBER (F) CARLIE', 'SWIMMER? GORDON', 'SWIMMER? AYDEN', 'SWIMMER? MARCO', 'SWIMMER? CIERRA', 'SWIMMER? MARCY',
->   'SWIMMER? KATHY', 'POKÉFAN (M) PEYTON', 'POKÉFAN (M) JULIAN', 'POKÉFAN (M) QUINN', 'POKÉFAN (F) HAYLEE',
->   'POKÉFAN (F) AMANDA', 'POKÉFAN (F) STACY', 'PKMN BREEDER (M) RAFAEL', 'PKMN BREEDER (M) OLIVER',
+>   'TUBER (F) CARLIE', 'SWIMMER (M) GORDON', 'SWIMMER (M) AYDEN', 'SWIMMER (M) MARCO', 'SWIMMER (F) CIERRA',
+>   'SWIMMER (F) MARCY', 'SWIMMER (F) KATHY', 'POKÉFAN (M) PEYTON', 'POKÉFAN (M) JULIAN', 'POKÉFAN (M) QUINN',
+>   'POKÉFAN (F) HAYLEE', 'POKÉFAN (F) AMANDA', 'POKÉFAN (F) STACY', 'PKMN BREEDER (M) RAFAEL', 'PKMN BREEDER (M) OLIVER',
 >   'PKMN BREEDER (M) PAYTON', 'PKMN BREEDER (F) PAMELA', 'PKMN BREEDER (F) ELIZA', 'PKMN BREEDER (F) MARISA',
 >   'BUG CATCHER LEWIS', 'BUG CATCHER YOSHI', 'BUG CATCHER DESTIN', 'NINJA BOY KEON', 'NINJA BOY STUART',
 >   'NINJA BOY NESTOR', 'BUG MANIAC DERRICK', 'BUG MANIAC BRYSON', 'BUG MANIAC CLAYTON', 'FISHERMAN TRENTON',
@@ -544,19 +257,19 @@ Import teams from [Pokepaste](https://pokepast.es/) format:
 >   'GUITARIST HAL', 'BIRD KEEPER GAGE', 'BIRD KEEPER ARNOLD', 'SAILOR JARRETT', 'SAILOR GARETT', 'HIKER EMANUEL',
 >   'HIKER GUSTAVO', 'KINDLER KAMERON', 'KINDLER ALFREDO', 'GENTLEMAN RUBEN', 'GENTLEMAN LAMAR', 'YOUNGSTER JAXON',
 >   'YOUNGSTER LOGAN', 'LASS EMILEE', 'LASS JOSIE', 'CAMPER ARMANDO', 'CAMPER SKYLER', 'PICNICKER RUTH',
->   'PICNICKER MELODY', 'SWIMMER? PEDRO', 'SWIMMER? ERICK', 'SWIMMER? ELAINE', 'SWIMMER? JOYCE', 'POKÉFAN (M) TODD',
->   'POKÉFAN (M) GAVIN', 'POKÉFAN (F) MALORY', 'POKÉFAN (F) ESTHER', 'PKMN BREEDER (M) OSCAR', 'PKMN BREEDER (M) WILSON',
->   'PKMN BREEDER (F) CLARE', 'PKMN BREEDER (F) TESS', 'COOLTRAINER (M) LEON', 'COOLTRAINER (M) ALONZO',
->   'COOLTRAINER (M) VINCE', 'COOLTRAINER (M) BRYON', 'COOLTRAINER (F) AVA', 'COOLTRAINER (F) MIRIAM',
->   'COOLTRAINER (F) CARRIE', 'COOLTRAINER (F) GILLIAN', 'PKMN RANGER (M) TYLER', 'PKMN RANGER (M) CHAZ',
->   'PKMN RANGER (M) NELSON', 'PKMN RANGER (F) SHANIA', 'PKMN RANGER (F) STELLA', 'PKMN RANGER (F) DORINE',
->   'DRAGON TAMER MADDOX', 'DRAGON TAMER DAVIN', 'DRAGON TAMER TREVON', 'BLACK BELT MATEO', 'BLACK BELT BRET',
->   'BLACK BELT RAUL', 'BATTLE GIRL KAY', 'BATTLE GIRL ELENA', 'BATTLE GIRL ALANA', 'EXPERT (M) ALEXAS',
->   'EXPERT (M) WESTON', 'EXPERT (M) JASPER', 'EXPERT (F) NADIA', 'EXPERT (F) MIRANDA', 'EXPERT (F) EMMA',
->   'PSYCHIC (M) ROLANDO', 'PSYCHIC (M) STANLY', 'PSYCHIC (M) DARIO', 'PSYCHIC (F) KARLEE', 'PSYCHIC (F) JAYLIN',
->   'PSYCHIC (F) INGRID', 'HEX MANIAC DELILAH', 'HEX MANIAC CARLY', 'HEX MANIAC LEXIE', 'POKÉMANIAC MILLER',
->   'POKÉMANIAC MARV', 'POKÉMANIAC LAYTON', 'GENTLEMAN BROOKS', 'GENTLEMAN GREGORY', 'GENTLEMAN REESE',
->   'TRIATHLETE (M RUNNER) MASON', 'TRIATHLETE (M RUNNER) TOBY', 'TRIATHLETE (F RUNNER) DOROTHY',
+>   'PICNICKER MELODY', 'SWIMMER (M) PEDRO', 'SWIMMER (M) ERICK', 'SWIMMER (F) ELAINE', 'SWIMMER (F) JOYCE',
+>   'POKÉFAN (M) TODD', 'POKÉFAN (M) GAVIN', 'POKÉFAN (F) MALORY', 'POKÉFAN (F) ESTHER', 'PKMN BREEDER (M) OSCAR',
+>   'PKMN BREEDER (M) WILSON', 'PKMN BREEDER (F) CLARE', 'PKMN BREEDER (F) TESS', 'COOLTRAINER (M) LEON',
+>   'COOLTRAINER (M) ALONZO', 'COOLTRAINER (M) VINCE', 'COOLTRAINER (M) BRYON', 'COOLTRAINER (F) AVA',
+>   'COOLTRAINER (F) MIRIAM', 'COOLTRAINER (F) CARRIE', 'COOLTRAINER (F) GILLIAN', 'PKMN RANGER (M) TYLER',
+>   'PKMN RANGER (M) CHAZ', 'PKMN RANGER (M) NELSON', 'PKMN RANGER (F) SHANIA', 'PKMN RANGER (F) STELLA',
+>   'PKMN RANGER (F) DORINE', 'DRAGON TAMER MADDOX', 'DRAGON TAMER DAVIN', 'DRAGON TAMER TREVON', 'BLACK BELT MATEO',
+>   'BLACK BELT BRET', 'BLACK BELT RAUL', 'BATTLE GIRL KAY', 'BATTLE GIRL ELENA', 'BATTLE GIRL ALANA',
+>   'EXPERT (M) ALEXAS', 'EXPERT (M) WESTON', 'EXPERT (M) JASPER', 'EXPERT (F) NADIA', 'EXPERT (F) MIRANDA',
+>   'EXPERT (F) EMMA', 'PSYCHIC (M) ROLANDO', 'PSYCHIC (M) STANLY', 'PSYCHIC (M) DARIO', 'PSYCHIC (F) KARLEE',
+>   'PSYCHIC (F) JAYLIN', 'PSYCHIC (F) INGRID', 'HEX MANIAC DELILAH', 'HEX MANIAC CARLY', 'HEX MANIAC LEXIE',
+>   'POKÉMANIAC MILLER', 'POKÉMANIAC MARV', 'POKÉMANIAC LAYTON', 'GENTLEMAN BROOKS', 'GENTLEMAN GREGORY',
+>   'GENTLEMAN REESE', 'TRIATHLETE (M RUNNER) MASON', 'TRIATHLETE (M RUNNER) TOBY', 'TRIATHLETE (F RUNNER) DOROTHY',
 >   'TRIATHLETE (F RUNNER) PIPER', 'TRIATHLETE (M SWIMMER) FINN', 'TRIATHLETE (M SWIMMER) SAMIR',
 >   'TRIATHLETE (F SWIMMER) FIONA', 'TRIATHLETE (F SWIMMER) GLORIA', 'TRIATHLETE (M BIKER) NICO',
 >   'TRIATHLETE (M BIKER) JEREMY', 'TRIATHLETE (F BIKER) CAITLIN', 'TRIATHLETE (F BIKER) REENA', 'BUG MANIAC AVERY',
@@ -572,6 +285,288 @@ Import teams from [Pokepaste](https://pokepast.es/) format:
 >
 > </details>
 
+
+<br>
+
+> ```python
+> db.allSets("Charizard").ids()
+> ```
+>
+> <details>
+> <summary>Output</summary>
+>
+> ```
+> ['Charizard-1', 'Charizard-2', 'Charizard-3', 'Charizard-4', 'Charizard-TuckerSilver']
+> ```
+>
+> </details>
+
+
+---
+
+## CustomSet
+
+Represents a player-defined Pokemon with full control over species, nature, EVs, IVs, level, item, ability, and moves.
+
+
+> ```python
+> from frontierbrain3 import CustomSet
+> flygon = CustomSet(
+>     "Flygon",
+>     nature="Jolly",
+>     evs=[4, 252, 0, 0, 0, 252],
+>     ivs=31,            # int (all same) or list of 6
+>     level=100,
+>     item="Choice Band",
+>     ability="Levitate",
+>     moves=["Earthquake", "Rock Slide", "Fire Blast", "Return"],
+> )
+> ```
+>
+> <details>
+> <summary>Output</summary>
+>
+> ```
+> flygon = CustomSet(Flygon, nature=Jolly, evs=[4, 252, 0, 0, 0, 252], ivs=[31, 31, 31, 31, 31, 31], level=100, item=Choice Band, ability=Levitate, moves=['earthquake', 'rockslide', 'fireblast', 'return'])
+> ```
+>
+> </details>
+
+
+<br>
+
+> ```python
+> flygon.get_stats()
+> ```
+>
+> <details>
+> <summary>Output</summary>
+>
+> ```
+> {
+>   'hp': 302,
+>   'atk': 299,
+>   'def': 196,
+>   'spa': 176,
+>   'spd': 196,
+>   'spe': 328,
+> }
+> ```
+>
+> </details>
+
+
+<br>
+
+> ```python
+> flygon.speed()
+> ```
+>
+> <details>
+> <summary>Output</summary>
+>
+> ```
+> 328
+> ```
+>
+> </details>
+
+
+The `stats` parameter lets you directly declare stat values rather than calculating them from nature/EVs/IVs:
+
+
+> ```python
+> custom = CustomSet("Flygon", stats={"hp": 302, "atk": 299, "def": 196, "spa": 176, "spd": 196, "spe": 328})
+> ```
+>
+> <details>
+> <summary>Output</summary>
+>
+> ```
+> custom = CustomSet(Flygon, stats={'hp': 302, 'atk': 299, 'def': 196, 'spa': 176, 'spd': 196, 'spe': 328}, level=100, ability=levitate)
+> ```
+>
+> </details>
+
+
+<br>
+
+> ```python
+> custom.get_stats()
+> ```
+>
+> <details>
+> <summary>Output</summary>
+>
+> ```
+> {
+>   'hp': 302,
+>   'atk': 299,
+>   'def': 196,
+>   'spa': 176,
+>   'spd': 196,
+>   'spe': 328,
+> }
+> ```
+>
+> </details>
+
+
+### Pokepaste Import
+
+Import teams from [Pokepaste](https://pokepast.es/) format:
+
+
+> ```python
+> from frontierbrain3 import from_paste
+> from_paste("""
+> Skarmory (M) @ Leftovers
+> Ability: Sturdy
+> EVs: 252 HP / 252 Def / 4 SpD
+> Bold Nature
+> - Spikes
+> - Whirlwind
+> - Protect
+> - Rest
+> """)
+> ```
+>
+> <details>
+> <summary>Output</summary>
+>
+> ```
+> {
+>   'CustomSkarmory': CustomSet(Skarmory, nature=Bold, evs=[252, 0, 252, 0, 4, 0], ivs=[31, 31, 31, 31, 31, 31], level=100, item=Leftovers, ability=Sturdy, moves=['spikes', 'whirlwind', 'protect', 'rest']),
+> }
+> ```
+>
+> </details>
+
+
+### Stat Calculations
+
+
+> ```python
+> from frontierbrain3 import calc_stats, Database
+> db = Database()
+> snorlax = db.allSets("Snorlax")._sets[0]
+> ```
+>
+> <details>
+> <summary>Output</summary>
+>
+> ```
+> snorlax = {
+>   'Pokemon': 'Snorlax',
+>   'SetNum': 1,
+>   'Nature': 'Adamant',
+>   'Item': 'Leftovers',
+>   'Abilities': ['Immunity', 'Thick Fat'],
+>   'Moves': ['facade', 'shadowball', 'attract', 'doubleteam'],
+>   'EVs': [0, 255, 255, 0, 0, 0],
+>   'Index': 461,
+>   'DexNum': 143,
+> }
+> ```
+>
+> </details>
+
+
+<br>
+
+> ```python
+> calc_stats(snorlax)
+> ```
+>
+> <details>
+> <summary>Output</summary>
+>
+> ```
+> {
+>   'hp': 461,
+>   'atk': 350,
+>   'def': 229,
+>   'spa': 149,
+>   'spd': 256,
+>   'spe': 96,
+> }
+> ```
+>
+> </details>
+
+
+<br>
+
+> ```python
+> calc_stats(snorlax, ivs=15)
+> ```
+>
+> <details>
+> <summary>Output</summary>
+>
+> ```
+> {
+>   'hp': 445,
+>   'atk': 333,
+>   'def': 213,
+>   'spa': 135,
+>   'spd': 240,
+>   'spe': 80,
+> }
+> ```
+>
+> </details>
+
+
+<br>
+
+> ```python
+> calc_stats(snorlax, ivs=15, level=50)
+> ```
+>
+> <details>
+> <summary>Output</summary>
+>
+> ```
+> {
+>   'hp': 227,
+>   'atk': 169,
+>   'def': 109,
+>   'spa': 69,
+>   'spd': 122,
+>   'spe': 42,
+> }
+> ```
+>
+> </details>
+
+
+<br>
+
+> ```python
+> calc_stats(snorlax, ivs=[31,31,31,0,31,31])
+> ```
+>
+> <details>
+> <summary>Output</summary>
+>
+> ```
+> {
+>   'hp': 461,
+>   'atk': 350,
+>   'def': 229,
+>   'spa': 121,
+>   'spd': 256,
+>   'spe': 96,
+> }
+> ```
+>
+> </details>
+
+
+---
+
+## Filtering
 
 ### SetCollection
 
@@ -1249,10 +1244,10 @@ These run the full damage calculator for every set in the collection. The attack
 
 - `willOHKO(target)`: sets whose best move guarantees the KO (even the minimum damage roll kills)
 - `canOHKO(target)`: sets whose best move has any chance to KO (the maximum damage roll kills)
-- `canOHKO(target, min_chance=X)`: at least X probability (0.0-1.0) that a random roll KOs
 - `willDieTo(attacker)`: sets that the attacker guarantees to KO (each set is the defender)
 - `canDieTo(attacker)`: sets that the attacker can KO on at least one roll
-- `include_acc=True`: factors move accuracy into all probability calcs (also accounts for Brightpowder/Lax Incense on the defender)
+- `min_chance=X`: minimum probability (0.0-1.0) that a random roll KOs. Only applies to `canOHKO` and `canDieTo`. Setting `min_chance=0` has no effect (equivalent to omitting it), and `min_chance=1.0` is equivalent to `willOHKO`/`willDieTo`.
+- `include_acc=True`: factors move accuracy into all probability calcs, including Brightpowder/Lax Incense on the defender. When combined with `min_chance`, both accuracy and damage roll probability are multiplied together (e.g. a 50% OHKO chance on an 80% accuracy move gives 40% total).
 - `include_ohko=True`: allows one-hit KO moves (Guillotine, Fissure, Horn Drill, Sheer Cold) to count
 
 
@@ -1782,25 +1777,25 @@ Every filter has a negated form via `.Not`:
 >   'RUIN MANIAC AIDEN', 'RUIN MANIAC XAVIER', 'COLLECTOR CLINTON', 'COLLECTOR JESSE', 'BIRD KEEPER GAGE',
 >   'BIRD KEEPER ARNOLD', 'SAILOR JARRETT', 'SAILOR GARETT', 'GENTLEMAN RUBEN', 'GENTLEMAN LAMAR', 'YOUNGSTER JAXON',
 >   'YOUNGSTER LOGAN', 'LASS EMILEE', 'LASS JOSIE', 'CAMPER ARMANDO', 'CAMPER SKYLER', 'PICNICKER RUTH',
->   'PICNICKER MELODY', 'SWIMMER? PEDRO', 'SWIMMER? ERICK', 'SWIMMER? ELAINE', 'SWIMMER? JOYCE', 'POKÉFAN (M) TODD',
->   'POKÉFAN (M) GAVIN', 'POKÉFAN (F) MALORY', 'POKÉFAN (F) ESTHER', 'PKMN BREEDER (M) OSCAR', 'PKMN BREEDER (M) WILSON',
->   'PKMN BREEDER (F) CLARE', 'PKMN BREEDER (F) TESS', 'COOLTRAINER (M) LEON', 'COOLTRAINER (M) ALONZO',
->   'COOLTRAINER (M) VINCE', 'COOLTRAINER (M) BRYON', 'COOLTRAINER (F) AVA', 'COOLTRAINER (F) MIRIAM',
->   'COOLTRAINER (F) CARRIE', 'COOLTRAINER (F) GILLIAN', 'PKMN RANGER (M) TYLER', 'PKMN RANGER (M) CHAZ',
->   'PKMN RANGER (M) NELSON', 'PKMN RANGER (F) SHANIA', 'PKMN RANGER (F) STELLA', 'PKMN RANGER (F) DORINE',
->   'DRAGON TAMER MADDOX', 'DRAGON TAMER DAVIN', 'DRAGON TAMER TREVON', 'EXPERT (M) ALEXAS', 'EXPERT (M) WESTON',
->   'EXPERT (M) JASPER', 'EXPERT (F) NADIA', 'EXPERT (F) MIRANDA', 'EXPERT (F) EMMA', 'PSYCHIC (M) ROLANDO',
->   'PSYCHIC (M) STANLY', 'PSYCHIC (M) DARIO', 'PSYCHIC (F) KARLEE', 'PSYCHIC (F) JAYLIN', 'PSYCHIC (F) INGRID',
->   'HEX MANIAC DELILAH', 'HEX MANIAC CARLY', 'HEX MANIAC LEXIE', 'POKÉMANIAC MILLER', 'POKÉMANIAC MARV',
->   'POKÉMANIAC LAYTON', 'GENTLEMAN BROOKS', 'GENTLEMAN GREGORY', 'GENTLEMAN REESE', 'TRIATHLETE (M RUNNER) MASON',
->   'TRIATHLETE (M RUNNER) TOBY', 'TRIATHLETE (F RUNNER) DOROTHY', 'TRIATHLETE (F RUNNER) PIPER',
->   'TRIATHLETE (M SWIMMER) FINN', 'TRIATHLETE (M SWIMMER) SAMIR', 'TRIATHLETE (F SWIMMER) FIONA',
->   'TRIATHLETE (F SWIMMER) GLORIA', 'TRIATHLETE (M BIKER) NICO', 'TRIATHLETE (M BIKER) JEREMY',
->   'TRIATHLETE (F BIKER) CAITLIN', 'TRIATHLETE (F BIKER) REENA', 'FISHERMAN THEO', 'FISHERMAN BAILEY',
->   'COLLECTOR GIDEON', 'COLLECTOR TRISTON', 'GUITARIST CHARLES', 'GUITARIST RAYMOND', 'BIRD KEEPER DIRK',
->   'BIRD KEEPER HAROLD', 'SAILOR OMAR', 'SAILOR PETER', 'PARASOL LADY ALIVIA', 'PARASOL LADY PAIGE', 'BEAUTY ANYA',
->   'BEAUTY DAWN', 'AROMA LADY ABBY', 'AROMA LADY GRETEL', 'DOME ACE TUCKER', 'DOME ACE TUCKER', 'PALACE MAVEN SPENSER',
->   'PIKE QUEEN LUCY'
+>   'PICNICKER MELODY', 'SWIMMER (M) PEDRO', 'SWIMMER (M) ERICK', 'SWIMMER (F) ELAINE', 'SWIMMER (F) JOYCE',
+>   'POKÉFAN (M) TODD', 'POKÉFAN (M) GAVIN', 'POKÉFAN (F) MALORY', 'POKÉFAN (F) ESTHER', 'PKMN BREEDER (M) OSCAR',
+>   'PKMN BREEDER (M) WILSON', 'PKMN BREEDER (F) CLARE', 'PKMN BREEDER (F) TESS', 'COOLTRAINER (M) LEON',
+>   'COOLTRAINER (M) ALONZO', 'COOLTRAINER (M) VINCE', 'COOLTRAINER (M) BRYON', 'COOLTRAINER (F) AVA',
+>   'COOLTRAINER (F) MIRIAM', 'COOLTRAINER (F) CARRIE', 'COOLTRAINER (F) GILLIAN', 'PKMN RANGER (M) TYLER',
+>   'PKMN RANGER (M) CHAZ', 'PKMN RANGER (M) NELSON', 'PKMN RANGER (F) SHANIA', 'PKMN RANGER (F) STELLA',
+>   'PKMN RANGER (F) DORINE', 'DRAGON TAMER MADDOX', 'DRAGON TAMER DAVIN', 'DRAGON TAMER TREVON', 'EXPERT (M) ALEXAS',
+>   'EXPERT (M) WESTON', 'EXPERT (M) JASPER', 'EXPERT (F) NADIA', 'EXPERT (F) MIRANDA', 'EXPERT (F) EMMA',
+>   'PSYCHIC (M) ROLANDO', 'PSYCHIC (M) STANLY', 'PSYCHIC (M) DARIO', 'PSYCHIC (F) KARLEE', 'PSYCHIC (F) JAYLIN',
+>   'PSYCHIC (F) INGRID', 'HEX MANIAC DELILAH', 'HEX MANIAC CARLY', 'HEX MANIAC LEXIE', 'POKÉMANIAC MILLER',
+>   'POKÉMANIAC MARV', 'POKÉMANIAC LAYTON', 'GENTLEMAN BROOKS', 'GENTLEMAN GREGORY', 'GENTLEMAN REESE',
+>   'TRIATHLETE (M RUNNER) MASON', 'TRIATHLETE (M RUNNER) TOBY', 'TRIATHLETE (F RUNNER) DOROTHY',
+>   'TRIATHLETE (F RUNNER) PIPER', 'TRIATHLETE (M SWIMMER) FINN', 'TRIATHLETE (M SWIMMER) SAMIR',
+>   'TRIATHLETE (F SWIMMER) FIONA', 'TRIATHLETE (F SWIMMER) GLORIA', 'TRIATHLETE (M BIKER) NICO',
+>   'TRIATHLETE (M BIKER) JEREMY', 'TRIATHLETE (F BIKER) CAITLIN', 'TRIATHLETE (F BIKER) REENA', 'FISHERMAN THEO',
+>   'FISHERMAN BAILEY', 'COLLECTOR GIDEON', 'COLLECTOR TRISTON', 'GUITARIST CHARLES', 'GUITARIST RAYMOND',
+>   'BIRD KEEPER DIRK', 'BIRD KEEPER HAROLD', 'SAILOR OMAR', 'SAILOR PETER', 'PARASOL LADY ALIVIA', 'PARASOL LADY PAIGE',
+>   'BEAUTY ANYA', 'BEAUTY DAWN', 'AROMA LADY ABBY', 'AROMA LADY GRETEL', 'DOME ACE TUCKER', 'DOME ACE TUCKER',
+>   'PALACE MAVEN SPENSER', 'PIKE QUEEN LUCY'
 > ]
 > ```
 >
@@ -2241,8 +2236,6 @@ Both can be either a frontier set dict (from the database) or a `CustomSet`. Fro
 >
 > </details>
 
-
-Other fields: `helping_hand` (1.5x), `cloud_nine` (suppresses weather), `reflect` (physical screen). All can be combined freely.
 
 ### Stat Boosts
 
@@ -2749,26 +2742,27 @@ Extends `Database` with tower-specific trainer filtering:
 > TrainerCollection(100 trainers)
 > [
 >   'YOUNGSTER JAXON', 'YOUNGSTER LOGAN', 'LASS EMILEE', 'LASS JOSIE', 'CAMPER ARMANDO', 'CAMPER SKYLER',
->   'PICNICKER RUTH', 'PICNICKER MELODY', 'SWIMMER? PEDRO', 'SWIMMER? ERICK', 'SWIMMER? ELAINE', 'SWIMMER? JOYCE',
->   'POKÉFAN (M) TODD', 'POKÉFAN (M) GAVIN', 'POKÉFAN (F) MALORY', 'POKÉFAN (F) ESTHER', 'PKMN BREEDER (M) OSCAR',
->   'PKMN BREEDER (M) WILSON', 'PKMN BREEDER (F) CLARE', 'PKMN BREEDER (F) TESS', 'COOLTRAINER (M) LEON',
->   'COOLTRAINER (M) ALONZO', 'COOLTRAINER (M) VINCE', 'COOLTRAINER (M) BRYON', 'COOLTRAINER (F) AVA',
->   'COOLTRAINER (F) MIRIAM', 'COOLTRAINER (F) CARRIE', 'COOLTRAINER (F) GILLIAN', 'PKMN RANGER (M) TYLER',
->   'PKMN RANGER (M) CHAZ', 'PKMN RANGER (M) NELSON', 'PKMN RANGER (F) SHANIA', 'PKMN RANGER (F) STELLA',
->   'PKMN RANGER (F) DORINE', 'DRAGON TAMER MADDOX', 'DRAGON TAMER DAVIN', 'DRAGON TAMER TREVON', 'BLACK BELT MATEO',
->   'BLACK BELT BRET', 'BLACK BELT RAUL', 'BATTLE GIRL KAY', 'BATTLE GIRL ELENA', 'BATTLE GIRL ALANA',
->   'EXPERT (M) ALEXAS', 'EXPERT (M) WESTON', 'EXPERT (M) JASPER', 'EXPERT (F) NADIA', 'EXPERT (F) MIRANDA',
->   'EXPERT (F) EMMA', 'PSYCHIC (M) ROLANDO', 'PSYCHIC (M) STANLY', 'PSYCHIC (M) DARIO', 'PSYCHIC (F) KARLEE',
->   'PSYCHIC (F) JAYLIN', 'PSYCHIC (F) INGRID', 'HEX MANIAC DELILAH', 'HEX MANIAC CARLY', 'HEX MANIAC LEXIE',
->   'POKÉMANIAC MILLER', 'POKÉMANIAC MARV', 'POKÉMANIAC LAYTON', 'GENTLEMAN BROOKS', 'GENTLEMAN GREGORY',
->   'GENTLEMAN REESE', 'TRIATHLETE (M RUNNER) MASON', 'TRIATHLETE (M RUNNER) TOBY', 'TRIATHLETE (F RUNNER) DOROTHY',
->   'TRIATHLETE (F RUNNER) PIPER', 'TRIATHLETE (M SWIMMER) FINN', 'TRIATHLETE (M SWIMMER) SAMIR',
->   'TRIATHLETE (F SWIMMER) FIONA', 'TRIATHLETE (F SWIMMER) GLORIA', 'TRIATHLETE (M BIKER) NICO',
->   'TRIATHLETE (M BIKER) JEREMY', 'TRIATHLETE (F BIKER) CAITLIN', 'TRIATHLETE (F BIKER) REENA', 'BUG MANIAC AVERY',
->   'BUG MANIAC LIAM', 'FISHERMAN THEO', 'FISHERMAN BAILEY', 'RUIN MANIAC HUGO', 'RUIN MANIAC BRYCE', 'COLLECTOR GIDEON',
->   'COLLECTOR TRISTON', 'GUITARIST CHARLES', 'GUITARIST RAYMOND', 'BIRD KEEPER DIRK', 'BIRD KEEPER HAROLD',
->   'SAILOR OMAR', 'SAILOR PETER', 'HIKER DEV', 'HIKER COREY', 'KINDLER ANDRE', 'KINDLER FERRIS', 'PARASOL LADY ALIVIA',
->   'PARASOL LADY PAIGE', 'BEAUTY ANYA', 'BEAUTY DAWN', 'AROMA LADY ABBY', 'AROMA LADY GRETEL'
+>   'PICNICKER RUTH', 'PICNICKER MELODY', 'SWIMMER (M) PEDRO', 'SWIMMER (M) ERICK', 'SWIMMER (F) ELAINE',
+>   'SWIMMER (F) JOYCE', 'POKÉFAN (M) TODD', 'POKÉFAN (M) GAVIN', 'POKÉFAN (F) MALORY', 'POKÉFAN (F) ESTHER',
+>   'PKMN BREEDER (M) OSCAR', 'PKMN BREEDER (M) WILSON', 'PKMN BREEDER (F) CLARE', 'PKMN BREEDER (F) TESS',
+>   'COOLTRAINER (M) LEON', 'COOLTRAINER (M) ALONZO', 'COOLTRAINER (M) VINCE', 'COOLTRAINER (M) BRYON',
+>   'COOLTRAINER (F) AVA', 'COOLTRAINER (F) MIRIAM', 'COOLTRAINER (F) CARRIE', 'COOLTRAINER (F) GILLIAN',
+>   'PKMN RANGER (M) TYLER', 'PKMN RANGER (M) CHAZ', 'PKMN RANGER (M) NELSON', 'PKMN RANGER (F) SHANIA',
+>   'PKMN RANGER (F) STELLA', 'PKMN RANGER (F) DORINE', 'DRAGON TAMER MADDOX', 'DRAGON TAMER DAVIN',
+>   'DRAGON TAMER TREVON', 'BLACK BELT MATEO', 'BLACK BELT BRET', 'BLACK BELT RAUL', 'BATTLE GIRL KAY',
+>   'BATTLE GIRL ELENA', 'BATTLE GIRL ALANA', 'EXPERT (M) ALEXAS', 'EXPERT (M) WESTON', 'EXPERT (M) JASPER',
+>   'EXPERT (F) NADIA', 'EXPERT (F) MIRANDA', 'EXPERT (F) EMMA', 'PSYCHIC (M) ROLANDO', 'PSYCHIC (M) STANLY',
+>   'PSYCHIC (M) DARIO', 'PSYCHIC (F) KARLEE', 'PSYCHIC (F) JAYLIN', 'PSYCHIC (F) INGRID', 'HEX MANIAC DELILAH',
+>   'HEX MANIAC CARLY', 'HEX MANIAC LEXIE', 'POKÉMANIAC MILLER', 'POKÉMANIAC MARV', 'POKÉMANIAC LAYTON',
+>   'GENTLEMAN BROOKS', 'GENTLEMAN GREGORY', 'GENTLEMAN REESE', 'TRIATHLETE (M RUNNER) MASON',
+>   'TRIATHLETE (M RUNNER) TOBY', 'TRIATHLETE (F RUNNER) DOROTHY', 'TRIATHLETE (F RUNNER) PIPER',
+>   'TRIATHLETE (M SWIMMER) FINN', 'TRIATHLETE (M SWIMMER) SAMIR', 'TRIATHLETE (F SWIMMER) FIONA',
+>   'TRIATHLETE (F SWIMMER) GLORIA', 'TRIATHLETE (M BIKER) NICO', 'TRIATHLETE (M BIKER) JEREMY',
+>   'TRIATHLETE (F BIKER) CAITLIN', 'TRIATHLETE (F BIKER) REENA', 'BUG MANIAC AVERY', 'BUG MANIAC LIAM', 'FISHERMAN THEO',
+>   'FISHERMAN BAILEY', 'RUIN MANIAC HUGO', 'RUIN MANIAC BRYCE', 'COLLECTOR GIDEON', 'COLLECTOR TRISTON',
+>   'GUITARIST CHARLES', 'GUITARIST RAYMOND', 'BIRD KEEPER DIRK', 'BIRD KEEPER HAROLD', 'SAILOR OMAR', 'SAILOR PETER',
+>   'HIKER DEV', 'HIKER COREY', 'KINDLER ANDRE', 'KINDLER FERRIS', 'PARASOL LADY ALIVIA', 'PARASOL LADY PAIGE',
+>   'BEAUTY ANYA', 'BEAUTY DAWN', 'AROMA LADY ABBY', 'AROMA LADY GRETEL'
 > ]
 > ```
 >
@@ -2880,7 +2874,7 @@ Generates a random trainer + 3-set team respecting species and item clause:
 > <summary>Output</summary>
 >
 > ```
-> 'Cooltrainer (F) CARRIE: Dragonite-5, Gardevoir-2, Lapras-8'
+> 'Cooltrainer (M) VINCE: Latios-3, Metagross-3, Lapras-4'
 > ```
 >
 > </details>
@@ -2896,7 +2890,7 @@ Generates a random trainer + 3-set team respecting species and item clause:
 > <summary>Output</summary>
 >
 > ```
-> 'Dragon Tamer TREVON: Latios-1, Latias-3, Charizard-4'
+> 'Dragon Tamer TREVON: Latias-8, Nidoking-4, Altaria-4'
 > ```
 >
 > </details>
@@ -2912,7 +2906,7 @@ Generates a random trainer + 3-set team respecting species and item clause:
 > <summary>Output</summary>
 >
 > ```
-> 'Youngster BRADY: Magikarp-1, Taillow-1, Meditite-1'
+> 'Youngster BRADY: Smeargle-1, Shroomish-1, Ledyba-1'
 > ```
 >
 > </details>
@@ -3511,9 +3505,9 @@ Generate teams with optional type/phrase constraints:
 > <summary>Output</summary>
 >
 > ```
-> ids = ['Typhlosion-2', 'Lapras-7', 'Tyranitar-6']
+> ids = ['Walrein-1', 'Breloom-4', 'Claydol-1']
 > typ = 'No Type'
-> phrase = 'appears to be free-spirited and unrestrained'
+> phrase = 'appears to be slow and steady'
 > ```
 >
 > </details>
@@ -3529,7 +3523,7 @@ Generate teams with optional type/phrase constraints:
 > <summary>Output</summary>
 >
 > ```
-> ids = ['Magmar-2', 'Starmie-7', 'Ludicolo-3']
+> ids = ['Gyarados-4', 'Flareon-2', 'Starmie-7']
 > typ = 'Water'
 > phrase = 'appears to be free-spirited and unrestrained'
 > ```
@@ -3547,8 +3541,8 @@ Generate teams with optional type/phrase constraints:
 > <summary>Output</summary>
 >
 > ```
-> ids = ['Regice-5', 'Donphan-2', 'Fearow-1']
-> typ = 'No Type'
+> ids = ['Exeggutor-4', 'Steelix-3', 'Registeel-4']
+> typ = 'Steel'
 > phrase = 'appears to be high risk, high return'
 > ```
 >
@@ -3565,7 +3559,7 @@ Generate teams with optional type/phrase constraints:
 > <summary>Output</summary>
 >
 > ```
-> ids = ['Growlithe-1', 'Ledian-1', 'Houndour-1']
+> ids = ['Growlithe-1', 'Magby-1', 'Clamperl-1']
 > typ = 'Fire'
 > phrase = 'appears to be one based on total preparation'
 > ```
@@ -3581,7 +3575,7 @@ Phrase numbers: 0=none, 1=preparation, 2=slow/steady, 3=endurance, 4=high-risk, 
 
 ### Seeding
 
-The Dome ranks teams by a seeding value. Higher seed = higher bracket position. Notably, the higher seed wins in case of a tie, unlike every other facility where a tie counts as a loss for the player.
+The Dome gives each team a seed using a formula based on the Pokemon's stats, types, and levels. The seed affects where the players and opponents are placed in the bracket, and having the highest seed possible is advantageous to the player. The higher seed wins in case of a tie (except for Dome Ace Tucker, who will always win ties), unlike every other facility where a tie counts as a loss for the player.
 
 
 > ```python
@@ -3767,7 +3761,7 @@ The enemy seeding bugs massively favor the player, but it's useful to know how h
 > <summary>Output</summary>
 >
 > ```
-> Highest enemy seed: 4176
+> Highest enemy seed: 4190
 > ```
 >
 > </details>
@@ -3783,11 +3777,13 @@ The enemy seeding bugs massively favor the player, but it's useful to know how h
 > <summary>Output</summary>
 >
 > ```
-> Team: PKMN Breeder (M) OSCAR: Typhlosion-4, Feraligatr-4, Slaking-4
+> Team: Cooltrainer (M) ALONZO: Charizard-4, Feraligatr-3, Kingdra-1
 > ```
 >
 > </details>
 
+
+After simulating 1000 random enemy teams, the highest seed found gives a rough upper bound on what the player needs to beat. This is an easy way to estimate how high your team's seed should be to guarantee the #1 position.
 
 ---
 
@@ -4322,8 +4318,8 @@ Status probabilities accounting for immunities (example team: Metagross / Tauros
 
 
 > ```python
-> from frontierbrain3.facilities.pike import get_wild_pokemon
-> get_wild_pokemon(100, lv50=True)
+> from frontierbrain3.facilities.pike import pike_wild_pokemon
+> pike_wild_pokemon(100, lv50=True)
 > ```
 >
 > <details>
@@ -4343,7 +4339,7 @@ Status probabilities accounting for immunities (example team: Metagross / Tauros
 <br>
 
 > ```python
-> get_wild_pokemon(300, lv50=True)
+> pike_wild_pokemon(300, lv50=True)
 > ```
 >
 > <details>
@@ -4363,7 +4359,7 @@ Status probabilities accounting for immunities (example team: Metagross / Tauros
 <br>
 
 > ```python
-> get_wild_pokemon(900, lv50=False)
+> pike_wild_pokemon(900, lv50=False)
 > ```
 >
 > <details>
@@ -4408,15 +4404,15 @@ Status probabilities accounting for immunities (example team: Metagross / Tauros
 
 ## Battle Pyramid (`facilities.pyramid`)
 
+For more details, see the [Bulbapedia Battle Pyramid page](https://bulbapedia.bulbagarden.net/wiki/Battle_Pyramid).
+
 ### Round Themes and Wild Pokemon
 
 20 rounds, each with a theme and 8 wild Pokemon:
 
 
 > ```python
-> from frontierbrain3.facilities.pyramid import (
->     ROUNDS, ROUND_THEMES, get_round_pokemon, get_encounters,
-> )
+> from frontierbrain3.facilities.pyramid import pyramid_wild_pokemon, ROUND_THEMES
 > ROUND_THEMES
 > ```
 >
@@ -4454,7 +4450,7 @@ Status probabilities accounting for immunities (example team: Metagross / Tauros
 <br>
 
 > ```python
-> get_round_pokemon(1)
+> pyramid_wild_pokemon(1)
 > ```
 >
 > <details>
@@ -4479,7 +4475,7 @@ Status probabilities accounting for immunities (example team: Metagross / Tauros
 <br>
 
 > ```python
-> get_encounters(1, 3)
+> pyramid_wild_pokemon(1, floor=3)
 > ```
 >
 > <details>

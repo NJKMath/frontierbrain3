@@ -4,7 +4,7 @@ pike.py -- Battle Pike event probabilities, wild Pokemon, and hints.
 Provides:
     get_event_probabilities() - adjusted event odds given party state
     get_status_chances()      - status infliction odds with immunities
-    get_wild_pokemon()        - wild Pokemon pool for a given room number
+    pike_wild_pokemon()       - wild Pokemon pool for a given room number
     HINTS                     - hint text -> possible event pairs
 """
 
@@ -297,7 +297,7 @@ WILD_POKEMON_OPEN = {
 }
 
 
-def get_wild_pokemon(cumulative_room: int, *, lv50: bool = True) -> list[dict]:
+def pike_wild_pokemon(cumulative_room: int, *, lv50: bool = True) -> list[dict]:
     """
     Return the wild Pokemon pool for a given cumulative room number.
 
@@ -332,6 +332,10 @@ def get_wild_pokemon(cumulative_room: int, *, lv50: bool = True) -> list[dict]:
             break
 
     return result
+
+
+# Backward compatibility
+get_wild_pokemon = pike_wild_pokemon
 
 
 # -- Difficulty ----------------------------------------------------------------
