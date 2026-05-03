@@ -13,7 +13,6 @@ import random
 #                  "any"   — can be last in any of their rounds (round 8+ tier)
 #
 # Frontier Brains (index 300+) are not in this table; they're fixed battles.
-# Brain IVs: Silver = 15, Gold = 31.
 
 TIERS = [
     (range(  1,  81),  3,  [1],          None),
@@ -28,7 +27,17 @@ TIERS = [
     (range(241, 301), 31,  [8],          "any"),
 ]
 
-BRAIN_IVS = {"silver": 15, "gold": 31}
+BRAIN_IVS = {
+    "gold": 31,
+    "silver": {
+        "brandon": 16,
+        "lucy": 16,
+        "spenser": 16,
+        "greta": 20,
+        "tucker": 20,
+        "anabel": 24,
+    },
+}
 
 
 def get_tier(index: int) -> dict | None:
