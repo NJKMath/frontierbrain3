@@ -2874,7 +2874,7 @@ Generates a random trainer + 3-set team respecting species and item clause:
 > <summary>Output</summary>
 >
 > ```
-> 'Cooltrainer (M) VINCE: Latios-3, Metagross-3, Lapras-4'
+> 'Cooltrainer (F) GILLIAN: Latias-4, Dragonite-4, Regirock-5'
 > ```
 >
 > </details>
@@ -2890,7 +2890,7 @@ Generates a random trainer + 3-set team respecting species and item clause:
 > <summary>Output</summary>
 >
 > ```
-> 'Dragon Tamer TREVON: Latias-8, Nidoking-4, Altaria-4'
+> 'Dragon Tamer MADDOX: Gyarados-4, Charizard-4, Tyranitar-2'
 > ```
 >
 > </details>
@@ -2906,7 +2906,7 @@ Generates a random trainer + 3-set team respecting species and item clause:
 > <summary>Output</summary>
 >
 > ```
-> 'Youngster BRADY: Smeargle-1, Shroomish-1, Ledyba-1'
+> 'Youngster BRADY: Ekans-1, Marill-1, Rattata-1'
 > ```
 >
 > </details>
@@ -3505,9 +3505,9 @@ Generate teams with optional type/phrase constraints:
 > <summary>Output</summary>
 >
 > ```
-> ids = ['Walrein-1', 'Breloom-4', 'Claydol-1']
+> ids = ['Crobat-1', 'Cradily-2', 'Metagross-2']
 > typ = 'No Type'
-> phrase = 'appears to be slow and steady'
+> phrase = 'appears to be free-spirited and unrestrained'
 > ```
 >
 > </details>
@@ -3523,9 +3523,9 @@ Generate teams with optional type/phrase constraints:
 > <summary>Output</summary>
 >
 > ```
-> ids = ['Gyarados-4', 'Flareon-2', 'Starmie-7']
+> ids = ['Milotic-1', 'Blaziken-3', 'Tentacruel-3']
 > typ = 'Water'
-> phrase = 'appears to be free-spirited and unrestrained'
+> phrase = 'appears to be high risk, high return'
 > ```
 >
 > </details>
@@ -3541,8 +3541,8 @@ Generate teams with optional type/phrase constraints:
 > <summary>Output</summary>
 >
 > ```
-> ids = ['Exeggutor-4', 'Steelix-3', 'Registeel-4']
-> typ = 'Steel'
+> ids = ['Donphan-2', 'Milotic-2', 'Granbull-2']
+> typ = 'No Type'
 > phrase = 'appears to be high risk, high return'
 > ```
 >
@@ -3559,7 +3559,7 @@ Generate teams with optional type/phrase constraints:
 > <summary>Output</summary>
 >
 > ```
-> ids = ['Growlithe-1', 'Magby-1', 'Clamperl-1']
+> ids = ["Farfetch'd-1", 'Houndour-1', 'Growlithe-1']
 > typ = 'Fire'
 > phrase = 'appears to be one based on total preparation'
 > ```
@@ -3761,7 +3761,7 @@ The enemy seeding bugs massively favor the player, but it's useful to know how h
 > <summary>Output</summary>
 >
 > ```
-> Highest enemy seed: 4190
+> Highest enemy seed: 4192
 > ```
 >
 > </details>
@@ -3777,7 +3777,7 @@ The enemy seeding bugs massively favor the player, but it's useful to know how h
 > <summary>Output</summary>
 >
 > ```
-> Team: Cooltrainer (M) ALONZO: Charizard-4, Feraligatr-3, Kingdra-1
+> Team: PKMN Breeder (M) WILSON: Kingdra-4, Lapras-4, Walrein-4
 > ```
 >
 > </details>
