@@ -16,31 +16,6 @@ cd frontierbrain3
 pip install -e .
 ```
 
-## Package Structure
-
-```
-frontierbrain3/
-├── __init__.py          # Re-exports core API
-├── frontierutils.py     # CustomSet, stats, types, paste import
-├── frontier_db.py       # Database, SetCollection, TrainerCollection
-├── damagecalc.py        # Damage formula, KO probability
-├── data/
-│   ├── pokemon.json     # Species data (stats, types, weight, abilities)
-│   ├── bf_pokemon.json  # All frontier sets (882 regular + 36 Frontier Brain)
-│   ├── bf_trainers.json # All 300+ trainers (includes Frontier Brains)
-│   ├── moves.json       # Move data (type, power, accuracy, etc.)
-│   ├── items.json       # Item names/IDs
-│   └── abilities.json   # Ability names/IDs
-└── facilities/
-    ├── tower.py         # Trainer tiers, TowerDatabase
-    ├── factory.py       # Team type/phrase, FactoryDatabase
-    ├── dome.py          # Seeding formula
-    ├── palace.py        # Nature-based move selection
-    ├── pike.py          # Events, status, wild Pokemon, hints
-    ├── pyramid.py       # Wild encounters, items, round themes
-    └── arena.py         # Placeholder (no mechanics to model)
-```
-
 ---
 
 ## Core Concepts
@@ -115,7 +90,7 @@ The `Sets` list contains all set IDs the trainer can draw from. In battle, they 
 
 ### CustomSet
 
-Represents a player-defined Pokemon with full control over species, nature, EVs, IVs, level, item, ability, and moves. Used as attacker/defender in damage calcs and as a speed benchmark in queries.
+Represents a player-defined Pokemon with full control over species, nature, EVs, IVs, level, item, ability, and moves.
 
 
 > ```python
@@ -1272,6 +1247,14 @@ Compare frontier sets against a `CustomSet` benchmark:
 
 These run the full damage calculator for every set in the collection. The attacker/defender can be a frontier set dict or a `CustomSet`.
 
+- `willOHKO(target)`: sets whose best move guarantees the KO (even the minimum damage roll kills)
+- `canOHKO(target)`: sets whose best move has any chance to KO (the maximum damage roll kills)
+- `canOHKO(target, min_chance=X)`: at least X probability (0.0-1.0) that a random roll KOs
+- `willDieTo(attacker)`: sets that the attacker guarantees to KO (each set is the defender)
+- `canDieTo(attacker)`: sets that the attacker can KO on at least one roll
+- `include_acc=True`: factors move accuracy into all probability calcs (also accounts for Brightpowder/Lax Incense on the defender)
+- `include_ohko=True`: allows one-hit KO moves (Guillotine, Fissure, Horn Drill, Sheer Cold) to count
+
 
 > ```python
 > lax = db.allSets("Snorlax")._sets[0]
@@ -1989,33 +1972,6 @@ Moves can be passed as a string name (looked up from `data/moves.json`):
 
 
 > ```python
-> result = calc_matchup(meta, ttar, "Meteor Mash")
-> ```
->
-> <details>
-> <summary>Output</summary>
->
-> ```
-> result = {
->   'rolls': [323, 326, 330, 334, 338, 342, 345, 349, 353, 357, 361, 364, 368, 372, 376, 380],
->   'attack_rolls': None,
->   'hit_info': {'type': 'single'},
->   'min': 323,
->   'max': 380,
->   'min_pct': 94.70,
->   'max_pct': 111.40,
->   'defender_hp': 341,
->   'defender_max_hp': 341,
->   'ko_chances': {1: 0.68, 2: 1.0},
-> }
-> ```
->
-> </details>
-
-
-<br>
-
-> ```python
 > result = calc_matchup(starmie, ttar, "Surf")
 > ```
 >
@@ -2270,16 +2226,16 @@ Both can be either a frontier set dict (from the database) or a `CustomSet`. Fro
 >
 > ```
 > {
->   'rolls': [261, 264, 267, 271, 274, 277, 280, 283, 286, 289, 292, 295, 298, 301, 304, 308],
+>   'rolls': [132, 134, 135, 137, 138, 140, 141, 143, 145, 146, 148, 149, 151, 152, 154, 156],
 >   'attack_rolls': None,
 >   'hit_info': {'type': 'single'},
->   'min': 261,
->   'max': 308,
->   'min_pct': 76.50,
->   'max_pct': 90.30,
+>   'min': 132,
+>   'max': 156,
+>   'min_pct': 38.70,
+>   'max_pct': 45.70,
 >   'defender_hp': 341,
 >   'defender_max_hp': 341,
->   'ko_chances': {1: 0.0, 2: 1.0},
+>   'ko_chances': {1: 0.0, 2: 0.0, 3: 1.0},
 > }
 > ```
 >
@@ -2924,7 +2880,7 @@ Generates a random trainer + 3-set team respecting species and item clause:
 > <summary>Output</summary>
 >
 > ```
-> 'Dragon Tamer DAVIN: Rhydon-3, Lapras-1, Latias-1'
+> 'Cooltrainer (F) CARRIE: Dragonite-5, Gardevoir-2, Lapras-8'
 > ```
 >
 > </details>
@@ -2940,7 +2896,7 @@ Generates a random trainer + 3-set team respecting species and item clause:
 > <summary>Output</summary>
 >
 > ```
-> 'Dragon Tamer TREVON: Altaria-1, Lapras-4, Dragonite-3'
+> 'Dragon Tamer TREVON: Latios-1, Latias-3, Charizard-4'
 > ```
 >
 > </details>
@@ -2956,7 +2912,7 @@ Generates a random trainer + 3-set team respecting species and item clause:
 > <summary>Output</summary>
 >
 > ```
-> 'Youngster BRADY: Ekans-1, Meowth-1, Ledyba-1'
+> 'Youngster BRADY: Magikarp-1, Taillow-1, Meditite-1'
 > ```
 >
 > </details>
@@ -3555,9 +3511,9 @@ Generate teams with optional type/phrase constraints:
 > <summary>Output</summary>
 >
 > ```
-> ids = ['Latias-2', 'Magmar-3', 'Salamence-4']
-> typ = 'Dragon'
-> phrase = 'appears to be high risk, high return'
+> ids = ['Typhlosion-2', 'Lapras-7', 'Tyranitar-6']
+> typ = 'No Type'
+> phrase = 'appears to be free-spirited and unrestrained'
 > ```
 >
 > </details>
@@ -3573,9 +3529,9 @@ Generate teams with optional type/phrase constraints:
 > <summary>Output</summary>
 >
 > ```
-> ids = ['Entei-3', 'Swampert-3', 'Vaporeon-3']
+> ids = ['Magmar-2', 'Starmie-7', 'Ludicolo-3']
 > typ = 'Water'
-> phrase = 'appears to be high risk, high return'
+> phrase = 'appears to be free-spirited and unrestrained'
 > ```
 >
 > </details>
@@ -3591,7 +3547,7 @@ Generate teams with optional type/phrase constraints:
 > <summary>Output</summary>
 >
 > ```
-> ids = ['Swampert-4', 'Zapdos-5', 'Alakazam-1']
+> ids = ['Regice-5', 'Donphan-2', 'Fearow-1']
 > typ = 'No Type'
 > phrase = 'appears to be high risk, high return'
 > ```
@@ -3609,7 +3565,7 @@ Generate teams with optional type/phrase constraints:
 > <summary>Output</summary>
 >
 > ```
-> ids = ['Growlithe-1', 'Clamperl-1', 'Houndour-1']
+> ids = ['Growlithe-1', 'Ledian-1', 'Houndour-1']
 > typ = 'Fire'
 > phrase = 'appears to be one based on total preparation'
 > ```
@@ -3790,73 +3746,6 @@ The enemy seeding bugs massively favor the player, but it's useful to know how h
 > from frontierbrain3.facilities.dome import calc_seed
 > tower = TowerDatabase()
 > set_lookup = {f"{s['Pokemon']}-{s['SetNum']}": s for s in tower._sets}
-> ```
->
-> <details>
-> <summary>Output</summary>
->
-> ```
-> set_lookup = {  # 918 entries
->   'Sunkern-1': {'Pokemon': 'Sunkern', 'SetNum': 1, 'Nature': 'Relaxed', 'Item': 'Lax Incense', 'Abilities': ['Chlorophyll'], 'Moves': ['megadrain', 'helpinghand', 'sunnyday', 'lightscreen'], 'EVs': [255, 0, 0, 255, 0, 0], 'Index': 1, 'DexNum': 191},
->   'Azurill-1': {'Pokemon': 'Azurill', 'SetNum': 1, 'Nature': 'Rash', 'Item': 'Cheri Berry', 'Abilities': ['Thick Fat', 'Huge Power'], 'Moves': ['waterpulse', 'attract', 'sing', 'charm'], 'EVs': [255, 0, 0, 255, 0, 0], 'Index': 2, 'DexNum': 298},
->   'Caterpie-1': {'Pokemon': 'Caterpie', 'SetNum': 1, 'Nature': 'Quirky', 'Item': 'Focus Band', 'Abilities': ['Shield Dust'], 'Moves': ['tackle', 'stringshot', '', ''], 'EVs': [255, 255, 0, 0, 0, 0], 'Index': 3, 'DexNum': 10},
->   'Weedle-1': {'Pokemon': 'Weedle', 'SetNum': 1, 'Nature': 'Quirky', 'Item': 'Focus Band', 'Abilities': ['Shield Dust'], 'Moves': ['poisonsting', 'stringshot', '', ''], 'EVs': [255, 255, 0, 0, 0, 0], 'Index': 4, 'DexNum': 13},
->   'Wurmple-1': {'Pokemon': 'Wurmple', 'SetNum': 1, 'Nature': 'Quirky', 'Item': 'Lax Incense', 'Abilities': ['Shield Dust'], 'Moves': ['tackle', 'stringshot', 'poisonsting', ''], 'EVs': [255, 255, 0, 0, 0, 0], 'Index': 5, 'DexNum': 265},
->   'Ralts-1': {'Pokemon': 'Ralts', 'SetNum': 1, 'Nature': 'Docile', 'Item': 'TwistedSpoon', 'Abilities': ['Synchronize', 'Trace'], 'Moves': ['confusion', 'imprison', 'doubleteam', 'lightscreen'], 'EVs': [255, 0, 0, 255, 0, 0], 'Index': 6, 'DexNum': 280},
->   'Magikarp-1': {'Pokemon': 'Magikarp', 'SetNum': 1, 'Nature': 'Hardy', 'Item': 'Focus Band', 'Abilities': ['Swift Swim'], 'Moves': ['flail', '', '', ''], 'EVs': [255, 255, 0, 0, 0, 0], 'Index': 7, 'DexNum': 129},
->   'Feebas-1': {'Pokemon': 'Feebas', 'SetNum': 1, 'Nature': 'Lonely', 'Item': 'Focus Band', 'Abilities': ['Swift Swim'], 'Moves': ['flail', 'mirrorcoat', '', ''], 'EVs': [255, 255, 0, 0, 0, 0], 'Index': 8, 'DexNum': 349},
->   'Metapod-1': {'Pokemon': 'Metapod', 'SetNum': 1, 'Nature': 'Bashful', 'Item': 'Lax Incense', 'Abilities': ['Shed Skin'], 'Moves': ['harden', '', '', ''], 'EVs': [255, 0, 0, 0, 255, 0], 'Index': 9, 'DexNum': 11},
->   'Kakuna-1': {'Pokemon': 'Kakuna', 'SetNum': 1, 'Nature': 'Bashful', 'Item': 'Lax Incense', 'Abilities': ['Shed Skin'], 'Moves': ['harden', '', '', ''], 'EVs': [255, 0, 0, 0, 255, 0], 'Index': 10, 'DexNum': 14},
->   'Pichu-1': {'Pokemon': 'Pichu', 'SetNum': 1, 'Nature': 'Rash', 'Item': 'Sitrus Berry', 'Abilities': ['Static'], 'Moves': ['sweetkiss', 'thunderwave', 'attract', 'shockwave'], 'EVs': [255, 0, 0, 255, 0, 0], 'Index': 11, 'DexNum': 172},
->   'Silcoon-1': {'Pokemon': 'Silcoon', 'SetNum': 1, 'Nature': 'Bashful', 'Item': 'Lax Incense', 'Abilities': ['Shed Skin'], 'Moves': ['harden', '', '', ''], 'EVs': [255, 0, 0, 0, 255, 0], 'Index': 12, 'DexNum': 266},
->   'Cascoon-1': {'Pokemon': 'Cascoon', 'SetNum': 1, 'Nature': 'Bashful', 'Item': 'Lax Incense', 'Abilities': ['Shed Skin'], 'Moves': ['harden', '', '', ''], 'EVs': [255, 0, 0, 0, 255, 0], 'Index': 13, 'DexNum': 268},
->   'Igglybuff-1': {'Pokemon': 'Igglybuff', 'SetNum': 1, 'Nature': 'Docile', 'Item': 'Focus Band', 'Abilities': ['Cute Charm'], 'Moves': ['sweetkiss', 'sing', 'attract', 'seismictoss'], 'EVs': [255, 255, 0, 0, 0, 0], 'Index': 14, 'DexNum': 174},
->   'Wooper-1': {'Pokemon': 'Wooper', 'SetNum': 1, 'Nature': 'Docile', 'Item': 'Sitrus Berry', 'Abilities': ['Damp', 'Water Absorb'], 'Moves': ['yawn', 'dig', 'waterpulse', 'raindance'], 'EVs': [255, 255, 0, 0, 0, 0], 'Index': 15, 'DexNum': 194},
->   'Tyrogue-1': {'Pokemon': 'Tyrogue', 'SetNum': 1, 'Nature': 'Docile', 'Item': 'Focus Band', 'Abilities': ['Guts'], 'Moves': ['machpunch', 'protect', 'doubleteam', 'facade'], 'EVs': [255, 255, 0, 0, 0, 0], 'Index': 16, 'DexNum': 236},
->   'Sentret-1': {'Pokemon': 'Sentret', 'SetNum': 1, 'Nature': 'Docile', 'Item': "King's Rock", 'Abilities': ['Run Away', 'Keen Eye'], 'Moves': ['quickattack', 'followme', 'helpinghand', 'assist'], 'EVs': [255, 255, 0, 0, 0, 0], 'Index': 17, 'DexNum': 161},
->   'Cleffa-1': {'Pokemon': 'Cleffa', 'SetNum': 1, 'Nature': 'Serious', 'Item': 'Lax Incense', 'Abilities': ['Cute Charm'], 'Moves': ['sweetkiss', 'sing', 'attract', 'metronome'], 'EVs': [255, 0, 0, 255, 0, 0], 'Index': 18, 'DexNum': 173},
->   'Seedot-1': {'Pokemon': 'Seedot', 'SetNum': 1, 'Nature': 'Docile', 'Item': 'Focus Band', 'Abilities': ['Chlorophyll', 'Early Bird'], 'Moves': ['bulletseed', 'bide', 'defensecurl', 'rollout'], 'EVs': [255, 255, 0, 0, 0, 0], 'Index': 19, 'DexNum': 273},
->   'Lotad-1': {'Pokemon': 'Lotad', 'SetNum': 1, 'Nature': 'Docile', 'Item': 'Lax Incense', 'Abilities': ['Swift Swim', 'Rain Dish'], 'Moves': ['raindance', 'waterpulse', 'sunnyday', 'megadrain'], 'EVs': [255, 0, 0, 255, 0, 0], 'Index': 20, 'DexNum': 270},
->   'Poochyena-1': {'Pokemon': 'Poochyena', 'SetNum': 1, 'Nature': 'Relaxed', 'Item': 'Petaya Berry', 'Abilities': ['Run Away'], 'Moves': ['crunch', 'swagger', 'roar', 'sandattack'], 'EVs': [255, 0, 0, 255, 0, 0], 'Index': 21, 'DexNum': 261},
->   'Shedinja-1': {'Pokemon': 'Shedinja', 'SetNum': 1, 'Nature': 'Naive', 'Item': 'Lax Incense', 'Abilities': ['Wonder Guard'], 'Moves': ['shadowball', 'confuseray', 'silverwind', 'grudge'], 'EVs': [255, 0, 0, 0, 0, 255], 'Index': 22, 'DexNum': 292},
->   'Makuhita-1': {'Pokemon': 'Makuhita', 'SetNum': 1, 'Nature': 'Docile', 'Item': 'Scope Lens', 'Abilities': ['Thick Fat', 'Guts'], 'Moves': ['fakeout', 'seismictoss', 'detect', 'whirlwind'], 'EVs': [255, 255, 0, 0, 0, 0], 'Index': 23, 'DexNum': 296},
->   'Whismur-1': {'Pokemon': 'Whismur', 'SetNum': 1, 'Nature': 'Relaxed', 'Item': 'Cheri Berry', 'Abilities': ['Soundproof'], 'Moves': ['uproar', 'swagger', 'bodyslam', 'smellingsalt'], 'EVs': [255, 255, 0, 0, 0, 0], 'Index': 24, 'DexNum': 293},
->   'Zigzagoon-1': {'Pokemon': 'Zigzagoon', 'SetNum': 1, 'Nature': 'Timid', 'Item': 'Silk Scarf', 'Abilities': ['Pickup'], 'Moves': ['headbutt', 'pinmissile', 'swift', 'sandattack'], 'EVs': [255, 255, 0, 0, 0, 0], 'Index': 25, 'DexNum': 263},
->   'Zubat-1': {'Pokemon': 'Zubat', 'SetNum': 1, 'Nature': 'Sassy', 'Item': 'Cheri Berry', 'Abilities': ['Inner Focus'], 'Moves': ['poisonfang', 'whirlwind', 'confuseray', 'aerialace'], 'EVs': [255, 255, 0, 0, 0, 0], 'Index': 26, 'DexNum': 41},
->   'Togepi-1': {'Pokemon': 'Togepi', 'SetNum': 1, 'Nature': 'Relaxed', 'Item': 'Lax Incense', 'Abilities': ['Hustle', 'Serene Grace'], 'Moves': ['return', 'yawn', 'wish', 'sweetkiss'], 'EVs': [255, 255, 0, 0, 0, 0], 'Index': 27, 'DexNum': 175},
->   'Spinarak-1': {'Pokemon': 'Spinarak', 'SetNum': 1, 'Nature': 'Quirky', 'Item': 'Liechi Berry', 'Abilities': ['Swarm', 'Insomnia'], 'Moves': ['signalbeam', 'nightshade', 'spiderweb', 'scaryface'], 'EVs': [255, 255, 0, 0, 0, 0], 'Index': 28, 'DexNum': 167},
->   'Marill-1': {'Pokemon': 'Marill', 'SetNum': 1, 'Nature': 'Gentle', 'Item': 'Mystic Water', 'Abilities': ['Thick Fat', 'Huge Power'], 'Moves': ['waterpulse', 'raindance', 'lightscreen', 'return'], 'EVs': [255, 255, 0, 0, 0, 0], 'Index': 29, 'DexNum': 183},
->   'Hoppip-1': {'Pokemon': 'Hoppip', 'SetNum': 1, 'Nature': 'Lax', 'Item': 'Lax Incense', 'Abilities': ['Chlorophyll'], 'Moves': ['megadrain', 'leechseed', 'sleeppowder', 'stunspore'], 'EVs': [0, 0, 255, 0, 255, 0], 'Index': 30, 'DexNum': 187},
->   'Slugma-1': {'Pokemon': 'Slugma', 'SetNum': 1, 'Nature': 'Sassy', 'Item': 'Sitrus Berry', 'Abilities': ['Magma Armor', 'Flame Body'], 'Moves': ['ember', 'rockslide', 'yawn', 'bodyslam'], 'EVs': [170, 0, 170, 0, 170, 0], 'Index': 31, 'DexNum': 218},
->   'Swinub-1': {'Pokemon': 'Swinub', 'SetNum': 1, 'Nature': 'Gentle', 'Item': 'Sitrus Berry', 'Abilities': ['Oblivious'], 'Moves': ['icywind', 'dig', 'rocktomb', 'endure'], 'EVs': [0, 255, 0, 255, 0, 0], 'Index': 32, 'DexNum': 220},
->   'Smeargle-1': {'Pokemon': 'Smeargle', 'SetNum': 1, 'Nature': 'Hardy', 'Item': "King's Rock", 'Abilities': ['Own Tempo'], 'Moves': ['extremespeed', 'fakeout', 'quickattack', 'machpunch'], 'EVs': [255, 255, 0, 0, 0, 0], 'Index': 33, 'DexNum': 235},
->   'Pidgey-1': {'Pokemon': 'Pidgey', 'SetNum': 1, 'Nature': 'Lonely', 'Item': 'Sharp Beak', 'Abilities': ['Keen Eye'], 'Moves': ['gust', 'sandattack', 'whirlwind', 'quickattack'], 'EVs': [255, 255, 0, 0, 0, 0], 'Index': 34, 'DexNum': 16},
->   'Rattata-1': {'Pokemon': 'Rattata', 'SetNum': 1, 'Nature': 'Docile', 'Item': "King's Rock", 'Abilities': ['Run Away', 'Guts'], 'Moves': ['hyperfang', 'pursuit', 'quickattack', 'swagger'], 'EVs': [255, 255, 0, 0, 0, 0], 'Index': 35, 'DexNum': 19},
->   'Wynaut-1': {'Pokemon': 'Wynaut', 'SetNum': 1, 'Nature': 'Jolly', 'Item': 'Lax Incense', 'Abilities': ['Shadow Tag'], 'Moves': ['encore', 'counter', 'mirrorcoat', 'charm'], 'EVs': [0, 0, 255, 0, 255, 0], 'Index': 36, 'DexNum': 360},
->   'Skitty-1': {'Pokemon': 'Skitty', 'SetNum': 1, 'Nature': 'Docile', 'Item': 'BrightPowder', 'Abilities': ['Cute Charm'], 'Moves': ['sing', 'attract', 'charm', 'doubleslap'], 'EVs': [255, 255, 0, 0, 0, 0], 'Index': 37, 'DexNum': 300},
->   'Spearow-1': {'Pokemon': 'Spearow', 'SetNum': 1, 'Nature': 'Docile', 'Item': 'Liechi Berry', 'Abilities': ['Keen Eye'], 'Moves': ['furyattack', 'pursuit', 'mirrormove', 'protect'], 'EVs': [255, 0, 0, 0, 0, 255], 'Index': 38, 'DexNum': 21},
->   'Hoothoot-1': {'Pokemon': 'Hoothoot', 'SetNum': 1, 'Nature': 'Quirky', 'Item': 'Persim Berry', 'Abilities': ['Insomnia', 'Keen Eye'], 'Moves': ['confusion', 'hypnosis', 'supersonic', 'reflect'], 'EVs': [255, 0, 0, 255, 0, 0], 'Index': 39, 'DexNum': 163},
->   'Diglett-1': {'Pokemon': 'Diglett', 'SetNum': 1, 'Nature': 'Naive', 'Item': "King's Rock", 'Abilities': ['Sand Veil', 'Arena Trap'], 'Moves': ['magnitude', 'slash', 'rocktomb', 'sandattack'], 'EVs': [0, 255, 0, 0, 0, 255], 'Index': 40, 'DexNum': 50},
->   'Ledyba-1': {'Pokemon': 'Ledyba', 'SetNum': 1, 'Nature': 'Bashful', 'Item': 'Sitrus Berry', 'Abilities': ['Swarm', 'Early Bird'], 'Moves': ['psybeam', 'agility', 'batonpass', 'lightscreen'], 'EVs': [255, 0, 0, 255, 0, 0], 'Index': 41, 'DexNum': 165},
->   'Nincada-1': {'Pokemon': 'Nincada', 'SetNum': 1, 'Nature': 'Calm', 'Item': 'Pecha Berry', 'Abilities': ['Compoundeyes'], 'Moves': ['mudslap', 'dig', 'toxic', 'protect'], 'EVs': [255, 255, 0, 0, 0, 0], 'Index': 42, 'DexNum': 290},
->   'Surskit-1': {'Pokemon': 'Surskit', 'SetNum': 1, 'Nature': 'Relaxed', 'Item': 'Mystic Water', 'Abilities': ['Swift Swim'], 'Moves': ['bubblebeam', 'raindance', 'sweetscent', 'quickattack'], 'EVs': [255, 0, 0, 255, 0, 0], 'Index': 43, 'DexNum': 283},
->   'Jigglypuff-1': {'Pokemon': 'Jigglypuff', 'SetNum': 1, 'Nature': 'Relaxed', 'Item': 'Lax Incense', 'Abilities': ['Cute Charm'], 'Moves': ['sing', 'wish', 'mimic', 'doubleslap'], 'EVs': [170, 0, 170, 0, 170, 0], 'Index': 44, 'DexNum': 39},
->   'Taillow-1': {'Pokemon': 'Taillow', 'SetNum': 1, 'Nature': 'Gentle', 'Item': 'Salac Berry', 'Abilities': ['Guts'], 'Moves': ['fly', 'quickattack', 'endeavor', 'focusenergy'], 'EVs': [170, 170, 0, 0, 0, 170], 'Index': 45, 'DexNum': 276},
->   'Wingull-1': {'Pokemon': 'Wingull', 'SetNum': 1, 'Nature': 'Hardy', 'Item': 'Persim Berry', 'Abilities': ['Keen Eye'], 'Moves': ['waterpulse', 'fly', 'quickattack', 'steelwing'], 'EVs': [255, 0, 0, 255, 0, 0], 'Index': 46, 'DexNum': 278},
->   'NidoranM-1': {'Pokemon': 'NidoranM', 'SetNum': 1, 'Nature': 'Quirky', 'Item': 'Sitrus Berry', 'Abilities': ['Poison Point'], 'Moves': ['doublekick', 'poisonsting', 'disable', 'helpinghand'], 'EVs': [255, 255, 0, 0, 0, 0], 'Index': 47, 'DexNum': 32},
->   'NidoranF-1': {'Pokemon': 'NidoranF', 'SetNum': 1, 'Nature': 'Quirky', 'Item': 'Sitrus Berry', 'Abilities': ['Poison Point'], 'Moves': ['crunch', 'doublekick', 'flatter', 'helpinghand'], 'EVs': [255, 255, 0, 0, 0, 0], 'Index': 48, 'DexNum': 29},
->   'Kirlia-1': {'Pokemon': 'Kirlia', 'SetNum': 1, 'Nature': 'Docile', 'Item': 'White Herb', 'Abilities': ['Synchronize', 'Trace'], 'Moves': ['confusion', 'willowisp', 'futuresight', 'lightscreen'], 'EVs': [255, 0, 0, 0, 0, 255], 'Index': 49, 'DexNum': 281},
->   'Mareep-1': {'Pokemon': 'Mareep', 'SetNum': 1, 'Nature': 'Relaxed', 'Item': 'Cheri Berry', 'Abilities': ['Static'], 'Moves': ['shockwave', 'flash', 'reflect', 'cottonspore'], 'EVs': [255, 0, 0, 255, 0, 0], 'Index': 50, 'DexNum': 179},
->   ... (868 more) ...
-> }
-> ```
->
-> </details>
-
-
-<br>
-
-> ```python
 > best_seed = 0
 > best_team = ""
 > for _ in range(1000):
@@ -3878,7 +3767,7 @@ The enemy seeding bugs massively favor the player, but it's useful to know how h
 > <summary>Output</summary>
 >
 > ```
-> Highest enemy seed: 4188
+> Highest enemy seed: 4176
 > ```
 >
 > </details>
@@ -3894,7 +3783,7 @@ The enemy seeding bugs massively favor the player, but it's useful to know how h
 > <summary>Output</summary>
 >
 > ```
-> Team: Swimmer? ERICK: Kingdra-4, Blastoise-4, Slaking-4
+> Team: PKMN Breeder (M) OSCAR: Typhlosion-4, Feraligatr-4, Slaking-4
 > ```
 >
 > </details>

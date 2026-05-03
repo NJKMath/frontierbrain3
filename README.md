@@ -16,31 +16,6 @@ cd frontierbrain3
 pip install -e .
 ```
 
-## Package Structure
-
-```
-frontierbrain3/
-├── __init__.py          # Re-exports core API
-├── frontierutils.py     # CustomSet, stats, types, paste import
-├── frontier_db.py       # Database, SetCollection, TrainerCollection
-├── damagecalc.py        # Damage formula, KO probability
-├── data/
-│   ├── pokemon.json     # Species data (stats, types, weight, abilities)
-│   ├── bf_pokemon.json  # All frontier sets (882 regular + 36 Frontier Brain)
-│   ├── bf_trainers.json # All 300+ trainers (includes Frontier Brains)
-│   ├── moves.json       # Move data (type, power, accuracy, etc.)
-│   ├── items.json       # Item names/IDs
-│   └── abilities.json   # Ability names/IDs
-└── facilities/
-    ├── tower.py         # Trainer tiers, TowerDatabase
-    ├── factory.py       # Team type/phrase, FactoryDatabase
-    ├── dome.py          # Seeding formula
-    ├── palace.py        # Nature-based move selection
-    ├── pike.py          # Events, status, wild Pokemon, hints
-    ├── pyramid.py       # Wild encounters, items, round themes
-    └── arena.py         # Placeholder (no mechanics to model)
-```
-
 ---
 
 ## Core Concepts
@@ -106,7 +81,7 @@ The `Sets` list contains all set IDs the trainer can draw from. In battle, they 
 
 ### CustomSet
 
-Represents a player-defined Pokemon with full control over species, nature, EVs, IVs, level, item, ability, and moves. Used as attacker/defender in damage calcs and as a speed benchmark in queries.
+Represents a player-defined Pokemon with full control over species, nature, EVs, IVs, level, item, ability, and moves.
 
 ```python
 from frontierbrain3 import CustomSet
@@ -244,16 +219,19 @@ db.sets.fasterThan(my_flygon, ivs=15)        # enemy sets at 15 IVs
 
 These run the full damage calculator for every set in the collection. The attacker/defender can be a frontier set dict or a `CustomSet`.
 
+- `willOHKO(target)`: sets whose best move guarantees the KO (even the minimum damage roll kills)
+- `canOHKO(target)`: sets whose best move has any chance to KO (the maximum damage roll kills)
+- `canOHKO(target, min_chance=X)`: at least X probability (0.0-1.0) that a random roll KOs
+- `willDieTo(attacker)`: sets that the attacker guarantees to KO (each set is the defender)
+- `canDieTo(attacker)`: sets that the attacker can KO on at least one roll
+- `include_acc=True`: factors move accuracy into all probability calcs (also accounts for Brightpowder/Lax Incense on the defender)
+- `include_ohko=True`: allows one-hit KO moves (Guillotine, Fissure, Horn Drill, Sheer Cold) to count
+
 ```python
 lax = db.allSets("Snorlax")._sets[0]
 
-# Sets that GUARANTEED OHKO Snorlax-1 (min roll kills)
 db.sets.willOHKO(lax)
-
-# Sets that CAN OHKO Snorlax-1 (at least one roll kills)
 db.sets.canOHKO(lax)
-
-# Sets where at least 50% of rolls OHKO
 db.sets.canOHKO(lax, min_chance=0.5)
 ```
 
@@ -274,16 +252,11 @@ from frontierbrain3 import Field
 
 meta = db.allSets("Metagross")._sets[0]
 
-# With stat boosts
 db.sets.willDieTo(meta, atk_boosts={"atk": 1})
-
-# With weather
 db.sets.willOHKO(meta, field=Field(weather="rain"))
-
-# Include OHKO moves (Guillotine, Fissure, etc.)
 db.sets.canOHKO(meta, include_ohko=True)
 
-# Factor accuracy into guaranteed OHKOs (excludes imperfect-accuracy moves like Cross Chop)
+# include_acc excludes sets relying on imperfect-accuracy moves for the guaranteed KO
 db.sets.willOHKO(meta)
 db.sets.willOHKO(meta, include_acc=True)
 ```
@@ -343,7 +316,6 @@ starmie = CustomSet("Starmie", nature="Timid", evs=[0,0,0,252,4,252],
 Moves can be passed as a string name (looked up from `data/moves.json`):
 
 ```python
-result = calc_matchup(meta, ttar, "Meteor Mash")
 result = calc_matchup(starmie, ttar, "Surf")
 ```
 
@@ -392,7 +364,7 @@ calc_matchup(starmie, ttar, "Surf", field=Field(weather="rain"))
 # Screens
 calc_matchup(starmie, ttar, "Surf", field=Field(light_screen=True))
 
-# Doubles (spread moves halved, screens use 2/3 instead of 1/2)
+# Doubles (spread moves like Surf, Blizzard, Rock Slide are halved; screens use 2/3 instead of 1/2)
 calc_matchup(starmie, ttar, "Surf", field=Field(is_doubles=True))
 ```
 

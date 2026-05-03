@@ -34,7 +34,7 @@ _SOUND_MOVES = frozenset({
 _SPREAD_MOVES = frozenset({
     "acid", "aircutter", "blizzard", "bubble", "eruption", "heatwave",
     "hypervoice", "icywind", "muddywater", "powdersnow", "razorleaf",
-    "razorwind", "rockslide", "swift", "twister", "waterspout",
+    "razorwind", "rockslide", "surf", "swift", "twister", "waterspout",
 })
 
 # Multi-hit moves

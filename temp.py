@@ -153,12 +153,14 @@ def _assign_targets(node: ast.Assign) -> list[str]:
 
 
 def _is_literal_assign(node: ast.AST) -> bool:
-    """Return True if this is an assignment of a literal value (list, dict, str, number)."""
+    """Return True if this is an assignment whose value is obvious from the code."""
     if not isinstance(node, ast.Assign):
         return False
     val = node.value
     return isinstance(val, (ast.List, ast.Dict, ast.Constant, ast.Tuple,
-                            ast.JoinedStr, ast.Set))
+                            ast.JoinedStr, ast.Set,
+                            ast.ListComp, ast.DictComp, ast.SetComp,
+                            ast.GeneratorExp))
 
 
 # -- Single statement execution ------------------------------------------------
