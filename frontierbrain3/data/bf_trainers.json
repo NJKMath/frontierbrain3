@@ -1568,7 +1568,7 @@
   {
     "Index": 31,
     "Name": "GORDON",
-    "Class": "Swimmer?",
+    "Class": "Swimmer (M)",
     "Sets": [
       "Azurill-1",
       "Igglybuff-1",
@@ -1625,7 +1625,7 @@
   {
     "Index": 32,
     "Name": "AYDEN",
-    "Class": "Swimmer?",
+    "Class": "Swimmer (M)",
     "Sets": [
       "Azurill-1",
       "Igglybuff-1",
@@ -1682,7 +1682,7 @@
   {
     "Index": 33,
     "Name": "MARCO",
-    "Class": "Swimmer?",
+    "Class": "Swimmer (M)",
     "Sets": [
       "Azurill-1",
       "Igglybuff-1",
@@ -1739,7 +1739,7 @@
   {
     "Index": 34,
     "Name": "CIERRA",
-    "Class": "Swimmer?",
+    "Class": "Swimmer (F)",
     "Sets": [
       "Azurill-1",
       "Igglybuff-1",
@@ -1793,7 +1793,7 @@
   {
     "Index": 35,
     "Name": "MARCY",
-    "Class": "Swimmer?",
+    "Class": "Swimmer (F)",
     "Sets": [
       "Azurill-1",
       "Igglybuff-1",
@@ -1847,7 +1847,7 @@
   {
     "Index": 36,
     "Name": "KATHY",
-    "Class": "Swimmer?",
+    "Class": "Swimmer (F)",
     "Sets": [
       "Azurill-1",
       "Igglybuff-1",
@@ -8602,7 +8602,7 @@
   {
     "Index": 209,
     "Name": "PEDRO",
-    "Class": "Swimmer?",
+    "Class": "Swimmer (M)",
     "Sets": [
       "Sharpedo-2",
       "Medicham-4",
@@ -8644,7 +8644,7 @@
   {
     "Index": 210,
     "Name": "ERICK",
-    "Class": "Swimmer?",
+    "Class": "Swimmer (M)",
     "Sets": [
       "Sharpedo-2",
       "Medicham-4",
@@ -8686,7 +8686,7 @@
   {
     "Index": 211,
     "Name": "ELAINE",
-    "Class": "Swimmer?",
+    "Class": "Swimmer (F)",
     "Sets": [
       "Granbull-4",
       "Jynx-4",
@@ -8726,7 +8726,7 @@
   {
     "Index": 212,
     "Name": "JOYCE",
-    "Class": "Swimmer?",
+    "Class": "Swimmer (F)",
     "Sets": [
       "Granbull-4",
       "Jynx-4",
