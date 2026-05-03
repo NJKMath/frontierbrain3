@@ -302,6 +302,32 @@ The `Sets` list contains all set IDs the trainer can draw from. In battle, they 
 > </details>
 
 
+<br>
+
+> ```python
+> db.allSets("Metagross", 1)
+> ```
+>
+> <details>
+> <summary>Output</summary>
+>
+> ```
+> {
+>   'Pokemon': 'Metagross',
+>   'SetNum': 1,
+>   'Nature': 'Adamant',
+>   'Item': 'Leftovers',
+>   'Abilities': ['Clear Body'],
+>   'Moves': ['meteormash', 'aerialace', 'facade', 'lightscreen'],
+>   'EVs': [0, 170, 0, 0, 170, 170],
+>   'Index': 467,
+>   'DexNum': 376,
+> }
+> ```
+>
+> </details>
+
+
 ---
 
 ## CustomSet
@@ -449,7 +475,7 @@ Import teams from [Pokepaste](https://pokepast.es/) format:
 > ```python
 > from frontierbrain3 import calc_stats, Database
 > db = Database()
-> snorlax = db.allSets("Snorlax")._sets[0]
+> snorlax = db.allSets("Snorlax", 1)
 > ```
 >
 > <details>
@@ -1252,7 +1278,7 @@ These run the full damage calculator for every set in the collection. The attack
 
 
 > ```python
-> lax = db.allSets("Snorlax")._sets[0]
+> lax = db.allSets("Snorlax", 1)
 > ```
 >
 > <details>
@@ -1396,7 +1422,7 @@ Other optional parameters are passed through to the damage calculator:
 
 > ```python
 > from frontierbrain3 import Field
-> meta = db.allSets("Metagross")._sets[0]
+> meta = db.allSets("Metagross", 1)
 > ```
 >
 > <details>
@@ -1414,110 +1440,6 @@ Other optional parameters are passed through to the damage calculator:
 >   'Index': 467,
 >   'DexNum': 376,
 > }
-> ```
->
-> </details>
-
-
-<br>
-
-> ```python
-> db.sets.willDieTo(meta, atk_boosts={"atk": 1})
-> ```
->
-> <details>
-> <summary>Output</summary>
->
-> ```
-> SetCollection(335 sets)
-> [
->   'Sunkern-1', 'Azurill-1', 'Caterpie-1', 'Weedle-1', 'Wurmple-1', 'Ralts-1', 'Feebas-1', 'Metapod-1', 'Kakuna-1',
->   'Pichu-1', 'Silcoon-1', 'Cascoon-1', 'Igglybuff-1', 'Tyrogue-1', 'Sentret-1', 'Cleffa-1', 'Seedot-1', 'Lotad-1',
->   'Poochyena-1', 'Shedinja-1', 'Makuhita-1', 'Whismur-1', 'Zigzagoon-1', 'Zubat-1', 'Togepi-1', 'Spinarak-1',
->   'Hoppip-1', 'Swinub-1', 'Smeargle-1', 'Pidgey-1', 'Rattata-1', 'Skitty-1', 'Spearow-1', 'Hoothoot-1', 'Diglett-1',
->   'Ledyba-1', 'Nincada-1', 'Surskit-1', 'Jigglypuff-1', 'Taillow-1', 'Wingull-1', 'NidoranM-1', 'NidoranF-1',
->   'Kirlia-1', 'Meditite-1', 'Slakoth-1', 'Paras-1', 'Ekans-1', 'Barboach-1', 'Meowth-1', 'Trapinch-1', 'Spheal-1',
->   'Shroomish-1', 'Shuppet-1', 'Duskull-1', 'Pikachu-1', 'Bellsprout-1', 'Geodude-1', 'Dratini-1', 'Snubbull-1',
->   'Remoraid-1', 'Larvitar-1', 'Baltoy-1', 'Snorunt-1', 'Bagon-1', 'Gulpin-1', 'Venonat-1', 'Mankey-1', 'Machop-1',
->   'Smoochum-1', 'Carvanha-1', 'Abra-1', 'Doduo-1', 'Gastly-1', 'Swablu-1', 'Treecko-1', 'Torchic-1', 'Bulbasaur-1',
->   'Chikorita-1', 'Oddish-1', 'Psyduck-1', 'Natu-1', 'Clefairy-1', 'Grimer-1', 'Eevee-1', 'Drowzee-1', 'Teddiursa-1',
->   'Delibird-1', 'Houndour-1', 'Phanpy-1', 'Spoink-1', 'Tentacool-1', 'Cacnea-1', 'Unown-1', 'Skiploom-1', 'Nuzleaf-1',
->   'Lombre-1', 'Vibrava-1', 'Rhyhorn-1', 'Pidgeotto-1', "Farfetch'd-1", 'Omanyte-1', 'Kabuto-1', 'Lileep-1', 'Anorith-1',
->   'Aipom-1', 'Loudred-1', 'Spinda-1', 'Nidorina-1', 'Nidorino-1', 'Nosepass-1', 'Butterfree-1', 'Beedrill-1', 'Onix-1',
->   'Beautifly-1', 'Dustox-1', 'Ledian-1', 'Ariados-1', 'Yanma-1', 'Delcatty-1', 'Sableye-1', 'Weepinbell-1',
->   'Graveler-1', 'Gloom-1', 'Kadabra-1', 'Roselia-1', 'Volbeat-1', 'Illumise-1', 'Ivysaur-1', 'Parasect-1', 'Haunter-1',
->   'Murkrow-1', 'Grovyle-1', 'Combusken-1', 'Sudowoodo-1', 'Pupitar-1', 'Raticate-1', 'Dragonair-1', 'Mightyena-1',
->   'Linoone-1', 'Castform-1', 'Chimecho-1', 'Sneasel-1', 'Swellow-1', 'Arbok-1', 'Lunatone-1', 'Solrock-1', 'Venomoth-1',
->   'Piloswine-1', 'Girafarig-1', 'Ninjask-1', 'Seviper-1', 'Zangoose-1', 'Stantler-1', 'Absol-1', 'Cacturne-1',
->   'Delcatty-2', 'Sableye-2', 'Weepinbell-2', 'Graveler-2', 'Gloom-2', 'Porygon-2', 'Kadabra-2', 'Roselia-2',
->   'Volbeat-2', 'Illumise-2', 'Ivysaur-2', 'Parasect-2', 'Haunter-2', 'Murkrow-2', 'Plusle-2', 'Grovyle-2',
->   'Combusken-2', 'Sudowoodo-2', 'Pupitar-2', 'Raticate-2', 'Furret-2', 'Dragonair-2', 'Linoone-2', 'Castform-2',
->   'Sneasel-2', 'Swellow-2', 'Vigoroth-2', 'Lunatone-2', 'Solrock-2', 'Venomoth-2', 'Piloswine-2', 'Banette-2',
->   'Ninjask-2', 'Zangoose-2', 'Stantler-2', 'Absol-2', 'Pidgeot-2', 'Cacturne-2', 'Scyther-2', 'Dugtrio-1', 'Medicham-1',
->   'Fearow-1', 'Jynx-1', 'Dodrio-1', 'Breloom-1', 'Xatu-1', 'Glalie-1', 'Golem-1', 'Rhydon-1', 'Alakazam-1', 'Cradily-1',
->   'Armaldo-1', 'Gengar-1', 'Heracross-1', 'Shuckle-1', 'Aerodactyl-1', 'Flygon-1', 'Espeon-1', 'Sceptile-1',
->   'Dugtrio-2', 'Medicham-2', 'Fearow-2', 'Granbull-2', 'Jynx-2', 'Dodrio-2', 'Mr. Mime-2', 'Breloom-2', 'Victreebel-2',
->   'Exploud-2', 'Glalie-2', 'Golem-2', 'Rhydon-2', 'Alakazam-2', 'Cradily-2', 'Armaldo-2', 'Gengar-2', 'Heracross-2',
->   'Shuckle-2', 'Aerodactyl-2', 'Flygon-2', 'Espeon-2', 'Sceptile-2', 'Dugtrio-3', 'Medicham-3', 'Fearow-3', 'Jynx-3',
->   'Dodrio-3', 'Mr. Mime-3', 'Breloom-3', 'Xatu-3', 'Vileplume-3', 'Victreebel-3', 'Exploud-3', 'Shiftry-3', 'Glalie-3',
->   'Golem-3', 'Rhydon-3', 'Alakazam-3', 'Cradily-3', 'Armaldo-3', 'Gengar-3', 'Heracross-3', 'Shuckle-3', 'Aerodactyl-3',
->   'Gardevoir-3', 'Flygon-3', 'Espeon-3', 'Sceptile-3', 'Crobat-3', 'Dugtrio-4', 'Medicham-4', 'Misdreavus-4',
->   'Fearow-4', 'Granbull-4', 'Jynx-4', 'Dodrio-4', 'Mr. Mime-4', 'Breloom-4', 'Xatu-4', 'Vileplume-4', 'Victreebel-4',
->   'Exploud-4', 'Shiftry-4', 'Glalie-4', 'Golem-4', 'Rhydon-4', 'Alakazam-4', 'Nidoking-4', 'Cradily-4', 'Armaldo-4',
->   'Gengar-4', 'Heracross-4', 'Shuckle-4', 'Aerodactyl-4', 'Gardevoir-4', 'Flygon-4', 'Venusaur-4', 'Espeon-4',
->   'Sceptile-4', 'Crobat-4', 'Articuno-1', 'Regice-1', 'Articuno-2', 'Regice-2', 'Latios-2', 'Articuno-3', 'Regice-3',
->   'Latios-3', 'Articuno-4', 'Regice-4', 'Gengar-5', 'Gengar-6', 'Gengar-7', 'Gengar-8', 'Gardevoir-6', 'Gardevoir-8',
->   'Regice-5', 'Regice-6', 'Latios-6', 'Latios-8', 'Tyranitar-1', 'Tyranitar-2', 'Tyranitar-3', 'Tyranitar-4',
->   'Tyranitar-5', 'Tyranitar-6', 'Tyranitar-7', 'Tyranitar-8', 'Tyranitar-9', 'Tyranitar-10', 'Articuno-5', 'Articuno-6',
->   'Alakazam-AnabelSilver', 'Heracross-GretaSilver', 'Shedinja-GretaSilver', 'Breloom-GretaGold', 'Seviper-LucyGold',
->   'Regice-BrandonSilver', 'Articuno-BrandonGold'
-> ]
-> ```
->
-> </details>
-
-
-<br>
-
-> ```python
-> db.sets.willOHKO(meta, field=Field(weather="rain"))
-> ```
->
-> <details>
-> <summary>Output</summary>
->
-> ```
-> SetCollection(4 sets)
-> [
->   'Marowak-1', 'Marowak-2', 'Marowak-3', 'Marowak-4'
-> ]
-> ```
->
-> </details>
-
-
-<br>
-
-> ```python
-> db.sets.canOHKO(meta, include_ohko=True)
-> ```
->
-> <details>
-> <summary>Output</summary>
->
-> ```
-> SetCollection(69 sets)
-> [
->   'Gligar-2', 'Seaking-2', 'Crawdaunt-2', 'Kingler-2', 'Pinsir-2', 'Marowak-1', 'Golem-1', 'Rhydon-1', 'Nidoking-1',
->   'Donphan-1', 'Charizard-1', 'Typhlosion-1', 'Marowak-2', 'Rhydon-2', 'Magmar-2', 'Houndoom-2', 'Arcanine-2',
->   'Dugtrio-3', 'Whiscash-3', 'Marowak-3', 'Dewgong-3', 'Golem-3', 'Rhydon-3', 'Nidoking-3', 'Rapidash-3', 'Houndoom-3',
->   'Donphan-3', 'Wailord-3', 'Ninetales-3', 'Blaziken-3', 'Walrein-3', 'Charizard-3', 'Typhlosion-3', 'Swampert-3',
->   'Arcanine-3', 'Slaking-3', 'Dugtrio-4', 'Granbull-4', 'Whiscash-4', 'Marowak-4', 'Dewgong-4', 'Golem-4', 'Rhydon-4',
->   'Armaldo-4', 'Rapidash-4', 'Houndoom-4', 'Donphan-4', 'Wailord-4', 'Ninetales-4', 'Flareon-4', 'Blaziken-4',
->   'Walrein-4', 'Charizard-4', 'Typhlosion-4', 'Arcanine-4', 'Moltres-1', 'Moltres-2', 'Entei-2', 'Moltres-3',
->   'Moltres-4', 'Lapras-7', 'Lapras-8', 'Moltres-5', 'Moltres-6', 'Charizard-TuckerSilver', 'Swampert-TuckerGold',
->   'Lapras-SpenserSilver', 'Arcanine-SpenserGold', 'Moltres-BrandonGold'
-> ]
 > ```
 >
 > </details>
@@ -1548,6 +1470,52 @@ Other optional parameters are passed through to the damage calculator:
 <br>
 
 > ```python
+> db.sets.willOHKO(meta, atk_boosts={"atk": 1})
+> ```
+>
+> <details>
+> <summary>Output</summary>
+>
+> ```
+> SetCollection(70 sets)
+> [
+>   'Camerupt-2', 'Dugtrio-1', 'Whiscash-1', 'Marowak-1', 'Quagsire-1', 'Golem-1', 'Rhydon-1', 'Donphan-1', 'Steelix-1',
+>   'Flygon-1', 'Charizard-1', 'Typhlosion-1', 'Swampert-1', 'Dugtrio-2', 'Marowak-2', 'Rhydon-2', 'Nidoqueen-2',
+>   'Nidoking-2', 'Magmar-2', 'Houndoom-2', 'Donphan-2', 'Aerodactyl-2', 'Dugtrio-3', 'Breloom-3', 'Marowak-3',
+>   'Quagsire-3', 'Golem-3', 'Rhydon-3', 'Rapidash-3', 'Donphan-3', 'Steelix-3', 'Flygon-3', 'Swampert-3', 'Arcanine-3',
+>   'Slaking-3', 'Dugtrio-4', 'Granbull-4', 'Breloom-4', 'Marowak-4', 'Golem-4', 'Rhydon-4', 'Nidoqueen-4', 'Nidoking-4',
+>   'Armaldo-4', 'Muk-4', 'Houndoom-4', 'Donphan-4', 'Ninetales-4', 'Steelix-4', 'Flygon-4', 'Flareon-4', 'Blaziken-4',
+>   'Charizard-4', 'Typhlosion-4', 'Swampert-4', 'Arcanine-4', 'Moltres-2', 'Entei-2', 'Moltres-3', 'Moltres-4',
+>   'Machamp-7', 'Metagross-5', 'Metagross-8', 'Moltres-5', 'Moltres-6', 'Swampert-TuckerSilver',
+>   'Charizard-TuckerSilver', 'Swampert-TuckerGold', 'Slaking-SpenserGold', 'Moltres-BrandonGold'
+> ]
+> ```
+>
+> </details>
+
+
+<br>
+
+> ```python
+> db.sets.willOHKO(meta, field=Field(weather="rain"))
+> ```
+>
+> <details>
+> <summary>Output</summary>
+>
+> ```
+> SetCollection(4 sets)
+> [
+>   'Marowak-1', 'Marowak-2', 'Marowak-3', 'Marowak-4'
+> ]
+> ```
+>
+> </details>
+
+
+<br>
+
+> ```python
 > db.sets.willOHKO(meta, include_acc=True)
 > ```
 >
@@ -1558,6 +1526,31 @@ Other optional parameters are passed through to the damage calculator:
 > SetCollection(3 sets)
 > [
 >   'Marowak-2', 'Marowak-3', 'Marowak-4'
+> ]
+> ```
+>
+> </details>
+
+
+<br>
+
+> ```python
+> db.sets.willOHKO(meta, include_ohko=True)
+> ```
+>
+> <details>
+> <summary>Output</summary>
+>
+> ```
+> SetCollection(50 sets)
+> [
+>   'Gligar-2', 'Seaking-2', 'Crawdaunt-2', 'Kingler-2', 'Pinsir-2', 'Marowak-1', 'Nidoking-1', 'Charizard-1',
+>   'Typhlosion-1', 'Marowak-2', 'Rhydon-2', 'Magmar-2', 'Houndoom-2', 'Dugtrio-3', 'Whiscash-3', 'Marowak-3',
+>   'Dewgong-3', 'Rhydon-3', 'Nidoking-3', 'Rapidash-3', 'Donphan-3', 'Wailord-3', 'Walrein-3', 'Arcanine-3', 'Dugtrio-4',
+>   'Whiscash-4', 'Marowak-4', 'Dewgong-4', 'Rhydon-4', 'Houndoom-4', 'Donphan-4', 'Wailord-4', 'Ninetales-4',
+>   'Flareon-4', 'Blaziken-4', 'Walrein-4', 'Charizard-4', 'Typhlosion-4', 'Arcanine-4', 'Moltres-2', 'Entei-2',
+>   'Moltres-3', 'Moltres-4', 'Lapras-7', 'Lapras-8', 'Moltres-5', 'Moltres-6', 'Charizard-TuckerSilver',
+>   'Lapras-SpenserSilver', 'Moltres-BrandonGold'
 > ]
 > ```
 >
@@ -1895,7 +1888,7 @@ The examples below assume this setup:
 >     format_result, ko_chance, calc_stats, Field,
 > )
 > db = Database()
-> meta = db.allSets("Metagross")._sets[0]
+> meta = db.allSets("Metagross", 1)
 > ```
 >
 > <details>
@@ -1921,7 +1914,7 @@ The examples below assume this setup:
 <br>
 
 > ```python
-> ttar = db.allSets("Tyranitar")._sets[0]
+> ttar = db.allSets("Tyranitar", 1)
 > ```
 >
 > <details>
@@ -2477,7 +2470,7 @@ The calculator handles multi-hit moves automatically:
 
 > ```python
 > from frontierbrain3.damagecalc import combine_multi_hit_rolls
-> blaziken = db.allSets("Blaziken")._sets[0]
+> blaziken = db.allSets("Blaziken", 1)
 > ```
 >
 > <details>
@@ -2503,7 +2496,7 @@ The calculator handles multi-hit moves automatically:
 <br>
 
 > ```python
-> lax = db.allSets("Snorlax")._sets[0]
+> lax = db.allSets("Snorlax", 1)
 > ```
 >
 > <details>
@@ -2874,7 +2867,7 @@ Generates a random trainer + 3-set team respecting species and item clause:
 > <summary>Output</summary>
 >
 > ```
-> 'Cooltrainer (F) GILLIAN: Latias-4, Dragonite-4, Regirock-5'
+> 'PKMN Ranger (F) STELLA: Clefable-1, Manectric-1, Espeon-1'
 > ```
 >
 > </details>
@@ -2890,7 +2883,7 @@ Generates a random trainer + 3-set team respecting species and item clause:
 > <summary>Output</summary>
 >
 > ```
-> 'Dragon Tamer MADDOX: Gyarados-4, Charizard-4, Tyranitar-2'
+> 'Dragon Tamer DAVIN: Latios-2, Latias-7, Dragonite-4'
 > ```
 >
 > </details>
@@ -2906,7 +2899,7 @@ Generates a random trainer + 3-set team respecting species and item clause:
 > <summary>Output</summary>
 >
 > ```
-> 'Youngster BRADY: Ekans-1, Marill-1, Rattata-1'
+> 'Youngster BRADY: Wynaut-1, Kirlia-1, Magikarp-1'
 > ```
 >
 > </details>
@@ -3505,9 +3498,9 @@ Generate teams with optional type/phrase constraints:
 > <summary>Output</summary>
 >
 > ```
-> ids = ['Crobat-1', 'Cradily-2', 'Metagross-2']
+> ids = ['Breloom-1', 'Manectric-4', 'Flareon-3']
 > typ = 'No Type'
-> phrase = 'appears to be free-spirited and unrestrained'
+> phrase = 'appears to be high risk, high return'
 > ```
 >
 > </details>
@@ -3523,9 +3516,9 @@ Generate teams with optional type/phrase constraints:
 > <summary>Output</summary>
 >
 > ```
-> ids = ['Milotic-1', 'Blaziken-3', 'Tentacruel-3']
+> ids = ['Lapras-1', 'Suicune-3', 'Walrein-3']
 > typ = 'Water'
-> phrase = 'appears to be high risk, high return'
+> phrase = 'appears to be slow and steady'
 > ```
 >
 > </details>
@@ -3541,7 +3534,7 @@ Generate teams with optional type/phrase constraints:
 > <summary>Output</summary>
 >
 > ```
-> ids = ['Donphan-2', 'Milotic-2', 'Granbull-2']
+> ids = ['Hariyama-3', 'Dewgong-4', 'Tyranitar-3']
 > typ = 'No Type'
 > phrase = 'appears to be high risk, high return'
 > ```
@@ -3559,7 +3552,7 @@ Generate teams with optional type/phrase constraints:
 > <summary>Output</summary>
 >
 > ```
-> ids = ["Farfetch'd-1", 'Houndour-1', 'Growlithe-1']
+> ids = ['Growlithe-1', 'Houndour-1', 'Ledian-1']
 > typ = 'Fire'
 > phrase = 'appears to be one based on total preparation'
 > ```
@@ -3575,14 +3568,14 @@ Phrase numbers: 0=none, 1=preparation, 2=slow/steady, 3=endurance, 4=high-risk, 
 
 ### Seeding
 
-The Dome gives each team a seed using a formula based on the Pokemon's stats, types, and levels. The seed affects where the players and opponents are placed in the bracket, and having the highest seed possible is advantageous to the player. The higher seed wins in case of a tie (except for Dome Ace Tucker, who will always win ties), unlike every other facility where a tie counts as a loss for the player.
+The Dome gives each team a seed using a formula based on the Pokemon's stats, types, and levels. The seed affects where the players and opponents are placed in the bracket, and having the highest seed is advantageous to the player. The higher seed wins in case of a tie (except for Dome Ace Tucker, who will always win ties), unlike every other facility where a tie counts as a loss for the player.
 
 
 > ```python
 > from frontierbrain3 import Database, CustomSet
 > from frontierbrain3.facilities.dome import calc_seed
 > db = Database()
-> meta = db.allSets("Metagross")._sets[0]
+> meta = db.allSets("Metagross", 1)
 > ```
 >
 > <details>
@@ -3608,7 +3601,7 @@ The Dome gives each team a seed using a formula based on the Pokemon's stats, ty
 <br>
 
 > ```python
-> lax  = db.allSets("Snorlax")._sets[0]
+> lax  = db.allSets("Snorlax", 1)
 > ```
 >
 > <details>
@@ -3634,7 +3627,7 @@ The Dome gives each team a seed using a formula based on the Pokemon's stats, ty
 <br>
 
 > ```python
-> ttar = db.allSets("Tyranitar")._sets[0]
+> ttar = db.allSets("Tyranitar", 1)
 > ```
 >
 > <details>
@@ -3761,7 +3754,7 @@ The enemy seeding bugs massively favor the player, but it's useful to know how h
 > <summary>Output</summary>
 >
 > ```
-> Highest enemy seed: 4192
+> Highest enemy seed: 4205
 > ```
 >
 > </details>
@@ -3777,7 +3770,7 @@ The enemy seeding bugs massively favor the player, but it's useful to know how h
 > <summary>Output</summary>
 >
 > ```
-> Team: PKMN Breeder (M) WILSON: Kingdra-4, Lapras-4, Walrein-4
+> Team: PKMN Breeder (F) TESS: Kingdra-4, Charizard-4, Lapras-4
 > ```
 >
 > </details>
@@ -4586,16 +4579,3 @@ Encounter data includes species, ability, level ranges, and moves. Rounds cycle 
 > ```
 >
 > </details>
-
-
----
-
-## Demo Script
-
-Run the interactive demo to explore all features with guided examples:
-
-```bash
-python demo.py
-```
-
-Select a category from the menu, then step through examples one at a time.

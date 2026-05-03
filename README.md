@@ -79,7 +79,11 @@ db = Database()
 db.sets       # SetCollection of all 918 frontier sets (882 regular + 36 Frontier Brain)
 db.trainers   # TrainerCollection of all trainers (300 regular + Frontier Brains)
 
+# All sets for a species
 db.allSets("Charizard").ids()
+
+# A specific set by number
+db.allSets("Metagross", 1)
 ```
 
 ---
@@ -138,7 +142,7 @@ Bold Nature
 from frontierbrain3 import calc_stats, Database
 
 db = Database()
-snorlax = db.allSets("Snorlax")._sets[0]
+snorlax = db.allSets("Snorlax", 1)
 
 calc_stats(snorlax)
 calc_stats(snorlax, ivs=15)
@@ -218,7 +222,7 @@ These run the full damage calculator for every set in the collection. The attack
 - `include_ohko=True`: allows one-hit KO moves (Guillotine, Fissure, Horn Drill, Sheer Cold) to count
 
 ```python
-lax = db.allSets("Snorlax")._sets[0]
+lax = db.allSets("Snorlax", 1)
 
 db.sets.willOHKO(lax)
 db.sets.canOHKO(lax)
@@ -240,15 +244,22 @@ Other optional parameters are passed through to the damage calculator:
 ```python
 from frontierbrain3 import Field
 
-meta = db.allSets("Metagross")._sets[0]
+meta = db.allSets("Metagross", 1)
 
-db.sets.willDieTo(meta, atk_boosts={"atk": 1})
-db.sets.willOHKO(meta, field=Field(weather="rain"))
-db.sets.canOHKO(meta, include_ohko=True)
-
-# include_acc excludes sets relying on imperfect-accuracy moves for the guaranteed KO
+# Base: sets that guaranteed OHKO Metagross-1
 db.sets.willOHKO(meta)
+
+# With stat boosts (+1 Atk on the attacker)
+db.sets.willOHKO(meta, atk_boosts={"atk": 1})
+
+# With weather
+db.sets.willOHKO(meta, field=Field(weather="rain"))
+
+# Factor accuracy (excludes sets relying on imperfect-accuracy moves)
 db.sets.willOHKO(meta, include_acc=True)
+
+# Include OHKO moves
+db.sets.willOHKO(meta, include_ohko=True)
 ```
 
 #### Negation
@@ -294,8 +305,8 @@ from frontierbrain3 import (
 
 db = Database()
 
-meta = db.allSets("Metagross")._sets[0]
-ttar = db.allSets("Tyranitar")._sets[0]
+meta = db.allSets("Metagross", 1)
+ttar = db.allSets("Tyranitar", 1)
 
 starmie = CustomSet("Starmie", nature="Timid", evs=[0,0,0,252,4,252],
                     moves=["Surf", "Psychic", "Thunderbolt", "Ice Beam"])
@@ -441,8 +452,8 @@ get_hit_info("Earthquake")
 ```python
 from frontierbrain3.damagecalc import combine_multi_hit_rolls
 
-blaziken = db.allSets("Blaziken")._sets[0]
-lax = db.allSets("Snorlax")._sets[0]
+blaziken = db.allSets("Blaziken", 1)
+lax = db.allSets("Snorlax", 1)
 per_hit = damage_rolls(blaziken, lax, "Double Kick")
 hit_info = get_hit_info("Double Kick")
 total_rolls = combine_multi_hit_rolls(per_hit, hit_info)
@@ -559,7 +570,7 @@ Phrase numbers: 0=none, 1=preparation, 2=slow/steady, 3=endurance, 4=high-risk, 
 
 ### Seeding
 
-The Dome gives each team a seed using a formula based on the Pokemon's stats, types, and levels. The seed affects where the players and opponents are placed in the bracket, and having the highest seed possible is advantageous to the player. The higher seed wins in case of a tie (except for Dome Ace Tucker, who will always win ties), unlike every other facility where a tie counts as a loss for the player.
+The Dome gives each team a seed using a formula based on the Pokemon's stats, types, and levels. The seed affects where the players and opponents are placed in the bracket, and having the highest seed is advantageous to the player. The higher seed wins in case of a tie (except for Dome Ace Tucker, who will always win ties), unlike every other facility where a tie counts as a loss for the player.
 
 ```python
 from frontierbrain3 import Database, CustomSet
@@ -567,9 +578,9 @@ from frontierbrain3.facilities.dome import calc_seed
 
 db = Database()
 
-meta = db.allSets("Metagross")._sets[0]
-lax  = db.allSets("Snorlax")._sets[0]
-ttar = db.allSets("Tyranitar")._sets[0]
+meta = db.allSets("Metagross", 1)
+lax  = db.allSets("Snorlax", 1)
+ttar = db.allSets("Tyranitar", 1)
 team = [meta, lax, ttar]
 
 # Player seed
@@ -815,15 +826,3 @@ get_items(1, 3)
 
 get_pickup_items(1)
 ```
-
----
-
-## Demo Script
-
-Run the interactive demo to explore all features with guided examples:
-
-```bash
-python demo.py
-```
-
-Select a category from the menu, then step through examples one at a time.

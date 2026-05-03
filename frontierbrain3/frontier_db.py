@@ -544,11 +544,21 @@ class Database:
     def trainers(self) -> TrainerCollection:
         return self._make_trainer_collection(self._trainers)
 
-    def allSets(self, pokemon: str) -> SetCollection:
+    def allSets(self, pokemon: str, set_num: int = None):
+        """
+        Get all sets for a species, or a specific set by number.
+
+        allSets("Metagross")    -> SetCollection of all Metagross sets
+        allSets("Metagross", 1) -> the Metagross-1 set dict
+        """
         norm = _norm(pokemon)
-        return SetCollection(
-            [s for s in self._sets if _norm(s["Pokemon"]) == norm], self
-        )
+        matching = [s for s in self._sets if _norm(s["Pokemon"]) == norm]
+        if set_num is not None:
+            for s in matching:
+                if s.get("SetNum") == set_num:
+                    return s
+            raise ValueError(f"Set '{pokemon}-{set_num}' not found")
+        return SetCollection(matching, self)
 
     def usedByTrainer(self, set_id: str) -> TrainerCollection:
         norm = _norm(set_id)
