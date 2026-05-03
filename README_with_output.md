@@ -2710,8 +2710,8 @@ Tower trainers are grouped into tiers by index, each with fixed IVs and round el
 >
 > ```
 > {
->   'silver': 15,
 >   'gold': 31,
+>   'silver': {'brandon': 16, 'lucy': 16, 'spenser': 16, 'greta': 20, 'tucker': 20, 'anabel': 24},
 > }
 > ```
 >
@@ -2867,7 +2867,7 @@ Generates a random trainer + 3-set team respecting species and item clause:
 > <summary>Output</summary>
 >
 > ```
-> 'PKMN Ranger (F) STELLA: Clefable-1, Manectric-1, Espeon-1'
+> 'PKMN Ranger (M) CHAZ: Arcanine-3, Lanturn-3, Venusaur-3'
 > ```
 >
 > </details>
@@ -2883,7 +2883,7 @@ Generates a random trainer + 3-set team respecting species and item clause:
 > <summary>Output</summary>
 >
 > ```
-> 'Dragon Tamer DAVIN: Latios-2, Latias-7, Dragonite-4'
+> 'Dragon Tamer TREVON: Dragonite-2, Kingdra-2, Charizard-1'
 > ```
 >
 > </details>
@@ -2899,7 +2899,7 @@ Generates a random trainer + 3-set team respecting species and item clause:
 > <summary>Output</summary>
 >
 > ```
-> 'Youngster BRADY: Wynaut-1, Kirlia-1, Magikarp-1'
+> 'Youngster BRADY: Wooper-1, Smeargle-1, Feebas-1'
 > ```
 >
 > </details>
@@ -3498,9 +3498,9 @@ Generate teams with optional type/phrase constraints:
 > <summary>Output</summary>
 >
 > ```
-> ids = ['Breloom-1', 'Manectric-4', 'Flareon-3']
-> typ = 'No Type'
-> phrase = 'appears to be high risk, high return'
+> ids = ['Raichu-3', 'Slowbro-2', 'Manectric-1']
+> typ = 'Electric'
+> phrase = 'appears to be free-spirited and unrestrained'
 > ```
 >
 > </details>
@@ -3516,9 +3516,9 @@ Generate teams with optional type/phrase constraints:
 > <summary>Output</summary>
 >
 > ```
-> ids = ['Lapras-1', 'Suicune-3', 'Walrein-3']
+> ids = ['Wailord-1', 'Umbreon-2', 'Suicune-1']
 > typ = 'Water'
-> phrase = 'appears to be slow and steady'
+> phrase = 'appears to be one based on total preparation'
 > ```
 >
 > </details>
@@ -3534,8 +3534,8 @@ Generate teams with optional type/phrase constraints:
 > <summary>Output</summary>
 >
 > ```
-> ids = ['Hariyama-3', 'Dewgong-4', 'Tyranitar-3']
-> typ = 'No Type'
+> ids = ['Regice-5', 'Charizard-3', 'Lapras-3']
+> typ = 'Ice'
 > phrase = 'appears to be high risk, high return'
 > ```
 >
@@ -3552,7 +3552,7 @@ Generate teams with optional type/phrase constraints:
 > <summary>Output</summary>
 >
 > ```
-> ids = ['Growlithe-1', 'Houndour-1', 'Ledian-1']
+> ids = ['Magby-1', 'Growlithe-1', 'Ledian-1']
 > typ = 'Fire'
 > phrase = 'appears to be one based on total preparation'
 > ```
@@ -3754,7 +3754,7 @@ The enemy seeding bugs massively favor the player, but it's useful to know how h
 > <summary>Output</summary>
 >
 > ```
-> Highest enemy seed: 4205
+> Highest enemy seed: 4183
 > ```
 >
 > </details>
@@ -3770,7 +3770,7 @@ The enemy seeding bugs massively favor the player, but it's useful to know how h
 > <summary>Output</summary>
 >
 > ```
-> Team: PKMN Breeder (F) TESS: Kingdra-4, Charizard-4, Lapras-4
+> Team: Swimmer (F) JOYCE: Kingdra-4, Walrein-4, Blastoise-4
 > ```
 >
 > </details>
