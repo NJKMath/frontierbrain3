@@ -11,7 +11,7 @@ pip install frontierbrain3
 Alternatively, clone the repository and install locally:
 
 ```bash
-git clone https://github.com/yourname/frontierbrain3.git
+git clone https://github.com/NJKMath/frontierbrain3.git
 cd frontierbrain3
 pip install -e .
 ```
