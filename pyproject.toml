@@ -5,13 +5,18 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "frontierbrain3"
 version = "0.1.0"
-description = "Data analysis tools for Pokémon Emerald's Battle Frontier"
+description = "Data analysis tools for Pokemon Emerald's Battle Frontier"
 readme = "README.md"
 requires-python = ">=3.10"
 license = {text = "MIT"}
+authors = [
+    {name = "Noah Kaufmann"},
+]
 
-[project.optional-dependencies]
-clipboard = ["tkinter"]  # from_clipboard() needs tkinter; usually bundled with Python
+[project.urls]
+Homepage = "https://github.com/NJKMath/frontierbrain3"
+Repository = "https://github.com/NJKMath/frontierbrain3"
+Issues = "https://github.com/NJKMath/frontierbrain3/issues"
 
 [tool.setuptools.packages.find]
 include = ["frontierbrain3*"]
