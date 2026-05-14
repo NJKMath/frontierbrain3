@@ -104,12 +104,12 @@ def _set_has_type(s: dict, type_name: str, species_map: dict) -> bool:
 
 _GROUP_RANGES = [
     (range(111, 163), 1),
-    (range(163, 269), 2),
-    (range(269, 373), 3),
-    (range(373, 470), 4),
-    (range(470, 566), 5),
-    (range(566, 662), 6),
-    (range(662, 757), 7),
+    (range(163, 268), 2),   
+    (range(268, 373), 3),   
+    (range(373, 469), 4),   
+    (range(469, 565), 5),   
+    (range(565, 661), 6),   
+    (range(661, 757), 7),   
     (range(757, 851), 8),
     (range(851, 883), 9),
 ]
